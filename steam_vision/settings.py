@@ -26,12 +26,17 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
 
-ALLOWED_HOSTS = ['steam-vision.herokuapp.com']
+ALLOWED_HOSTS = [
+    'steam-vision.herokuapp.com',
+    '127.0.0.1',
+    'localhost',
+    ]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'home.apps.HomeConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
