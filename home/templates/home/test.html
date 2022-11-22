@@ -1,0 +1,16 @@
+{% extends "home/base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <!-- My CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'home/graphs.css' %}">
+
+    <div id="sentiment" style="overflow: visible;">
+        <svg id="sentiment-histogram">
+        </svg>
+    </div>
+
+    <script src="{% static 'home/test_bar.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "home/base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <!-- Load sentiment data passed through by view -->
+    <!-- I have to do this hear as otherwise there is no way to access data in javascript file -->
+    <script defer>
+        // const sentiment_data = '{{ sentiment }}';
+
+        // let resizeTimer;
+        // $(window).resize(function () { 
+        //     clearTimeout(resizeTimer)
+        //     resizeTimer = setTimeout(graph(), 1000000)
+        //     console.log("RESIZE")
+        // });
+    </script>
+
+    <!-- My CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'home/css/graphs.css' %}">
+
+    <div class="row">
+        <div class="col-sm-12">
+        <div class="box main-colour">
+            <div class="box-body box-text text">
+                <img src="{% static 'home/images/CSGO-Banner.jpg' %}" style="height: 500px; width: 100%;" class="d-inline-block align-top rounded" alt="">
+                <h1>Counter Strike</h1>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="box main-colour">
+                <div class="box-head">
+                    <h3 class="box-title text">Reviews sentiment</h3>
+                </div>
+                <div class="box-body box-text text" id="sentiment-box">
+                    <svg id="sentiment-graph">
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'home/javascript/reviews_sentiment_bars.js' %}" defer></script>
+
+{% endblock %}
