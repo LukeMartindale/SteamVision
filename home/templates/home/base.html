@@ -18,11 +18,26 @@
 
     <!-- My CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'home/css/base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'home/css/nav.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'home/css/content.css' %}">
+
+    <script>
+      //Check if the sizebar should be out or not when page is loaded
+      $(document).ready(function() {
+        if(localStorage.getItem("sidebar-status")){
+          $(".sidebar").addClass("short-sidebar")
+          $(".content-wrapper").addClass("short-content")
+        }
+      });
+    </script>
 
     <!-- MY JS -->
     <script src="{% static 'home/javascript/base.js' %}"></script>
 
-    <title>Hello, world!</title>
+    <title>Steam Vision</title>
+
+
+
   </head>
   <body class="main-colour">
     <div class="wrapper" style="height: auto;">
@@ -39,28 +54,13 @@
 
       <div class="sidebar main-colour">
         <ul class="sidebar-menu">
-          <li class="sidebar-menu-item current-page rounded" id="dashboard"><i class="bi bi-speedometer text"></i><span class="text" href="#">Dashboard</span></li>
-          <li class="sidebar-menu-item rounded" id="game"><i class="bi bi-speedometer text"></i><span class="text" href="#">Game</span></li>
-          <li class="sidebar-menu-item rounded" id="test"><i class="bi bi-speedometer text"></i><span class="text" href="#">TEST</span></li>
+          <a href="{% url 'home' %}" style="text-decoration: none;"><li class="sidebar-menu-item current-page rounded" id="dashboard"><i class="bi bi-speedometer text-colour"></i><span class="text-colour">Dashboard</span></li></a>
+          <a href="{% url 'game-list' %}" style="text-decoration: none;"><li class="sidebar-menu-item rounded" id="game"><i class="bi bi-controller text-colour"></i><span class="text-colour" href="#">Games</span></li></a>
+          <a href="{% url 'test' %}" style="text-decoration: none;"><li class="sidebar-menu-item rounded" id="test"><i class="bi bi-speedometer text-colour"></i><span class="text-colour" href="#">TEST</span></li></a>
         </ul>
       </div>
 
-      <div class="content secondary-colour">
-        <!-- <h1 class="text" style="text-align: center;">CONTENT GOES HERE</h1> -->
-
-        <!-- Box Template Start -->
-        <!-- <div class="row">
-          <div class="col-sm-12">
-            <div class="box main-colour">
-              <div class="box-head">
-                <h3 class="box-title text"></h3>
-              </div>
-              <div class="box-body box-text text">
-
-              </div>
-            </div>
-          </div>
-        </div> -->
+      <div class="content-wrapper secondary-colour">
 
         {% block content %}{% endblock %}
 

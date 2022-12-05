@@ -1,0 +1,97 @@
+{% extends "home/base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <!-- My CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'home/css/game_detail.css' %}">
+
+    <div class="content-block">
+
+        <div class="game-detail main-colour text-colour">
+            <div class="row">
+                <div class="col-6">
+                    <img id="banner-image" src="{{ games.header_image }}">
+                </div>
+                <div class="col-6">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>Title</td>
+                                <td>{{ games.name }}</td>
+                            </tr>
+                            <tr>
+                                <td>Game ID</td>
+                                <td>{{ games.app_id }}</td>
+                            </tr>
+                            <tr>
+                                <td>Release Date</td>
+                                <td>{{ games.release_date }}</td>
+                            </tr>
+                            <tr>
+                                <td>Developers</td>
+                                <td>
+                                    {% for dev in games.developer %}
+                                        {% if not forloop.last %}
+                                            {{ dev }},
+                                        {% else %}
+                                            {{ dev }}
+                                        {% endif %}
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Publishers</td>
+                                <td>
+                                    {% for pub in games.publisher %}
+                                        {% if not forloop.last %}
+                                            {{ pub }},
+                                        {% else %}
+                                            {{ pub }}
+                                        {% endif %}
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row" style="min-height: 180px;">
+                <div class="col-6 description">
+                    <p id="description" style="padding-top: 20px;">{{ games.description }}</p>
+                </div>
+                <div class="col-6">
+                    <div class="row" style="padding: 15px;">
+                        <div class="col-6 small-info-box" style="height: 100%; width: 45%; margin-left: auto; margin-right: auto;">
+                            <p style="color: black;">Reviews Percentage</p>
+                        </div>
+                        <div class="col-6 small-info-box" style="height: 100%; width: 45%; margin-left: auto; margin-right: auto;">
+                            <p style="color: black;">Players Count</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 info-box" style="height: 100%; width: 90%; margin-left: auto; margin-right: auto;">
+                            <div style="display: flex; flex-wrap: wrap;">
+                                {% for cat in games.categories %}
+                                    {% if not forloop.last %}
+                                        {{ cat.description }},
+                                    {% else %}
+                                        {{ cat.description }}
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <!-- <h1>{{ games.name }}</h1>
+
+    <h1>{{ games.description }}</h1> -->
+
+{% endblock %}

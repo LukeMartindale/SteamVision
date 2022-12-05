@@ -1,0 +1,24 @@
+.left {
+    background-color: red;
+    height: 150px;
+    margin-bottom: 15px;
+}
+.right {
+    background-color: blue;
+    height: 150px;
+    margin-bottom: 15px;
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .content {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+
+    .content-block {
+        width: 100%;
+        border-radius: 10px;
+    }
+
+}

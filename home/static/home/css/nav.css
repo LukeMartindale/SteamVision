@@ -1,0 +1,63 @@
+/* FOR ALL CSS RELATED TOCTHE NAVRBAR & SIDEBAR */
+.navbar {
+    z-index: 1000;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 56px;
+    min-height: 100%;
+    width: 230px;
+    z-index: 810;
+    border-top: 1px solid #f4f4f4;
+}
+
+.sidebar-menu {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+/* spacing of sidebar menu items */
+.sidebar-menu-item {
+    display: block;
+    align-items: center;
+    padding: 1rem 0;
+    position: relative;
+    cursor: pointer;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.sidebar-menu-item {
+    text-decoration: none;
+}
+
+.sidebar-menu-item i {
+    font-size: 21px;
+    padding-left: 25px;
+    padding-right: 7.5px;
+}
+
+.sidebar-menu-item span {
+    font-size: 21px;
+}
+
+.short-sidebar {
+    /* width: 90px; */
+    display: none;
+}
+
+.short-content {
+    margin-left: 0;
+}
+
+.current-page {
+    background-color: #20272ae6;
+}
+
+.active {
+    background-color: #20272ae6;
+}

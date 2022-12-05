@@ -1,0 +1,22 @@
+.game-block {
+    border-radius: 5px;
+    height: 100px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.game-block:hover {
+    background-color: #20272ae6;
+    color: #bec5cb;
+}
+
+#image {
+    height: auto;
+    width: 200px;
+    min-width: 200px;
+    margin-right: 10px;
+}
