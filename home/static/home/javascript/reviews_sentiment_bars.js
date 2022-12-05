@@ -1,28 +1,7 @@
-const sentiment_data = [
-    {'label': '-1', 'value': 2}, 
-    {'label': '-0.9', 'value': 3}, 
-    {'label': '-0.8', 'value': 1}, 
-    {'label': '-0.7', 'value': 3}, 
-    {'label': '-0.6', 'value': 5}, 
-    {'label': '-0.5', 'value': 14}, 
-    {'label': '-0.4', 'value': 59}, 
-    {'label': '-0.3', 'value': 9}, 
-    {'label': '-0.2', 'value': 41}, 
-    {'label': '-0.1', 'value': 55}, 
-    {'label': '0', 'value': 539}, 
-    {'label': '0.1', 'value': 199}, 
-    {'label': '0.2', 'value': 141}, 
-    {'label': '0.3', 'value': 178}, 
-    {'label': '0.4', 'value': 47}, 
-    {'label': '0.5', 'value': 99}, 
-    {'label': '0.6', 'value': 47}, 
-    {'label': '0.7', 'value': 60}, 
-    {'label': '0.8', 'value': 21}, 
-    {'label': '0.9', 'value': 13}, 
-    {'label': '1', 'value': 64},
-]
-
 function sentiment_graph(){
+
+    sentiment_data = reviews_sentiment_data
+
     $('#sentiment-graph').empty()
 
     let margins = {top: 20, bottom: 10, left: 40, right: 20}
@@ -57,6 +36,7 @@ function sentiment_graph(){
     chart
         .append('g')
         .call(d3.axisLeft(y))
+        .attr('color', '#bec5cb')
         .attr('font-size', 15);
     
     //BARS

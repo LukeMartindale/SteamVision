@@ -5,6 +5,25 @@
 
     <!-- My CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'home/css/game_detail.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'home/css/content.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'home/css/graphs.css' %}">
+
+    <script defer>
+        //Draws graphs on page load
+        $(document).ready(function() {
+            sentiment_graph()
+        });
+
+        //Redraws graph after dealy when page is resized
+        let resizeTimer;
+        $(window).resize(function () { 
+            clearTimeout(resizeTimer)
+            resizeTimer = setTimeout(function() {
+                sentiment_graph()
+                console.log("RESIZE")
+            }, 100)
+        });
+    </script>
 
     <div class="content-block">
 
@@ -86,8 +105,25 @@
             </div>
         </div>
 
+        <div class="box main-colour">
+            <div class="box-head">
+                <h3 class="box-title text-colour">Reviews sentiment</h3>
+            </div>
+            <div class="box-body box-text text" id="sentiment-box">
+                <svg id="sentiment-graph" style="width: 100%;">
+                </svg>
+            </div>
+        </div>
+
     </div>
 
+    <!-- MY JS -->
+
+    <!-- LOAD DATA -->
+    <script src="{% static 'home/javascript/get_review_data.js' %}" defer></script>
+
+    <!-- DRAW GRAPHS -->
+    <script src="{% static 'home/javascript/reviews_sentiment_bars.js' %}" defer></script>
 
 
     <!-- <h1>{{ games.name }}</h1>

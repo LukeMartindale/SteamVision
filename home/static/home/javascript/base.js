@@ -1,10 +1,5 @@
 $(function(){
 
-    // Does something when sidebar item is clicked
-    // $(".sidebar-menu-item").click(function(){
-    //     alert(this.id)
-    // });
-
     // Changes sidebart item background colour when hovering over it.
     $(".sidebar-menu-item").hover(function(){
         $(this).addClass("active");
@@ -27,6 +22,7 @@ $(function(){
         sentiment_graph()
     });
 
+    //On hover chnage the colour of sidebar toggle button when hovered
     $("#sidebar-toggle").hover(function(){
         $(this).addClass("active");
         }, function(){

@@ -20,11 +20,6 @@ def home(request):
 
 def games(request):
 
-    # context = {
-    #     'sentiment': reviews_sentiment_analysis.get_sentiment(reviews_sentiment_analysis.url)
-    # }
-
-
     return render(request, 'home/game.html')
 
 class GameListView(ListView):
