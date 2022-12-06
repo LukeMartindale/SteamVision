@@ -74,5 +74,8 @@ class ReviewsStat(models.Model):
     #total of all sentiment analysis for this app
     sentiment = models.JSONField(default=dict)
 
+    #total of all amotion analysis for this app
+    emotion = models.JSONField(default=dict)
+
     def __str__(self):
         return self.app.name

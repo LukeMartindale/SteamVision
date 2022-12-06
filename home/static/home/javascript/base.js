@@ -9,7 +9,8 @@ $(function(){
     );
 
     // Do something when sidebar toggle is clicked
-    $("#sidebar-toggle").click(function(){
+    $("#sidebar-toggle").click(function(e){
+        e.preventDefault()
         if($(".sidebar").hasClass("short-sidebar") && $(".content-wrapper").hasClass("short-content")){
             $(".sidebar").removeClass("short-sidebar")
             $(".content-wrapper").removeClass("short-content")

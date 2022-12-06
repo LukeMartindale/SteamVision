@@ -2,7 +2,7 @@ let host_url = window.location.hostname
 
 let api_url = `http://${host_url}:8000/api/get-reviews-stats/${game_id}/`
 
-const reviews_sentiment_data = function(){
+const reviews_data = function(){
     let data = null;
     $.ajax({
         async: false,
