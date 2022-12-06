@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'home/css/graphs.css' %}">
 
     <script defer>
+        const game_id = '{{games.app_id}}'
         //Draws graphs on page load
         $(document).ready(function() {
             sentiment_graph()

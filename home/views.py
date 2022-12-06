@@ -6,14 +6,10 @@ from django.views.generic import (
     DetailView,
 )
 
-# Create your views here.
+from helper_files.addGame import getGame
+from helper_files.getReviews import getReviews, getReviewsStats
 
-temp = [
-    {
-        'label': '1',
-        'value': '10'
-    }
-]
+# Create your views here.
 
 def home(request):
     return render(request, 'home/base.html', {"tests": Game.objects.all()})
@@ -27,7 +23,9 @@ class GameListView(ListView):
     template_name = 'home/game_list.html'
     context_object_name = 'games'
 
-    # my_function("730")
+    # getGame("10")
+    # getReviews("10")
+    # getReviewsStats("10")
 
 class GameDetailView(DetailView):
     model = Game
@@ -37,10 +35,4 @@ class GameDetailView(DetailView):
 
 def test(request):
 
-    context = {
-        'data': temp
-    }
-
-    print(context)
-
-    return render(request, 'home/test.html', {'tests': Game.objects.all(), 'data': temp})
+    return render(request, 'home/test.html')

@@ -1,8 +1,10 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
-from home.models import Game
-from .serializers import GameSerializer
+from .serializers import GameSerializer, ReviewStatSerializer
+
+from home.models import Game, Review, ReviewsStat
+
 
 # Create your views here.
 
@@ -25,7 +27,7 @@ def getGame(request, id):
     return Response(serializer.data)
 
 @api_view(['GET'])
-def getReviews(request):
+def getAllReviews(request):
     temp = { 730: [
         {'label': '-1', 'value': 2}, 
         {'label': '-0.9', 'value': 3}, 
@@ -50,3 +52,13 @@ def getReviews(request):
         {'label': '1', 'value': 64},
     ]}
     return Response(temp)
+
+@api_view(['GET'])
+def getReviewsStats(request, id):
+    #Get stats using foreign key
+    stats = ReviewsStat.objects.filter(app__app_id__contains=id)
+
+    # serializer = ReviewStatSerializer(stats, many=True)
+    serializer = ReviewStatSerializer(stats, many=True)
+
+    return Response(serializer.data)

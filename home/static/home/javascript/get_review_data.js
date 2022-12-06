@@ -1,4 +1,6 @@
-api_url = "http://localhost:8000/api/get-reviews/"
+let host_url = window.location.hostname
+
+let api_url = `http://${host_url}:8000/api/get-reviews-stats/${game_id}/`
 
 const reviews_sentiment_data = function(){
     let data = null;
@@ -11,5 +13,5 @@ const reviews_sentiment_data = function(){
             data = result
         }
     });
-    return data['730']
+    return data[0]
 }();

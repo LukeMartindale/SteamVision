@@ -1,6 +1,8 @@
 function sentiment_graph(){
 
-    sentiment_data = reviews_sentiment_data
+    sentiment_data = reviews_sentiment_data.sentiment
+
+    console.log(sentiment_data)
 
     $('#sentiment-graph').empty()
 
