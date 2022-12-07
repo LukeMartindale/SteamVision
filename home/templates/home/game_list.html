@@ -8,6 +8,9 @@
 
 <div class="content-block">
 
+    <div class="game-block-pannel main-colour">
+    </div>
+
     {% for game in games %}
     <a class="game-block main-colour text-colour" href="{% url 'game-detail' game.app_id %}">
         <img id="image" src="{{ game.header_image }}">
