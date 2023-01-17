@@ -17,6 +17,8 @@ class Game(models.Model):
     developer = models.JSONField(default=dict)
     #publishers
     publisher = models.JSONField(default=dict)
+    #genres
+    genres = models.JSONField(default=dict)
     #categories
     categories = models.JSONField(default=dict)
     #supported_languages
@@ -33,14 +35,13 @@ class Game(models.Model):
 class Review(models.Model):
 
     #what app this review belongs to
-    app = models.ForeignKey(Game, on_delete=models.CASCADE, default=0)
-
+    app_id = models.ForeignKey(Game, on_delete=models.CASCADE, default=0)
     #recommendationid
-    review_id = models.IntegerField(default=0, primary_key=True, unique=True)
+    review_id = models.IntegerField(default=0)
     #author
     author = models.JSONField(default=dict)
     #language
-    language = models.CharField(max_length=50, default="english")
+    language = models.CharField(max_length=50, default="")
     #review
     review_text = models.TextField(default="")
     #timestamp_created
@@ -61,7 +62,7 @@ class Review(models.Model):
     written_during_early_access = models.BooleanField(default=False)
 
     def __str__(self):
-        return "{app_name}/{review_id}".format(app_name=self.app.name, review_id = str(self.review_id))
+        return "{app_name}/{review_id}".format(app_name=self.app_id.name, review_id = str(self.review_id))
 
     def get_absolute_url(self):
         return reverse('review', kwargs={'pk': self.pk})

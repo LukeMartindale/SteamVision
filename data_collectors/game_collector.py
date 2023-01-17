@@ -1,4 +1,4 @@
-from data_collectors.collector_helpers import convertDate
+from data_collectors.collector_helpers import convertDate, descriptionStripper
 
 from home.models import Game
 import requests
@@ -17,7 +17,8 @@ def game_collector(game_id):
     game.developer = response_app[game_id]["data"]["developers"]
     game.publisher = response_app[game_id]["data"]["publishers"]
 
-    game.categories = response_app[game_id]["data"]["categories"]
+    game.genres =  descriptionStripper(response_app[game_id]["data"]["genres"])
+    game.categories = descriptionStripper(response_app[game_id]["data"]["categories"])
     game.supported_languages = response_app[game_id]["data"]["supported_languages"]
 
     game.header_image = response_app[game_id]["data"]["header_image"]

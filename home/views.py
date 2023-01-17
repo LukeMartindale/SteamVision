@@ -6,9 +6,6 @@ from django.views.generic import (
     DetailView,
 )
 
-from helper_files.addGame import getGame
-from helper_files.getReviews import getReviews
-
 # Create your views here.
 
 def home(request):
@@ -22,9 +19,6 @@ class GameListView(ListView):
     model = Game
     template_name = 'home/game_list.html'
     context_object_name = 'games'
-
-    # getGame("10")
-    # getReviews("10")
 
 class GameDetailView(DetailView):
     model = Game
