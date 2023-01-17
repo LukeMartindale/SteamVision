@@ -60,6 +60,8 @@ class Review(models.Model):
     #written_during_early_access
     written_during_early_access = models.BooleanField(default=False)
 
+    test = models.BooleanField(default=False)
+
     def __str__(self):
         return "{app_name}/{review_id}".format(app_name=self.app.name, review_id = str(self.review_id))
 
