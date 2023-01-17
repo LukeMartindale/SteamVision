@@ -39,15 +39,15 @@ class Review(models.Model):
     #recommendationid
     review_id = models.IntegerField(default=0)
     #author
-    author = models.JSONField(default=dict)
+    author_id = models.IntegerField(default=0)
     #language
     language = models.CharField(max_length=50, default="")
     #review
     review_text = models.TextField(default="")
     #timestamp_created
     time_created = models.DateField(default=timezone.now)
-    #timestamp_updated
-    time_updated = models.DateField(default=timezone.now)
+    #playtime_at_review(In Minutes)
+    playtime_at_review = models.IntegerField(default=0)
     #voted_up
     voted_up = models.BooleanField(default=False)
     #votes_up
