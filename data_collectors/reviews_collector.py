@@ -5,34 +5,44 @@ import urllib.parse
 from datetime import datetime
 
 def initial_reviews_collector(game_id):
-    api_url = "https://store.steampowered.com/appreviews/{}?json=1&filter=recent".format(game_id)
-    response_reviews = requests.get(api_url).json()
-    print(response_reviews["reviews"][0])
 
+    #get game object
     game = Game.objects.filter(app_id=game_id)
 
+    if(game.first()):
 
+        api_url = "https://store.steampowered.com/appreviews/{}?json=1&filter=recent".format(game_id)
+        response_reviews = requests.get(api_url).json()
 
-    review = Review()
+        while response_reviews["reviews"]:
 
-    review.app_id = game.first()
-    review.review_id = response_reviews["reviews"][0]["recommendationid"]
-    review.author_id = response_reviews["reviews"][0]["author"]["steamid"]
+            for i in range(len(response_reviews["reviews"])):
 
-    review.time_created = datetime.fromtimestamp(response_reviews["reviews"][0]["timestamp_created"])
+                review = Review()
 
-    print(game[0].app_id)
-    print(review.app_id)
-    print(review.review_id)
-    print(review.author_id)
-    print(review.time_created)
+                review.app_id = game.first()
+                review.review_id = response_reviews["reviews"][i]["recommendationid"]
+                review.author_id = response_reviews["reviews"][i]["author"]["steamid"]
 
+                review.language = response_reviews["reviews"][i]["language"]
+                review.review_text = response_reviews["reviews"][i]["review"]
 
-    # while(response_reviews["reviews"]):
+                review.time_created = datetime.fromtimestamp(response_reviews["reviews"][i]["timestamp_created"])
+                if response_reviews["reviews"][i]["author"].get("playtime_at_review"):review.playtime_at_review = response_reviews["reviews"][i]["author"]["playtime_at_review"]
 
-    #     review = Review()
+                review.voted_up = response_reviews["reviews"][i]["voted_up"]
+                review.votes_up = response_reviews["reviews"][i]["votes_up"]
+                review.votes_funny = response_reviews["reviews"][i]["votes_funny"]
 
-    #     review.app_id = game_id
+                review.purchase_on_steam = response_reviews["reviews"][i]["steam_purchase"]
+                review.received_for_free = response_reviews["reviews"][i]["received_for_free"]
+                review.written_during_early_access = response_reviews["reviews"][i]["written_during_early_access"]
 
-    #     next_url = "https://store.steampowered.com/appreviews/{}?json=1&filter=recent&cursor={}".format(game_id, urllib.parse.quote(response_reviews["cursor"]))
-    #     response_reviews = requests.get(next_url).json()
+                review.save()
+
+            next_url = "https://store.steampowered.com/appreviews/{}?json=1&filter=recent&cursor={}".format(game_id, urllib.parse.quote(response_reviews["cursor"]))
+            response_reviews = requests.get(next_url).json()
+
+        return {"status": 200, "message": "Collection successful"}
+    else:
+        return {"status": 400, "message": "This app does not exist!"}

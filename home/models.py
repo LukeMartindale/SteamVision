@@ -47,7 +47,7 @@ class Review(models.Model):
     #timestamp_created
     time_created = models.DateField(default=timezone.now)
     #playtime_at_review(In Minutes)
-    playtime_at_review = models.IntegerField(default=0)
+    playtime_at_review = models.IntegerField(default=-1)
     #voted_up
     voted_up = models.BooleanField(default=False)
     #votes_up
