@@ -1,4 +1,5 @@
 from django.core.management.base import BaseCommand
+from data_collectors.game_collector import game_collector
 
 class Command(BaseCommand):
 
@@ -6,5 +7,4 @@ class Command(BaseCommand):
         parser.add_argument("--id")
 
     def handle(self, *args, **options):
-        print("get game")
-        print(f'Game Id: {options["id"]}')
+        game_collector(options["id"])
