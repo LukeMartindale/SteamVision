@@ -7,7 +7,7 @@ from django.views.generic import (
 )
 
 from helper_files.addGame import getGame
-from helper_files.getReviews import getReviews, getReviewsStats
+from helper_files.getReviews import getReviews
 
 # Create your views here.
 
@@ -25,7 +25,6 @@ class GameListView(ListView):
 
     # getGame("10")
     # getReviews("10")
-    # getReviewsStats("10")
 
 class GameDetailView(DetailView):
     model = Game
