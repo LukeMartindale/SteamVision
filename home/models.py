@@ -66,16 +66,16 @@ class Review(models.Model):
     def get_absolute_url(self):
         return reverse('review', kwargs={'pk': self.pk})
 
-# class ReviewsStat(models.Model):
+class ReviewsStat(models.Model):
 
-#     #Which app this data belongs to.
-#     app = models.ForeignKey(Game, on_delete=models.CASCADE, default=0)
+    #Which app this data belongs to.
+    app = models.ForeignKey(Game, on_delete=models.CASCADE, default=0)
 
-#     #total of all sentiment analysis for this app
-#     sentiment = models.JSONField(default=dict)
+    #total of all sentiment analysis for this app
+    sentiment = models.JSONField(default=dict)
 
-#     #total of all amotion analysis for this app
-#     emotion = models.JSONField(default=dict)
+    #total of all amotion analysis for this app
+    emotion = models.JSONField(default=dict)
 
-#     def __str__(self):
-#         return self.app.name
+    def __str__(self):
+        return self.app.name
