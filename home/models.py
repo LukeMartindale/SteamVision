@@ -34,31 +34,32 @@ class Game(models.Model):
 
 class Review(models.Model):
 
-    #what app this review belongs to
+    #app, recommendationid, author
     app_id = models.ForeignKey(Game, on_delete=models.CASCADE, default=0)
-    #recommendationid
     review_id = models.BigIntegerField(default=0)
-    #author
     author_id = models.BigIntegerField(default=0)
-    #language
+
+    #language, review
     language = models.CharField(max_length=50, default="")
-    #review
     review_text = models.TextField(default="")
-    #timestamp_created
+
+    #Sentiment_pos, Sentiment_polarity, Sentiment_subjectivity
+    sentiment_pos = models.BooleanField(default=True)
+    sentiment_polarity = models.FloatField(default=0)
+    sentiment_subjectivity = models.FloatField(default=0)
+
+    #timestamp_created, playtime_at_review(In Minutes)
     time_created = models.DateField(default=timezone.now)
-    #playtime_at_review(In Minutes)
     playtime_at_review = models.IntegerField(default=-1)
-    #voted_up
+
+    #voted_up, votes_up, votes_funny
     voted_up = models.BooleanField(default=False)
-    #votes_up
     votes_up = models.IntegerField(default=0)
-    #votes_funny
     votes_funny = models.IntegerField(default=0)
-    #steam_purchase
+
+    #steam_purchase, received_for_free, written_during_early_access
     purchase_on_steam = models.BooleanField(default=True)
-    #received_for_free
     received_for_free = models.BooleanField(default=False)
-    #written_during_early_access
     written_during_early_access = models.BooleanField(default=False)
 
     def __str__(self):

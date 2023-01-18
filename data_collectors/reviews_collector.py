@@ -1,7 +1,8 @@
-from home.models import Review, Game
 import requests
 import urllib.parse
 
+from home.models import Review, Game
+from data_processors.reviews_sentiment import reviews_sentiment
 from datetime import datetime
 
 def initial_reviews_collector(game_id):
@@ -18,7 +19,6 @@ def initial_reviews_collector(game_id):
                 if Review.objects.filter(review_id=response_reviews["reviews"][i]["recommendationid"]).exists():
                     return {"status": 200, "message": "Collection finished"}
                 else:
-
                     review = Review()
 
                     review.app_id = game
@@ -30,6 +30,11 @@ def initial_reviews_collector(game_id):
 
                     review.time_created = datetime.fromtimestamp(response_reviews["reviews"][i]["timestamp_created"])
                     if response_reviews["reviews"][i]["author"].get("playtime_at_review"):review.playtime_at_review = response_reviews["reviews"][i]["author"]["playtime_at_review"]
+
+                    sentiment = reviews_sentiment(response_reviews["reviews"][i]["review"])
+                    review.sentiment_pos = sentiment["positive"]
+                    review.sentiment_polarity = sentiment["polarity"]
+                    review.sentiment_subjectivity = sentiment["subjectivity"]
 
                     review.voted_up = response_reviews["reviews"][i]["voted_up"]
                     review.votes_up = response_reviews["reviews"][i]["votes_up"]
