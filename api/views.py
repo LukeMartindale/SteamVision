@@ -27,6 +27,10 @@ def getGame(request, id):
     return Response(serializer.data)
 
 @api_view(['GET'])
+def getGameStats(request, id):
+    return True
+
+@api_view(['GET'])
 def getAllReviews(request):
     temp = { 730: [
         {'label': '-1', 'value': 2}, 

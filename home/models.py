@@ -32,10 +32,24 @@ class Game(models.Model):
     def get_absolute_url(self):
         return reverse('game', kwargs={'pk': self.pk})
 
+class GameStat(models.Model):
+
+    #app
+    app_id = models.ForeignKey(Game, on_delete=models.CASCADE, null=True)
+
+    #sentiment
+    sentiment = models.JSONField(default=dict)
+
+    #emotion
+    emotion = models.JSONField(default=dict)
+
+    def __str__(self):
+        return "{} Stats".format(self.app_id.name)
+
 class Review(models.Model):
 
     #app, recommendationid, author
-    app_id = models.ForeignKey(Game, on_delete=models.CASCADE, default=0)
+    app_id = models.ForeignKey(Game, on_delete=models.CASCADE)
     review_id = models.BigIntegerField(default=0)
     author_id = models.BigIntegerField(default=0)
 
