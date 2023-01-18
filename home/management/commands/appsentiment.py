@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from data_processors.post_sentiment import post_sentiment
+from data_processors.app_sentiment import app_sentiment
 
 class Command(BaseCommand):
 
@@ -7,4 +7,4 @@ class Command(BaseCommand):
         parser.add_argument("--id")
 
     def handle(self, *args, **options):
-        post_sentiment(options["id"])
+        sentiment = app_sentiment(options["id"])
