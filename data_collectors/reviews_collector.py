@@ -6,24 +6,37 @@ from data_processors.reviews_sentiment import reviews_sentiment
 from data_processors.reviews_emotions import reviews_emotions
 from datetime import datetime
 
+import os
+
 def initial_reviews_collector(game_id):
     #get game object
     game = Game.objects.get(app_id=game_id)
 
     if(game):
-        api_url = "https://store.steampowered.com/appreviews/{}?json=1&filter=recent".format(game_id)
+        api_url = "https://store.steampowered.com/appreviews/{}?json=1&filter=recent&purchase_type=all".format(game_id)
         response_reviews = requests.get(api_url).json()
 
-        # print(response_reviews["reviews"][0]["review"])
-        # emotions = reviews_emotions(response_reviews["reviews"][0]["review"])
-        # print(emotions)
+        total = response_reviews["query_summary"]["total_reviews"]
+        current = 0
+
+        on_read_sentiment = (os.environ.get('ON_READ_SENTIMENT') == 'True')
+        on_read_emotion = (os.environ.get('ON_READ_EMOTION') == 'True')
+
+        if(on_read_sentiment):
+            print("SENTIMENT TRUE")
+        if(on_read_emotion):
+            print("EMOTION TRUE")
 
         while response_reviews["reviews"]:
             for i in range(len(response_reviews["reviews"])):
+
                 #Check if review has already been read into database
                 if Review.objects.filter(review_id=response_reviews["reviews"][i]["recommendationid"]).exists():
                     return {"status": 200, "message": "Collection finished"}
                 else:
+                    current+=1
+                    print(current, " / ", total)
+                    
                     review = Review()
 
                     review.app_id = game
@@ -36,15 +49,16 @@ def initial_reviews_collector(game_id):
                     review.time_created = datetime.fromtimestamp(response_reviews["reviews"][i]["timestamp_created"])
                     if response_reviews["reviews"][i]["author"].get("playtime_at_review"):review.playtime_at_review = response_reviews["reviews"][i]["author"]["playtime_at_review"]
 
-                    sentiment = reviews_sentiment(response_reviews["reviews"][i]["review"])
-                    review.sentiment_pos = sentiment["positive"]
-                    review.sentiment_polarity = sentiment["polarity"]
-                    review.sentiment_subjectivity = sentiment["subjectivity"]
+                    if(on_read_sentiment):
+                        sentiment = reviews_sentiment(response_reviews["reviews"][i]["review"])
+                        review.sentiment_pos = sentiment["positive"]
+                        review.sentiment_polarity = sentiment["polarity"]
+                        review.sentiment_subjectivity = sentiment["subjectivity"]
 
-                    emotions = reviews_emotions(response_reviews["reviews"][i]["review"])
-                    review.emotion_scores = emotions["scores"]
-                    review.emotion_prominent = emotions["prominent"]
-                    print(emotions)
+                    if(on_read_emotion):
+                        emotions = reviews_emotions(response_reviews["reviews"][i]["review"])
+                        review.emotion_scores = emotions["scores"]
+                        review.emotion_prominent = emotions["prominent"]
 
                     review.voted_up = response_reviews["reviews"][i]["voted_up"]
                     review.votes_up = response_reviews["reviews"][i]["votes_up"]
@@ -56,7 +70,7 @@ def initial_reviews_collector(game_id):
 
                     review.save()
 
-            next_url = "https://store.steampowered.com/appreviews/{}?json=1&filter=recent&cursor={}".format(game_id, urllib.parse.quote(response_reviews["cursor"]))
+            next_url = "https://store.steampowered.com/appreviews/{}?json=1&filter=recent&purchase_type=all&cursor={}".format(game_id, urllib.parse.quote(response_reviews["cursor"]))
             response_reviews = requests.get(next_url).json()
 
         return {"status": 200, "message": "Collection successful"}
