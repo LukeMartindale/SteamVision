@@ -1,6 +1,8 @@
-let host_url = window.location.hostname
+let host_url = window.location.host
 
-let api_url = `http://${host_url}:8000/api/get-games-stats/${game_id}/`
+// if(host_url ==)
+
+let api_url = `/api/get-games-stats/${game_id}/`
 
 const reviews_data = function(){
     let data = null;
