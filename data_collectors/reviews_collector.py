@@ -20,15 +20,23 @@ def initial_reviews_collector(game_id):
 
                 review = Review()
 
+                print("TEST 1")
                 review.app_id = game.first()
+                print("TEST app_id")
                 review.review_id = response_reviews["reviews"][i]["recommendationid"]
+                print("TEST review_id")
                 review.author_id = response_reviews["reviews"][i]["author"]["steamid"]
+                print("TEST author_id")
 
+                print("TEST 2")
                 review.language = response_reviews["reviews"][i]["language"]
                 review.review_text = response_reviews["reviews"][i]["review"]
 
+                print("TEST 3")
                 review.time_created = datetime.fromtimestamp(response_reviews["reviews"][i]["timestamp_created"])
+                print("TEST time created")
                 if response_reviews["reviews"][i]["author"].get("playtime_at_review"):review.playtime_at_review = response_reviews["reviews"][i]["author"]["playtime_at_review"]
+                print("TEST playtime at review")
 
                 review.voted_up = response_reviews["reviews"][i]["voted_up"]
                 review.votes_up = response_reviews["reviews"][i]["votes_up"]
