@@ -37,9 +37,9 @@ class Review(models.Model):
     #what app this review belongs to
     app_id = models.ForeignKey(Game, on_delete=models.CASCADE, default=0)
     #recommendationid
-    review_id = models.IntegerField(default=0)
+    review_id = models.BigIntegerField(default=0)
     #author
-    author_id = models.IntegerField(default=0)
+    author_id = models.BigIntegerField(default=0)
     #language
     language = models.CharField(max_length=50, default="")
     #review
