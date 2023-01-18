@@ -1,7 +1,5 @@
 let host_url = window.location.host
 
-// if(host_url ==)
-
 let api_url = `/api/get-games-stats/${game_id}/`
 
 const reviews_data = function(){
@@ -17,5 +15,3 @@ const reviews_data = function(){
     });
     return data[0]
 }();
-
-console.log(reviews_data)
