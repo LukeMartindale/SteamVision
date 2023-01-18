@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from . import reviews_sentiment_analysis
 from . models import Game
 from django.views.generic import (
     ListView,

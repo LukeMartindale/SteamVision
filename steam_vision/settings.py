@@ -37,6 +37,7 @@ ALLOWED_HOSTS = [
 
 INSTALLED_APPS = [
     'home.apps.HomeConfig',
+    'charts.apps.ChartsConfig',
     'api.apps.ApiConfig',
     'django.contrib.admin',
     'django.contrib.auth',
