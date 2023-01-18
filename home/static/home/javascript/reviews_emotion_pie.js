@@ -1,8 +1,6 @@
 function emotion_graph(){
 
-    let emotion_data = reviews_data.emotion[0]
-
-    console.log(emotion_data)
+    let emotion_data = reviews_data.emotion
 
     $('#emotion-box').empty()
 
