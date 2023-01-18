@@ -43,10 +43,14 @@ class Review(models.Model):
     language = models.CharField(max_length=50, default="")
     review_text = models.TextField(default="")
 
-    #Sentiment_pos, Sentiment_polarity, Sentiment_subjectivity
+    #sentiment_pos, sentiment_polarity, sentiment_subjectivity
     sentiment_pos = models.BooleanField(default=True)
     sentiment_polarity = models.FloatField(default=0)
     sentiment_subjectivity = models.FloatField(default=0)
+
+    #emotion_scores, emotions_prominent
+    emotion_scores = models.JSONField(default=dict)
+    emotion_prominent = models.JSONField(default=dict)
 
     #timestamp_created, playtime_at_review(In Minutes)
     time_created = models.DateField(default=timezone.now)

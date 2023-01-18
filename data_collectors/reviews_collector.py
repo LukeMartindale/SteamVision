@@ -3,6 +3,7 @@ import urllib.parse
 
 from home.models import Review, Game
 from data_processors.reviews_sentiment import reviews_sentiment
+from data_processors.reviews_emotions import reviews_emotions
 from datetime import datetime
 
 def initial_reviews_collector(game_id):
@@ -12,6 +13,10 @@ def initial_reviews_collector(game_id):
     if(game):
         api_url = "https://store.steampowered.com/appreviews/{}?json=1&filter=recent".format(game_id)
         response_reviews = requests.get(api_url).json()
+
+        # print(response_reviews["reviews"][0]["review"])
+        # emotions = reviews_emotions(response_reviews["reviews"][0]["review"])
+        # print(emotions)
 
         while response_reviews["reviews"]:
             for i in range(len(response_reviews["reviews"])):
@@ -35,6 +40,11 @@ def initial_reviews_collector(game_id):
                     review.sentiment_pos = sentiment["positive"]
                     review.sentiment_polarity = sentiment["polarity"]
                     review.sentiment_subjectivity = sentiment["subjectivity"]
+
+                    emotions = reviews_emotions(response_reviews["reviews"][i]["review"])
+                    review.emotion_scores = emotions["scores"]
+                    review.emotion_prominent = emotions["prominent"]
+                    print(emotions)
 
                     review.voted_up = response_reviews["reviews"][i]["voted_up"]
                     review.votes_up = response_reviews["reviews"][i]["votes_up"]

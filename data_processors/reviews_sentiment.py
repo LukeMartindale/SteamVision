@@ -1,5 +1,4 @@
 from textblob import TextBlob
-from textblob.sentiments import NaiveBayesAnalyzer
 
 def reviews_sentiment(review_text):
     value = TextBlob(str(review_text))
