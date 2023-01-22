@@ -12,9 +12,8 @@
 
 .content-wrapper {
     margin-top: 55px;
-    min-height: 90vh;
     padding: 25px;
-    margin: 0;
+    height: 85vh;
     align-content: space-between;
     display: flex;
     justify-content: center;
