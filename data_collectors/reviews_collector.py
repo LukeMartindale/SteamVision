@@ -97,7 +97,6 @@ def reviews_new_all_collector():
         while response_reviews["reviews"]:
             for i in range(len(response_reviews["reviews"])):
                 if Review.objects.filter(review_id=response_reviews["reviews"][i]["recommendationid"]).exists():
-                    print("No New Reviews")
                     no_new = True
                     break
                 else:
