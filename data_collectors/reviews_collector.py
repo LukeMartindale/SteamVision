@@ -86,21 +86,19 @@ def reviews_new_all_collector():
     on_read_sentiment = (os.environ.get('ON_READ_SENTIMENT') == 'True')
     on_read_emotion = (os.environ.get('ON_READ_EMOTION') == 'True')
 
-    no_new = False
-
     for game in games:
+        
         api_url = "https://store.steampowered.com/appreviews/{}?json=1&filter=recent&purchase_type=all".format(game.app_id)
         response_reviews = requests.get(api_url).json()
 
+        no_new = False
         print(game)
 
         while response_reviews["reviews"]:
             for i in range(len(response_reviews["reviews"])):
                 if Review.objects.filter(review_id=response_reviews["reviews"][i]["recommendationid"]).exists():
                     no_new = True
-                    break
                 else:
-                    
                     review = Review()
 
                     review.app_id = game
@@ -142,4 +140,4 @@ def reviews_new_all_collector():
             next_url = "https://store.steampowered.com/appreviews/{}?json=1&filter=recent&purchase_type=all&cursor={}".format(game.app_id, urllib.parse.quote(response_reviews["cursor"]))
             response_reviews = requests.get(next_url).json()
 
-        return {"status": 200, "message": "Collection successful"}
+    return {"status": 200, "message": "Collection successful"}
