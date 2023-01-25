@@ -32,6 +32,7 @@ def initial_reviews_collector(game_id):
 
                 #Check if review has already been read into database
                 if Review.objects.filter(review_id=response_reviews["reviews"][i]["recommendationid"]).exists():
+                    print(response_reviews["reviews"][i]["recommendationid"])
                     return {"status": 200, "message": "Collection finished"}
                 else:
                     current+=1
@@ -76,3 +77,70 @@ def initial_reviews_collector(game_id):
         return {"status": 200, "message": "Collection successful"}
     else:
         return {"status": 400, "message": "This app does not exist!"}
+
+
+
+def reviews_new_all_collector():
+    games = Game.objects.all()
+
+    on_read_sentiment = (os.environ.get('ON_READ_SENTIMENT') == 'True')
+    on_read_emotion = (os.environ.get('ON_READ_EMOTION') == 'True')
+
+    no_new = False
+
+    for game in games:
+        api_url = "https://store.steampowered.com/appreviews/{}?json=1&filter=recent&purchase_type=all".format(game.app_id)
+        response_reviews = requests.get(api_url).json()
+
+        print(game)
+
+        while response_reviews["reviews"]:
+            for i in range(len(response_reviews["reviews"])):
+                if Review.objects.filter(review_id=response_reviews["reviews"][i]["recommendationid"]).exists():
+                    print("No New Reviews")
+                    no_new = True
+                    break
+                else:
+                    
+                    review = Review()
+
+                    review.app_id = game
+                    review.review_id = response_reviews["reviews"][i]["recommendationid"]
+                    review.author_id = response_reviews["reviews"][i]["author"]["steamid"]
+
+                    review.language = response_reviews["reviews"][i]["language"]
+                    review.review_text = response_reviews["reviews"][i]["review"]
+
+                    review.time_created = datetime.fromtimestamp(response_reviews["reviews"][i]["timestamp_created"])
+                    if response_reviews["reviews"][i]["author"].get("playtime_at_review"):review.playtime_at_review = response_reviews["reviews"][i]["author"]["playtime_at_review"]
+
+                    if(on_read_sentiment):
+                        sentiment = reviews_sentiment(response_reviews["reviews"][i]["review"])
+                        review.sentiment_pos = sentiment["positive"]
+                        review.sentiment_polarity = sentiment["polarity"]
+                        review.sentiment_subjectivity = sentiment["subjectivity"]
+
+                    if(on_read_emotion):
+                        emotions = reviews_emotions(response_reviews["reviews"][i]["review"])
+                        review.emotion_scores = emotions["scores"]
+                        review.emotion_prominent = emotions["prominent"]
+
+                    review.voted_up = response_reviews["reviews"][i]["voted_up"]
+                    review.votes_up = response_reviews["reviews"][i]["votes_up"]
+                    review.votes_funny = response_reviews["reviews"][i]["votes_funny"]
+
+                    review.purchase_on_steam = response_reviews["reviews"][i]["steam_purchase"]
+                    review.received_for_free = response_reviews["reviews"][i]["received_for_free"]
+                    review.written_during_early_access = response_reviews["reviews"][i]["written_during_early_access"]
+
+                    review.save()
+
+                if no_new:
+                    break
+            if no_new:
+                break
+
+            next_url = "https://store.steampowered.com/appreviews/{}?json=1&filter=recent&purchase_type=all&cursor={}".format(game.app_id, urllib.parse.quote(response_reviews["cursor"]))
+            response_reviews = requests.get(next_url).json()
+
+        return {"status": 200, "message": "Collection successful"}
