@@ -1,0 +1,41 @@
+.main-colour {
+    background-color: #272c30;
+}
+
+.secondary-colour {
+    background-color: #363c41;
+}
+
+.text-colour {
+    color: #bec5cb;
+}
+
+body {
+    margin: 0;
+}
+
+.wrapper {
+    height: 100vh;
+}
+
+@media only screen and (max-width: 960px){
+    .content-wrapper {
+        padding: 10px;
+        height: 100%;
+        align-content: space-between;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media only screen and (min-width: 960px){
+    .content-wrapper {
+        padding: 25px;
+        height: 100%;
+        align-content: space-between;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+

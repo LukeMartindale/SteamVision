@@ -1,0 +1,38 @@
+.navbar {
+    height: 55px;
+    display: flex;
+    flex-direction: row;
+}
+
+.sidebar-button-wrapper {
+    min-width: 55px;
+    min-height: 55px;
+}
+
+.sidebar-button-widget {
+    min-width: 55px;
+    min-height: 55px;
+    color: #bec5cb;
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-text {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.account-wrapper {
+    min-width: 55px;
+    min-height: 55px;
+    background-color: blue;
+}
