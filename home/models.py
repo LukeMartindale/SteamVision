@@ -46,6 +46,24 @@ class GameStat(models.Model):
     def __str__(self):
         return "{} Stats".format(self.app_id.name)
 
+    def get_absolute_url(self):
+        return reverse('gamestat', kwargs={'pk': self.pk})
+
+class PlayerCount(models.Model):
+    #app
+    app_id = models.ForeignKey(Game, on_delete=models.CASCADE, null=True)
+    #Player Count
+    player_count = models.IntegerField(default=-1)
+    #TimeStamp
+    timestamp = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return "{}/{}/{} - {} - {}".format(self.timestamp.day, self.timestamp.month, self.timestamp.year ,self.timestamp.hour, self.app_id)
+
+    def get_absolute_url(self):
+        return reverse('playercount', kwargs={'pk': self.pk})
+
+
 class Review(models.Model):
 
     #app, recommendationid, author
