@@ -24,6 +24,30 @@ def app_sentiment(app):
 
     return app_sentiment
 
+def app_all_sentiment():
+
+    games = Game.objects.all()
+
+    for game in games:
+        reviews = Review.objects.filter(app_id=game)
+
+        sentiment = []
+        for i in range(len(reviews)):
+            sentiment.append(round(reviews[i].sentiment_polarity, 1))
+
+        #Try to get the Gamestats object for this game
+        try:
+            game_stats = GameStat.objects.get(app_id=game)
+        except GameStat.DoesNotExist:
+            #If does not exist create
+            game_stats = GameStat()
+            game_stats.app_id = game
+
+        app_sentiment = rounded_sentiment(sentiment)
+        game_stats.sentiment = app_sentiment
+
+        game_stats.save()
+
 def rounded_sentiment(data):
 
     sentiment = [
