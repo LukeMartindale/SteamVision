@@ -43,6 +43,9 @@ class GameStat(models.Model):
     #emotion
     emotion = models.JSONField(default=dict)
 
+    #highest_player_count
+    highest_player_count = models.IntegerField(default=0)
+
     def __str__(self):
         return "{} Stats".format(self.app_id.name)
 

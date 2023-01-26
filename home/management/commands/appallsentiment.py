@@ -7,5 +7,4 @@ class Command(BaseCommand):
         parser.add_argument("--id")
 
     def handle(self, *args, **options):
-        print("appallsentiment")
         app_all_sentiment()

@@ -1,6 +1,5 @@
-from home.models import Game, PlayerCount
+from home.models import Game, GameStat, PlayerCount
 import requests
-from datetime import datetime
 from django.utils import timezone
 
 def player_count_all_collector():
@@ -18,5 +17,11 @@ def player_count_all_collector():
         playerCount.app_id = game
         playerCount.player_count = response["response"]["player_count"]
         playerCount.timestamp = time
+
+        game_stats = GameStat.objects.get(app_id=game)
+        
+        if game_stats.highest_player_count < playerCount.player_count:
+            game_stats.highest_player_count = playerCount.player_count
+            game_stats.save()
 
         playerCount.save()
