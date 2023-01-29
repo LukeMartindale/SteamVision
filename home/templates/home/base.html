@@ -1,68 +1,88 @@
 {% load static %}
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- BOOTSTRAP -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
 
-    <!-- JQUERY -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-    <!-- D3 -->
-    <script src="https://d3js.org/d3.v7.min.js" defer></script>
-
-    <!-- My CSS -->
-    <link rel="stylesheet" type="text/css" href="{% static 'home/css/base.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'home/css/nav.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'home/css/content.css' %}">
-
-    <script>
-      //Check if the sizebar should be out or not when page is loaded
-      $(document).ready(function() {
-        if(localStorage.getItem("sidebar-status")){
-          $(".sidebar").addClass("short-sidebar")
-          $(".content-wrapper").addClass("short-content")
-        }
-      });
-    </script>
-
-    <!-- MY JS -->
-    <script src="{% static 'home/javascript/base.js' %}"></script>
+    <!-- MY CSS -->
+    <link rel="stylesheet" href="{% static  'home/css/base.css' %}">
 
     <title>Steam Vision</title>
+
+    <!-- FAVICON IMG -->
     <link rel="icon" type="image/x-icon" href="{% static 'home/images/favicon.ico' %}"/>
 
-  </head>
-  <body class="main-colour">
-    <div class="wrapper" style="height: auto;">
+</head>
+<body>
 
-      <nav class="navbar fixed-top navbar-dark main-colour">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#" style="margin-left: 16px;">
-            <img src="{% static 'home/images/steam-logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
-            <b id="nav-title">Steam Vision</b>
-          </a>
-          <a href="#" id="sidebar-toggle" class="bi bi-list me-auto ms-5" style="color: white; font-size:20px; padding: 5px;"></a>
+    <div class="base-wrapper">
+
+        <div class="navbar">
+
+            <div class="sidebar-widget-wrapper">
+                <div class="sidebar-widget-highlight">
+                    <i class="bi bi-list sidebar-widget"></i>
+                </div>
+            </div>
+    
+            <div class="title-wrapper">
+                <header class="title">Steam Vision</header>
+            </div>
+    
+            <div class="user-widget-wrapper">
+                <i class="bi bi-person-circle user-widget"></i>
+            </div>
+    
         </div>
-      </nav>
 
-      <div class="sidebar main-colour">
-        <ul class="sidebar-menu">
-          <!-- <a href="{% url 'home' %}" style="text-decoration: none;"><li class="sidebar-menu-item current-page rounded" id="dashboard"><i class="bi bi-speedometer text-colour"></i><span class="text-colour">Dashboard</span></li></a> -->
-          <a href="{% url 'game-list' %}" style="text-decoration: none;"><li class="sidebar-menu-item rounded" id="game"><i class="bi bi-controller text-colour"></i><span class="text-colour" href="#">Games</span></li></a>
-        </ul>
-      </div>
+        <div class="sidebar-mini">
 
-      <div class="content-wrapper secondary-colour">
+            <div class="sidebar-mini-option-wrapper">
+                <div class="sidebar-mini-option-highlight">
+                    <i class="bi bi-bar-chart-line-fill"></i>
+                </div>
+            </div>
 
-        {% block content %}{% endblock %}
+            <div class="sidebar-mini-option-wrapper">
+                <div class="sidebar-mini-option-highlight">
+                    <i class="bi bi-controller"></i>
+                </div>
+            </div>
 
-      </div>
+            <div class="sidebar-mini-option-wrapper">
+                <div class="sidebar-mini-option-highlight">
+                    <i class="bi bi-pc"></i>
+                </div>
+            </div>
+
+            <div class="sidebar-mini-option-wrapper">
+                <div class="sidebar-mini-option-highlight">
+                    <i class="bi bi-compass"></i>
+                </div>
+            </div>
+
+            <div class="sidebar-mini-option-wrapper">
+                <div class="sidebar-mini-option-highlight">
+                    <i class="bi bi-people-fill"></i>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="content-wrapper">
+            
+            {% block content %}{% endblock %}
+
+        </div>
+
     </div>
-  </body>
+
+</body>
 </html>

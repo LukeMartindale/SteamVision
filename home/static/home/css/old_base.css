@@ -12,9 +12,14 @@
 
 .content-wrapper {
     margin-top: 55px;
+    margin-left: 230px;
+    min-height: 100%;
     padding: 25px;
-    height: 85vh;
     align-content: space-between;
-    display: flex;
-    justify-content: center;
+}
+
+.content-block {
+    width: 960px;
+    margin-left: auto;
+    margin-right: auto;
 }
