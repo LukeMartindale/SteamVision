@@ -89,12 +89,12 @@ class Review(models.Model):
 
     #timestamp_created, playtime_at_review(In Minutes)
     time_created = models.DateField(default=timezone.now)
-    playtime_at_review = models.IntegerField(default=-1)
+    playtime_at_review = models.BigIntegerField(default=-1)
 
     #voted_up, votes_up, votes_funny
     voted_up = models.BooleanField(default=False)
     votes_up = models.IntegerField(default=0)
-    votes_funny = models.IntegerField(default=0)
+    votes_funny = models.BigIntegerField(default=0)
 
     #steam_purchase, received_for_free, written_during_early_access
     purchase_on_steam = models.BooleanField(default=True)

@@ -10,6 +10,7 @@ from .decorators import unauthrosied_user
 def base(request):
     return render(request, 'users/base.html')
 
+@unauthrosied_user
 def registerPage(request):
     form = UserRegisterForm()
 
