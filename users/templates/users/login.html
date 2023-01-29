@@ -1,42 +1,50 @@
-{% extends "users/users_base.html" %}
+{% extends "users/base.html" %}
 {% load static %}
 
 {% block content %}
 
-<link rel="stylesheet" href="{% static 'users/css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'users/css/login.css' %}">
 
-<div class="content-block secondary-colour">
+    <div class="content-wrapper">
 
-    <h1 class="text-colour">Steam Vision</h1>
+        <div class="login-box">
+            <div class="bi bi-eye" id="logo"></div>
+            <header class="title">Steam Vision</header>
 
-    <div class="form-block">
-        <form id="register_form" method="POST" class="text-colour">
-            {% csrf_token %}
+            <form method="POST" class="login-form">
+                {% csrf_token %}
 
-            {% for field in form %}
-                <div class="form-section">
-                    {{ field.label }}
-                    {{ field }}
-                    {% for error in field.errors %}
-                        <span class="errorlist">{{ error }}</span>
+                <input type="text" name="username" id="username-input" required placeholder="Username">
+
+                <input type="password" name="password" id="password-input" required placeholder="Password">
+
+                <div class="message-box">
+                    {% for message in messages %}
+                        {{ message }}
                     {% endfor %}
                 </div>
-            {% endfor %}
 
-            <div class="form-buttons">
-                <button class="register-button"><b>Login</b></button>
-            </div>
+                <div class="bottom-box">
 
-        </form>
+                    <button class="login-button">
+                        <div class="bi bi-box-arrow-in-right" id="login-icon"></div>
+                        <p>Login</p>
+                    </button>
 
-        <div class="small-box text-colour">
-            <small>
-                Dont have an account? <a href="{% url 'register' %}">Sign Up</a>
-            </small>
+                    <div class="text-info">
+                        <p>Don't have an account? <a href="{% url 'register' %}" class="text-info-link"> Register</a></p>
+                    </div>
+
+                    <div class="text-info">
+                        <p>Forgot you password? <a href="#" class="text-info-link"> Reset it</a></p>
+                    </div>
+
+                </div>
+
+            </form>
+
         </div>
 
     </div>
-
-</div>
 
 {% endblock %}

@@ -1,42 +1,52 @@
-{% extends "users/users_base.html" %}
+{% extends "users/base.html" %}
 {% load static %}
 
 {% block content %}
 
     <link rel="stylesheet" href="{% static 'users/css/register.css' %}">
 
-    <div class="content-block secondary-colour">
+    <div class="content-wrapper">
 
-        <h1 class="text-colour">Steam Vision</h1>
-
-        <div class="form-block">
-            <form id="register_form" method="POST" class="text-colour">
+        <div class="register-box">
+            <div class="bi bi-eye" id="logo"></div>
+            <header class="title">Steam Vision</header>
+            
+            <form method="POST" class="register-form">
                 {% csrf_token %}
 
-                {% for field in form %}
-                    <div class="form-section">
-                        {{ field.label }}
-                        {{ field }}
+                <input type="text" name="username" id="username-input" required placeholder="Username">
+
+                <input type="email" name="email" id="email-input" required placeholder="Email">
+
+                <input type="password" name="password1" id="password-input" autocomplete="new-password" required placeholder="Password">
+
+                <input type="password" name="password2" id="confirm-password-input" autocomplete="new-password" required placeholder="Confirm Password">
+
+                <div class="message-box">
+                    {% for field in form %}
                         {% for error in field.errors %}
                             <span class="errorlist">{{ error }}</span>
                         {% endfor %}
-                    </div>
-                {% endfor %}
-    
-                <div class="form-buttons">
-                    <button class="register-button"><b>Sign Up</b></button>
+                    {% endfor %}
                 </div>
-    
+
+                <div class="bottom-box">
+
+                    <button class="register-button">
+                        <div class="bi bi-box-arrow-in-right" id="register-icon"></div>
+                        <p>Register</p>
+                    </button>
+
+                    <div class="text-info">
+                        <p>Already have an account? <a href="{% url 'login' %}" class="text-info-link"> Login</a></p>
+                    </div>
+
+                </div>
+
             </form>
 
-            <div class="small-box text-colour">
-                <small>
-                    Already have an account? <a href="{% url 'login' %}">Login</a>
-                </small>
-            </div>
-
         </div>
-
+        
     </div>
 
 {% endblock %}
