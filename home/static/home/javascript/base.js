@@ -1,34 +1,28 @@
 $(function(){
 
-    // Changes sidebart item background colour when hovering over it.
-    $(".sidebar-menu-item").hover(function(){
-        $(this).addClass("active");
-        }, function(){
-            $(this).removeClass("active")
-        }
-    );
+    // When user widegt click open dropdown menu
+    $(".user-widget").click(function(){
 
-    // Do something when sidebar toggle is clicked
-    $("#sidebar-toggle").click(function(e){
-        e.preventDefault()
-        if($(".sidebar").hasClass("short-sidebar") && $(".content-wrapper").hasClass("short-content")){
-            $(".sidebar").removeClass("short-sidebar")
-            $(".content-wrapper").removeClass("short-content")
-            localStorage.removeItem("sidebar-status", "collapsed")
+        if($(".dropdown").hasClass("show-dropdown")){
+            $(".dropdown").removeClass("show-dropdown")
         } else {
-            $(".sidebar").addClass("short-sidebar")
-            $(".content-wrapper").addClass("short-content")
-            localStorage.setItem("sidebar-status", "closed")
-        }
-        sentiment_graph()
-    });
+            $(".dropdown").addClass("show-dropdown")
+        };
 
-    //On hover chnage the colour of sidebar toggle button when hovered
-    $("#sidebar-toggle").hover(function(){
-        $(this).addClass("active");
-        }, function(){
-            $(this).removeClass("active")
-        }
-    );
+        // Add functionality so when this is clicked close open sidebar
 
-});
+    })
+
+    // Open Sidebar Functionality
+
+    // Close Dropdown & Sidebar when document clicked
+    document.addEventListener('click', event => {
+        if (event.target.closest(".dropdown") === null) {
+            if(!event.target.classList.contains("user-widget")){
+                $(".dropdown").removeClass("show-dropdown")
+            }
+        }
+    })
+
+
+})
