@@ -1,9 +1,8 @@
 html {
-    height: 100%;
+    height: 99%;
 }
 
 body {
-    height: 100%;
     background-color: #363c41;
     margin: 0;
 }
@@ -95,17 +94,12 @@ body {
     justify-content: center;
     align-items: center;
     border-radius: 6px;
+    color: #bec5cb;
+    text-decoration: none;
 }
 
 .dropdown-highlight:hover {
     background-color: rgba(217, 217, 217, 0.3);
-}
-
-
-.dropdown-option {
-    color: #bec5cb;
-    text-decoration: none;
-
 }
 
 .show-dropdown {
@@ -121,7 +115,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 55px;
 }
 
 .sidebar-mini-option-wrapper {
@@ -153,9 +146,22 @@ body {
 }
 
 .content-wrapper {
-    width: 100%;
     height: 100%;
     margin-top: 55px;
     margin-left: 55px;
-    position: fixed;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 36px;
+}
+
+@media only screen and (max-width: 800px){
+
+    .sidebar-mini {
+        display: none;
+    }
+
+    .content-wrapper {
+        margin-left: 0px;
+    }
+
 }

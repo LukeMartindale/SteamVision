@@ -47,9 +47,15 @@
             </div>
 
             <div class="dropdown">
-                <div class="dropdown-highlight">
-                    <a href="{% url 'logout' %}" class="dropdown-option">Logout</a>
-                </div>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}" class="dropdown-highlight">
+                        Logout
+                    </a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="dropdown-highlight">
+                        Login
+                    </a>
+                {% endif %}
             </div>
     
         </div>
@@ -63,8 +69,8 @@
             </div>
 
             <div class="sidebar-mini-option-wrapper">
-                <div class="sidebar-mini-option-highlight">
-                    <a href="#" class="bi bi-controller sidebar-mini-option-icon"></a>
+                <div class="sidebar-mini-option-highlight" id="game-list-icon">
+                    <a href="{% url 'game-list' %}" class="bi bi-controller sidebar-mini-option-icon"></a>
                 </div>
             </div>
 

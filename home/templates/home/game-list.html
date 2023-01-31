@@ -1,0 +1,89 @@
+{% extends "home/base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <!-- MY CSS -->
+    <link rel="stylesheet" href="{% static 'home/css/game-list.css' %}">
+
+    <!-- MY JS -->
+    <script src="{% static 'home/javascript/game-list.js' %}"></script>
+
+    <div class="block-wrapper">
+
+        <div class="filter-block">
+
+            <form action="" method="POST" class="filter-form">
+                {% csrf_token %}
+
+                <div class="top-filter-section">
+                    <div class="search-filter-wrapper">
+
+                        <div class="search-bar-wrapper">
+        
+                            <input type="text" name="search" id="search-input" class="search-bar-input"></input>
+        
+                            <button type="submit" class="search-bar-button">
+                                <i class="bi bi-search search-icon"></i>
+                            </button>
+        
+                        </div>
+        
+                    </div>
+        
+                    <div class="more-filter-wrapper">
+        
+                        <div class="filter-dropdown-wrapper">
+                            <i class="bi bi-caret-down-fill filter-icon" id="filter-dropdown-icon"></i>
+                        </div>
+        
+                    </div>
+                </div>
+
+                <div class="filter-break hide-none"></div>
+
+                <div class="bottom-filter hide">
+
+                    <div class="bottom-filter-section" id="bottom-filter-section-1">
+
+                        <div class="dropdown-wrapper">
+
+                            <div class="dropdown-button">
+                                <div class="dropdown-button-display">
+
+                                </div>
+
+                                <div class="dropdown-button-arrow-wrapper">
+                                    <i class="bi bi-caret-down-fill filter-icon"></i>
+                                </div>
+                            </div>
+
+                            <div class="dropdown-menu">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="bottom-filter-section" id="bottom-filter-section-2">
+                        
+                    </div>
+
+                    <div class="bottom-filter-section" id="bottom-filter-section-3">
+                        
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+        <div class="content-block">
+
+        </div>
+
+    </div>
+
+{% endblock %}
