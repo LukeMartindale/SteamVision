@@ -42,9 +42,36 @@ $(function(){
         $(this).parent().children(".dropdown-menu").children(".dropdown-menu-item-wrapper").toggleClass("hide-none")
 
     })
-
+    // Add selected item to relevant input
     $(".dropdown-menu-item").click(function(){
-        console.log("TEST")
+
+        let selected = $(this).closest(".dropdown-wrapper").children("#genres-input").val()
+
+        // let values = selected.split(",")
+        // console.log(values)
+        // console.log(values[0])
+
+        if($(this).hasClass("dropdown-menu-item-selected")){
+            //If item  selected, unselect and remove value from input
+            let values = selected.split(",")
+            values.splice($.inArray($(this).attr('id'), values), 1)
+
+            selected = values
+
+        } else {
+            //If item not selected, select and add value to input
+            if($(this).closest(".dropdown-wrapper").children("input").val()){
+                selected = selected + ',' + $(this).attr('id')
+            } else {
+                selected = $(this).attr('id')
+            }
+        }
+
+
+
+        $(this).closest(".dropdown-wrapper").children("input").val(selected)
+        $(this).toggleClass("dropdown-menu-item-selected")
+
     })
 
     $(".select-widget").click(function(){

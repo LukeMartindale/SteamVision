@@ -219,6 +219,10 @@
     background-color: rgba(217, 217, 217, 0.3);
 }
 
+.dropdown-menu-item-selected {
+    background-color: rgba(217, 217, 217, 0.3)
+}
+
 .filter-icon {
     color: #bec5cb;
     font-size: 30px;
