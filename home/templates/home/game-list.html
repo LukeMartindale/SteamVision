@@ -6,14 +6,11 @@
     <!-- MY CSS -->
     <link rel="stylesheet" href="{% static 'home/css/game-list.css' %}">
 
-    <!-- MY JS -->
-    <script src="{% static 'home/javascript/game-list.js' %}"></script>
-
     <div class="block-wrapper">
 
         <div class="filter-block">
 
-            <form action="" method="POST" class="filter-form">
+            <form action="" method="POST" class="filter-form" id="filter-form" onsubmit="on_form_submit()">
                 {% csrf_token %}
 
                 <div class="top-filter-section">
@@ -59,30 +56,13 @@
                             <div class="dropdown-menu hide" id="genres-dropdown-menu">
 
                                 <div class="dropdown-menu-item-wrapper hide-none">
-                                    <div class="dropdown-menu-item" id="genres">
-                                        TEST
-                                    </div>
-                                    <div class="dropdown-menu-item">
-                                        TEST
-                                    </div>
-                                    <div class="dropdown-menu-item">
-                                        TEST
-                                    </div>
-                                    <div class="dropdown-menu-item">
-                                        TEST
-                                    </div>
-                                    <div class="dropdown-menu-item">
-                                        TEST
-                                    </div>
-                                    <div class="dropdown-menu-item">
-                                        TEST
-                                    </div>
-                                    <div class="dropdown-menu-item">
-                                        TEST
-                                    </div>
-                                    <div class="dropdown-menu-item">
-                                        TEST
-                                    </div>
+                                    {% for descriptor in descriptors %}
+                                        {% if descriptor.type == 'Genres' %}
+                                            <div class="dropdown-menu-item" id="{{ descriptor.name }}">
+                                                {{ descriptor.name }}
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
                                 </div>
 
                             </div>
@@ -90,6 +70,7 @@
 
                         <!-- TAGS DROPDOWN -->
                         <div class="dropdown-wrapper" id="tags-dropdown-wrapper">
+                            <input type="hidden" name="tags" value="" id="tags-input">
                             <header class="dropdown-label">Tags:</header>
                             <div class="dropdown-button">
                                 <div class="dropdown-button-display"></div>
@@ -99,11 +80,22 @@
                             </div>
                             <div class="dropdown-menu hide" id="tags-dropdown-menu">
 
+                                <div class="dropdown-menu-item-wrapper hide-none">
+                                    {% for descriptor in descriptors %}
+                                        {% if descriptor.type == 'Tags' %}
+                                            <div class="dropdown-menu-item" id="{{ descriptor.name }}">
+                                                {{ descriptor.name }}
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+
                             </div>
                         </div>
 
                         <!-- CATEGORIES DROPDOWN -->
                         <div class="dropdown-wrapper" id="categories-dropdown-wrapper">
+                            <input type="hidden" name="categories" value="" id="categories-input">
                             <header class="dropdown-label">Categories:</header>
                             <div class="dropdown-button">
                                 <div class="dropdown-button-display"></div>
@@ -112,7 +104,15 @@
                                 </div>
                             </div>
                             <div class="dropdown-menu hide" id="categories-dropdown-wrapper">
-
+                                <div class="dropdown-menu-item-wrapper hide-none">
+                                    {% for descriptor in descriptors %}
+                                        {% if descriptor.type == 'Categories' %}
+                                            <div class="dropdown-menu-item" id="{{ descriptor.name }}">
+                                                {{ descriptor.name }}
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
                             </div>
                         </div>
 
@@ -137,5 +137,8 @@
         </div>
 
     </div>
+
+    <!-- MY JS -->
+    <script src="{% static 'home/javascript/game-list.js' %}"></script>
 
 {% endblock %}

@@ -106,3 +106,17 @@ class Review(models.Model):
 
     def get_absolute_url(self):
         return reverse('review', kwargs={'pk': self.pk})
+
+class Descriptor(models.Model):
+
+    type = models.CharField(max_length=20, default="")
+
+    name = models.CharField(max_length=100, default="")
+
+    symbol = models.CharField(max_length=100, default="bi-asterisk")
+
+    def __str__(self):
+        return "{descriptor_type} - {descriptor_name}".format(descriptor_type=self.type, descriptor_name=self.name)
+
+    def get_absolute_url(self):
+        return reverse('descriptor', kwargs={'pk': self.pk})

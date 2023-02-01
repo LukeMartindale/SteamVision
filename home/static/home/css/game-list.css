@@ -151,6 +151,45 @@
     width: 100%;
     background-color: #363C41;
     border-radius: 4px 0px 0px 4px;
+    padding-left: 5px;
+    padding-right: 5px;
+    overflow:auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+/* width */
+.dropdown-button-display::-webkit-scrollbar {
+    height: 10px;
+}
+  
+/* Track */
+.dropdown-button-display::-webkit-scrollbar-track {
+    background: rgba(217, 217, 217, 0.3); 
+}
+
+/* Handle */
+.dropdown-button-display::-webkit-scrollbar-thumb {
+    background: #bec5cb; 
+}
+
+/* Handle on hover */
+.dropdown-button-display::-webkit-scrollbar-thumb:hover {
+    background: #bec5cb; 
+}
+
+.dropdown-button-display-widget {
+    background-color: #4169E1;
+    height: 28px;
+    padding-left: 7.5px;
+    padding-right: 7.5px;
+    border-radius: 4px;
+    margin-right: 3px;
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .dropdown-button-arrow-wrapper {
@@ -165,7 +204,6 @@
 
 .dropdown-menu {
     max-height: 200px;
-    height: 200px;
     min-width: 220px;
     background-color: #363C41;
     position: absolute;

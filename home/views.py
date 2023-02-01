@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from . models import Game
+from . models import Game, Descriptor
 from django.views.generic import (
     ListView,
     DetailView,
@@ -11,17 +11,16 @@ def home(request):
     return render(request, 'home/base.html', {"tests": Game.objects.all()})
 
 def GameList(request):
+
+    descriptors = Descriptor.objects.all().order_by('name').values()
+
     if request.method == "POST":
         print(request.POST)
-        # print(request.POST["tags"])
-        # print(type(request.POST["tags"]))
-        # test = request.POST["tags"].split(",")
-        # print(test)
-        context = {"games": Game.objects.filter(name__contains=request.POST["search"])}
+        games = Game.objects.filter(name__contains=request.POST["search"])
+        print(games)
+        context = {"games": games, "descriptors": descriptors }
     else:
-        context = {"games": Game.objects.all()}
-
-
+        context = {"games": Game.objects.all(), "descriptors": descriptors}
 
     return render(request, 'home/game-list.html', context)
 
