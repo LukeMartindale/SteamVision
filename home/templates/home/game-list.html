@@ -133,6 +133,55 @@
         </div>
 
         <div class="content-block">
+            
+            <table>
+                <thead>
+                    <th class="table-head">Name</th>
+                    <th class="table-head">Genres</th>
+                    <th class="table-head">Tags</th>
+                    <th class="table-head">Categories</th>
+                    <th class="table-head"></th>
+                </thead>
+                <tbody>
+                    {% for game in games %}
+                    <tr id={{game.app_id}} class="table-row">
+                        <a href="#"><td>{{game.name}}</td></a>
+                        <td>
+                            {% for genre in game.genres %}
+                                {{ genre }},
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% for tag in game.tags %}
+                                {% if forloop.counter < 5 %}
+                                    {{ tag }},
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td class="category-wrapper">
+                            {% for category in game.categories %}
+                                {% for descriptor in descriptors %}
+                                    {% if descriptor.name == category %}
+                                        <div class="category-widget">
+                                            <i class="bi {{ descriptor.symbol }} category-widget-image"></i>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                        </td>
+                        <td>
+                            <div class="more-info-button-wrapper">
+                                <div class="more-info-button-highlight">
+                                    <i class="bi bi-card-text more-info-button"></i>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+
+            </table>
 
         </div>
 

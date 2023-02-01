@@ -113,6 +113,11 @@ $(function(){
 
     })
 
+    $(".table-row").click(function(){
+        console.log($(this).attr('id'))
+        window.location.href = "/games/" + $(this).attr('id');
+    })
+
 })
 
 function on_form_submit(){
