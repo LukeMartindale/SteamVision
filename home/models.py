@@ -19,6 +19,8 @@ class Game(models.Model):
     publisher = models.JSONField(default=dict)
     #genres
     genres = models.JSONField(default=dict)
+    #tags
+    tags = models.JSONField(default=dict)
     #categories
     categories = models.JSONField(default=dict)
     #supported_languages
