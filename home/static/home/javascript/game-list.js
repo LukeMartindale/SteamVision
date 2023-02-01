@@ -4,8 +4,6 @@ $(function(){
     let tags = sessionStorage.getItem("tags").split(",")
     let categories = sessionStorage.getItem("categories").split(",")
 
-    console.log(genres, tags, categories)
-
     //Add data to hidden inputs
     $("#genres-input").val(genres)
     $("#tags-input").val(tags)
