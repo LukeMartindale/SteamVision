@@ -293,7 +293,7 @@
 }
 
 .table-row:hover {
-    background-color: cadetblue;
+    filter: brightness(50%);
 }
 
 .category-wrapper {
