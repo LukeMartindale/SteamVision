@@ -162,9 +162,11 @@
                             {% for category in game.categories %}
                                 {% for descriptor in descriptors %}
                                     {% if descriptor.name == category %}
-                                        <div class="category-widget">
-                                            <i class="bi {{ descriptor.symbol }} category-widget-image"></i>
-                                        </div>
+                                        {% if descriptor.type == 'Categories' %}
+                                            <div class="category-widget" title="{{ descriptor.name }}">
+                                                <i class="bi {{ descriptor.symbol }} category-widget-image"></i>
+                                            </div>
+                                        {% endif %}
                                     {% endif %}
                                 {% endfor %}
                             {% endfor %}
