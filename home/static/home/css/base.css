@@ -218,6 +218,7 @@ body {
     margin-left: 10px;
     text-decoration: none;
     color: #bec5cb;
+    font-size: 32px;
     display: flex;
     justify-content: start;
     align-items: center;
@@ -225,6 +226,19 @@ body {
 
 .sidebar-text {
     margin: 0;
+}
+
+.display-draw {
+    position: absolute;
+    height: 10000px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1100;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 1;
+    transition: opacity 2s ease;
 }
 
 .content-wrapper {
@@ -239,6 +253,17 @@ body {
 .hidden {
     width: 0;
     transition: 0.1s;
+}
+
+.hidden-none {
+    display: none;
+    opacity: 0;
+    transition: opacity 1s ease-out;
+}
+
+.stop-scrolling {
+    height: 100%;
+    overflow: hidden;
 }
 
 @media only screen and (max-width: 800px){

@@ -1,5 +1,7 @@
 $(function(){
 
+    let draw_state = false
+
     // When user widegt click open dropdown menu
     $(".user-widget").click(function(){
 
@@ -9,18 +11,22 @@ $(function(){
             $(".dropdown").addClass("show-dropdown")
         };
 
-        // Add functionality so when this is clicked close open sidebar
-
     })
 
     // Open Sidebar Functionality
     $(".sidebar-widget-highlight").click(function(){
 
         $(".sidebar").toggleClass("hidden")
-        
-        console.log("TEST WIDGET")
-        console.log(this)
+        $(".display-draw").toggleClass("hidden-none")
+        $('body').toggleClass("stop-scrolling")
 
+    })
+
+    //Close sidebar when display-drawer is clicked
+    $(".display-draw").click(function(){
+        $(".sidebar").toggleClass("hidden")
+        $(".display-draw").toggleClass("hidden-none")
+        $('body').toggleClass("stop-scrolling")
     })
 
     // Close Dropdown & Sidebar when document clicked
@@ -34,3 +40,15 @@ $(function(){
 
 
 })
+
+function disableScroll() {
+
+  }
+  
+  // call this to Enable
+  function enableScroll() {
+    window.removeEventListener('DOMMouseScroll', preventDefault, false);
+    window.removeEventListener(wheelEvent, preventDefault, wheelOpt); 
+    window.removeEventListener('touchmove', preventDefault, wheelOpt);
+    window.removeEventListener('keydown', preventDefaultForScrollKeys, false);
+  }
