@@ -1,9 +1,9 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
-from .serializers import GameSerializer, GameStatSerializer
+from .serializers import GameSerializer, GameStatSerializer, DescriptorSerializer
 
-from home.models import Game, GameStat, Review
+from home.models import Game, GameStat, Review, Descriptor
 
 
 # Create your views here.
@@ -59,3 +59,31 @@ def getAllReviews(request):
         {'label': '1', 'value': 64},
     ]}
     return Response(temp)
+
+@api_view(['GET'])
+def getDescriptors(request):
+    descriptors = Descriptor.objects.all()
+    serializer = DescriptorSerializer(descriptors, many=True)
+
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getGenres(request):
+    genres = Descriptor.objects.filter(type="Genres")
+    serializer = DescriptorSerializer(genres, many=True)
+
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getTags(request):
+    tags = Descriptor.objects.filter(type="Tags")
+    serializer = DescriptorSerializer(tags, many=True)
+
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getCategories(request):
+    categories = Descriptor.objects.filter(type="Categories")
+    serializer = DescriptorSerializer(categories, many=True)
+
+    return Response(serializer.data)
