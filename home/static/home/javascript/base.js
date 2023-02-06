@@ -14,6 +14,14 @@ $(function(){
     })
 
     // Open Sidebar Functionality
+    $(".sidebar-widget-highlight").click(function(){
+
+        $(".sidebar").toggleClass("hidden")
+        
+        console.log("TEST WIDGET")
+        console.log(this)
+
+    })
 
     // Close Dropdown & Sidebar when document clicked
     document.addEventListener('click', event => {

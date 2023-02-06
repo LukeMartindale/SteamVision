@@ -6,6 +6,10 @@
     margin-right: auto;
 }
 
+#game-list-mini-icon {
+    background-color: rgba(217, 217, 217, 0.3);
+}
+
 #game-list-icon {
     background-color: rgba(217, 217, 217, 0.3);
 }
