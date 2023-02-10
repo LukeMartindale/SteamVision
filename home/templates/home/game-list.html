@@ -30,9 +30,9 @@
         
                     <div class="more-filter-wrapper">
         
-                        <div class="filter-dropdown-wrapper">
+                        <button class="filter-dropdown-wrapper" type="button">
                             <i class="bi bi-caret-down-fill filter-icon" id="filter-dropdown-icon"></i>
-                        </div>
+                        </button>
         
                     </div>
                 </div>
@@ -47,12 +47,12 @@
                         <div class="dropdown-wrapper" id="genres-dropdown-wrapper">
                             <input type="hidden" name="genres" value="" id="genres-input">
                             <header class="dropdown-label">Genres:</header>
-                            <div class="dropdown-button" id="tag-dropdown-button">
+                            <button class="dropdown-button" id="tag-dropdown-button" type="button">
                                 <div class="dropdown-button-display"></div>
                                 <div class="dropdown-button-arrow-wrapper">
                                     <i class="bi bi-caret-down-fill filter-icon" id="tag-dropdown-icon"></i>
                                 </div>
-                            </div>
+                            </button>
                             <div class="dropdown-menu hide" id="genres-dropdown-menu">
 
                                 <div class="dropdown-menu-item-wrapper hide-none">
@@ -72,12 +72,12 @@
                         <div class="dropdown-wrapper" id="tags-dropdown-wrapper">
                             <input type="hidden" name="tags" value="" id="tags-input">
                             <header class="dropdown-label">Tags:</header>
-                            <div class="dropdown-button">
+                            <button class="dropdown-button" type="button">
                                 <div class="dropdown-button-display"></div>
                                 <div class="dropdown-button-arrow-wrapper">
                                     <i class="bi bi-caret-down-fill filter-icon"></i>
                                 </div>
-                            </div>
+                            </button>
                             <div class="dropdown-menu hide" id="tags-dropdown-menu">
 
                                 <div class="dropdown-menu-item-wrapper hide-none">
@@ -97,12 +97,12 @@
                         <div class="dropdown-wrapper" id="categories-dropdown-wrapper">
                             <input type="hidden" name="categories" value="" id="categories-input">
                             <header class="dropdown-label">Categories:</header>
-                            <div class="dropdown-button">
+                            <button class="dropdown-button" type="button">
                                 <div class="dropdown-button-display"></div>
                                 <div class="dropdown-button-arrow-wrapper">
                                     <i class="bi bi-caret-down-fill filter-icon"></i>
                                 </div>
-                            </div>
+                            </button>
                             <div class="dropdown-menu hide" id="categories-dropdown-wrapper">
                                 <div class="dropdown-menu-item-wrapper hide-none">
                                     {% for descriptor in descriptors %}
@@ -137,32 +137,36 @@
             <div class="game-list-wrapper">
 
                     <div class="game-tabs-header">
-                        <div class="game-tabs-header-text">Name</div>
-                        <div class="game-tabs-header-text">Genres</div>
-                        <div class="game-tabs-header-text">Tags</div>
-                        <div class="game-tabs-header-text">Categories</div>
-                        <div class="game-tabs-header-hidden">More Info</div>
+                        <div class="game-tabs-header-text name-header">Name</div>
+                        <div class="game-tabs-header-text genres-header">Genres</div>
+                        <div class="game-tabs-header-text tag-header">Tags</div>
+                        <div class="game-tabs-header-text category-header">Categories</div>
+                        <div class="game-tabs-header-hidden more-info-header">More Info</div>
                     </div>
 
                     {% for game in games %}
                         <div class="game-tab-wrapper">
                             <div class="game-tab" id="{{ game.app_id }}">
-                                <div class="game-tab-block" >
+                                <div class="game-tab-block name-tab-block" >
                                     {{game.name}}
                                 </div>
-                                <div class="game-tab-block">
+                                <div class="game-tab-block genres-tab-block">
                                     {% for genre in game.genres %}
-                                        {{ genre }},
+                                        <div class="game-descriptor-box">
+                                            {{ genre }}
+                                        </div>
                                     {% endfor %}
                                 </div>
-                                <div class="game-tab-block">
+                                <div class="game-tab-block tag-tab-block">
                                     {% for tag in game.tags %}
                                         {% if forloop.counter < 5 %}
-                                            {{ tag }},
+                                            <div class="game-descriptor-box">
+                                                {{ tag }}
+                                            </div>
                                         {% endif %}
                                     {% endfor %}
                                 </div>
-                                <div class="game-tab-block">
+                                <div class="game-tab-block category-tab-block">
                                     {% for category in game.categories %}
                                         {% for descriptor in descriptors %}
                                             {% if descriptor.name == category %}
@@ -209,13 +213,17 @@
                                             <div class="descriptors-box-content">
                                                 <div class="descriptors-box-section">
                                                     {% for genre in game.genres %}
-                                                        {{ genre }},
+                                                        <div class="game-descriptor-box">
+                                                            {{ genre }}
+                                                        </div>
                                                     {% endfor %}
                                                 </div>
                                                 <div class="descriptors-box-section">
                                                     {% for tag in game.tags %}
                                                         {% if forloop.counter < 5 %}
-                                                            {{ tag }},
+                                                            <div class="game-descriptor-box">
+                                                                {{ tag }}
+                                                            </div>
                                                         {% endif %}
                                                     {% endfor %}
                                                 </div>

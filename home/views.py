@@ -15,8 +15,46 @@ def GameList(request):
     descriptors = Descriptor.objects.all().order_by('name').values()
 
     if request.method == "POST":
+
         games = Game.objects.filter(name__contains=request.POST["search"])
+
+        print(games)
+
+        if(request.POST["genres"]):
+
+            genres = request.POST["genres"].split(",")
+            filtered_games = []
+
+            for index, game in enumerate(games):
+                if(all(g in game.genres for g in genres)):
+                    filtered_games.append(game)
+
+            games = filtered_games
+
+        if(request.POST["tags"]):
+
+            tags = request.POST["tags"].split(",")
+            filtered_games = []
+
+            for index, game in enumerate(games):
+                if(all(g in game.tags for g in tags)):
+                    filtered_games.append(game)
+
+            games = filtered_games
+
+        if(request.POST["categories"]):
+
+            categories = request.POST["categories"].split(",")
+            filtered_games = []
+
+            for index, game in enumerate(games):
+                if(all(g in game.categories for g in categories)):
+                    filtered_games.append(game)
+
+            games = filtered_games
+
         context = {"games": games, "descriptors": descriptors}
+
     else:
         context = {"games": Game.objects.all(), "descriptors": descriptors}
 
