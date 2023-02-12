@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from . models import Game, Descriptor
+from . models import Game, Descriptor, Review
 from django.views.generic import (
     ListView,
     DetailView,
@@ -64,9 +64,11 @@ def GameDetail(request, pk):
 
     game = Game.objects.get(app_id=pk)
 
+    total_reviews = len(Review.objects.filter(app_id=game))
+
     descriptors = Descriptor.objects.all().order_by('name').values()
 
-    context = {'game': game, 'descriptors': descriptors}
+    context = {'game': game, 'descriptors': descriptors, 'total_reviews': total_reviews}
 
     return render(request, 'home/game-detail.html', context)
 
