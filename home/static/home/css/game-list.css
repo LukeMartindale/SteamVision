@@ -1,9 +1,9 @@
 .block-wrapper {
     color: #bec5cb;
     max-width: 960px;
-    height: 450px;
     margin-left: auto;
     margin-right: auto;
+    padding-bottom: 25px;
 }
 
 #game-list-mini-icon {

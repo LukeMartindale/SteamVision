@@ -3,6 +3,7 @@
     max-width: 960px;
     margin-left: auto;
     margin-right: auto;
+    padding-bottom: 25px;
 }
 
 .detail-block-wrapper {
@@ -236,26 +237,18 @@
     margin-bottom: 30px;
 }
 
-.game-review-section {
+.game-player-wrapper {
+    max-width: 960px;
+    margin-bottom: 30px;
+}
+
+.game-section {
     max-width: 960px;
     border-radius: 12px;
     background-color: #272C30;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    margin-top: 30px;
-}
-
-.game-player-section {
-    max-width: 960px;
-    border-radius: 12px;
-    background-color: #272C30;
-    display: flex;
-    flex-direction: column;
     padding-left: 30px;
     padding-right: 30px;
     padding-top: 15px;
@@ -344,6 +337,47 @@
     height: 100%;
 }
 
+.visualisation-widgets-drawer {
+    width: 100%;
+    height: 30px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.divider {
+    width: 100%;
+    border-bottom: 1px solid #bec5cb;
+}
+
+.widgets-draw-icon-wrapper {
+    width: 40px;
+    height: 35px;
+    margin-right: 10px;
+    margin-left: 10px;
+    font-size: 30px;
+    padding: 3px;
+    cursor: pointer;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.widgets-icon {
+    transition: 0.5s;
+}
+
+.widgets-icon-up {
+    transform: rotate(-180deg);
+}
+
+.widgets-draw-icon-wrapper:hover {
+    background-color: rgba(217, 217, 217, 0.3);
+}
+
 .visualisation-widgets-wrapper {
     width: 100%;
     margin-top: 20px;
@@ -365,6 +399,17 @@
 .hide-section {
     display: none;
     overflow: hidden;
+}
+
+.hide-ani {
+    height: 0;
+    overflow: hidden;
+    transition: 1s;
+}
+
+/* TEMPORARY REMOVE LATER */
+.bar {
+    fill: royalblue;
 }
 
 @media only screen and (max-width: 800px){

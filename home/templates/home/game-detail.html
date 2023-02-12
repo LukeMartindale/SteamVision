@@ -6,6 +6,31 @@
     <!-- MY CSS -->
     <link rel="stylesheet" href="{% static 'home/css/game-detail.css' %}">
 
+    <!-- MY JS -->
+    <script src="{% static 'home/javascript/game-detail.js' %}"></script>
+
+    <!-- D3 -->
+    <script src="https://d3js.org/d3.v7.min.js" defer></script>
+
+    <script defer>
+        const game_id = '{{ game.app_id }}'
+
+        //Draws graphs on page load
+        $(document).ready(function() {
+            sentiment_graph()
+        });
+
+        //Redraws graph after dealy when page is resized
+        let resizeTimer;
+        $(window).resize(function () { 
+            clearTimeout(resizeTimer)
+            resizeTimer = setTimeout(function() {
+                sentiment_graph()
+                console.log("RESIZE")
+            }, 100)
+        });
+    </script>
+
     <div class="block-wrapper">
 
         <div class="detail-block-wrapper">
@@ -128,20 +153,174 @@
         </div>
 
         <div class="game-content-selector">
-            <div class="game-content-selector-widget content-selected">
+            <div class="game-content-selector-widget content-selected" id="review-selector-button">
                 <b>Reviews</b> 
             </div>
-            <div class="game-content-selector-widget">
+            <div class="game-content-selector-widget" id="players-selector-button">
                 <b>Players</b> 
             </div>
         </div>
 
-        <div class="game-review-wrapper">
-            <div class="game-review-section">
+        <div class="game-review-wrapper" id="reviews-section">
+            <div class="game-section">
 
                 <div class="detail-title-wrapper">
                     <header class="detail-title-text">
                         Reviews
+                    </header>
+                </div>
+    
+                <div class="visualisation-container">
+                    <div class="visualisation-container-header">
+                        <div class="visualisation-container-options-wrapper">
+                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
+                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
+                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
+                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
+                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
+                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
+                        </div>
+                        <div class="visualisation-container-header-detail-widget">
+                            <div class="visualisation-container-header-detail-widget-left">
+                                <b>Total Reviews:</b> 
+                            </div>
+                            <div class="visualisation-container-header-detail-widget-right">
+                                Placeholder
+                            </div>
+                        </div>
+                    </div>
+                    <div class="visualisation-container-content" id="reviews-container-content">
+                        <svg class="visualisation-svg">
+    
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="visualisation-widgets-drawer">
+                    <div class="divider"></div>
+                    <div class="widgets-draw-icon-wrapper">
+                        <i class="bi bi-chevron-double-down widgets-icon"></i>
+                    </div>
+                    <div class="divider"></div>
+                </div>
+
+                <div class="visualisation-widgets-wrapper hide-ani">
+                    <div class="visualisation-widgets-container"></div>
+                    <div class="visualisation-widgets-container"></div>
+                    <div class="visualisation-widgets-container"></div>
+                    <div class="visualisation-widgets-container"></div>
+                    <div class="visualisation-widgets-container"></div>
+                </div>
+            </div>
+
+            <div class="game-section">
+
+                <div class="detail-title-wrapper">
+                    <header class="detail-title-text">
+                        Reviews Sentiment
+                    </header>
+                </div>
+    
+                <div class="visualisation-container">
+                    <div class="visualisation-container-header">
+                        <div class="visualisation-container-options-wrapper">
+                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
+                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
+                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
+                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
+                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
+                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
+                        </div>
+                        <div class="visualisation-container-header-detail-widget">
+                            <div class="visualisation-container-header-detail-widget-left">
+                                <b>Sentiment Value:</b> 
+                            </div>
+                            <div class="visualisation-container-header-detail-widget-right">
+                                Placeholder
+                            </div>
+                        </div>
+                    </div>
+                    <div class="visualisation-container-content" id="sentiment-container-content">
+                        <svg class="visualisation-svg" id="sentiment-graph">
+    
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="visualisation-widgets-drawer">
+                    <div class="divider"></div>
+                    <div class="widgets-draw-icon-wrapper">
+                        <i class="bi bi-chevron-double-down widgets-icon"></i>
+                    </div>
+                    <div class="divider"></div>
+                </div>
+
+                <div class="visualisation-widgets-wrapper hide-ani">
+                    <div class="visualisation-widgets-container"></div>
+                    <div class="visualisation-widgets-container"></div>
+                    <div class="visualisation-widgets-container"></div>
+                    <div class="visualisation-widgets-container"></div>
+                    <div class="visualisation-widgets-container"></div>
+                </div>
+            </div>
+
+            <div class="game-section">
+
+                <div class="detail-title-wrapper">
+                    <header class="detail-title-text">
+                        Reviews Emotion
+                    </header>
+                </div>
+    
+                <div class="visualisation-container">
+                    <div class="visualisation-container-header">
+                        <div class="visualisation-container-options-wrapper">
+                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
+                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
+                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
+                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
+                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
+                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
+                        </div>
+                        <div class="visualisation-container-header-detail-widget">
+                            <div class="visualisation-container-header-detail-widget-left">
+                                <b>Prominent Emotion:</b> 
+                            </div>
+                            <div class="visualisation-container-header-detail-widget-right">
+                                Placeholder
+                            </div>
+                        </div>
+                    </div>
+                    <div class="visualisation-container-content" id="emotion-container-content"></div>
+                </div>
+
+                <div class="visualisation-widgets-drawer">
+                    <div class="divider"></div>
+                    <div class="widgets-draw-icon-wrapper">
+                        <i class="bi bi-chevron-double-down widgets-icon"></i>
+                    </div>
+                    <div class="divider"></div>
+                </div>
+
+                <div class="visualisation-widgets-wrapper hide-ani">
+                    <div class="visualisation-widgets-container"></div>
+                    <div class="visualisation-widgets-container"></div>
+                    <div class="visualisation-widgets-container"></div>
+                    <div class="visualisation-widgets-container"></div>
+                    <div class="visualisation-widgets-container"></div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div class="game-player-wrapper hide-section" id="players-section">
+            <div class="game-section">
+
+                <div class="detail-title-wrapper">
+                    <header class="detail-title-text">
+                        Player Count
                     </header>
                 </div>
     
@@ -171,23 +350,31 @@
                     </div>
                 </div>
 
-                <div class="visualisation-widgets-wrapper">
+                <div class="visualisation-widgets-drawer">
+                    <div class="divider"></div>
+                    <div class="widgets-draw-icon-wrapper">
+                        <i class="bi bi-chevron-double-down widgets-icon"></i>
+                    </div>
+                    <div class="divider"></div>
+                </div>
+
+                <div class="visualisation-widgets-wrapper hide-ani">
                     <div class="visualisation-widgets-container"></div>
                     <div class="visualisation-widgets-container"></div>
                     <div class="visualisation-widgets-container"></div>
                     <div class="visualisation-widgets-container"></div>
                     <div class="visualisation-widgets-container"></div>
                 </div>
-                
             </div>
         </div>
 
-
-
-        <div class="game-player-section hide-section">
-
-        </div>
-
     </div>
+
+    <!-- LOAD GAME DATA -->
+    <script src="{% static 'home/javascript/data_getters/get_game_stats.js' %}" defer></script>
+
+    <!-- DRAW GRAPHS -->
+    <script src="{% static 'home/javascript/visualisations/temp-reviews-sentiment.js' %}" defer></script>
+    <script src="{% static 'home/javascript/visualisations/temp-reviews-emotion.js' %}" defer></script>
 
 {% endblock %}
