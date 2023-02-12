@@ -4,7 +4,7 @@
 {% block content %}
 
 <!-- My CSS -->
-<link rel="stylesheet" type="text/css" href="{% static 'home/css/game_list.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'home/css/old_game_list.css' %}">
 
 <div class="content-block">
 
@@ -12,7 +12,7 @@
     </div>
 
     {% for game in games %}
-    <a class="game-block main-colour text-colour" href="{% url 'game-detail' game.app_id %}">
+    <a class="game-block main-colour text-colour" href="{% url 'old-game-detail' game.app_id %}">
         <img id="image" src="{{ game.header_image }}">
         <h3> {{ game.name }} </h3>
     </a>

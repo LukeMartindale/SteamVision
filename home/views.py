@@ -60,6 +60,16 @@ def GameList(request):
 
     return render(request, 'home/game-list.html', context)
 
+def GameDetail(request, pk):
+
+    game = Game.objects.get(app_id=pk)
+
+    descriptors = Descriptor.objects.all().order_by('name').values()
+
+    context = {'game': game, 'descriptors': descriptors}
+
+    return render(request, 'home/game-detail.html', context)
+
 class OldGameListView(ListView):
     model = Game
     template_name = 'home/old_game_list.html'
@@ -67,5 +77,5 @@ class OldGameListView(ListView):
 
 class GameDetailView(DetailView):
     model = Game
-    template_name: str = 'home/game_detail.html'
+    template_name: str = 'home/old_game_detail.html'
     context_object_name: str = 'games'

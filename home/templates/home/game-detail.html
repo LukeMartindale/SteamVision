@@ -1,0 +1,193 @@
+{% extends "home/base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <!-- MY CSS -->
+    <link rel="stylesheet" href="{% static 'home/css/game-detail.css' %}">
+
+    <div class="block-wrapper">
+
+        <div class="detail-block-wrapper">
+
+            <div class="detail-title-wrapper">
+                <header class="detail-title-text">
+                    {{ game.name }}
+                </header>
+            </div>
+
+            <div class="detail-section-top">
+                <div class="detail-image-wrapper">
+                    <img class="detail-image" src="{{ game.header_image }}" alt="">
+                </div>
+
+                <div class="detail-info-section">
+                    <div class="detail-description-title-wrapper">
+                        <header class="detail-description-title-text">Description</header>
+                    </div>
+                    <div class="detail-description-text-wrapper">
+                        {{ game.description }}
+                    </div>
+                    <div class="detail-about-title-wrapper">
+                        <header class="detail-about-title-text">About</header>
+                    </div>
+                    <div class="detail-about-content-wrapper">
+                        <div class="detail-about-content-left">
+                            <div class="detail-about-content-left-section">
+                                <b>Price:</b>
+                            </div>
+                            <div class="detail-about-content-left-section">
+                                <b>Release Date:</b>
+                            </div>
+                            <div class="detail-about-content-left-section">
+                                <b>Developer:</b>
+                            </div>
+                            <div class="detail-about-content-left-section">
+                                <b>Publisher:</b>
+                            </div>
+                        </div>
+                        <div class="detail-about-content-right">
+                            <div class="detail-about-content-right-section">
+                                Placeholder
+                            </div>
+                            <div class="detail-about-content-right-section">
+                                Placeholder
+                            </div>
+                            <div class="detail-about-content-right-section">
+                                Placeholder
+                            </div>
+                            <div class="detail-about-content-right-section">
+                                Placeholder
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="detail-section-bottom">
+
+                <div class="descriptors-section-wrapper">
+                    <div class="descriptors-label-wrapper">
+                        <b>Genre:</b>
+                    </div>
+                    <div class="descriptors-container-wrapper">
+                        {% for genre in game.genres %}
+                            <div class="descriptors-widget">
+                                {{ genre }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="descriptors-label-wrapper">
+                        <b>Tags:</b>
+                    </div>
+                    <div class="descriptors-container-wrapper">
+                        {% for tag in game.tags %}
+                            {% if forloop.counter < 11 %}
+                                <div class="descriptors-widget">
+                                    {{ tag }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="descriptors-label-wrapper">
+                        <b>Categories:</b>
+                    </div>
+                    <div class="descriptors-container-wrapper">
+                        {% for category in game.categories %}
+                            {% for descriptor in descriptors %}
+                                {% if descriptor.name == category %}
+                                    {% if descriptor.type == 'Categories' %}
+                                        <div class="category-widget" title="{{ descriptor.name }}">
+                                            <i class="bi {{ descriptor.symbol }} category-widget-image"></i>
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="widgets-section-wrapper">
+                    <div class="widget-section">
+
+                    </div>
+                    <div class="widget-section">
+                        
+                    </div>
+                    <div class="widget-section">
+                        
+                    </div>
+                    <div class="widget-section">
+                        
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="game-content-selector">
+            <div class="game-content-selector-widget content-selected">
+                <b>Reviews</b> 
+            </div>
+            <div class="game-content-selector-widget">
+                <b>Players</b> 
+            </div>
+        </div>
+
+        <div class="game-review-wrapper">
+            <div class="game-review-section">
+
+                <div class="detail-title-wrapper">
+                    <header class="detail-title-text">
+                        Reviews
+                    </header>
+                </div>
+    
+                <div class="visualisation-container">
+                    <div class="visualisation-container-header">
+                        <div class="visualisation-container-options-wrapper">
+                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
+                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
+                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
+                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
+                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
+                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
+                        </div>
+                        <div class="visualisation-container-header-detail-widget">
+                            <div class="visualisation-container-header-detail-widget-left">
+                                <b>Total Reviews:</b> 
+                            </div>
+                            <div class="visualisation-container-header-detail-widget-right">
+                                Placeholder
+                            </div>
+                        </div>
+                    </div>
+                    <div class="visualisation-container-content">
+                        <svg class="visualisation-svg">
+    
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="visualisation-widgets-wrapper">
+                    <div class="visualisation-widgets-container"></div>
+                    <div class="visualisation-widgets-container"></div>
+                    <div class="visualisation-widgets-container"></div>
+                    <div class="visualisation-widgets-container"></div>
+                    <div class="visualisation-widgets-container"></div>
+                </div>
+                
+            </div>
+        </div>
+
+
+
+        <div class="game-player-section hide-section">
+
+        </div>
+
+    </div>
+
+{% endblock %}
