@@ -4,7 +4,7 @@ function sentiment_graph(){
 
     $('#sentiment-graph').empty()
 
-    let margins = {top: 20, bottom: 10, left: 40, right: 20}
+    let margins = {top: 10, bottom: 0, left: 40, right: 20}
     let svgWidth = $('#sentiment-container-content').width() - margins.left - margins.right
     let svgHeight = 400 - margins.top - margins.bottom
     // let svgHeight = ($('#sentiment-box').width()*0.7) - margins.top - margins.bottom

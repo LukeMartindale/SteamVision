@@ -280,7 +280,9 @@
 .visualisation-container-content {
     height: 450px;
     max-height: 450px;
-    padding: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
     overflow: visible;
 }
 
