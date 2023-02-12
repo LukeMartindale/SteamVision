@@ -76,13 +76,17 @@
                                 Placeholder
                             </div>
                             <div class="detail-about-content-right-section">
-                                Placeholder
+                                {{ game.release_date }}
                             </div>
                             <div class="detail-about-content-right-section">
-                                Placeholder
+                                {% for developer in game.developer %}
+                                    {{ developer }}
+                                {% endfor %}
                             </div>
                             <div class="detail-about-content-right-section">
-                                Placeholder
+                                {% for publisher in game.publisher %}
+                                    {{ publisher }}
+                                {% endfor %}
                             </div>
                         </div>
                     </div>

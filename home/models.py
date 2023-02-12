@@ -48,6 +48,21 @@ class GameStat(models.Model):
     #highest_player_count
     highest_player_count = models.IntegerField(default=0)
 
+    #highest_player_count_date
+    highest_player_count_date = models.DateField(default=timezone.now)
+
+    #highest_review_score
+    highest_review_score = models.IntegerField(default=0)
+
+    #highest_sentiment_score
+    highest_sentiment_score = models.FloatField(default=0.0)
+
+    #highest_sentiment_score_date
+    highest_sentiment_score_date = models.DateField(default=timezone.now)
+
+    #current_sentiment_score
+    current_sentiment_score = models.FloatField(default=0.0)
+
     def __str__(self):
         return "{} Stats".format(self.app_id.name)
 
