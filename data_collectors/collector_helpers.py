@@ -57,4 +57,88 @@ def newDescriptors(descriptors_genre, descriptors_tags, descriptors_categories):
             desc.save()
 
 def requirementsStripper(raw_requirements):
-    print("requirements Stripper")
+
+    pc_minimum = {}
+    pc_recommended = {}
+
+    mac_minimum = {}
+    mac_recommended = {}
+
+    linux_minimum = {}
+    linux_recommended = {}
+
+    # PC Requirements
+    if 'pc' in raw_requirements:
+        if('minimum' in raw_requirements['pc']):
+            soup = BeautifulSoup(raw_requirements['pc']['minimum'], features='lxml')
+            contents = soup.find_all('li')
+            items = soup.find_all('strong')
+
+            for i in range(len(contents)):
+                for item in items:
+                    if (str(item.get_text()) + '') in contents[i].get_text():
+                        pc_minimum[item.get_text()] = contents[i].get_text().replace(str(item.get_text()) + ' ', '')
+
+        if('recommended' in raw_requirements['pc']):
+            soup = BeautifulSoup(raw_requirements['pc']['recommended'], features='lxml')
+            contents = soup.find_all('li')
+            items = soup.find_all('strong')
+
+            for i in range(len(contents)):
+                for item in items:
+                    if (str(item.get_text()) + '') in contents[i].get_text():
+                        pc_recommended[item.get_text()] = contents[i].get_text().replace(str(item.get_text()) + ' ', '')
+
+    # MAC Requirements
+    if 'mac' in raw_requirements:
+        if('minimum' in raw_requirements['mac']):
+            soup = BeautifulSoup(raw_requirements['mac']['minimum'], features='lxml')
+            contents = soup.find_all('li')
+            items = soup.find_all('strong')
+
+            for i in range(len(contents)):
+                for item in items:
+                    if (str(item.get_text()) + '') in contents[i].get_text():
+                        mac_minimum[item.get_text()] = contents[i].get_text().replace(str(item.get_text()) + ' ', '')
+
+        if('recommended' in raw_requirements['mac']):
+            soup = BeautifulSoup(raw_requirements['mac']['recommended'], features='lxml')
+            contents = soup.find_all('li')
+            items = soup.find_all('strong')
+
+            for i in range(len(contents)):
+                for item in items:
+                    if (str(item.get_text()) + '') in contents[i].get_text():
+                        mac_recommended[item.get_text()] = contents[i].get_text().replace(str(item.get_text()) + ' ', '')
+
+    # Linux Requirements
+    if 'linux' in raw_requirements:
+        if('minimum' in raw_requirements['linux']):
+            soup = BeautifulSoup(raw_requirements['linux']['minimum'], features='lxml')
+            contents = soup.find_all('li')
+            items = soup.find_all('strong')
+
+            for i in range(len(contents)):
+                for item in items:
+                    if (str(item.get_text()) + '') in contents[i].get_text():
+                        linux_minimum[item.get_text()] = contents[i].get_text().replace(str(item.get_text()) + ' ', '')
+
+        if('recommended' in raw_requirements['linux']):
+            soup = BeautifulSoup(raw_requirements['linux']['recommended'], features='lxml')
+            contents = soup.find_all('li')
+            items = soup.find_all('strong')
+
+            for i in range(len(contents)):
+                for item in items:
+                    if (str(item.get_text()) + '') in contents[i].get_text():
+                        linux_recommended[item.get_text()] = contents[i].get_text().replace(str(item.get_text()) + ' ', '')
+
+    return {
+        'pc_minimum': pc_minimum, 
+        'pc_recommended': pc_recommended, 
+        'mac_minimum': mac_minimum, 
+        'mac_recommended': mac_recommended,
+        'linux_minimum': linux_minimum, 
+        'linux_recommended': linux_recommended,
+        }
+

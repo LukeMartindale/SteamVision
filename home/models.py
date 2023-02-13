@@ -30,13 +30,15 @@ class Game(models.Model):
     #windows_support
     windows_support = models.BooleanField(default=False)
     #windows_requirements
+    windows_requirements = models.JSONField(default=dict)
     #mac_support
     mac_support = models.BooleanField(default=False)
     #mac_requirements
+    mac_requirements = models.JSONField(default=dict)
     #linux_support
     linux_support = models.BooleanField(default=False)
     #linux_requirements
-
+    linux_requirements = models.JSONField(default=dict)
 
     #supported_languages
     supported_languages = models.TextField(default="Languages")

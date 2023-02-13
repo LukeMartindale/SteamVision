@@ -1,23 +1,33 @@
-from data_collectors.collector_helpers import convertDate, descriptionStripper, tagStripper, newDescriptors
+from data_collectors.collector_helpers import convertDate, descriptionStripper, tagStripper, newDescriptors, requirementsStripper
 
 from home.models import Game
 import requests
 from bs4 import BeautifulSoup
 
 def game_collector(game_id):
+
     api_url = "http://store.steampowered.com/api/appdetails?appids={}&cc=UK".format(game_id)
     response_app = requests.get(api_url).json()
-
-    # print(response_app[game_id]["data"]["pc_requirements"])
-    # print(response_app[game_id]["data"]["mac_requirements"])
-    # print(response_app[game_id]["data"]["linux_requirements"])
-
+    
     tag_url = "https://store.steampowered.com/apphoverpublic/{}".format(game_id)
     response_tags = requests.get(tag_url)
 
+    # game tags
     tags = tagStripper(response_tags)
-
     newDescriptors(descriptionStripper(response_app[game_id]["data"]["genres"]), tags, descriptionStripper(response_app[game_id]["data"]["categories"]))
+
+    # System Requirements
+    raw_requirements = {'pc': {}, 'mac': {}, 'linux': {}}
+    if 'pc_requirements' in response_app[game_id]["data"]:
+        raw_requirements['pc'] = response_app[game_id]["data"]["pc_requirements"]
+    if 'mac_requirements' in response_app[game_id]["data"]:
+        raw_requirements['mac'] = response_app[game_id]["data"]["mac_requirements"]
+    if 'linux_requirements' in response_app[game_id]["data"]:
+        raw_requirements['linux'] = response_app[game_id]["data"]["linux_requirements"]
+
+    requirements = requirementsStripper(raw_requirements)
+
+    print(requirements)
 
     if(Game.objects.filter(app_id=game_id).exists()):
         game = Game.objects.get(app_id=game_id)
@@ -35,6 +45,15 @@ def game_collector(game_id):
     game.genres =  descriptionStripper(response_app[game_id]["data"]["genres"])
     game.tags = tags
     game.categories = descriptionStripper(response_app[game_id]["data"]["categories"])
+
+    game.windows_support = response_app[game_id]["data"]["platforms"]["windows"]
+    game.mac_support = response_app[game_id]["data"]["platforms"]["mac"]
+    game.linux_support = response_app[game_id]["data"]["platforms"]["linux"]
+
+    game.windows_requirements = {'minimum': requirements["pc_minimum"], 'recommended': requirements["pc_recommended"]}
+    game.mac_requirements = {'minimum': requirements["mac_minimum"], 'recommended': requirements["mac_recommended"]}
+    game.linux_requirements = {'minimum': requirements["linux_minimum"], 'recommended': requirements["linux_recommended"]}
+
     game.supported_languages = response_app[game_id]["data"]["supported_languages"]
 
     game.header_image = response_app[game_id]["data"]["header_image"]
@@ -54,27 +73,22 @@ def game_recollector():
         api_url = "http://store.steampowered.com/api/appdetails?appids={}&cc=UK".format(game_id)
         response_app = requests.get(api_url).json()
 
-        # if response_app[game_id]["data"]["pc_requirements"]: 
-        #     print(response_app[game_id]["data"]["pc_requirements"])
-        # else:
-        #     print("pc_requirements none")
-
-        # if response_app[game_id]["data"]["mac_requirements"]:
-        #     print(response_app[game_id]["data"]["mac_requirements"])
-        # else:
-        #     print("mac_requirements none")
-
-        # if response_app[game_id]["data"]["linux_requirements"]:
-        #     print(response_app[game_id]["data"]["linux_requirements"])
-        # else:
-        #     print("linux_requirements none")
-
         tag_url = "https://store.steampowered.com/apphoverpublic/{}".format(game_id)
         response_tags = requests.get(tag_url)
 
         tags = tagStripper(response_tags)
-
         newDescriptors(descriptionStripper(response_app[game_id]["data"]["genres"]), tags, descriptionStripper(response_app[game_id]["data"]["categories"]))
+
+        # System Requirements
+        raw_requirements = {'pc': {}, 'mac': {}, 'linux': {}}
+        if 'pc_requirements' in response_app[game_id]["data"]:
+            raw_requirements['pc'] = response_app[game_id]["data"]["pc_requirements"]
+        if 'mac_requirements' in response_app[game_id]["data"]:
+            raw_requirements['mac'] = response_app[game_id]["data"]["mac_requirements"]
+        if 'linux_requirements' in response_app[game_id]["data"]:
+            raw_requirements['linux'] = response_app[game_id]["data"]["linux_requirements"]
+
+        requirements = requirementsStripper(raw_requirements)
 
         if(Game.objects.filter(app_id=game_id).exists()):
             game = Game.objects.get(app_id=game_id)
@@ -89,13 +103,18 @@ def game_recollector():
         game.developer = response_app[game_id]["data"]["developers"]
         game.publisher = response_app[game_id]["data"]["publishers"]
 
+        game.genres =  descriptionStripper(response_app[game_id]["data"]["genres"])
+        game.tags = tags
+        game.categories = descriptionStripper(response_app[game_id]["data"]["categories"])
+
         game.windows_support = response_app[game_id]["data"]["platforms"]["windows"]
         game.mac_support = response_app[game_id]["data"]["platforms"]["mac"]
         game.linux_support = response_app[game_id]["data"]["platforms"]["linux"]
 
-        game.genres =  descriptionStripper(response_app[game_id]["data"]["genres"])
-        game.tags = tags
-        game.categories = descriptionStripper(response_app[game_id]["data"]["categories"])
+        game.windows_requirements = {'minimum': requirements["pc_minimum"], 'recommended': requirements["pc_recommended"]}
+        game.mac_requirements = {'minimum': requirements["mac_minimum"], 'recommended': requirements["mac_recommended"]}
+        game.linux_requirements = {'minimum': requirements["linux_minimum"], 'recommended': requirements["linux_recommended"]}
+
         game.supported_languages = response_app[game_id]["data"]["supported_languages"]
 
         game.header_image = response_app[game_id]["data"]["header_image"]
