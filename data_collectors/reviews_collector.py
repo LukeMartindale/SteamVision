@@ -22,11 +22,6 @@ def initial_reviews_collector(game_id):
         on_read_sentiment = (os.environ.get('ON_READ_SENTIMENT') == 'True')
         on_read_emotion = (os.environ.get('ON_READ_EMOTION') == 'True')
 
-        if(on_read_sentiment):
-            print("SENTIMENT TRUE")
-        if(on_read_emotion):
-            print("EMOTION TRUE")
-
         while response_reviews["reviews"]:
             for i in range(len(response_reviews["reviews"])):
 

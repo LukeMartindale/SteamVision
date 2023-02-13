@@ -137,3 +137,7 @@ class Descriptor(models.Model):
 
     def get_absolute_url(self):
         return reverse('descriptor', kwargs={'pk': self.pk})
+
+class Developer(models.Model):
+
+    name = models.CharField(max_length=100, default="")

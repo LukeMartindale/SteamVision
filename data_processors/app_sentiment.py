@@ -1,4 +1,5 @@
 from home.models import Game, GameStat, Review
+from django.utils import timezone
 
 def app_sentiment(app):
 
@@ -75,3 +76,88 @@ def rounded_sentiment(data):
     ]
 
     return sentiment
+
+def calc_sentiment_score(app):
+
+    game = Game.objects.get(app_id=app)
+    pos_labels = ["0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9", "1"]
+    neg_labels = ["-0.1", "-0.2", "-0.3", "-0.4", "-0.5", "-0.6", "-0.7", "-0.8", "-0.9", "-1"]
+
+    stats = GameStat.objects.get(app_id=game)
+
+    pos_total = 0
+    neg_total = 0
+    neu_total = 0
+
+    # Calculate each total for type of sentiment
+    for sentiment in stats.sentiment:
+        if sentiment["label"] in pos_labels:
+            pos_total += sentiment["value"]
+        if sentiment["label"] in neg_labels:
+            neg_total += sentiment["value"]
+        if sentiment["label"] == "0":
+            neu_total += sentiment["value"]
+
+    net_total = pos_total - neg_total
+    sub_total = pos_total + neg_total + neu_total
+
+    # Check is not zero so dont try to divide by zero
+    if sub_total > 0:
+        net_percent = round(net_total / sub_total, 3)
+    else:
+        net_percent = 0
+
+    # Update the current sentiment of the game stats
+    stats.current_sentiment_score = net_percent
+
+    # Check if current sentiment is higher than highest alltime sentiment score
+    if net_percent > stats.highest_sentiment_score:
+        stats.highest_sentiment_score = round(net_percent, 3)
+        stats.highest_sentiment_score_date = timezone.now()
+
+    # Save Stats
+    stats.save()
+
+
+
+def calc_sentiment_score_all():
+
+    games = Game.objects.all()
+    pos_labels = ["0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9", "1"]
+    neg_labels = ["-0.1", "-0.2", "-0.3", "-0.4", "-0.5", "-0.6", "-0.7", "-0.8", "-0.9", "-1"]
+
+    for game in games:
+        stats = GameStat.objects.get(app_id=game)
+
+        pos_total = 0
+        neg_total = 0
+        neu_total = 0
+
+        # Calculate each total for type of sentiment
+        for sentiment in stats.sentiment:
+            if sentiment["label"] in pos_labels:
+                pos_total += sentiment["value"]
+            if sentiment["label"] in neg_labels:
+                neg_total += sentiment["value"]
+            if sentiment["label"] == "0":
+                neu_total += sentiment["value"]
+
+        net_total = pos_total - neg_total
+        sub_total = pos_total + neg_total + neu_total
+
+        # Check is not zero so dont try to divide by zero
+        if sub_total > 0:
+            net_percent = round(net_total / sub_total, 3)
+        else:
+            net_percent = 0
+
+        # Update the current sentiment of the game stats
+        stats.current_sentiment_score = net_percent
+
+        # Check if current sentiment is higher than highest alltime sentiment score
+        if net_percent > stats.highest_sentiment_score:
+            stats.highest_sentiment_score = round(net_percent, 3)
+            stats.highest_sentiment_score_date = timezone.now()
+
+        # Save Stats
+        stats.save()

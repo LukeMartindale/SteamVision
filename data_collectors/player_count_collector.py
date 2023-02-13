@@ -22,6 +22,7 @@ def player_count_all_collector():
         
         if game_stats.highest_player_count < playerCount.player_count:
             game_stats.highest_player_count = playerCount.player_count
+            game_stats.highest_player_count_date = time
             game_stats.save()
 
         playerCount.save()
