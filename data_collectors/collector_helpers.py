@@ -55,3 +55,6 @@ def newDescriptors(descriptors_genre, descriptors_tags, descriptors_categories):
             desc.type = "Categories"
             desc.name = category
             desc.save()
+
+def requirementsStripper(raw_requirements):
+    print("requirements Stripper")

@@ -23,6 +23,8 @@ def app_sentiment(app):
 
     game_stats.save()
 
+    calc_sentiment_score(app)
+
     return app_sentiment
 
 def app_all_sentiment():
@@ -48,6 +50,8 @@ def app_all_sentiment():
         game_stats.sentiment = app_sentiment
 
         game_stats.save()
+
+    calc_sentiment_score_all()
 
 def rounded_sentiment(data):
 
