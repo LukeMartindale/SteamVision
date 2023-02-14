@@ -8,6 +8,8 @@ def game_collector(game_id):
 
     api_url = "http://store.steampowered.com/api/appdetails?appids={}&cc=UK".format(game_id)
     response_app = requests.get(api_url).json()
+
+    print(response_app[game_id]["data"]["package_groups"][0]["price_in_cents_with_discount"])
     
     tag_url = "https://store.steampowered.com/apphoverpublic/{}".format(game_id)
     response_tags = requests.get(tag_url)
@@ -26,8 +28,6 @@ def game_collector(game_id):
         raw_requirements['linux'] = response_app[game_id]["data"]["linux_requirements"]
 
     requirements = requirementsStripper(raw_requirements)
-
-    print(requirements)
 
     if(Game.objects.filter(app_id=game_id).exists()):
         game = Game.objects.get(app_id=game_id)

@@ -13,6 +13,9 @@ class Game(models.Model):
     #short_description, detailed_description, about_the_game
     description = models.TextField(default="description")
 
+    #price
+    price = models.IntegerField(default=0)
+
     #release_date
     release_date = models.DateField(default=timezone.now) 
     #developers
