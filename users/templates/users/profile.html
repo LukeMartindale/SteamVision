@@ -1,0 +1,110 @@
+{% extends "home/base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <!-- MY CSS -->
+    <link rel="stylesheet" href="{% static 'users/css/profile.css' %}">
+
+    <!-- MY JS -->
+    <script src="{% static 'users/javascript/profile.js' %}"></script>
+
+    <div class="block-wrapper">
+
+        <div class="profile-info-wrapper">
+
+            <div class="profile-info-section">
+
+                <div class="profile-icon-wrapper">
+                    <i class="bi bi-person-circle profile-icon-widget"></i>
+                </div>
+
+                <div class="profile-info">
+                    <div class="profile-info-content-section">
+                        <div class="profile-info-content-label">
+                            <b>Username:</b> 
+                        </div>
+                        <div class="profile-info-content-text">
+                            {{ user.username }}
+                        </div>
+                    </div>
+                    <div class="profile-info-content-section">
+                        <div class="profile-info-content-label">
+                            <b>Email:</b> 
+                        </div>
+                        <div class="profile-info-content-text">
+                            {{ user.email }}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="profile-content-selector">
+            <div class="profile-content-selector-widget content-selected" id="system-info-selector-button">
+                <b>System Info</b> 
+            </div>
+            <div class="profile-content-selector-widget" id="edit-profile-selector-button">
+                <b>Profile Info</b> 
+            </div>
+        </div>
+
+        <div class="content-section" id="system-info-section">
+            <div class="content-section-box">
+                <div class="content-title-wrapper">
+                    <header class="content-title-text">
+                        System Info
+                    </header>
+                </div>
+
+                <div class="content-section-wrapper">
+                
+                </div>
+
+            </div>
+        </div>
+
+        <div class="content-section hide-section" id="edit-profile-section">
+            <div class="content-section-box">
+                <div class="content-title-wrapper">
+                    <header class="content-title-text">
+                        Profile Info
+                    </header>
+                </div>
+
+                <div class="content-section-wrapper">
+
+                    <div class="user-info-bar">
+                        <div class="user-info-bar-label">
+                            <b>Username:</b> 
+                        </div>
+                        <div class="user-info-bar-contents">
+                            {{ user.username }}
+                        </div>
+                    </div>
+
+                    <div class="user-info-bar">
+                        <div class="user-info-bar-label">
+                            <b>Email:</b> 
+                        </div>
+                        <div class="user-info-bar-contents">
+                            {{ user.email }}
+                        </div>
+                    </div>
+
+                    <div class="user-info-button-wrapper">
+                        <div class="user-info-button" id="edit-profile-button">
+                            Edit Profile
+                        </div>
+                    </div>
+
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

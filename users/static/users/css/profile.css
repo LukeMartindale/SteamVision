@@ -1,0 +1,221 @@
+.block-wrapper {
+    color: #bec5cb;
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 25px;
+}
+
+.profile-info-wrapper {
+    max-width: 960px;
+    border-radius: 12px;
+    background-color: #272C30;
+    display: flex;
+    flex-direction: column;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.profile-info-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow: hidden;
+}
+
+.profile-icon-wrapper {
+    width: 250px;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-icon-widget {
+    font-size: 220px;
+    text-align: center;
+}
+
+.profile-info {
+    width: 50%;
+    height: 100%;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-info-content-section {
+    width: 100%;
+    padding-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.profile-info-content-label {
+    width: 25%;
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.profile-info-content-text {
+    width: 75%;
+    font-size: 20px;
+}
+
+.profile-content-selector {
+    max-width: 960px;
+    height: 55px;
+    border-radius: 12px;
+    background-color: #272C30;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-top: 30px;
+}
+
+.profile-content-selector-widget {
+    height: 90%;
+    min-width: 80px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.profile-content-selector-widget:hover {
+    background-color: rgba(217, 217, 217, 0.3);
+}
+
+.content-selected {
+    background-color: rgba(217, 217, 217, 0.3);
+}
+
+.content-section {
+    max-width: 960px;
+    margin-bottom: 30px;
+}
+
+.content-section-box {
+    max-width: 960px;
+    border-radius: 12px;
+    background-color: #272C30;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-top: 30px;
+}
+
+.content-title-wrapper {
+    width: 100%;
+    border-bottom: 1px solid #bec5cb;
+}
+
+.content-title-text {
+    font-size: 36px;
+    text-align: center;
+}
+
+.content-section-wrapper {
+    width: 100%;
+    padding-top: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-info-bar {
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.user-info-bar-label {
+    width: 156px;
+    font-size: 18px;
+}
+
+.user-info-bar-contents {
+    width: 450px;
+    font-size: 18px;
+}
+
+.user-info-button-wrapper {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.user-info-button {
+    width: 150px;
+    height: 34px;
+    background-color: #292D88;
+    border-radius: 6px;
+    border: 0;
+    font-size: 20px;
+    color: #BEC5CB;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.user-info-button:hover {
+    filter: brightness(120%);
+}
+
+.hide-section {
+    display: none;
+    overflow: hidden;
+}
+
+@media only screen and (max-width:610px){
+
+    .profile-info-section {
+        flex-direction: column;
+    }
+
+    .profile-info {
+        width: 100%;
+        border-top: 1px solid #bec5cb;
+        margin-top: 10px;
+        padding-top: 10px;
+    }
+
+}
+
+@media only screen and (max-width:360px){
+
+    .profile-info-content-text {
+        font-size: 14px;
+    }
+
+    .user-info-bar-contents {
+        font-size: 14px;
+    }
+
+    .profile-icon-widget {
+        font-size: 180px;
+    }
+
+}

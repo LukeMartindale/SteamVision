@@ -1,0 +1,53 @@
+{% extends "users/base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <link rel="stylesheet" href="{% static 'users/css/profile-edit.css' %}">
+
+    <script src="{% static 'users/javascript/profile-edit.js' %}"></script>
+
+    <div class="content-wrapper">
+
+        <div class="content-section">
+            <div class="edit-box">
+
+                <div class="content-title-wrapper">
+                    <header class="content-title-text">
+                        Edit Profile
+                    </header>
+                </div>
+
+                <form method="POST" class="content-section-wrapper">
+                    {% csrf_token %}
+                    <div class="user-info-bar">
+                        <div class="user-info-bar-label">
+                            <b>Username:</b> 
+                        </div>
+                        <input class="profile-input" type="text" name="username" id="username-input" placeholder="Username" value={{user.username}} required>
+                    </div>
+
+                    <div class="user-info-bar">
+                        <div class="user-info-bar-label">
+                            <b>Email:</b> 
+                        </div>
+                        <input class="profile-input" type="email" name="email" id="email-input" placeholder="Email" value={{user.email}} required>
+                    </div>
+
+                    <div class="user-info-button-wrapper">
+                        <button class="cancel-button" type="button" id="cancel-edit-profile-button">
+                            Cancel
+                        </button>
+                        <button class="user-info-button" type="submit" id="edit-profile-button">
+                            Edit Profile
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
