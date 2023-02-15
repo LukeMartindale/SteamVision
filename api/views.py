@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
-from .serializers import GameSerializer, GameStatSerializer, DescriptorSerializer
+from .serializers import GameSerializer, GameReviewSerializer, GameStatSerializer, DescriptorSerializer
 
 from home.models import Game, GameStat, Review, Descriptor
 
@@ -32,6 +32,19 @@ def getGameStats(request, id):
     serializer = GameStatSerializer(game_stats, many=True)
 
     return Response(serializer.data)
+
+@api_view(['GET'])
+def getReviews(request, id):
+    reviews = Review.objects.filter(app_id__app_id__contains=id).order_by("time_created")
+    serializer = GameReviewSerializer(reviews, many=True)
+
+    years = [y.year for y in Review.objects.filter(app_id__app_id__contains=id).dates('time_created', 'year')]
+    months = [m.month for m in Review.objects.filter(app_id__app_id__contains=id).dates('time_created', 'month')]
+
+    print(years)
+    print(months)
+
+    return Response({'data': serializer.data, 'years': years, 'months': months})
 
 @api_view(['GET'])
 def getAllReviews(request):

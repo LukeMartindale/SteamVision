@@ -5,6 +5,7 @@
 
     <!-- MY CSS -->
     <link rel="stylesheet" href="{% static 'home/css/game-detail.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/graphs.css' %}">
 
     <!-- MY JS -->
     <script src="{% static 'home/javascript/game-detail.js' %}"></script>
@@ -25,6 +26,7 @@
         $(window).resize(function () { 
             clearTimeout(resizeTimer)
             resizeTimer = setTimeout(function() {
+                reviews_graph()
                 sentiment_graph()
                 console.log("RESIZE")
             }, 100)
@@ -193,9 +195,10 @@
                             </div>
                         </div>
                     </div>
+                    <!-- REVIEWS GRAPH -->
                     <div class="visualisation-container-content" id="reviews-container-content">
-                        <svg class="visualisation-svg">
-    
+                        <svg class="visualisation-svg" id="reviews-graph">
+                            TEST
                         </svg>
                     </div>
                 </div>
@@ -378,6 +381,7 @@
     <script src="{% static 'home/javascript/data_getters/get_game_stats.js' %}" defer></script>
 
     <!-- DRAW GRAPHS -->
+    <script src="{% static 'home/javascript/visualisations/reviews.js' %}" defer></script>
     <script src="{% static 'home/javascript/visualisations/temp-reviews-sentiment.js' %}" defer></script>
     <script src="{% static 'home/javascript/visualisations/temp-reviews-emotion.js' %}" defer></script>
 

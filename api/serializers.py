@@ -6,6 +6,11 @@ class GameSerializer(serializers.ModelSerializer):
         model = Game
         fields = '__all__'
 
+class GameReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = '__all__'
+
 class GameStatSerializer(serializers.ModelSerializer):
     class Meta:
         model = GameStat
