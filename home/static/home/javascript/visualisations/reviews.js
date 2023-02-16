@@ -1,14 +1,17 @@
 function get_game_reviews() {
 
-    let api_url = `/api/get-reviews/${game_id}/`
+    let api_url = `/api/get-reviews-data/${game_id}/`
 
     let reviews = function(){
         let data = null;
         $.ajax({
             async: false,
-            type: 'GET',
+            type: 'POST',
             dataType: 'json',
             url: api_url,
+            data: {
+                "type": "all_time_year"
+            },
             success: function(result){
                 data = result
             }
@@ -24,35 +27,37 @@ function reviews_graph() {
 
     reviews = get_game_reviews()
 
-    reviews_pecentages = []
+    reviews_pecentages = reviews
 
-    reviews['years'].forEach(function(year, index){
+    // reviews_pecentages = []
 
-        year_counter = 0
-        pos_counter = 0
-        neg_counter = 0
+    // reviews['years'].forEach(function(year, index){
 
-        reviews['data'].forEach(function(data, index){
-            date = new Date(data['time_created']).getFullYear()
-            if(date == year){
+    //     year_counter = 0
+    //     pos_counter = 0
+    //     neg_counter = 0
 
-                if(data['voted_up']){
-                    pos_counter++
-                } else {
-                    neg_counter++
-                }
+    //     reviews['data'].forEach(function(data, index){
+    //         date = new Date(data['time_created']).getFullYear()
+    //         if(date == year){
 
-                year_counter++
+    //             if(data['voted_up']){
+    //                 pos_counter++
+    //             } else {
+    //                 neg_counter++
+    //             }
 
-            }
+    //             year_counter++
 
-        })
+    //         }
 
-        reviews_pecentages.push({'label': year, 'percentage': Number(((pos_counter / year_counter) * 100).toFixed(1)), 'number_of_reviews': year_counter})
+    //     })
 
-    })
+    //     reviews_pecentages.push({'label': year, 'percentage': Number(((pos_counter / year_counter) * 100).toFixed(1)), 'number_of_reviews': year_counter})
 
-    console.log(reviews_pecentages)
+    // })
+
+    // console.log(reviews_pecentages)
 
     $('#reviews-graph').empty()
 
@@ -103,7 +108,12 @@ function reviews_graph() {
             .attr('y', data => y(data.percentage))
             .append('title')
             .text((data) => `Percentage: ${data.percentage}%\nNumber of Reviews: ${data.number_of_reviews}`);
-            // .text((data) => `${data.percentage}% of ${data.number_of_reviews} \n reviews for ${data.label} where posative`);
+}
+
+function click_test(){
+
+    alert("Bar Clicked")
+
 }
 
 reviews_graph()

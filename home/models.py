@@ -84,6 +84,9 @@ class GameStat(models.Model):
     #current_sentiment_score
     current_sentiment_score = models.FloatField(default=0.0)
 
+    #reviews_all_time_year
+    reviews_all_time_year = models.JSONField(default=dict)
+
     def __str__(self):
         return "{} Stats".format(self.app_id.name)
 

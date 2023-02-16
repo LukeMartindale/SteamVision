@@ -51,5 +51,7 @@ function sentiment_graph(){
         .attr('width', x.bandwidth())
         .attr('height', data => svgHeight - y(data.value))
         .attr('x', data => x(data.label))
-        .attr('y', data => y(data.value));
+        .attr('y', data => y(data.value))
+        .append('title')
+        .text((data) => `Sentiment: ${data.label}\nNumber of Reviews: ${data.value}`);
 }

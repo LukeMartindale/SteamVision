@@ -46,6 +46,16 @@ def getReviews(request, id):
 
     return Response({'data': serializer.data, 'years': years, 'months': months})
 
+@api_view(['POST'])
+def getReviewsData(request, id):
+    game = Game.objects.get(app_id=id)
+    stats = GameStat.objects.get(app_id=game)
+
+    if request.data["type"] == "all_time_year":
+        return Response(stats.reviews_all_time_year)
+
+    return Response({"test": "test"})
+
 @api_view(['GET'])
 def getAllReviews(request):
     temp = { 730: [
