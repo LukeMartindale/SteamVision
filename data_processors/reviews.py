@@ -157,7 +157,7 @@ def reviews_all_time_month_legacy(id):
             if not num_of_reviews:
                 percentage = 0.0
             else:
-                percentage = pos_counter / num_of_reviews
+                percentage = round(pos_counter / num_of_reviews * 100, 1)
 
             reviews_percentages.append({'year': year, 'month': calendar.month_name[i], 'percentage': percentage, 'number_of_reviews': num_of_reviews})
 
@@ -197,7 +197,7 @@ def reviews_all_time_month_legacy_all():
                 if not num_of_reviews:
                     percentage = 0.0
                 else:
-                    percentage = pos_counter / num_of_reviews
+                    percentage = round(pos_counter / num_of_reviews * 100, 1)
 
                 reviews_percentages.append({'year': year, 'month': calendar.month_name[i], 'percentage': percentage, 'number_of_reviews': num_of_reviews})
 
