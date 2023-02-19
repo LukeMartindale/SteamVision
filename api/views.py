@@ -2,18 +2,12 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
 from .serializers import GameSerializer, GameReviewSerializer, GameStatSerializer, DescriptorSerializer
-
 from home.models import Game, GameStat, Review, Descriptor
+from django.utils import timezone
+import datetime
+import calendar
 
-
-# Create your views here.
-
-@api_view(['GET'])
-def getAllGames(request):
-    game = Game.objects.all()
-    serializer = GameSerializer(game, many=True)
-    return Response(serializer.data)
-
+# Get a single game by its app_id / pk
 @api_view(['GET'])
 def getGame(request, id):
 
@@ -26,6 +20,14 @@ def getGame(request, id):
 
     return Response(serializer.data)
 
+# get all games in the database
+@api_view(['GET'])
+def getAllGames(request):
+    game = Game.objects.all()
+    serializer = GameSerializer(game, many=True)
+    return Response(serializer.data)
+
+# Get a single game stat object by its app_id / pk of the game
 @api_view(['GET'])
 def getGameStats(request, id):
     game_stats = GameStat.objects.filter(app_id__app_id__contains=id)
@@ -33,55 +35,93 @@ def getGameStats(request, id):
 
     return Response(serializer.data)
 
+# Get the all time year reviews data form game stat object by its app_id / pk of the game
 @api_view(['GET'])
-def getReviews(request, id):
-    reviews = Review.objects.filter(app_id__app_id__contains=id).order_by("time_created")
-    serializer = GameReviewSerializer(reviews, many=True)
-
-    years = [y.year for y in Review.objects.filter(app_id__app_id__contains=id).dates('time_created', 'year')]
-    months = [m.month for m in Review.objects.filter(app_id__app_id__contains=id).dates('time_created', 'month')]
-
-    print(years)
-    print(months)
-
-    return Response({'data': serializer.data, 'years': years, 'months': months})
-
-@api_view(['POST'])
-def getReviewsData(request, id):
-    game = Game.objects.get(app_id=id)
-    stats = GameStat.objects.get(app_id=game)
-
-    if request.data["type"] == "all_time_year":
-        return Response(stats.reviews_all_time_year)
-
-    return Response({"test": "test"})
+def getReviewsAllTimeYear(request, id):
+    stat = GameStat.objects.get(app_id__app_id__contains=id)
+    
+    return Response(stat.reviews_all_time_year)
 
 @api_view(['GET'])
-def getAllReviews(request):
-    temp = { 730: [
-        {'label': '-1', 'value': 2}, 
-        {'label': '-0.9', 'value': 3}, 
-        {'label': '-0.8', 'value': 1}, 
-        {'label': '-0.7', 'value': 3}, 
-        {'label': '-0.6', 'value': 5}, 
-        {'label': '-0.5', 'value': 14}, 
-        {'label': '-0.4', 'value': 59}, 
-        {'label': '-0.3', 'value': 9}, 
-        {'label': '-0.2', 'value': 41}, 
-        {'label': '-0.1', 'value': 55}, 
-        {'label': '0', 'value': 539}, 
-        {'label': '0.1', 'value': 199}, 
-        {'label': '0.2', 'value': 141}, 
-        {'label': '0.3', 'value': 178}, 
-        {'label': '0.4', 'value': 47}, 
-        {'label': '0.5', 'value': 99}, 
-        {'label': '0.6', 'value': 47}, 
-        {'label': '0.7', 'value': 60}, 
-        {'label': '0.8', 'value': 21}, 
-        {'label': '0.9', 'value': 13}, 
-        {'label': '1', 'value': 64},
-    ]}
-    return Response(temp)
+def getReviewsAllTimeMonth(request, id):
+    stat = GameStat.objects.get(app_id__app_id__contains=id)
+
+    return Response(stat.reviews_all_time_month)
+
+@api_view(['GET'])
+def getReviewsPastTweleveMonths(request, id):
+    stats = GameStat.objects.get(app_id__app_id__contains=id)
+
+    time = timezone.now()
+    end_index = 0
+
+    for index, stat in enumerate(stats.reviews_all_time_month):
+        if(stat["year"] == time.year and stat["month"] == calendar.month_name[time.month]):
+            end_index = index+1
+            break
+
+    start_index = end_index - 12
+    past_twelve_months = []
+
+    for stat in reversed(stats.reviews_all_time_month[start_index:end_index]):
+        past_twelve_months.append(stat)
+
+    return Response(past_twelve_months)
+
+@api_view(['GET'])
+def getReviewsPastSixMonths(request, id):
+    stats = GameStat.objects.get(app_id__app_id__contains=id)
+
+    time = timezone.now()
+    end_index = 0
+
+    for index, stat in enumerate(stats.reviews_all_time_month):
+        if(stat["year"] == time.year and stat["month"] == calendar.month_name[time.month]):
+            end_index = index+1
+            break
+
+    start_index = end_index - 6
+    past_twelve_months = []
+
+    for stat in reversed(stats.reviews_all_time_month[start_index:end_index]):
+        past_twelve_months.append(stat)
+
+    return Response(past_twelve_months)
+
+@api_view(['GET'])
+def getReviewsPastOneMonth(request, id):
+    stats = GameStat.objects.get(app_id__app_id__contains=id)
+    reviews = Review.objects.filter(app_id__app_id__contains=id).order_by('time_created')
+    
+    dates = []
+    reviews_percentages = []
+
+    # Get all dates from the last 30 days
+    for i in range(1, 31):
+        dates.append(datetime.datetime.now() - datetime.timedelta(days=i))
+
+    for date in dates:
+
+        pos_counter = 0
+        neg_counter = 0
+        num_of_reviews = 0
+
+        for review in reviews:
+            if review.time_created.year == date.year and review.time_created.month == date.month and review.time_created.day == date.day:
+                num_of_reviews += 1
+                if review.voted_up:
+                    pos_counter += 1
+                else:
+                    neg_counter += 1
+
+        if num_of_reviews:
+           percentage = round(pos_counter / num_of_reviews * 100, 1)
+        else:
+            percentage = 0.0
+
+        reviews_percentages.append({'year': date.year, 'month': date.month, 'day': date.day, 'percentage': percentage, 'number_of_reviews': num_of_reviews})
+
+    return Response(reviews_percentages)
 
 @api_view(['GET'])
 def getDescriptors(request):

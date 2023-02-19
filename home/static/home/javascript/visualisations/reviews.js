@@ -1,17 +1,14 @@
 function get_game_reviews() {
 
-    let api_url = `/api/get-reviews-data/${game_id}/`
+    let api_url = `/api/get-reviews/all-time-year/${game_id}/`
 
     let reviews = function(){
         let data = null;
         $.ajax({
             async: false,
-            type: 'POST',
+            type: 'GET',
             dataType: 'json',
             url: api_url,
-            data: {
-                "type": "all_time_year"
-            },
             success: function(result){
                 data = result
             }
@@ -29,35 +26,7 @@ function reviews_graph() {
 
     reviews_pecentages = reviews
 
-    // reviews_pecentages = []
-
-    // reviews['years'].forEach(function(year, index){
-
-    //     year_counter = 0
-    //     pos_counter = 0
-    //     neg_counter = 0
-
-    //     reviews['data'].forEach(function(data, index){
-    //         date = new Date(data['time_created']).getFullYear()
-    //         if(date == year){
-
-    //             if(data['voted_up']){
-    //                 pos_counter++
-    //             } else {
-    //                 neg_counter++
-    //             }
-
-    //             year_counter++
-
-    //         }
-
-    //     })
-
-    //     reviews_pecentages.push({'label': year, 'percentage': Number(((pos_counter / year_counter) * 100).toFixed(1)), 'number_of_reviews': year_counter})
-
-    // })
-
-    // console.log(reviews_pecentages)
+    console.log(reviews_pecentages)
 
     $('#reviews-graph').empty()
 
