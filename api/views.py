@@ -90,7 +90,6 @@ def getReviewsPastSixMonths(request, id):
 
 @api_view(['GET'])
 def getReviewsPastOneMonth(request, id):
-    stats = GameStat.objects.get(app_id__app_id__contains=id)
     reviews = Review.objects.filter(app_id__app_id__contains=id).order_by('time_created')
     
     dates = []
@@ -123,7 +122,85 @@ def getReviewsPastOneMonth(request, id):
 
         reviews_percentages.append({'label': label, 'year': date.year, 'month': date.month, 'day': date.day, 'percentage': percentage, 'number_of_reviews': num_of_reviews})
 
-    return Response(reviews_percentages)
+        final_data = reversed(reviews_percentages)
+
+    return Response(final_data)
+
+@api_view(['GET'])
+def getReviewsPastTwoWeeks(request, id):
+    reviews = Review.objects.filter(app_id__app_id__contains=id).order_by('time_created')
+    
+    dates = []
+    reviews_percentages = []
+
+    # Get all dates from the last 30 days
+    for i in range(1, 15):
+        dates.append(datetime.datetime.now() - datetime.timedelta(days=i))
+
+    for date in dates:
+
+        pos_counter = 0
+        neg_counter = 0
+        num_of_reviews = 0
+
+        for review in reviews:
+            if review.time_created.year == date.year and review.time_created.month == date.month and review.time_created.day == date.day:
+                num_of_reviews += 1
+                if review.voted_up:
+                    pos_counter += 1
+                else:
+                    neg_counter += 1
+
+        if num_of_reviews:
+           percentage = round(pos_counter / num_of_reviews * 100, 1)
+        else:
+            percentage = 0.0
+
+        label = str(date.year) + " " + str(calendar.month_name[date.month] + " " + str(date.day))
+
+        reviews_percentages.append({'label': label, 'year': date.year, 'month': date.month, 'day': date.day, 'percentage': percentage, 'number_of_reviews': num_of_reviews})
+
+        final_data = reversed(reviews_percentages)
+
+    return Response(final_data)
+
+@api_view(['GET'])
+def getReviewsPastOneWeek(request, id):
+    reviews = Review.objects.filter(app_id__app_id__contains=id).order_by('time_created')
+    
+    dates = []
+    reviews_percentages = []
+
+    # Get all dates from the last 30 days
+    for i in range(1, 8):
+        dates.append(datetime.datetime.now() - datetime.timedelta(days=i))
+
+    for date in dates:
+
+        pos_counter = 0
+        neg_counter = 0
+        num_of_reviews = 0
+
+        for review in reviews:
+            if review.time_created.year == date.year and review.time_created.month == date.month and review.time_created.day == date.day:
+                num_of_reviews += 1
+                if review.voted_up:
+                    pos_counter += 1
+                else:
+                    neg_counter += 1
+
+        if num_of_reviews:
+           percentage = round(pos_counter / num_of_reviews * 100, 1)
+        else:
+            percentage = 0.0
+
+        label = str(date.year) + " " + str(calendar.month_name[date.month] + " " + str(date.day))
+
+        reviews_percentages.append({'label': label, 'year': date.year, 'month': date.month, 'day': date.day, 'percentage': percentage, 'number_of_reviews': num_of_reviews})
+
+        final_data = reversed(reviews_percentages)
+
+    return Response(final_data)
 
 @api_view(['GET'])
 def getDescriptors(request):

@@ -18,16 +18,6 @@
             sentiment_graph()
         });
 
-        // //Redraws graph after dealy when page is resized
-        // let resizeTimer;
-        // $(window).resize(function () { 
-        //     clearTimeout(resizeTimer)
-        //     resizeTimer = setTimeout(function() {
-        //         reviews_graph()
-        //         sentiment_graph()
-        //         console.log("RESIZE")
-        //     }, 100)
-        // });
     </script>
 
     <div class="block-wrapper">
@@ -181,6 +171,8 @@
                                 <option class="visualisation-select-option" value="past-12-months">Past 12 Months</option>
                                 <option class="visualisation-select-option" value="past-6-months">Past 6 Months</option>
                                 <option class="visualisation-select-option" value="past-1-month">Past Month</option>
+                                <option class="visualisation-select-option" value="past-2-weeks">Past 2 Weeks</option>
+                                <option class="visualisation-select-option" value="past-1-week">Past 7 Days</option>
                             </select>
                         </div>
                         <div class="visualisation-container-header-detail-widget">
@@ -391,12 +383,14 @@
     <!-- GRAPH FUNCTIONALITY JS -->
     <script src="{% static 'home/javascript/game-detail-visualisations.js' %}"></script>
 
-    <!-- LOAD VISUALISATIONS -->
+    <!-- LOAD REVIEWS VISUALISATIONS -->
     <script src="{% static 'home/javascript/visualisations/reviews-all-time-years.js' %}"></script>
     <script src="{% static 'home/javascript/visualisations/reviews-all-time-months.js' %}"></script>
     <script src="{% static 'home/javascript/visualisations/reviews-past-twelve-months.js' %}"></script>
     <script src="{% static 'home/javascript/visualisations/reviews-past-six-months.js' %}"></script>
     <script src="{% static 'home/javascript/visualisations/reviews-past-one-month.js' %}"></script>
+    <script src="{% static 'home/javascript/visualisations/reviews-past-two-weeks.js' %}"></script>
+    <script src="{% static 'home/javascript/visualisations/reviews-past-one-week.js' %}"></script>
 
     <!-- ON PAGE RESIZE -->
     <script src="{% static 'home/javascript/game-detail-on-resize.js' %}"></script>

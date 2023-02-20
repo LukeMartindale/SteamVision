@@ -10,6 +10,8 @@ urlpatterns = [
     path('get-reviews/past-twelve-months/<int:id>/', views.getReviewsPastTweleveMonths),
     path('get-reviews/past-six-months/<int:id>/', views.getReviewsPastSixMonths),
     path('get-reviews/past-one-month/<int:id>/', views.getReviewsPastOneMonth),
+    path('get-reviews/past-two-weeks/<int:id>/', views.getReviewsPastTwoWeeks),
+    path('get-reviews/past-one-week/<int:id>/', views.getReviewsPastOneWeek),
     path('get-descriptors/', views.getDescriptors),
     path('get-genres/', views.getGenres),
     path('get-tags/', views.getTags),
