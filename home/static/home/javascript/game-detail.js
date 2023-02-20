@@ -1,3 +1,4 @@
+// GENERAL PAGE FUNCTIONALITY
 $(function(){
 
     // Content Section Change "Tab"
@@ -50,6 +51,35 @@ $(function(){
     $(".widgets-draw-icon-wrapper").click(function(){
         $(this).closest(".game-section").find(".visualisation-widgets-wrapper").toggleClass("hide-ani")
         $(this).children().toggleClass("widgets-icon-up")
+    })
+
+})
+
+// VISUALISATION SELECT OPTIONS
+$(function(){
+
+    $('select').on('change', function (e) {
+
+        let option = $(this).children("option:selected").val()
+
+        if(option == "all-time"){
+
+            review_all_time_year(game_id)
+
+        } else if (option == "past-12-months"){
+
+            reviews_past_twelve_months(game_id)
+
+        } else if (option == "past-6-months"){
+
+            reviews_past_six_months(game_id)
+            
+        } else if (option == "past-1-month"){
+
+            reviews_past_one_month(game_id)
+            
+        }
+
     })
 
 })

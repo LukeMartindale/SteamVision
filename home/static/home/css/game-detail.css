@@ -294,6 +294,25 @@
     align-items: center;
 }
 
+.visualisation-select {
+    width: 50%;
+    height: 60%;
+    border-radius: 6px;
+    background-color: rgba(217, 217, 217, 0.3);
+    border: 1px solid #bec5cb;
+    color: #bec5cb;
+    text-align: center;
+}
+
+select option {
+    background-color: rgba(217, 217, 217, 0.3);
+}
+
+/* .visualisation-select-option {
+    background: rgba(217, 217, 217, 0.3);
+    color: #bec5cb;
+} */
+
 .visualisation-container-options-wrapper-highlight {
     width: 50px;
     height: 25px;
@@ -452,6 +471,10 @@
 
     .widget-section {
         width: 48%;
+    }
+
+    .visualisation-select {
+        width: 90%;
     }
 
 }

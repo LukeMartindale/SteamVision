@@ -159,7 +159,9 @@ def reviews_all_time_month_legacy(id):
             else:
                 percentage = round(pos_counter / num_of_reviews * 100, 1)
 
-            reviews_percentages.append({'year': year, 'month': calendar.month_name[i], 'percentage': percentage, 'number_of_reviews': num_of_reviews})
+            label = str(year) + " " + str(calendar.month_name[i])
+
+            reviews_percentages.append({'label': label, 'year': year, 'month': calendar.month_name[i], 'percentage': percentage, 'number_of_reviews': num_of_reviews})
 
     stats.reviews_all_time_month = reviews_percentages
     stats.save()
@@ -199,7 +201,9 @@ def reviews_all_time_month_legacy_all():
                 else:
                     percentage = round(pos_counter / num_of_reviews * 100, 1)
 
-                reviews_percentages.append({'year': year, 'month': calendar.month_name[i], 'percentage': percentage, 'number_of_reviews': num_of_reviews})
+                label = str(year) + " " + str(calendar.month_name[i])
+
+                reviews_percentages.append({'label': label, 'year': year, 'month': calendar.month_name[i], 'percentage': percentage, 'number_of_reviews': num_of_reviews})
 
         stats.reviews_all_time_month = reviews_percentages
         stats.save()
@@ -235,11 +239,13 @@ def reviews_all_time_month(id):
             stat["number_of_reviews"] = num_of_reviews
             found = True
 
+    label = str(year) + " " + str(calendar.month_name[month])
+
     if not found:
         if num_of_reviews:
-            stats.reviews_all_time_month.append({'year': year, 'month': calendar.month_name[month], 'percentage': round(pos_counter / num_of_reviews * 100, 1), 'number_of_reviews': num_of_reviews})
+            stats.reviews_all_time_month.append({'label': label, 'year': year, 'month': calendar.month_name[month], 'percentage': round(pos_counter / num_of_reviews * 100, 1), 'number_of_reviews': num_of_reviews})
         else:
-            stats.reviews_all_time_month.append({'year': year, 'month': calendar.month_name[month], 'percentage': 0.0, 'number_of_reviews': num_of_reviews})
+            stats.reviews_all_time_month.append({'label': label, 'year': year, 'month': calendar.month_name[month], 'percentage': 0.0, 'number_of_reviews': num_of_reviews})
 
     stats.save()
 
@@ -278,10 +284,12 @@ def reviews_all_time_month_all():
                 stat["number_of_reviews"] = num_of_reviews
                 found = True
 
+        label = str(year) + " " + str(calendar.month_name[month])
+
         if not found:
             if num_of_reviews:
-                stats.reviews_all_time_month.append({'year': year, 'month': calendar.month_name[month], 'percentage': round(pos_counter / num_of_reviews * 100, 1), 'number_of_reviews': num_of_reviews})
+                stats.reviews_all_time_month.append({'label': label, 'year': year, 'month': calendar.month_name[month], 'percentage': round(pos_counter / num_of_reviews * 100, 1), 'number_of_reviews': num_of_reviews})
             else:
-                stats.reviews_all_time_month.append({'year': year, 'month': calendar.month_name[month], 'percentage': 0.0, 'number_of_reviews': num_of_reviews})
+                stats.reviews_all_time_month.append({'label': label, 'year': year, 'month': calendar.month_name[month], 'percentage': 0.0, 'number_of_reviews': num_of_reviews})
 
         stats.save()

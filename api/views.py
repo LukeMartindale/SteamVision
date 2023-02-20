@@ -119,7 +119,9 @@ def getReviewsPastOneMonth(request, id):
         else:
             percentage = 0.0
 
-        reviews_percentages.append({'year': date.year, 'month': date.month, 'day': date.day, 'percentage': percentage, 'number_of_reviews': num_of_reviews})
+        label = str(date.year) + " " + str(calendar.month_name[date.month] + " " + str(date.day))
+
+        reviews_percentages.append({'label': label, 'year': date.year, 'month': date.month, 'day': date.day, 'percentage': percentage, 'number_of_reviews': num_of_reviews})
 
     return Response(reviews_percentages)
 
