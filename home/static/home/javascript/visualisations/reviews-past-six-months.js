@@ -22,7 +22,7 @@ function get_data_reviews_past_six_months(id){
 function reviews_past_six_months(id){
 
     // Get data
-    let reviews_data = get_data_reviews_past_six_months(id)
+    let reviews_data = get_data_reviews_past_six_months(id);
 
     //Draw Graph
     $('#reviews-graph').empty()
@@ -65,6 +65,21 @@ function reviews_past_six_months(id){
         .call(d3.axisLeft(y))
         .attr('color', '#bec5cb')
         .attr('font-size', 15);
+
+    //NEG BARS
+    chart
+        .selectAll('.neg-bar')
+        .data(reviews_data, data => data.label)
+        .enter()
+        .append('rect')
+            .classed('neg-bar', true)
+            .attr('width', x.bandwidth())
+            .attr('height', svgHeight - y(100))
+            .attr('x', data => x(data.label))
+            .attr('y', y(100))
+            .attr('id', data => data.label + "-")
+            .append('title')
+            .text((data) => `Percentage negative reviews: ${(100 - data.percentage).toFixed(1)}%\nNumber of negative reviews: ${Math.round(data.number_of_reviews * (((100 - data.percentage) / 100)))}\nDate: ${data.label}`);
     
     //BARS
     chart
@@ -77,6 +92,18 @@ function reviews_past_six_months(id){
             .attr('height', data => svgHeight - y(data.percentage))
             .attr('x', data => x(data.label))
             .attr('y', data => y(data.percentage))
+            .attr('id', data => data.label + "+")
             .append('title')
-            .text((data) => `Percentage: ${data.percentage}%\nNumber of Reviews: ${data.number_of_reviews}\nDate: ${data.label}`);
+            .text((data) => `Percentage positive reviews: ${data.percentage}%\nNumber of positive reviews: ${Math.round(data.number_of_reviews * (data.percentage / 100))}\nDate: ${data.label}`);
+
+    chart.selectAll('.bar').on("click", function(){
+        console.log("On Click Event Pos bar")
+        console.log(this.id)
+    })
+
+    chart.selectAll('.neg-bar').on("click", function(){
+        console.log("On Click Event Neg Bar")
+        console.log(this.id)
+    })
+
 }

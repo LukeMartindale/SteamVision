@@ -430,11 +430,6 @@ select option {
     transition: 1s;
 }
 
-/* TEMPORARY REMOVE LATER */
-.bar {
-    fill: royalblue;
-}
-
 @media only screen and (max-width: 800px){
 
     .detail-section-top {

@@ -60,11 +60,11 @@ class GameStat(models.Model):
     #app
     app_id = models.ForeignKey(Game, on_delete=models.CASCADE, null=True)
 
-    #sentiment
-    sentiment = models.JSONField(default=dict)
+    #sentiment_all_time
+    sentiment_all_time = models.JSONField(default=dict)
 
-    #emotion
-    emotion = models.JSONField(default=dict)
+    #emotion_all_time
+    emotion_all_time = models.JSONField(default=dict)
 
     #highest_player_count
     highest_player_count = models.IntegerField(default=0)
