@@ -24,8 +24,6 @@ function reviews_past_one_month(id){
 
     let reviews_data = get_data_reviews_past_one_month(id)
 
-    console.log(reviews_data)
-
     $('#reviews-graph').empty()
 
     let margins = {top: 0, bottom: 0, left: 40, right: 20}
@@ -79,6 +77,7 @@ function reviews_past_one_month(id){
             .attr('x', data => x(data.label))
             .attr('y', y(100))
             .attr('id', data => data.label + "-")
+            .property('value', data => Math.round(data.number_of_reviews * (((100 - data.percentage) / 100))))
             .append('title')
             .text((data) => `Percentage negative reviews: ${(100 - data.percentage).toFixed(1)}%\nNumber of negative reviews: ${Math.round(data.number_of_reviews * (((100 - data.percentage) / 100)))}\nDate: ${data.label}`);
     
@@ -96,5 +95,7 @@ function reviews_past_one_month(id){
             .attr('id', data => data.label + "+")
             .append('title')
             .text((data) => `Percentage positive reviews: ${data.percentage}%\nNumber of positive reviews: ${Math.round(data.number_of_reviews * (data.percentage / 100))}\nDate: ${data.label}`);
+
+    no_reviews_neutral_bar()
 
 }

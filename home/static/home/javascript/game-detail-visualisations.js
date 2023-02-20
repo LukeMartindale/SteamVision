@@ -34,3 +34,16 @@ $(function(){
     })
 
 })
+
+function no_reviews_neutral_bar(){
+
+    $(".neg-bar").each(function(){
+
+        if($(this).val() == 0){
+            $(this).css("fill", "rgba(217, 217, 217, 0.3)")
+            $(this).children("title").html("No Reviews")
+        }
+        
+    })
+
+}
