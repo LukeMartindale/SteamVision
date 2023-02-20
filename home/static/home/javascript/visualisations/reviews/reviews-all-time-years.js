@@ -96,6 +96,7 @@ function review_all_time_year(id){
             .append('title')
             .text((data) => `Percentage positive reviews: ${data.percentage}%\nNumber of positive reviews: ${Math.round(data.number_of_reviews * (data.percentage / 100))}\nDate: ${data.label}`);
 
+    reviews_update_current_total(reviews_data)
     no_reviews_neutral_bar()
 
 }

@@ -43,7 +43,19 @@ function no_reviews_neutral_bar(){
             $(this).css("fill", "rgba(217, 217, 217, 0.3)")
             $(this).children("title").html("No Reviews")
         }
-        
+
     })
+
+}
+
+function reviews_update_current_total(data){
+
+    let total_reviews = 0
+
+    data.forEach(function(item){
+        total_reviews += item.number_of_reviews
+    })
+
+    $(".visualisation-container-header-detail-widget-right").text(total_reviews)
 
 }

@@ -107,6 +107,7 @@ function reviews_past_six_months(id){
         console.log(this.id)
     })
 
+    reviews_update_current_total(reviews_data)
     no_reviews_neutral_bar()
 
 }

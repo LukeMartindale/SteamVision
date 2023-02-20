@@ -1,6 +1,6 @@
-function get_data_reviews_past_one_month(id){
+function get_data_reviews_past_two_weeks(id){
 
-    let api_url = `/api/get-reviews/past-one-month/${id}/`
+    let api_url = `/api/get-reviews/past-two-weeks/${id}/`
 
     let reviews = function(){
         let data = null;
@@ -20,9 +20,9 @@ function get_data_reviews_past_one_month(id){
 
 }
 
-function reviews_past_one_month(id){
+function reviews_past_two_weeks(id){
 
-    let reviews_data = get_data_reviews_past_one_month(id)
+    let reviews_data = get_data_reviews_past_two_weeks(id)
 
     $('#reviews-graph').empty()
 
@@ -96,6 +96,7 @@ function reviews_past_one_month(id){
             .append('title')
             .text((data) => `Percentage positive reviews: ${data.percentage}%\nNumber of positive reviews: ${Math.round(data.number_of_reviews * (data.percentage / 100))}\nDate: ${data.label}`);
 
+    reviews_update_current_total(reviews_data)
     no_reviews_neutral_bar()
 
 }
