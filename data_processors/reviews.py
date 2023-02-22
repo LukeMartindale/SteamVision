@@ -1,5 +1,6 @@
 from home.models import Game, Review, GameStat
 from django.utils import timezone
+import datetime
 import calendar
 
 def reviews_all_time_year_legacy(id):
@@ -293,3 +294,80 @@ def reviews_all_time_month_all():
                 stats.reviews_all_time_month.append({'label': label, 'year': year, 'month': calendar.month_name[month], 'percentage': 0.0, 'number_of_reviews': num_of_reviews})
 
         stats.save()
+
+def reviews_past_month(id):
+    stat = GameStat.objects.get(app_id__app_id__contains=id)
+    reviews = Review.objects.filter(app_id__app_id__contains=id).order_by('time_created')
+
+    dates = []
+    reviews_percentages = []
+
+    # Get all dates from the last 30 days
+    for i in range(1, 31):
+        dates.append(datetime.datetime.now() - datetime.timedelta(days=i))
+
+    for date in dates:
+
+        pos_counter = 0
+        neg_counter = 0
+        num_of_reviews = 0
+
+        for review in reviews:
+            if review.time_created.year == date.year and review.time_created.month == date.month and review.time_created.day == date.day:
+                num_of_reviews += 1
+                if review.voted_up:
+                    pos_counter += 1
+                else:
+                    neg_counter += 1
+
+        if num_of_reviews:
+            percentage = round(pos_counter / num_of_reviews * 100, 1)
+        else:
+            percentage = 0.0
+
+        label = str(date.year) + " " + str(calendar.month_name[date.month] + " " + str(date.day))
+
+        reviews_percentages.append({'label': label, 'year': date.year, 'month': date.month, 'day': date.day, 'percentage': percentage, 'number_of_reviews': num_of_reviews})
+
+    stat.reviews_past_one_month = reviews_percentages
+    stat.save()
+
+def reviews_past_month_all():
+    games = Game.objects.all()
+
+    for game in games:
+        stat = GameStat.objects.get(app_id=game)
+        reviews = Review.objects.filter(app_id=game).order_by('time_created')
+
+        dates = []
+        reviews_percentages = []
+
+        # Get all dates from the last 30 days
+        for i in range(1, 31):
+            dates.append(datetime.datetime.now() - datetime.timedelta(days=i))
+
+        for date in dates:
+
+            pos_counter = 0
+            neg_counter = 0
+            num_of_reviews = 0
+
+            for review in reviews:
+                if review.time_created.year == date.year and review.time_created.month == date.month and review.time_created.day == date.day:
+                    num_of_reviews += 1
+                    if review.voted_up:
+                        pos_counter += 1
+                    else:
+                        neg_counter += 1
+
+            if num_of_reviews:
+                percentage = round(pos_counter / num_of_reviews * 100, 1)
+            else:
+                percentage = 0.0
+
+            label = str(date.year) + " " + str(calendar.month_name[date.month] + " " + str(date.day))
+
+            reviews_percentages.append({'label': label, 'year': date.year, 'month': date.month, 'day': date.day, 'percentage': percentage, 'number_of_reviews': num_of_reviews})
+
+        stat.reviews_past_one_month = reviews_percentages
+        stat.save()

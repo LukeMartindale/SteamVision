@@ -90,6 +90,9 @@ class GameStat(models.Model):
     #reviews_all_time_month
     reviews_all_time_month = models.JSONField(default=dict)
 
+    #reviews_past_one_month
+    reviews_past_one_month = models.JSONField(default=dict)
+
     def __str__(self):
         return "{} Stats".format(self.app_id.name)
 
