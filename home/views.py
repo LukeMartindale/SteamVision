@@ -18,8 +18,6 @@ def GameList(request):
 
         games = Game.objects.filter(name__contains=request.POST["search"])
 
-        print(games)
-
         if(request.POST["genres"]):
 
             genres = request.POST["genres"].split(",")

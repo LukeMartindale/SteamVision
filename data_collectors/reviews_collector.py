@@ -170,7 +170,6 @@ def reviews_new_all_collector():
         response_reviews = requests.get(api_url).json()
 
         no_new = False
-        print(game)
 
         while response_reviews["reviews"]:
             for i in range(len(response_reviews["reviews"])):

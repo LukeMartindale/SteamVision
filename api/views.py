@@ -66,7 +66,7 @@ def getReviewsPastTweleveMonths(request, id):
     for stat in reversed(stats.reviews_all_time_month[start_index:end_index]):
         past_twelve_months.append(stat)
 
-    return Response(past_twelve_months)
+    return Response(reversed(past_twelve_months))
 
 @api_view(['GET'])
 def getReviewsPastSixMonths(request, id):
@@ -86,7 +86,7 @@ def getReviewsPastSixMonths(request, id):
     for stat in reversed(stats.reviews_all_time_month[start_index:end_index]):
         past_twelve_months.append(stat)
 
-    return Response(past_twelve_months)
+    return Response(reversed(past_twelve_months))
 
 @api_view(['GET'])
 def getReviewsPastOneMonth(request, id):

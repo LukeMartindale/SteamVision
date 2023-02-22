@@ -98,8 +98,6 @@ def reviews_all_time_year_all():
     games = Game.objects.all()
 
     for game in games:
-
-        print(game)
         
         reviews = Review.objects.filter(app_id=game).order_by("time_created")
         stats = GameStat.objects.get(app_id=game)
@@ -172,8 +170,6 @@ def reviews_all_time_month_legacy_all():
     games = Game.objects.all()
 
     for game in games:
-
-        print(game)
 
         stats = GameStat.objects.get(app_id=game)
         years = [y.year for y in Review.objects.filter(app_id=game).dates('time_created', 'year')]
@@ -258,7 +254,7 @@ def reviews_all_time_month_all():
     month = timezone.now().month
 
     for game in games:
-        print(game)
+
         stats = GameStat.objects.get(app_id=game)
 
         reviews = Review.objects.filter(app_id=game, time_created__year=year, time_created__month=month).order_by("time_created")
