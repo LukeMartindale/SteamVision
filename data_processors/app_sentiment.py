@@ -53,6 +53,21 @@ def app_all_sentiment():
 
     calc_sentiment_score_all()
 
+def app_sentiment_past_twelve_months(app):
+    print("not yet implemented")
+
+def app_sentiment_past_six_months(app):
+    print("not yet implemented")
+
+def app_sentiment_past_one_month(app):
+    print("not yet implemented")
+
+def app_sentiment_past_two_weeks(app):
+    print("not yet implemented")
+
+def app_sentiment_past_one_week(app):
+    print("not yet implemented")
+
 def rounded_sentiment(data):
 
     sentiment = [
@@ -121,8 +136,6 @@ def calc_sentiment_score(app):
 
     # Save Stats
     stats.save()
-
-
 
 def calc_sentiment_score_all():
 

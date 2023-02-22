@@ -117,6 +117,12 @@ def getReviewsPastOneWeek(request, id):
     return Response(reversed(reviews_percentages))
 
 @api_view(['GET'])
+def getSentimentAllTime(request, id):
+    stat = GameStat.objects.get(app_id__app_id__contains=id)
+
+    return Response(stat.sentiment_all_time)
+
+@api_view(['GET'])
 def getDescriptors(request):
     descriptors = Descriptor.objects.all()
     serializer = DescriptorSerializer(descriptors, many=True)

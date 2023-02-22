@@ -156,8 +156,6 @@ def initial_reviews_collector_continue(game_id, cursor):
     else:
         return {"status": 400, "message": "This app does not exist!"}
 
-
-
 def reviews_new_all_collector():
     games = Game.objects.all()
 

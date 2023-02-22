@@ -14,9 +14,9 @@
         const game_id = '{{ game.app_id }}'
 
         //Draws graphs on page load
-        $(document).ready(function() {
-            sentiment_graph()
-        });
+        // $(document).ready(function() {
+        //     sentiment_graph()
+        // });
 
     </script>
 
@@ -166,20 +166,20 @@
                 <div class="visualisation-container">
                     <div class="visualisation-container-header">
                         <div class="visualisation-container-options-wrapper">
-                            <select class="visualisation-select" name="test-select" id="test-select">
-                                <option class="visualisation-select-option" value="all-time">All Time (By Year)</option>
-                                <option class="visualisation-select-option" value="past-12-months">Past 12 Months</option>
-                                <option class="visualisation-select-option" value="past-6-months">Past 6 Months</option>
-                                <option class="visualisation-select-option" value="past-1-month">Past Month</option>
-                                <option class="visualisation-select-option" value="past-2-weeks">Past 2 Weeks</option>
-                                <option class="visualisation-select-option" value="past-1-week">Past 7 Days</option>
+                            <select class="visualisation-select" id="reviews-select">
+                                <option class="visualisation-select-option" value="review-all-time">All Time (By Year)</option>
+                                <option class="visualisation-select-option" value="review-past-12-months">Past 12 Months</option>
+                                <option class="visualisation-select-option" value="review-past-6-months">Past 6 Months</option>
+                                <option class="visualisation-select-option" value="review-past-1-month">Past Month</option>
+                                <option class="visualisation-select-option" value="review-past-2-weeks">Past 2 Weeks</option>
+                                <option class="visualisation-select-option" value="review-past-1-week">Past 7 Days</option>
                             </select>
                         </div>
                         <div class="visualisation-container-header-detail-widget">
                             <div class="visualisation-container-header-detail-widget-left">
                                 <b>Total Reviews:</b> 
                             </div>
-                            <div class="visualisation-container-header-detail-widget-right">
+                            <div class="visualisation-container-header-detail-widget-right" id="reviews-total-info">
                                 {{ total_reviews }}
                             </div>
                         </div>
@@ -220,18 +220,20 @@
                 <div class="visualisation-container">
                     <div class="visualisation-container-header">
                         <div class="visualisation-container-options-wrapper">
-                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
-                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
-                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
-                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
-                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
-                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
+                            <select class="visualisation-select" id="sentiment-select">
+                                <option class="visualisation-select-option" value="sentiment-all-time">All Time</option>
+                                <option class="visualisation-select-option" value="sentiment-past-12-months">Past 12 Months</option>
+                                <option class="visualisation-select-option" value="sentiment-past-6-months">Past 6 Months</option>
+                                <option class="visualisation-select-option" value="sentiment-past-1-month">Past Month</option>
+                                <option class="visualisation-select-option" value="sentiment-past-2-weeks">Past 2 Weeks</option>
+                                <option class="visualisation-select-option" value="sentiment-past-1-week">Past 7 Days</option>
+                            </select>
                         </div>
                         <div class="visualisation-container-header-detail-widget">
                             <div class="visualisation-container-header-detail-widget-left">
                                 <b>Sentiment Value:</b> 
                             </div>
-                            <div class="visualisation-container-header-detail-widget-right">
+                            <div class="visualisation-container-header-detail-widget-right" id="sentiment-value-info">
                                 {{ sentiment_score }}
                             </div>
                         </div>
@@ -371,7 +373,7 @@
 
     <!-- DRAW GRAPHS OLD -->
     <!-- <script src="{% static 'home/javascript/visualisations/temp-reviews.js' %}" defer></script> -->
-    <script src="{% static 'home/javascript/visualisations/temp-reviews-sentiment.js' %}" defer></script>
+    <!-- <script src="{% static 'home/javascript/visualisations/temp-reviews-sentiment.js' %}" defer></script> -->
     <script src="{% static 'home/javascript/visualisations/temp-reviews-emotion.js' %}" defer></script>
 
     <!-- LOAD GAME DATA -->
@@ -393,6 +395,9 @@
     <script src="{% static 'home/javascript/visualisations/reviews/reviews-past-one-week.js' %}"></script>
 
     <!-- LOAD SENTIMENT VISUALISATIONS -->
+    <script src="{% static 'home/javascript/visualisations/sentiment/sentiment-all-time.js' %}"></script>
+
+    <!-- LOAD EMOTION VISUALISATIONS -->
 
     <!-- ON PAGE RESIZE -->
     <script src="{% static 'home/javascript/game-detail-on-resize.js' %}"></script>

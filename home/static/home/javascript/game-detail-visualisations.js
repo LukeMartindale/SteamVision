@@ -1,33 +1,39 @@
-// VISUALISATION SELECT OPTIONS
+// REVIEW VISUALISATION SELECT OPTIONS
 $(function(){
 
-    $('select').on('change', function (e) {
+    $('#reviews-select').on('change', function (e) {
 
         let option = $(this).children("option:selected").val()
 
-        if(option == "all-time"){
+        if(option == "review-all-time"){
 
             review_all_time_year(game_id)
+            active_review_vis = "all_time_year"
 
-        } else if (option == "past-12-months"){
+        } else if (option == "review-past-12-months"){
 
             reviews_past_twelve_months(game_id)
+            active_review_vis = "past_twelve_months"
 
-        } else if (option == "past-6-months"){
+        } else if (option == "review-past-6-months"){
 
             reviews_past_six_months(game_id)
+            active_review_vis = "past_six_months"
             
-        } else if (option == "past-1-month"){
+        } else if (option == "review-past-1-month"){
 
             reviews_past_one_month(game_id)
+            active_review_vis = "past_one_month"
             
-        } else if (option == "past-2-weeks"){
+        } else if (option == "review-past-2-weeks"){
 
             reviews_past_two_weeks(game_id)
+            active_review_vis = "past_two_weeks"
             
-        } else if (option == "past-1-week"){
+        } else if (option == "review-past-1-week"){
 
             reviews_past_one_week(game_id)
+            active_review_vis = "past_one_week"
             
         } 
 
@@ -35,13 +41,59 @@ $(function(){
 
 })
 
+// SENTIMENT VISUALISATION SELECT OPTIONS
+$(function(){
+
+    $('#sentiment-select').on('change', function (e) {
+
+        let option = $(this).children("option:selected").val()
+
+        if(option == "sentiment-all-time"){
+
+            sentiment_all_time(game_id)
+            active_sentiment_vis = "all_time"
+
+        } else if (option == "sentiment-past-12-months"){
+
+            console.log("Not yet Implemented")
+
+        } else if (option == "sentiment-past-6-months"){
+
+            console.log("Not yet Implemented")
+            
+        } else if (option == "sentiment-past-1-month"){
+
+            console.log("Not yet Implemented")
+            
+        } else if (option == "sentiment-past-2-weeks"){
+
+            console.log("Not yet Implemented")
+            
+        } else if (option == "sentiment-past-1-week"){
+
+            console.log("Not yet Implemented")
+            
+        } 
+
+    })
+
+})
+
+// EMOTION VISUALISATION SELECT OPTIONS
+$(function(){
+    
+})
+
 function no_reviews_neutral_bar(){
 
     $(".neg-bar").each(function(){
 
         if($(this).val() == 0){
+            let reg = new RegExp("Date:(.*)")
             $(this).css("fill", "rgba(217, 217, 217, 0.3)")
-            $(this).children("title").html("No Reviews")
+            let title = $(this).children("title").html()
+            title = reg.exec(title)
+            $(this).children("title").html("Info: No Reviews\nDate:" + title[1])
         }
 
     })
@@ -56,6 +108,40 @@ function reviews_update_current_total(data){
         total_reviews += item.number_of_reviews
     })
 
-    $(".visualisation-container-header-detail-widget-right").text(total_reviews)
+    $("#reviews-total-info").text(total_reviews)
+
+}
+
+function sentiment_update_current_value(data){
+
+    let sentiment_score = 0
+    let num_of_reviews = 0
+    let pos_counter = 0
+    let neg_counter = 0
+
+    pos_labels = ["0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9", "1"]
+    neg_labels = ["-0.1", "-0.2", "-0.3", "-0.4", "-0.5", "-0.6", "-0.7", "-0.8", "-0.9", "-1"]
+
+    data.forEach(function(item){
+
+        num_of_reviews += item.value
+
+        if(pos_labels.includes(item.label)){
+            pos_counter += item.value
+        } else if (neg_labels.includes(item.label)){
+            neg_counter += item.value
+        }
+
+    })
+
+    let sub_total = pos_counter - neg_counter
+
+    if (num_of_reviews > 0){
+        sentiment_score = (sub_total / num_of_reviews).toFixed(3)
+    } else {
+        sentiment_score = 0.000
+    }
+
+    $("#sentiment-value-info").text(sentiment_score)
 
 }
