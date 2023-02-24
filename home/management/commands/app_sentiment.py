@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from data_processors.app_emotions import app_all_emotions
+from data_processors.app_sentiment import app_sentiment_all_time_month, app_sentiment_all_time_month_all
 
 class Command(BaseCommand):
 
@@ -7,4 +7,7 @@ class Command(BaseCommand):
         parser.add_argument("--id")
 
     def handle(self, *args, **options):
-        print("Not Yet Implemented")
+        if(options["id"].lower() == "all"):
+            app_sentiment_all_time_month_all()
+        else:
+            app_sentiment_all_time_month(options["id"])

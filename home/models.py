@@ -60,12 +60,6 @@ class GameStat(models.Model):
     #app
     app_id = models.ForeignKey(Game, on_delete=models.CASCADE, null=True)
 
-    #sentiment_all_time
-    sentiment_all_time = models.JSONField(default=dict)
-
-    #emotion_all_time
-    emotion_all_time = models.JSONField(default=dict)
-
     #highest_player_count
     highest_player_count = models.IntegerField(default=0)
 
@@ -74,6 +68,15 @@ class GameStat(models.Model):
 
     #highest_review_score
     highest_review_score = models.IntegerField(default=0)
+
+    #reviews_all_time_year
+    reviews_all_time_year = models.JSONField(default=dict)
+
+    #reviews_all_time_month
+    reviews_all_time_month = models.JSONField(default=dict)
+
+    #reviews_past_one_month
+    reviews_past_one_month = models.JSONField(default=dict)
 
     #highest_sentiment_score
     highest_sentiment_score = models.FloatField(default=0.0)
@@ -84,14 +87,17 @@ class GameStat(models.Model):
     #current_sentiment_score
     current_sentiment_score = models.FloatField(default=0.0)
 
-    #reviews_all_time_year
-    reviews_all_time_year = models.JSONField(default=dict)
+    #sentiment_all_time
+    sentiment_all_time = models.JSONField(default=dict)
 
-    #reviews_all_time_month
-    reviews_all_time_month = models.JSONField(default=dict)
+    #sentiment_all_time_month
+    sentiment_all_time_month = models.JSONField(default=dict)
 
-    #reviews_past_one_month
-    reviews_past_one_month = models.JSONField(default=dict)
+    #sentiment_past_one_month
+    sentiment_past_one_month = models.JSONField(default=dict)
+
+    #emotion_all_time
+    emotion_all_time = models.JSONField(default=dict)
 
     def __str__(self):
         return "{} Stats".format(self.app_id.name)
@@ -112,7 +118,6 @@ class PlayerCount(models.Model):
 
     def get_absolute_url(self):
         return reverse('playercount', kwargs={'pk': self.pk})
-
 
 class Review(models.Model):
 

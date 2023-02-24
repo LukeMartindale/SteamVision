@@ -3,6 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 from .serializers import GameSerializer, GameReviewSerializer, GameStatSerializer, DescriptorSerializer
 from home.models import Game, GameStat, Review, Descriptor
+from data_processors.processor_helpers import sentiment_past_time_calc
 from django.utils import timezone
 import datetime
 import calendar
@@ -49,7 +50,7 @@ def getReviewsAllTimeMonth(request, id):
     return Response(stat.reviews_all_time_month)
 
 @api_view(['GET'])
-def getReviewsPastTweleveMonths(request, id):
+def getReviewsPastTwelveMonths(request, id):
     stats = GameStat.objects.get(app_id__app_id__contains=id)
 
     time = timezone.now()
@@ -121,6 +122,56 @@ def getSentimentAllTime(request, id):
     stat = GameStat.objects.get(app_id__app_id__contains=id)
 
     return Response(stat.sentiment_all_time)
+
+@api_view(['GET'])
+def getSentimentAllTimeMonth(request, id):
+    stat = GameStat.objects.get(app_id__app_id__contains=id)
+
+    return Response(stat.sentiment_all_time_month)
+
+@api_view(['GET'])
+def getSentimentPastTwelveMonths(request, id):
+    stats = GameStat.objects.get(app_id__app_id__contains=id)
+
+    time = timezone.now()
+    end_index = 0
+
+    for index, stat in enumerate(stats.sentiment_all_time_month):
+        if(stat["year"] == time.year and stat["month"] == calendar.month_name[time.month]):
+            end_index = index+1
+            break
+
+    start_index = end_index - 12
+    past_twelve_months = []
+
+    for stat in reversed(stats.sentiment_all_time_month[start_index:end_index]):
+        past_twelve_months.append(stat)
+
+    past_twelve_months_calced = sentiment_past_time_calc(past_twelve_months)
+
+    return Response(past_twelve_months_calced)
+
+@api_view(['GET'])
+def getSentimentPastSixMonths(request, id):
+    stats = GameStat.objects.get(app_id__app_id__contains=id)
+
+    time = timezone.now()
+    end_index = 0
+
+    for index, stat in enumerate(stats.sentiment_all_time_month):
+        if(stat["year"] == time.year and stat["month"] == calendar.month_name[time.month]):
+            end_index = index+1
+            break
+
+    start_index = end_index - 6
+    past_six_months = []
+
+    for stat in reversed(stats.sentiment_all_time_month[start_index:end_index]):
+        past_six_months.append(stat)
+
+    past_six_months_calced = sentiment_past_time_calc(past_six_months)
+
+    return Response(past_six_months_calced)
 
 @api_view(['GET'])
 def getDescriptors(request):

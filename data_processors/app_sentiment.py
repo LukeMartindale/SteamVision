@@ -1,5 +1,7 @@
 from home.models import Game, GameStat, Review
+from data_processors.processor_helpers import calc_sentiment_score_from_data
 from django.utils import timezone
+import calendar
 
 def app_sentiment(app):
 
@@ -53,20 +55,62 @@ def app_all_sentiment():
 
     calc_sentiment_score_all()
 
-def app_sentiment_past_twelve_months(app):
-    print("not yet implemented")
+def app_sentiment_all_time_month(id):
+    stats = GameStat.objects.get(app_id__app_id__contains=id)
+    years = [y.year for y in Review.objects.filter(app_id__app_id__contains=id).dates('time_created', 'year')]
 
-def app_sentiment_past_six_months(app):
-    print("not yet implemented")
+    app_sentiment = []
 
-def app_sentiment_past_one_month(app):
-    print("not yet implemented")
+    for year in years:
+        for i in range(1, 13):
+            reviews = Review.objects.filter(app_id__app_id__contains=id, time_created__year=year, time_created__month=i).order_by("time_created")
 
-def app_sentiment_past_two_weeks(app):
-    print("not yet implemented")
+            sentiment = []
+            for x in range(len(reviews)):
+                sentiment.append(round(reviews[x].sentiment_polarity, 1))
 
-def app_sentiment_past_one_week(app):
-    print("not yet implemented")
+            month_sentiment = rounded_sentiment(sentiment)
+
+            app_sentiment.append({
+                "label": (str(year) + " " + str(calendar.month_name[i])),
+                "year": year,
+                "month": calendar.month_name[i],
+                "sentiment": month_sentiment,
+                "sentiment_score": calc_sentiment_score_from_data(month_sentiment)
+            })
+
+    stats.sentiment_all_time_month = app_sentiment
+    stats.save()
+
+def app_sentiment_all_time_month_all():
+    games = Game.objects.all()
+
+    for game in games:
+        stats = GameStat.objects.get(app_id=game)
+        years = [y.year for y in Review.objects.filter(app_id=game).dates('time_created', 'year')]
+
+        app_sentiment = []
+
+        for year in years:
+            for i in range(1, 13):
+                reviews = Review.objects.filter(app_id=game, time_created__year=year, time_created__month=i).order_by("time_created")
+
+                sentiment = []
+                for x in range(len(reviews)):
+                    sentiment.append(round(reviews[x].sentiment_polarity, 1))
+
+                month_sentiment = rounded_sentiment(sentiment)
+
+                app_sentiment.append({
+                    "label": (str(year) + " " + str(calendar.month_name[i])),
+                    "year": year,
+                    "month": calendar.month_name[i],
+                    "sentiment": month_sentiment,
+                    "sentiment_score": calc_sentiment_score_from_data(month_sentiment)
+                })
+
+        stats.sentiment_all_time_month = app_sentiment
+        stats.save()
 
 def rounded_sentiment(data):
 
