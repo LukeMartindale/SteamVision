@@ -1,6 +1,7 @@
 from home.models import Game, GameStat, Review
 from data_processors.processor_helpers import calc_sentiment_score_from_data
 from django.utils import timezone
+from datetime import datetime, timedelta
 import calendar
 
 def app_sentiment(app):
@@ -110,6 +111,120 @@ def app_sentiment_all_time_month_all():
                 })
 
         stats.sentiment_all_time_month = app_sentiment
+        stats.save()
+
+def app_sentiment_past_one_month(id):
+    start_date = datetime.now() + timedelta(days=-30)
+    end_date = datetime.now()
+
+    stats = GameStat.objects.get(app_id__app_id__contains=id)
+    reviews = Review.objects.filter(app_id__app_id__contains=id, time_created__range=[start_date, end_date]).order_by('time_created')
+    
+    sentiment = []
+
+    for review in reviews:
+        sentiment.append(round(review.sentiment_polarity, 1))
+
+    one_month = rounded_sentiment(sentiment)
+
+    stats.sentiment_past_one_month = one_month
+    stats.save()
+
+def app_sentiment_past_one_month_all():
+    games = Game.objects.all()
+
+    start_date = datetime.now() + timedelta(days=-30)
+    end_date = datetime.now()
+
+    for game in games:
+
+        stats = GameStat.objects.get(app_id=game)
+        reviews = Review.objects.filter(app_id=game, time_created__range=[start_date, end_date]).order_by('time_created')
+        
+        sentiment = []
+
+        for review in reviews:
+            sentiment.append(round(review.sentiment_polarity, 1))
+
+        one_month = rounded_sentiment(sentiment)
+
+        stats.sentiment_past_one_month = one_month
+        stats.save()
+
+def app_sentiment_past_two_weeks(id):
+    start_date = datetime.now() + timedelta(days=-14)
+    end_date = datetime.now()
+
+    stats = GameStat.objects.get(app_id__app_id__contains=id)
+    reviews = Review.objects.filter(app_id__app_id__contains=id, time_created__range=[start_date, end_date]).order_by('time_created')
+    
+    sentiment = []
+
+    for review in reviews:
+        sentiment.append(round(review.sentiment_polarity, 1))
+
+    two_weeks = rounded_sentiment(sentiment)
+
+    stats.sentiment_past_two_weeks = two_weeks
+    stats.save()
+
+def app_sentiment_past_two_weeks_all():
+    games = Game.objects.all()
+
+    start_date = datetime.now() + timedelta(days=-14)
+    end_date = datetime.now()
+
+    for game in games:
+
+        stats = GameStat.objects.get(app_id=game)
+        reviews = Review.objects.filter(app_id=game, time_created__range=[start_date, end_date]).order_by('time_created')
+        
+        sentiment = []
+
+        for review in reviews:
+            sentiment.append(round(review.sentiment_polarity, 1))
+
+        two_week = rounded_sentiment(sentiment)
+
+        stats.sentiment_past_two_weeks = two_week
+        stats.save()
+
+def app_sentiment_past_one_week(id):
+    start_date = datetime.now() + timedelta(days=-7)
+    end_date = datetime.now()
+
+    stats = GameStat.objects.get(app_id__app_id__contains=id)
+    reviews = Review.objects.filter(app_id__app_id__contains=id, time_created__range=[start_date, end_date]).order_by('time_created')
+    
+    sentiment = []
+
+    for review in reviews:
+        sentiment.append(round(review.sentiment_polarity, 1))
+
+    one_week = rounded_sentiment(sentiment)
+
+    stats.sentiment_past_one_week = one_week
+    stats.save()
+
+def app_sentiment_past_one_week_all():
+    games = Game.objects.all()
+
+    start_date = datetime.now() + timedelta(days=-7)
+    end_date = datetime.now()
+
+    for game in games:
+
+        stats = GameStat.objects.get(app_id=game)
+        reviews = Review.objects.filter(app_id=game, time_created__range=[start_date, end_date]).order_by('time_created')
+        
+        sentiment = []
+
+        for review in reviews:
+            sentiment.append(round(review.sentiment_polarity, 1))
+
+        one_week = rounded_sentiment(sentiment)
+
+        stats.sentiment_past_one_week = one_week
         stats.save()
 
 def rounded_sentiment(data):

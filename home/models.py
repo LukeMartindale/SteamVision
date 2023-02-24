@@ -96,6 +96,11 @@ class GameStat(models.Model):
     #sentiment_past_one_month
     sentiment_past_one_month = models.JSONField(default=dict)
 
+    #sentiment_past_two_weeks
+    sentiment_past_two_weeks = models.JSONField(default=dict)
+    #sentiment_past_one_week
+    sentiment_past_one_week = models.JSONField(default=dict)
+
     #emotion_all_time
     emotion_all_time = models.JSONField(default=dict)
 

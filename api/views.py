@@ -8,6 +8,8 @@ from django.utils import timezone
 import datetime
 import calendar
 
+from data_processors.app_sentiment import app_sentiment_past_one_month
+
 # Get a single game by its app_id / pk
 @api_view(['GET'])
 def getGame(request, id):
@@ -172,6 +174,24 @@ def getSentimentPastSixMonths(request, id):
     past_six_months_calced = sentiment_past_time_calc(past_six_months)
 
     return Response(past_six_months_calced)
+
+@api_view(['GET'])
+def getSentimentPastOneMonth(request, id):
+    stats = GameStat.objects.get(app_id__app_id__contains=id)
+
+    return Response(stats.sentiment_past_one_month)
+
+@api_view(['GET'])
+def getSentimentPastTwoWeeks(request, id):
+    stats = GameStat.objects.get(app_id__app_id__contains=id)
+
+    return Response(stats.sentiment_past_two_weeks)
+
+@api_view(['GET'])
+def getSentimentPastOneWeek(request, id):
+    stats = GameStat.objects.get(app_id__app_id__contains=id)
+
+    return Response(stats.sentiment_past_one_week)
 
 @api_view(['GET'])
 def getDescriptors(request):
