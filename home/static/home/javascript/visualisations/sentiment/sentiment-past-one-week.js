@@ -1,6 +1,6 @@
-function get_data_sentiment_all_time(id){
+function get_data_sentiment_past_one_week(id){
 
-    let api_url = `/api/get-sentiment/all-time/${id}/`
+    let api_url = `/api/get-sentiment/past-one-week/${id}/`
 
     let reviews = function(){
         let data = null;
@@ -20,9 +20,9 @@ function get_data_sentiment_all_time(id){
 
 }
 
-function sentiment_all_time(id) {
+function sentiment_past_one_week(id){
 
-    let reviews_data = get_data_sentiment_all_time(id)
+    let reviews_data = get_data_sentiment_past_one_week(id)
 
     console.log(reviews_data)
 
@@ -42,9 +42,7 @@ function sentiment_all_time(id) {
         .attr('height', svgHeight + margins.top + margins.bottom);
     
     x.domain(reviews_data.map(data => data.label));
-    y.domain([0, Math.floor((d3.max(reviews_data, data=> data.value) + ((d3.max(reviews_data, data => data.value))*0.1)) / 10) * 10]);
-
-    let max_val = Math.floor((d3.max(reviews_data, data=> data.value) + ((d3.max(reviews_data, data => data.value))*0.1)) / 10) * 10
+    y.domain([0, Math.floor((d3.max(reviews_data, data=> data.value) + (d3.max(reviews_data, data => data.value))*0.1))]);
     
     let chart = chartContainer
         .append('g')

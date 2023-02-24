@@ -55,23 +55,28 @@ $(function(){
 
         } else if (option == "sentiment-past-12-months"){
 
-            console.log("Not yet Implemented")
+            sentiment_past_twelve_months(game_id)
+            active_sentiment_vis = "past_twelve_months"
 
         } else if (option == "sentiment-past-6-months"){
 
-            console.log("Not yet Implemented")
+            sentiment_past_six_months(game_id)
+            active_sentiment_vis = "past_six_months"
             
         } else if (option == "sentiment-past-1-month"){
 
-            console.log("Not yet Implemented")
+            sentiment_past_one_month(game_id)
+            active_sentiment_vis = "past_one_month"
             
         } else if (option == "sentiment-past-2-weeks"){
 
-            console.log("Not yet Implemented")
+            sentiment_past_two_weeks(game_id)
+            active_sentiment_vis = "past_two_weeks"
             
         } else if (option == "sentiment-past-1-week"){
 
-            console.log("Not yet Implemented")
+            sentiment_past_one_week(game_id)
+            active_sentiment_vis = "past_one_week"
             
         } 
 

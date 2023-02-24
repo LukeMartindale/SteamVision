@@ -41,15 +41,15 @@ function sentiment_resize_handler(active_vis){
     if (active_vis == "all_time"){
         sentiment_all_time(game_id)
     } else if (active_vis == "past_twelve_months"){
-        console.log("Not Yet Implemented")
+        sentiment_past_twelve_months(game_id)
     } else if (active_vis == "past_six_months"){
-        console.log("Not Yet Implemented")
+        sentiment_past_six_months(game_id)
     } else if (active_vis == "past_one_month"){
-        console.log("Not Yet Implemented")
+        sentiment_past_one_month(game_id)
     } else if (active_vis == "past_two_weeks"){
-        console.log("Not Yet Implemented")
+        sentiment_past_two_weeks(game_id)
     } else if (active_vis == "past_one_week"){
-        console.log("Not Yet Implemented")
+        sentiment_past_one_week(game_id)
     }
 
 }

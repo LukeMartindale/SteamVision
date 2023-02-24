@@ -372,18 +372,10 @@
     <script src="{% static 'home/javascript/data/get_game_stats.js' %}" defer></script>
 
     <!-- DRAW GRAPHS OLD -->
-    <!-- <script src="{% static 'home/javascript/visualisations/temp-reviews.js' %}" defer></script> -->
-    <!-- <script src="{% static 'home/javascript/visualisations/temp-reviews-sentiment.js' %}" defer></script> -->
     <script src="{% static 'home/javascript/visualisations/temp-reviews-emotion.js' %}" defer></script>
 
-    <!-- LOAD GAME DATA -->
+    <!-- OLD LOAD GAME DATA -->
     <script src="{% static 'home/javascript/data/reviews-data.js' %}"></script>
-
-    <!-- ON PAGE LOAD JS -->
-    <script src="{% static 'home/javascript/game-detail-on-load.js' %}"></script>
-
-    <!-- GRAPH FUNCTIONALITY JS -->
-    <script src="{% static 'home/javascript/game-detail-visualisations.js' %}"></script>
 
     <!-- LOAD REVIEWS VISUALISATIONS -->
     <script src="{% static 'home/javascript/visualisations/reviews/reviews-all-time-years.js' %}"></script>
@@ -396,13 +388,24 @@
 
     <!-- LOAD SENTIMENT VISUALISATIONS -->
     <script src="{% static 'home/javascript/visualisations/sentiment/sentiment-all-time.js' %}"></script>
+    <script src="{% static 'home/javascript/visualisations/sentiment/sentiment-past-twelve-months.js' %}"></script>
+    <script src="{% static 'home/javascript/visualisations/sentiment/sentiment-past-six-months.js' %}"></script>
+    <script src="{% static 'home/javascript/visualisations/sentiment/sentiment-past-one-month.js' %}"></script>
+    <script src="{% static 'home/javascript/visualisations/sentiment/sentiment-past-two-weeks.js' %}"></script>
+    <script src="{% static 'home/javascript/visualisations/sentiment/sentiment-past-one-week.js' %}"></script>
 
     <!-- LOAD EMOTION VISUALISATIONS -->
 
-    <!-- ON PAGE RESIZE -->
-    <script src="{% static 'home/javascript/game-detail-on-resize.js' %}"></script>
-
     <!-- MY JS -->
     <script src="{% static 'home/javascript/game-detail.js' %}"></script>
+
+    <!-- GRAPH FUNCTIONALITY JS -->
+    <script src="{% static 'home/javascript/game-detail-visualisations.js' %}"></script>
+
+    <!-- ON PAGE LOAD JS -->
+    <script src="{% static 'home/javascript/game-detail-on-load.js' %}"></script>
+
+    <!-- ON PAGE RESIZE -->
+    <script src="{% static 'home/javascript/game-detail-on-resize.js' %}"></script>
 
 {% endblock %}
