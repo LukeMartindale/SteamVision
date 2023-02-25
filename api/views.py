@@ -8,8 +8,6 @@ from django.utils import timezone
 import datetime
 import calendar
 
-from data_processors.app_sentiment import app_sentiment_past_one_month
-
 # Get a single game by its app_id / pk
 @api_view(['GET'])
 def getGame(request, id):
@@ -192,6 +190,86 @@ def getSentimentPastOneWeek(request, id):
     stats = GameStat.objects.get(app_id__app_id__contains=id)
 
     return Response(stats.sentiment_past_one_week)
+
+@api_view(['GET'])
+def getEmotionAllTime(request, id):
+    stat = GameStat.objects.get(app_id__app_id__contains=id)
+
+    return Response(stat.emotion_all_time)
+
+@api_view(['GET'])
+def getEmotionAllTimeMonth(request, id):
+    stat = GameStat.objects.get(app_id__app_id__contains=id)
+
+    return Response(stat.emotion_all_time_month)
+
+@api_view(['GET'])
+def getEmotionPastTwelveMonths(request, id):
+    stats = GameStat.objects.get(app_id__app_id__contains=id)
+
+    time = timezone.now()
+    end_index = 0
+
+    for index, stat in enumerate(stats.emotion_all_time_month):
+        if(stat["year"] == time.year and stat["month"] == calendar.month_name[time.month]):
+            end_index = index+1
+            break
+
+    start_index = end_index - 12
+    past_twelve_months = []
+
+    for stat in reversed(stats.emotion_all_time_month[start_index:end_index]):
+        past_twelve_months.append(stat)
+
+    emotions = {"Happy": 0, "Angry": 0, "Surprise": 0, "Sad": 0, "Fear": 0}
+    for past in past_twelve_months:
+        for emotion, score in emotions.items():
+            emotions[emotion] += past["emotion"][emotion]
+        
+    return Response(emotions)
+
+@api_view(['GET'])
+def getEmotionPastSixMonths(request, id):
+    stats = GameStat.objects.get(app_id__app_id__contains=id)
+
+    time = timezone.now()
+    end_index = 0
+
+    for index, stat in enumerate(stats.emotion_all_time_month):
+        if(stat["year"] == time.year and stat["month"] == calendar.month_name[time.month]):
+            end_index = index+1
+            break
+
+    start_index = end_index - 6
+    past_twelve_months = []
+
+    for stat in reversed(stats.emotion_all_time_month[start_index:end_index]):
+        past_twelve_months.append(stat)
+
+    emotions = {"Happy": 0, "Angry": 0, "Surprise": 0, "Sad": 0, "Fear": 0}
+    for past in past_twelve_months:
+        for emotion, score in emotions.items():
+            emotions[emotion] += past["emotion"][emotion]
+        
+    return Response(emotions)
+
+@api_view(['GET'])
+def getEmotionPastOneMonth(request, id):
+    stats = GameStat.objects.get(app_id__app_id__contains=id)
+
+    return Response(stats.emotion_past_one_month)
+
+@api_view(['GET'])
+def getEmotionPastTwoWeeks(request, id):
+    stats = GameStat.objects.get(app_id__app_id__contains=id)
+
+    return Response(stats.emotion_past_two_weeks)
+
+@api_view(['GET'])
+def getEmotionPastOneWeek(request, id):
+    stats = GameStat.objects.get(app_id__app_id__contains=id)
+
+    return Response(stats.emotion_past_one_week)
 
 @api_view(['GET'])
 def getDescriptors(request):
