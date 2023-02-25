@@ -22,7 +22,7 @@ def app_sentiment(app):
         game_stats.app_id = game
 
     app_sentiment = rounded_sentiment(sentiment)
-    game_stats.sentiment = app_sentiment
+    game_stats.sentiment_all_time = app_sentiment
 
     game_stats.save()
 
@@ -50,7 +50,7 @@ def app_all_sentiment():
             game_stats.app_id = game
 
         app_sentiment = rounded_sentiment(sentiment)
-        game_stats.sentiment = app_sentiment
+        game_stats.sentiment_all_time = app_sentiment
 
         game_stats.save()
 

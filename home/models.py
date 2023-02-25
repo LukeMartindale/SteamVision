@@ -104,6 +104,18 @@ class GameStat(models.Model):
     #emotion_all_time
     emotion_all_time = models.JSONField(default=dict)
 
+    #emotion_all_time_month
+    emotion_all_time_month = models.JSONField(default=dict)
+
+    #emotion_past_one_month
+    emotion_past_one_month = models.JSONField(default=dict)
+
+    #emotion_past_two_weeks
+    emotion_past_two_weeks = models.JSONField(default=dict)
+
+    #emotion_past_one_week
+    emotion_past_one_week = models.JSONField(default=dict)
+
     def __str__(self):
         return "{} Stats".format(self.app_id.name)
 
