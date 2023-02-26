@@ -33,4 +33,7 @@ urlpatterns = [
     path('get-player-count/past-one-month/<int:id>/', views.getPlayerCountPastOneMonth),
     path('get-player-count/past-two-weeks/<int:id>/', views.getPlayerCountPastTwoWeeks),
     path('get-player-count/past-one-week/<int:id>/', views.getPlayerCountPastOneWeek),
+    path('get-player-count/past-72-hours/<int:id>/', views.getPlayerCountPast72Hours),
+    path('get-player-count/past-48-hours/<int:id>/', views.getPlayerCountPast48Hours),
+    path('get-player-count/past-24-hours/<int:id>/', views.getPlayerCountPast24Hours),
 ]

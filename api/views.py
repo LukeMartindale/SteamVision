@@ -340,3 +340,33 @@ def getPlayerCountPastOneWeek(request, id):
     serializer = PlayerCountSerializer(player_count, many=True)
 
     return Response(serializer.data)  
+
+@api_view(['GET'])
+def getPlayerCountPast72Hours(request, id):
+    start_time = timezone.now() - timezone.timedelta(hours=72)
+    end_time = timezone.now()
+
+    player_count = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[start_time, end_time])
+    serializer = PlayerCountSerializer(player_count, many=True)
+
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getPlayerCountPast48Hours(request, id):
+    start_time = timezone.now() - timezone.timedelta(hours=48)
+    end_time = timezone.now()
+
+    player_count = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[start_time, end_time])
+    serializer = PlayerCountSerializer(player_count, many=True)
+
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getPlayerCountPast24Hours(request, id):
+    start_time = timezone.now() - timezone.timedelta(hours=24)
+    end_time = timezone.now()
+
+    player_count = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[start_time, end_time])
+    serializer = PlayerCountSerializer(player_count, many=True)
+
+    return Response(serializer.data)
