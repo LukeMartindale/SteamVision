@@ -343,7 +343,7 @@ def getPlayerCountPastOneWeek(request, id):
 
 @api_view(['GET'])
 def getPlayerCountPast72Hours(request, id):
-    start_time = timezone.now() - timezone.timedelta(hours=72)
+    start_time = timezone.now() - timezone.timedelta(hours=73)
     end_time = timezone.now()
 
     player_count = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[start_time, end_time])
@@ -353,7 +353,7 @@ def getPlayerCountPast72Hours(request, id):
 
 @api_view(['GET'])
 def getPlayerCountPast48Hours(request, id):
-    start_time = timezone.now() - timezone.timedelta(hours=48)
+    start_time = timezone.now() - timezone.timedelta(hours=49)
     end_time = timezone.now()
 
     player_count = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[start_time, end_time])
@@ -363,7 +363,7 @@ def getPlayerCountPast48Hours(request, id):
 
 @api_view(['GET'])
 def getPlayerCountPast24Hours(request, id):
-    start_time = timezone.now() - timezone.timedelta(hours=24)
+    start_time = timezone.now() - timezone.timedelta(hours=25)
     end_time = timezone.now()
 
     player_count = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[start_time, end_time])
