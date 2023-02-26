@@ -73,6 +73,8 @@ function emotion_past_one_week(id){
             .attr('fill', function(d){return(colour(d.data[1])) })
             .style("stroke-width", "2px")
             .style("opacity", 0.7)
+            .append('title')
+            .text((data) => `Emotion: ${data.data[0]}\nEmotion Percentage: ${(data.data[1]/emotion.total * 100).toFixed(1)}%`);
     
         //add labels to the chart
         svg
@@ -86,6 +88,8 @@ function emotion_past_one_week(id){
             .style("font-weight","bold")
             .style("text-transform", "uppercase")
             .style("fill", "#bec5cb")
+            .append('title')
+            .text((data) => `Emotion: ${data.data[0]}\nEmotion Percentage: ${(data.data[1]/emotion.total * 100).toFixed(1)}%`);
 
     } else {
         $('#emotion-container-content').empty()
