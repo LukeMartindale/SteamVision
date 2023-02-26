@@ -86,6 +86,44 @@ $(function(){
 
 // EMOTION VISUALISATION SELECT OPTIONS
 $(function(){
+
+    $('#emotion-select').on('change', function (e) {
+
+        let option = $(this).children("option:selected").val()
+
+        if(option == "emotion-all-time"){
+
+            emotion_all_time(game_id)
+            active_emotion_vis = "all_time"
+
+        } else if (option == "emotion-past-12-months"){
+
+            emotion_past_twelve_months(game_id)
+            active_emotion_vis = "past_twelve_months"
+
+        } else if (option == "emotion-past-6-months"){
+
+            emotion_past_six_months(game_id)
+            active_emotion_vis = "past_six_months"
+            
+        } else if (option == "emotion-past-1-month"){
+
+            emotion_past_one_month(game_id)
+            active_emotion_vis = "past_one_month"
+            
+        } else if (option == "emotion-past-2-weeks"){
+
+            emotion_past_two_weeks(game_id)
+            active_emotion_vis = "past_two_weeks"
+            
+        } else if (option == "emotion-past-1-week"){
+
+            emotion_past_one_week(game_id)
+            active_emotion_vis = "past_one_week"
+            
+        } 
+
+    })
     
 })
 

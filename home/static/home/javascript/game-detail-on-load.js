@@ -9,4 +9,5 @@ $(function(){
     // Draw sentiment graph
     sentiment_all_time(game_id)
     // Draw emotion graph
+    emotion_all_time(game_id)
 })

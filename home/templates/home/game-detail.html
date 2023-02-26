@@ -273,12 +273,14 @@
                 <div class="visualisation-container">
                     <div class="visualisation-container-header">
                         <div class="visualisation-container-options-wrapper">
-                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
-                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
-                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
-                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
-                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
-                            <div class="visualisation-container-options-wrapper-highlight">TEST</div>
+                            <select class="visualisation-select" id="emotion-select">
+                                <option class="visualisation-select-option" value="emotion-all-time">All Time (By Year)</option>
+                                <option class="visualisation-select-option" value="emotion-past-12-months">Past 12 Months</option>
+                                <option class="visualisation-select-option" value="emotion-past-6-months">Past 6 Months</option>
+                                <option class="visualisation-select-option" value="emotion-past-1-month">Past Month</option>
+                                <option class="visualisation-select-option" value="emotion-past-2-weeks">Past 2 Weeks</option>
+                                <option class="visualisation-select-option" value="emotion-past-1-week">Past 7 Days</option>
+                            </select>
                         </div>
                         <div class="visualisation-container-header-detail-widget">
                             <div class="visualisation-container-header-detail-widget-left">
@@ -368,15 +370,6 @@
 
     </div>
 
-    <!-- LOAD GAME DATA OLD -->
-    <script src="{% static 'home/javascript/data/get_game_stats.js' %}" defer></script>
-
-    <!-- DRAW GRAPHS OLD -->
-    <script src="{% static 'home/javascript/visualisations/temp-reviews-emotion.js' %}" defer></script>
-
-    <!-- OLD LOAD GAME DATA -->
-    <script src="{% static 'home/javascript/data/reviews-data.js' %}"></script>
-
     <!-- LOAD REVIEWS VISUALISATIONS -->
     <script src="{% static 'home/javascript/visualisations/reviews/reviews-all-time-years.js' %}"></script>
     <script src="{% static 'home/javascript/visualisations/reviews/reviews-all-time-months.js' %}"></script>
@@ -395,6 +388,12 @@
     <script src="{% static 'home/javascript/visualisations/sentiment/sentiment-past-one-week.js' %}"></script>
 
     <!-- LOAD EMOTION VISUALISATIONS -->
+    <script src="{% static 'home/javascript/visualisations/emotion/emotion-all-time.js' %}"></script>
+    <script src="{% static 'home/javascript/visualisations/emotion/emotion-past-twelve-months.js' %}"></script>
+    <script src="{% static 'home/javascript/visualisations/emotion/emotion-past-six-months.js' %}"></script>
+    <script src="{% static 'home/javascript/visualisations/emotion/emotion-past-one-month.js' %}"></script>
+    <script src="{% static 'home/javascript/visualisations/emotion/emotion-past-two-weeks.js' %}"></script>
+    <script src="{% static 'home/javascript/visualisations/emotion/emotion-past-one-week.js' %}"></script>
 
     <!-- MY JS -->
     <script src="{% static 'home/javascript/game-detail.js' %}"></script>
