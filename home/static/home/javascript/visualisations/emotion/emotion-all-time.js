@@ -22,8 +22,10 @@ function get_data_emotion_all_time(id){
 
 function emotion_all_time(id){
 
-    let reviews_data = get_data_emotion_all_time(id)
-    console.log("emotion_all_time")
+    let raw_data = get_data_emotion_all_time(id)
+
+    let emotion = EmotionSection(raw_data, ["#0000FF","#0052FF","#007AFF","#00A3FF","#00CCFF"])
+    let reviews_data = emotion.section_data
 
     $('#emotion-container-content').empty()
 
@@ -45,7 +47,7 @@ function emotion_all_time(id){
 
     //set the colour scale
     let colour = d3.scaleOrdinal()
-        .range(["#0000FF","#0052FF","#007AFF","#00A3FF","#00CCFF"])
+        .range(emotion.section_colour)
 
     //compute poisition of each group in the chart
     let pie = d3.pie()
