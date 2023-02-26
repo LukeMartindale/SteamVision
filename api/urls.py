@@ -30,4 +30,7 @@ urlpatterns = [
     path('get-genres/', views.getGenres),
     path('get-tags/', views.getTags),
     path('get-categories/', views.getCategories),
+    path('get-player-count/past-one-month/<int:id>/', views.getPlayerCountPastOneMonth),
+    path('get-player-count/past-two-weeks/<int:id>/', views.getPlayerCountPastTwoWeeks),
+    path('get-player-count/past-one-week/<int:id>/', views.getPlayerCountPastOneWeek),
 ]

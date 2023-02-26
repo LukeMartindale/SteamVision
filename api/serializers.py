@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from home.models import Game, GameStat, Review, Descriptor
+from home.models import Game, GameStat, Review, Descriptor, PlayerCount
 
 class GameSerializer(serializers.ModelSerializer):
     class Meta:
@@ -19,4 +19,9 @@ class GameStatSerializer(serializers.ModelSerializer):
 class DescriptorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Descriptor
+        fields = '__all__'
+
+class PlayerCountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PlayerCount
         fields = '__all__'

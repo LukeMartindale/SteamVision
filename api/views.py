@@ -1,8 +1,20 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
-from .serializers import GameSerializer, GameReviewSerializer, GameStatSerializer, DescriptorSerializer
-from home.models import Game, GameStat, Review, Descriptor
+from .serializers import (
+    GameSerializer, 
+    GameReviewSerializer, 
+    GameStatSerializer, 
+    DescriptorSerializer, 
+    PlayerCountSerializer,
+    )
+from home.models import (
+    Game, 
+    GameStat, 
+    Review, 
+    Descriptor, 
+    PlayerCount,
+    )
 from data_processors.processor_helpers import sentiment_past_time_calc
 from django.utils import timezone
 import datetime
@@ -298,3 +310,33 @@ def getCategories(request):
     serializer = DescriptorSerializer(categories, many=True)
 
     return Response(serializer.data)
+
+@api_view(['GET'])
+def getPlayerCountPastOneMonth(request, id):
+    start_date = timezone.now() + timezone.timedelta(days=-30)
+    end_date = timezone.now()
+
+    player_count = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[start_date, end_date])
+    serializer = PlayerCountSerializer(player_count, many=True)
+
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getPlayerCountPastTwoWeeks(request, id):
+    start_date = timezone.now() + timezone.timedelta(days=-14)
+    end_date = timezone.now()
+
+    player_count = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[start_date, end_date])
+    serializer = PlayerCountSerializer(player_count, many=True)
+
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getPlayerCountPastOneWeek(request, id):
+    start_date = timezone.now() + timezone.timedelta(days=-7)
+    end_date = timezone.now()
+
+    player_count = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[start_date, end_date])
+    serializer = PlayerCountSerializer(player_count, many=True)
+
+    return Response(serializer.data)  
