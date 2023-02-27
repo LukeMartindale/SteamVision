@@ -217,7 +217,7 @@ def reviews_new_all_collector():
             response_reviews = requests.get(next_url).json()
 
         # Calculate Review Score & update highest review score if needed
-        game_stats = GameStat.objects.filter(app_id=game)
+        game_stats = GameStat.objects.get(app_id=game)
         game_reviews = Review.objects.filter(app_id=game).count()
         game_reviews_up = Review.objects.filter(app_id=game, voted_up=True).count()
 
