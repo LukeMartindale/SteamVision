@@ -1,10 +1,11 @@
 import requests
 import urllib.parse
 
-from home.models import Review, Game
+from home.models import Review, Game, GameStat
 from data_processors.reviews_sentiment import reviews_sentiment
 from data_processors.reviews_emotions import reviews_emotions
 from datetime import datetime
+from django.utils import timezone
 
 import os
 
@@ -214,5 +215,29 @@ def reviews_new_all_collector():
 
             next_url = "https://store.steampowered.com/appreviews/{}?json=1&filter=recent&purchase_type=all&cursor={}".format(game.app_id, urllib.parse.quote(response_reviews["cursor"]))
             response_reviews = requests.get(next_url).json()
+
+        # Calculate Review Score & update highest review score if needed
+        game_stats = GameStat.objects.filter(app_id=game)
+        game_reviews = Review.objects.filter(app_id=game).count()
+        game_reviews_up = Review.objects.filter(app_id=game, voted_up=True).count()
+
+        print(game_reviews)
+        print(game_reviews_up)
+
+        print(len(Review.objects.filter(app_id=game)))
+        print(len(Review.objects.filter(app_id=game, voted_up=True)))
+
+        print(review_score)
+
+        review_score = game_reviews_up / game_reviews
+        game_stats.current_review_score = review_score
+
+
+
+        if(review_score > game_stats.highest_review_score):
+            game_stats.highest_review_score = review_score
+            game_stats.highest_review_score_date = timezone.now()
+
+        game_stats.save()
 
     return {"status": 200, "message": "Collection successful"}

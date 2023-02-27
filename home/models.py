@@ -69,6 +69,12 @@ class GameStat(models.Model):
     #highest_review_score
     highest_review_score = models.IntegerField(default=0)
 
+    #highest_review_score_date
+    highest_review_score_date = models.DateField(default=timezone.now)
+
+    #current_review_score
+    current_review_score = models.FloatField(default=0.0)
+
     #reviews_all_time_year
     reviews_all_time_year = models.JSONField(default=dict)
 
