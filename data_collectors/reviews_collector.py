@@ -227,9 +227,8 @@ def reviews_new_all_collector():
         print(len(Review.objects.filter(app_id=game)))
         print(len(Review.objects.filter(app_id=game, voted_up=True)))
 
-        print(review_score)
-
         review_score = game_reviews_up / game_reviews
+        print(review_score)
         game_stats.current_review_score = review_score
 
 
