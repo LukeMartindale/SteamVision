@@ -10,4 +10,6 @@ $(function(){
     sentiment_all_time(game_id)
     // Draw emotion graph
     emotion_all_time(game_id)
+    // Draw Player Count
+    player_count_past_24_hours(game_id)
 })

@@ -1,8 +1,6 @@
 from django.urls import path
-from . views import (
-    GameTopView
-)
+from . import views
 
 urlpatterns = [
-    path('', GameTopView.as_view(), name='game-charts')
+    path('', views.Charts, name='charts')
 ]

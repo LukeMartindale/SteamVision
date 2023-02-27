@@ -8,16 +8,10 @@
     <link rel="stylesheet" href="{% static 'home/css/graphs.css' %}">
 
     <!-- D3 -->
-    <script src="https://d3js.org/d3.v7.min.js" defer></script>
+    <script src="https://d3js.org/d3.v7.min.js" charset="utf-8" defer></script>
 
     <script defer>
         const game_id = '{{ game.app_id }}'
-
-        //Draws graphs on page load
-        // $(document).ready(function() {
-        //     sentiment_graph()
-        // });
-
     </script>
 
     <div class="block-wrapper">
@@ -343,11 +337,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="visualisation-container-content">
-                        <svg class="visualisation-svg">
-    
-                        </svg>
-                    </div>
+                    <div class="visualisation-container-content" id="player-count-container-content"></div>
                 </div>
 
                 <div class="visualisation-widgets-drawer">
@@ -395,6 +385,9 @@
     <script src="{% static 'home/javascript/visualisations/emotion/emotion-past-one-month.js' %}"></script>
     <script src="{% static 'home/javascript/visualisations/emotion/emotion-past-two-weeks.js' %}"></script>
     <script src="{% static 'home/javascript/visualisations/emotion/emotion-past-one-week.js' %}"></script>
+
+    <!-- LOAD PLAYER COUNT VISUALISATIONS -->
+    <script src="{% static 'home/javascript/visualisations/player/player-count-past-24-hours.js' %}"></script>
 
     <!-- MY JS -->
     <script src="{% static 'home/javascript/game-detail.js' %}"></script>

@@ -1,0 +1,49 @@
+{% extends "home/base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <!-- MY CSS -->
+    <link rel="stylesheet" href="{% static 'charts/css/charts.css' %}">
+
+    <!-- MY JS -->
+    <script src="{% static 'charts/javascript/charts.js' %}"></script>
+
+    <div class="block-wrapper">
+
+        <div class="filter-block">
+
+            <div class="chart-select-wrapper">
+                <select class="chart-select" id="subject-select">
+                    <option class="chart-select-option" value="player-count">Player Count</option>
+                    <option class="chart-select-option" value="reviews">Reviews</option>
+                </select>
+            </div>
+
+            <div class="chart-select-wrapper">
+                <select class="chart-select" id="type-select">
+                    <option class="chart-select-option" value="current">Current</option>
+                    <option class="chart-select-option" value="all-time">All Time</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="content-block">
+
+            <div class="game-list-wrapper">
+
+                <div class="game-tabs-header">
+                    <div class="game-tabs-header-text name-header">Name</div>
+                    <div class="game-tabs-header-text genres-header">Genres</div>
+                    <div class="game-tabs-header-text category-header">Player Count</div>
+                    <div class="game-tabs-header-text more-info-header">More Info</div>
+                </div>
+
+            </div> 
+
+        </div>
+
+    </div>
+
+{% endblock %}
