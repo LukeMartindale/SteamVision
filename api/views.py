@@ -370,3 +370,23 @@ def getPlayerCountPast24Hours(request, id):
     serializer = PlayerCountSerializer(player_count, many=True)
 
     return Response(serializer.data)
+
+@api_view(['GET'])
+def getPlayerCountCurrent(request):
+    games = Game.objects.all()
+
+    # Get List of current most played games
+    players_current = []
+    for game in games:
+
+        current = {}
+        player_count = PlayerCount.objects.filter(app_id=game).last()
+        serializer = GameSerializer(game)
+
+        current["app"] = serializer.data
+        current["player_count"] = player_count.player_count
+        players_current.append(current)
+
+    players_current = sorted(players_current, key=lambda x:x['player_count'], reverse=True)
+
+    return Response(players_current)
