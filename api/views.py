@@ -390,3 +390,22 @@ def getPlayerCountCurrent(request):
     players_current = sorted(players_current, key=lambda x:x['player_count'], reverse=True)
 
     return Response(players_current)
+
+@api_view(['GET'])
+def getReviewPercentageCurrent(request):
+    games = Game.objects.all()
+
+    reviews_current = []
+    for game in games:
+
+        current = {}
+        review_percentage = GameStat.objects.get(app_id=game).current_review_score
+        serializer = GameSerializer(game)
+
+        current["app"] = serializer.data
+        current["reviews_percentage"] = review_percentage
+        reviews_current.append(current)
+
+    reviews_current = sorted(reviews_current, key=lambda x:x['reviews_percentage'], reverse=True)
+
+    return Response(reviews_current)
