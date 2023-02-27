@@ -21,6 +21,29 @@ function GetPlayerCountCurrent() {
 
 }
 
+// Get the data for Reviews Percentage
+function GetReviewsPercentageCurrent(){
+
+    let api_url = `/api/charts/get-reviews-percentage-current/`
+
+    let reviews = function(){
+        let data = null;
+        $.ajax({
+            async: false,
+            type: 'GET',
+            dataType: 'json',
+            url: api_url,
+            success: function(result){
+                data = result
+            }
+        });
+        return data
+    }();
+
+    return reviews
+
+}
+
 function getGameDescriptors(){
 
     let api_url = `/api/get-descriptors`
@@ -109,12 +132,68 @@ function PlayerCountDisplayTrending() {
 }
 
 // Games with highest review counts of all time
-function ReviewsDisplayCurrent() {
-    console.log("Not Yet Implemented")
+function DisplayReviewsCurrent() {
+
+    let reviews = GetReviewsPercentageCurrent()
+    let descriptors = getGameDescriptors()
+
+    $(".game-list-wrapper").empty()
+
+    reviews.forEach(function(game, index){
+
+        // GAME BAR SECTION
+        $(".game-list-wrapper").append(`<div class="game-tab-wrapper" id="game-tab-wrapper-${game.app.app_id}"></div>`)
+        $(`#game-tab-wrapper-${game.app.app_id}`).append(`<div class="game-tab" id=${game.app.app_id}></div>`)
+        $(`#${game.app.app_id}`)
+            .append('<div class="game-tab-block-short-1 rank-tab-block"></div>')
+            .append('<div class="game-tab-block name-tab-block"></div>')
+            .append('<div class="game-tab-block genre-tab-block"></div>')
+            .append('<div class="game-tab-block player-count-tab-block"></div>')
+            .append('<div class="game-tab-block-short-2 more-tab-block"></div>')
+
+        //Append Game Ranking
+        $(`#${game.app.app_id}`)
+            .children(".rank-tab-block")
+            .append(index + 1)
+
+        //Append Game Name
+        $(`#${game.app.app_id}`)
+            .children(".name-tab-block")
+            .append(game.app.name)
+
+        //Append the games Genres to the box
+        game.app.genres.forEach(function(genre){
+            $(`#${game.app.app_id}`)
+            .children(".genre-tab-block")
+            .append(`<div class="game-descriptor-box">${genre}</div>`)
+        })
+
+        $(`#${game.app.app_id}`)
+            .children(".player-count-tab-block")
+            .append(game.reviews_percentage)
+
+        // Append more info button
+        $(`#${game.app.app_id}`)
+            .find(".more-tab-block")
+            .append('<div class="more-info-button-wrapper">')
+
+        $(`#${game.app.app_id}`)
+            .find(".more-info-button-wrapper")
+            .append('<div class="more-info-button-highlight">')
+
+        $(`#${game.app.app_id}`)
+            .find(".more-info-button-highlight")
+            .append('<i class="bi bi-card-text more-info-button"></i>')
+
+        MoreInfoSectionAppend(game, descriptors)
+
+    })
+
+    MoreInfoButtonFunction()
 }
 
 // Games with the biggest increase in review score since last month comapred to this month
-function ReviewsDisplayTrending() {
+function DisplayReviewsTrending() {
     console.log("Not Yet Implemented")
 }
 
