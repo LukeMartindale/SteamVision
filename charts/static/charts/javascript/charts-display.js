@@ -72,6 +72,10 @@ function DisplayPlayerCountCurrent() {
     let players = GetPlayerCountCurrent()
     let descriptors = getGameDescriptors()
 
+    $(".game-list-wrapper").empty()
+
+    HeaderSectionAppend("Player Count")
+
     players.forEach(function(game, index){
 
         // GAME BAR SECTION
@@ -138,6 +142,8 @@ function DisplayReviewsCurrent() {
     let descriptors = getGameDescriptors()
 
     $(".game-list-wrapper").empty()
+
+    HeaderSectionAppend("Reviews Percentage")
 
     reviews.forEach(function(game, index){
 
@@ -305,4 +311,17 @@ function MoreInfoSectionAppend(game, descriptors) {
             })
 
         })
+}
+
+// Append Header Section
+function HeaderSectionAppend(type){
+
+    $(".game-list-wrapper").append(`<div class="game-tabs-header"></div>`)
+    $(".game-tabs-header")
+        .append('<div class="game-tabs-header-rank rank-header">Rank</div>')
+        .append('<div class="game-tabs-header-text name-header">Name</div>')
+        .append('<div class="game-tabs-header-text genres-header">Genres</div>')
+        .append(`<div class="game-tabs-header-text category-header">${type}</div>`)
+        .append('<div class="game-tabs-header-more more-info-header">More Info</div>')
+
 }
