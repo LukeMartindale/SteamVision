@@ -224,16 +224,9 @@ def reviews_new_all_collector():
         review_score = game_reviews_up / game_reviews
         game_stats.current_review_score = review_score
 
-        print(review_score)
-        print(game_stats.highest_review_score)
-        print(type(game_stats.highest_review_score))
-        print(type(game_stats.highest_review_score))
-
         if(review_score > game_stats.highest_review_score):
-            print("Inside")
             game_stats.highest_review_score = review_score
             game_stats.highest_review_score_date = timezone.now()
-            print(game_stats.highest_review_score)
 
         game_stats.save()
 
