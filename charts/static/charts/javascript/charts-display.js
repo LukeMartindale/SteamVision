@@ -176,7 +176,7 @@ function DisplayReviewsCurrent() {
 
         $(`#${game.app.app_id}`)
             .children(".player-count-tab-block")
-            .append((game.reviews_percentage.toFixed(3) * 100) + "%")
+            .append((game.reviews_percentage * 100).toFixed(1) + "%")
 
         // Append more info button
         $(`#${game.app.app_id}`)
