@@ -70,6 +70,15 @@ def GameDetail(request, pk):
 
     return render(request, 'home/game-detail.html', context)
 
+def GameReviews(request, pk):
+
+    game = Game.objects.get(app_id=pk)
+    reviews = Review.objects.filter(app_id=game).order_by('time_created')
+
+    context = {'game': game, 'reviews': reviews}
+
+    return render(request, 'home/game-reviews.html', context)
+
 class OldGameListView(ListView):
     model = Game
     template_name = 'home/old_game_list.html'
