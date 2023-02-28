@@ -67,7 +67,7 @@ class GameStat(models.Model):
     highest_player_count_date = models.DateField(default=timezone.now)
 
     #highest_review_score
-    highest_review_score = models.IntegerField(default=0)
+    highest_review_score = models.FloatField(default=0.0)
 
     #highest_review_score_date
     highest_review_score_date = models.DateField(default=timezone.now)
