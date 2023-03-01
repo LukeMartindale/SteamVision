@@ -62,8 +62,8 @@ def order_developer_games_all():
 
     for developer in developers:
         ordered_games = []
-        for dev_game in developer.games:
-            for stat in stats:
+        for stat in stats:
+            for dev_game in developer.games:
                 if stat.app_id.app_id == dev_game["app_id"]:
                     ordered_games.append(dev_game)
 
