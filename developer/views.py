@@ -15,11 +15,11 @@ def DeveloperList(request):
     print(request.GET.get('search_text', False))
 
     if request.method == 'POST':
-        developers = Developer.objects.filter(name__contains=request.POST["search"]).order_by('name')
+        developers = Developer.objects.filter(name__icontains=request.POST["search"]).order_by('name')
         pass_search = True
         search_text = request.POST["search"]
     elif request.GET.get('search_text', False):
-        developers = Developer.objects.filter(name__contains=request.GET.get('search_text', False)).order_by('name')
+        developers = Developer.objects.filter(name__icontains=request.GET.get('search_text', False)).order_by('name')
         pass_search = True
         search_text = request.GET.get('search_text', False) 
     else:

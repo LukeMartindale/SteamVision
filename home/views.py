@@ -80,15 +80,15 @@ def GameReviews(request, pk):
     reviews_format = ["[list]", "[/list]", "[i]", "[/i]", "[b]", "[/b]", "[h1]", "[/h1]", "[code]", "[/code]", "[/url]", "[spoiler]", "[/spoiler]"]
     reg = "\[url=[^\]]*]"
 
-    if request.method == 'POST':
+    # options = {
+    #     "text": , 
+    #     "review_score": request.POST["review-score-select"], 
+    #     "sentiment_score": request.POST["sentiment-range-select"],
+    #     "prominent_emotion": request.POST["prominent-emotion-select"],
+    # }
+    # print(options)
 
-        # options = {
-        #     "text": , 
-        #     "review_score": request.POST["review-score-select"], 
-        #     "sentiment_score": request.POST["sentiment-range-select"],
-        #     "prominent_emotion": request.POST["prominent-emotion-select"],
-        # }
-        # print(options)
+    if request.method == 'POST':
 
         reviews = Review.objects.filter(app_id=game, review_text__contains=request.POST["reviews-search-text"]).order_by('time_created')
 
@@ -105,8 +105,6 @@ def GameReviews(request, pk):
         page_obj = paginator.get_page(page_number)
 
         context = {'game': game, 'reviews': reviews, 'page_obj': page_obj}
-
-        return redirect()
 
     else:
         reviews = Review.objects.filter(app_id=game).order_by('time_created')
