@@ -64,6 +64,8 @@ def order_developer_games_all():
                 if stat.app_id.app_id == dev_game["app_id"]:
                     ordered_games.append(dev_game)
 
+        print(ordered_games)
+
         developer.games = ordered_games
         developer.save()
     
