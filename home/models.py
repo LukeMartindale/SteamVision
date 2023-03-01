@@ -204,6 +204,9 @@ class Developer(models.Model):
     #games
     games = models.JSONField(default=dict)
 
+    #common_genres
+    common_genres = models.JSONField(default=dict)
+
     def __str__(self):
         return self.name
 

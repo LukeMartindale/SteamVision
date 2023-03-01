@@ -2,18 +2,21 @@ from django.shortcuts import render
 from django.core.paginator import Paginator
 
 from home.models import (
+    Game,
     Developer
 )
 
 # Create your views here.
 def DeveloperList(request):
 
-    developer = Developer.objects.all().order_by('name')
-    print(request.GET.getlist('test'))
+    developers = Developer.objects.all().order_by('name')
+    games = Game.objects.all()
 
-    if(request.GET.getlist('test')):
-        print("test not empty")
+    # print(request.GET.getlist('test'))
+    # if(request.GET.getlist('test')):
+    #     print("test not empty")
+    # print(developer[0].pk)
+    
+    context = {"developers": developers, "games": games}
 
-    print(developer[0].pk)
-
-    return render(request, 'developer/developer-list.html')
+    return render(request, 'developer/developer-list.html', context)

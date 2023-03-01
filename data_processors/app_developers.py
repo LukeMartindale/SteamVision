@@ -57,9 +57,6 @@ def order_developer_games_all():
     developers = Developer.objects.all()
     stats = GameStat.objects.all().order_by("-current_review_score")
 
-    for s in stats:
-        print(s)
-
     for developer in developers:
         ordered_games = []
         for stat in stats:
@@ -67,8 +64,33 @@ def order_developer_games_all():
                 if stat.app_id.app_id == dev_game["app_id"]:
                     ordered_games.append(dev_game)
 
-        print(ordered_games)
-
         developer.games = ordered_games
         developer.save()
+
+def developer_common_genres_find_all():
+    developers = Developer.objects.all()
     
+    for developer in developers:
+
+        print(developer)
+
+        ids = []
+        for app in developer.games:
+            ids.append(app["app_id"])
+
+        games = Game.objects.filter(app_id__in=ids)
+
+        genres = {}
+
+        for game in games:
+            print(game)
+            for genre in game.genres:
+                genres[genre] = genres.get(genre, 0) + 1
+
+        if len(genres) > 5:
+            common = sorted(genres, key=genres.get, reverse=True)[:5]
+        else:
+            common = sorted(genres, key=genres.get, reverse=True)[:len(genres)]
+
+        developer.common_genres = common
+        developer.save()

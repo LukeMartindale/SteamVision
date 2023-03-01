@@ -6,4 +6,64 @@
     <!-- MY CSS -->
     <link rel="stylesheet" href="{% static 'developer/css/developer-list.css' %}">
 
+    <!-- MY JS -->
+    <script src="{% static 'developer/javascript/developer-list.js' %}"></script>
+
+    <div class="block-wrapper">
+
+        <div class="filter-block">
+
+            <form action="" method="POST" class="search-form" id="search-form">
+                {% csrf_token %}
+
+                <div class="search-filter-wrapper">
+                    <div class="search-bar-wrapper">
+                        <input type="text" name="search" id="search-input" class="search-bar-input"></input>
+
+                        <button type="submit" class="search-bar-button">
+                            <i class="bi bi-search search-icon"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+
+        <div class="developer-list-section">
+            {% for developer in developers %}
+                <div class="developer-widget-wrapper">
+
+                    <div class="developer-top-game-image-wrapper">
+                        {% for game in games %}
+                            {% if game.app_id == developer.games.0.app_id %}
+                                <img src="{{ game.header_image }}" alt="" class="developer-top-game-image">
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
+                    <div class="developer-info-wrapper">
+
+                        <header class="developer-title-header">
+                            {{ developer.name }}
+                        </header>
+
+                        <div class="developer-info-common-genres-wrapper">
+                            <header class="developer-sub-header">Most common Genres for this developer:</header>
+                            <div class="common-genres-container">
+                                {% for genre in developer.common_genres %}
+                                    <div class="genre-box">
+                                        {{ genre }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
 {% endblock %}
