@@ -4,6 +4,9 @@
     margin-left: auto;
     margin-right: auto;
     padding-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #developer-list-mini-icon {
@@ -82,6 +85,7 @@
     align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
+    margin-bottom: 36px;
 }
 
 .developer-widget-wrapper {
@@ -154,6 +158,19 @@
     margin-right: 3px;
     margin-bottom: 3px;
     white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pageinator-controls-wrapper {
+    width: 320px;
+    min-width: 240px;
+    height: 75px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 10px black;
+    background-color: #272C30;
+    align-self: center;
     display: flex;
     justify-content: center;
     align-items: center;

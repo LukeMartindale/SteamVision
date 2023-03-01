@@ -64,6 +64,36 @@
             {% endfor %}
         </div>
 
+        <div class="pageinator-controls-wrapper">
+
+            {% if developers.has_previous %}
+                {% if pass_search %}
+                    <a href="?search_text={{ text_search }}&page={{ developers.previous_page_number }}">Previous</a>
+                {% else %}
+                    <a href="?page={{ developers.previous_page_number }}">Previous</a>
+                {% endif %}
+            {% else %}
+                <p>Previous</p>
+            {% endif %}
+
+            <span class="current">
+                {% if developers %}
+                    Page {{ developers.number }} of {{ developers.paginator.num_pages }}
+                {% endif %}
+            </span>
+
+            {% if developers.has_next %}
+                {% if pass_search %}
+                    <a href="?search_text={{ text_search }}&page={{ developers.next_page_number }}">Next</a>
+                {% else %}
+                    <a href="?page={{ developers.next_page_number }}">Next</a>
+                {% endif %}
+            {% endif %}
+
+
+
+        </div>
+
     </div>
 
 {% endblock %}
