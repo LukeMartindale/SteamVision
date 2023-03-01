@@ -198,4 +198,14 @@ class Descriptor(models.Model):
 
 class Developer(models.Model):
 
+    #name
     name = models.CharField(max_length=100, default="")
+
+    #games
+    games = models.JSONField(default=dict)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('descriptor', kwargs={'pk': self.pk})

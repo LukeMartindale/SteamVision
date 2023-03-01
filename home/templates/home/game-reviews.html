@@ -2,5 +2,183 @@
 {% load static %}
 
 {% block content %}
-    <h1>REVIEWS</h1>
+
+    <!-- MY CSS -->
+    <link rel="stylesheet" href="{% static 'home/css/game-reviews.css' %}">
+
+    <!-- MY JS -->
+    <script src="{% static 'home/javascript/game-reviews.js' %}"></script>
+
+    <div class="block-wrapper">
+
+        <div class="filter-block">
+
+                <form class="review-filter-form" action="" method="POST" id="filter-form">
+                    {% csrf_token %}
+
+                    <div class="filter-block-top-section">
+                        <label for="reviews-search" class="reviews-text-search-label">Search Review Text:</label>
+                        <textarea class="reviews-text-search" name="reviews-search-text" id="reviews-text-search" cols="30" rows="10"></textarea>
+                    </div>
+
+                    <div class="filter-block-bottom-section">
+
+                        <div class="filter-block-bottom-section-row">
+                            <div class="filter-block-bottom-section-row-sub-group">
+                                <label for="review-score-select" class="filter-label">Review Score:</label>
+                                <select class="review-select" name="review-score-select" id="review-score-select">
+                                    <option class="review-select-option" value="all-reviews">All</option>
+                                    <option class="review-select-option" value="positive-reviews">Positive</option>
+                                    <option class="review-select-option" value="negative-reviews">Negative</option>
+                                </select>
+                            </div>
+
+                            <div class="filter-block-bottom-section-row-sub-group">
+                                <label for="sentiment-score-select" class="filter-label">Sentiment Score:</label>
+                                <select class="review-select" name="sentiment-range-select" id="sentiment-range-select">
+                                    <option class="sentiment-select-option" value="all-sentiment">All</option>
+                                    <option class="sentiment-select-option" value="sentiment-neutral">Neutral</option>
+                                    <option class="sentiment-select-option" value="sentiment-positive">Positive</option>
+                                    <option class="sentiment-select-option" value="sentiment-negative">Negative</option>
+                                </select>
+                            </div>
+
+                            <div class="filter-block-bottom-section-row-sub-group">
+                                <label for="prominent-emotion-select" class="filter-label">Prominent Emotion:</label>
+                                <select class="review-select" name="prominent-emotion-select" id="review-score-select">
+                                    <option class="review-select-option" value="all-emotions">All</option>
+                                    <option class="review-select-option" value="emotion-happy">Happy</option>
+                                    <option class="review-select-option" value="emotion-angry">Angry</option>
+                                    <option class="review-select-option" value="emotion-surprise">Surprise</option>
+                                    <option class="review-select-option" value="emotion-sad">Sad</option>
+                                    <option class="review-select-option" value="emotion-fear">Fear</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="search-button-section">
+                        <button class="clear-button" type="submit">Clear</button>
+                        <button class="search-button" type="submit">Search</button>
+                    </div>
+
+                </form>
+        </div>
+
+        <div class="reviews-block">
+
+            {% for review in page_obj.object_list %}
+                <div class="review-wrapper">
+
+                    <div class="review-info-section">
+
+                        <div class="review-info-sub-section">
+                            <div class="review-info-sub-section-label">
+                                Review Rating:
+                            </div>
+                            <div class="review-info-sub-section-info">
+                                {% if review.voted_up %}
+                                    <p class="positive-text">Positive</p> 
+                                {% else %}
+                                    <p class="negative-text">Negative</p>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="section-divider"></div>
+
+                        <div class="review-info-sub-section sentiment-label-section">
+                            <div class="review-info-sub-section-label">
+                                Sentiment Score:
+                            </div>
+                            <div class="review-info-sub-section-info">
+                                {% if review.sentiment_polarity > 0 %}
+                                    <p class="positive-text">{{ review.sentiment_polarity|floatformat:"3" }}</p>
+                                {% elif review.sentiment_polarity < 0 %}
+                                    <p class="negative-text">{{ review.sentiment_polarity|floatformat:"3" }}</p>
+                                {% else %}
+                                    <p class="neutral-text">{{ review.sentiment_polarity|floatformat:"3" }}</p>
+                                {% endif %}
+                                
+                            </div>
+                        </div>
+
+                        <div class="section-divider"></div>
+
+                        <div class="review-info-sub-section emotion-label-section">
+                            <div class="review-info-sub-section-label">
+                                Prominent Emotions:
+                            </div>
+                            <div class="review-info-sub-section-info">
+                                {% for emotion in review.emotion_prominent %}
+                                    {% if emotion == 'Happy' %}
+                                        {% if not forloop.last %}
+                                            <p class="happy-text"> {{ emotion }}, </p>
+                                        {% else %}
+                                            <p class="happy-text"> {{ emotion }}</p>
+                                        {% endif %}
+                                    {% elif emotion == 'Angry' %}
+                                        {% if not forloop.last %}
+                                            <p class="angry-text"> {{ emotion }}, </p>
+                                        {% else %}
+                                            <p class="angry-text"> {{ emotion }}</p>
+                                        {% endif %}
+                                    {% elif emotion == 'Surprise' %}
+                                        {% if not forloop.last %}
+                                            <p class="surprise-text"> {{ emotion }}, </p>
+                                        {% else %}
+                                            <p class="surprise-text"> {{ emotion }} </p>
+                                        {% endif %}
+                                    {% elif emotion == 'Sad' %}
+                                        {% if not forloop.last %}
+                                            <p class="sad-text"> {{ emotion }}, </p>
+                                        {% else %}
+                                            <p class="sad-text"> {{ emotion }} </p>
+                                        {% endif %}
+                                    {% elif emotion == 'Fear' %}
+                                        {% if not forloop.last %}
+                                            <p class="fear-text"> {{ emotion }}, </p>
+                                        {% else %}
+                                            <p class="fear-text"> {{ emotion }} </p>
+                                        {% endif %}
+                                    {% else %}
+                                        <p class="neutral-text">{{ emotion }}</p>
+                                    {% endif %}
+
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="review-text-section">
+                        <pre style="white-space: pre-wrap; text-align: justify;">{{ review.review_text }}</pre>
+                    </div>
+
+                </div>
+            {% endfor %}
+
+            <div class="page-selector">
+
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}" type="POST">Previous</a>
+                {% endif %}
+
+                <span class="current">
+                    {% if page_obj %}
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                    {% endif %}
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}" type="POST">Next</a>
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
 {% endblock %}

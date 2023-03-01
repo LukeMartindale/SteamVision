@@ -1,9 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from . models import Game, GameStat, Descriptor, Review
 from django.views.generic import (
     ListView,
     DetailView,
 )
+
+from django.core.paginator import Paginator
+import re
 
 # Create your views here.
 
@@ -73,9 +76,60 @@ def GameDetail(request, pk):
 def GameReviews(request, pk):
 
     game = Game.objects.get(app_id=pk)
-    reviews = Review.objects.filter(app_id=game).order_by('time_created')
 
-    context = {'game': game, 'reviews': reviews}
+    reviews_format = ["[list]", "[/list]", "[i]", "[/i]", "[b]", "[/b]", "[h1]", "[/h1]", "[code]", "[/code]", "[/url]", "[spoiler]", "[/spoiler]"]
+    reg = "\[url=[^\]]*]"
+
+    if request.method == 'POST':
+
+        # options = {
+        #     "text": , 
+        #     "review_score": request.POST["review-score-select"], 
+        #     "sentiment_score": request.POST["sentiment-range-select"],
+        #     "prominent_emotion": request.POST["prominent-emotion-select"],
+        # }
+        # print(options)
+
+        reviews = Review.objects.filter(app_id=game, review_text__contains=request.POST["reviews-search-text"]).order_by('time_created')
+
+        # Formated reviews by removing unecceseray content
+        for review in reviews:
+            for format in reviews_format:
+                review.review_text = review.review_text.replace(format, '')
+
+        for review in reviews:
+            review.review_text = re.sub(reg, '', review.review_text)
+
+        paginator = Paginator(reviews, 5)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
+        context = {'game': game, 'reviews': reviews, 'page_obj': page_obj}
+
+        return redirect()
+
+    else:
+        reviews = Review.objects.filter(app_id=game).order_by('time_created')
+
+        # Formated reviews by removing unecceseray content
+        for review in reviews:
+            for format in reviews_format:
+                review.review_text = review.review_text.replace(format, '')
+
+        for review in reviews:
+            review.review_text = re.sub(reg, '', review.review_text)
+
+        paginator = Paginator(reviews, 5)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
+        context = {'game': game, 'reviews': reviews, 'page_obj': page_obj}
+
+    return render(request, 'home/game-reviews.html', context)
+
+def GameReviewsContinue(request, pk, search):
+
+    context = {}
 
     return render(request, 'home/game-reviews.html', context)
 
