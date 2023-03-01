@@ -53,20 +53,17 @@ def get_developers_all():
             dev.games = dev_games
             dev.save()
 
-def order_developer_games(id):
-    print("Not Yet Implemented")
-
 def order_developer_games_all():
     developers = Developer.objects.all()
-    stats = GameStat.objects.all().order_by("current_review_score")
+    stats = GameStat.objects.all().order_by("-current_review_score")
 
-    # for developer in developers:
-    #     unordered_games = []
-    #     for dev_game in developer.games:
+    for developer in developers:
+        ordered_games = []
+        for dev_game in developer.games:
+            for stat in stats:
+                if stat.app_id.app_id == dev_game["app_id"]:
+                    ordered_games.append(dev_game)
 
-    for stat in stats:
-        print(stat.app_id, ": ", stat.current_review_score)
-            
-
-    print("Not Yet Implemented")
+        developer.games = ordered_games
+        developer.save()
     
