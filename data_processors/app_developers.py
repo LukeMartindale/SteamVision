@@ -57,6 +57,9 @@ def order_developer_games_all():
     developers = Developer.objects.all()
     stats = GameStat.objects.all().order_by("-current_review_score")
 
+    for s in stats:
+        print(s)
+
     for developer in developers:
         ordered_games = []
         for dev_game in developer.games:
