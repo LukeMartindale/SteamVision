@@ -15,8 +15,6 @@ $(function(){
 
     $(".review-text-section").each(function(){
 
-        console.log($(this).height())
-
         if($(this).height() > 350){
             $(this).append('<button class="more-review-button">Show More</button>')
             $(this).find(".more-review-button").css(
@@ -33,13 +31,9 @@ $(function(){
             )
         }
 
-        console.log("Review Found")
-
     })
 
     $(".more-review-button").click(function(){
-
-        console.log($(this).parent(".review-text-section"))
 
         $(this)
             .parent(".review-text-section")

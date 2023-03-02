@@ -189,7 +189,6 @@
     width: 100%;
     overflow: hidden;
     max-height: 350px;
-    border-bottom: 0.5px dashed #bec5cb;
 }
 
 .positive-text {
@@ -277,4 +276,9 @@
 
 .review-expanded {
     max-height: none;
+    border-bottom: 0px;
+}
+
+.expandable-review {
+    border-bottom: 0.5px dashed #bec5cb;
 }
