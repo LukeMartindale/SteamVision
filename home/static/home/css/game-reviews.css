@@ -178,6 +178,18 @@
 .review-text-section {
     padding: 15px;
     border-top: 0.5px solid #bec5cb;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.review-text-pre {
+    width: 100%;
+    overflow: hidden;
+    max-height: 350px;
+    border-bottom: 0.5px dashed #bec5cb;
 }
 
 .positive-text {
@@ -261,4 +273,8 @@
     font-weight: bold;
     cursor: pointer;
     margin-right: 10px;
+}
+
+.review-expanded {
+    max-height: none;
 }

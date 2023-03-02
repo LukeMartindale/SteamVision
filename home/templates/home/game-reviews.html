@@ -68,7 +68,7 @@
 
         <div class="reviews-block">
 
-            {% for review in page_obj.object_list %}
+            {% for review in reviews.object_list %}
                 <div class="review-wrapper">
 
                     <div class="review-info-section">
@@ -153,7 +153,7 @@
                     </div>
 
                     <div class="review-text-section">
-                        <pre style="white-space: pre-wrap; text-align: justify;">{{ review.review_text }}</pre>
+                        <pre style="white-space: pre-wrap; text-align: justify;" class="review-text-pre">{{ review.review_text }}</pre>
                     </div>
 
                 </div>
@@ -161,18 +161,18 @@
 
             <div class="page-selector">
 
-                {% if page_obj.has_previous %}
-                    <a href="?page={{ page_obj.previous_page_number }}" type="POST">Previous</a>
+                {% if reviews.has_previous %}
+                    <a href="?page={{ reviews.previous_page_number }}" type="POST">Previous</a>
                 {% endif %}
 
                 <span class="current">
-                    {% if page_obj %}
-                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                    {% if reviews %}
+                        Page {{ reviews.number }} of {{ reviews.paginator.num_pages }}
                     {% endif %}
                 </span>
 
-                {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}" type="POST">Next</a>
+                {% if reviews.has_next %}
+                    <a href="?page={{ reviews.next_page_number }}" type="POST">Next</a>
                 {% endif %}
 
             </div>

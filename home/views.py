@@ -76,6 +76,11 @@ def GameDetail(request, pk):
 def GameReviews(request, pk):
 
     game = Game.objects.get(app_id=pk)
+    pass_search = False
+    search_text = None
+    review_score = None
+    sentiment_range = None
+    prominent_range = None
 
     reviews_format = ["[list]", "[/list]", "[i]", "[/i]", "[b]", "[/b]", "[h1]", "[/h1]", "[code]", "[/code]", "[/url]", "[spoiler]", "[/spoiler]"]
     reg = "\[url=[^\]]*]"
@@ -89,39 +94,39 @@ def GameReviews(request, pk):
     # print(options)
 
     if request.method == 'POST':
-
         reviews = Review.objects.filter(app_id=game, review_text__contains=request.POST["reviews-search-text"]).order_by('time_created')
-
-        # Formated reviews by removing unecceseray content
-        for review in reviews:
-            for format in reviews_format:
-                review.review_text = review.review_text.replace(format, '')
-
-        for review in reviews:
-            review.review_text = re.sub(reg, '', review.review_text)
-
-        paginator = Paginator(reviews, 5)
-        page_number = request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
-
-        context = {'game': game, 'reviews': reviews, 'page_obj': page_obj}
-
+        pass_search = True
+        search_text = request.POST["reviews-search-text"]
+        review_score = request.POST["review-score-select"]
+        sentiment_range = request.POST["sentiment-range-select"]
+        prominent_range = request.POST["prominent-emotion-select"]
+    elif request.GET.get('search_text', False) or request.GET.get('reviews_score', False):
+        print("IN")
+        reviews = Review.objects.filter(
+            app_id=game, 
+            review_text__contains=request.GET.get('search_text'),
+        ).order_by('time_created')
+        pass_search = True
+        search_text = request.GET.get('search_text', False)
+        review_score = request.GET.get('reviews_score', False)
+        sentiment_range = request.GET.get('sentiment_range', False)
+        prominent_range = request.GET.get('prominent_range', False)
     else:
         reviews = Review.objects.filter(app_id=game).order_by('time_created')
 
-        # Formated reviews by removing unecceseray content
-        for review in reviews:
-            for format in reviews_format:
-                review.review_text = review.review_text.replace(format, '')
+    # Formated reviews by removing unecceseray content
+    for review in reviews:
+        for format in reviews_format:
+            review.review_text = review.review_text.replace(format, '')
 
-        for review in reviews:
-            review.review_text = re.sub(reg, '', review.review_text)
+    for review in reviews:
+        review.review_text = re.sub(reg, '', review.review_text)
 
-        paginator = Paginator(reviews, 5)
-        page_number = request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
+    paginator = Paginator(reviews, 5)
+    page_number = request.GET.get('page')
+    paginated_reviews = paginator.get_page(page_number)
 
-        context = {'game': game, 'reviews': reviews, 'page_obj': page_obj}
+    context = {'game': game, 'reviews': paginated_reviews, 'pass_search': pass_search}
 
     return render(request, 'home/game-reviews.html', context)
 
