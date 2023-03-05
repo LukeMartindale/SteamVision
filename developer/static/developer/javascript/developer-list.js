@@ -13,3 +13,12 @@ $(function(){
     })
 
 })
+
+// Links to developer detail page
+$(function(){
+
+    $(".developer-widget-wrapper").click(function(){
+        window.location.href = '/developer/' + $(this).attr('id').split("-")[2]
+    })
+
+})

@@ -31,3 +31,17 @@ def DeveloperList(request):
     context = {"developers": paginated_developers, "games": games, "pass_search": pass_search, "text_search": search_text}
 
     return render(request, 'developer/developer-list.html', context)
+
+def DeveloperDetail(request, pk):
+
+    developer = Developer.objects.get(id=pk)
+
+    dev_games = []
+    for dev_game in developer.games:
+        game = Game.objects.get(app_id=dev_game["app_id"])
+        dev_games.append(game)
+
+
+    context = {"developer": developer, "games": dev_games}
+
+    return render(request, 'developer/developer-detail.html', context)

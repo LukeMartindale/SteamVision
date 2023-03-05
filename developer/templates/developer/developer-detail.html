@@ -1,0 +1,64 @@
+{% extends "home/base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+    <!-- MY CSS -->
+    <link rel="stylesheet" href="{% static 'developer/css/developer-detail.css' %}">
+
+    <!-- MY JS -->
+    <script src="{% static 'developer/javascript/developer-detail.js' %}"></script>
+
+    <div class="block-wrapper">
+
+        <div class="developer-detail-wrapper">
+
+            <div class="developer-detail-title-wrapper">
+                <header class="developer-detail-title-text">
+                    {{ developer.name }}
+                </header>
+            </div>
+
+        </div>
+
+        <div class="developer-content-selector-wrapper">
+            <div class="developer-content-selector-button-wrapper">
+                <b>Games</b>
+            </div>
+        </div>
+
+        <div class="developer-games-list-section-wrapper">
+            {% for game in games %}
+
+                <div class="developer-game-widget-wrapper">
+                    <div class="developer-game-widget-image-wrapper">
+                        <img src="{{ game.header_image }}" alt="" class="developer-game-widget-image">
+                    </div>
+
+                    <div class="developer-game-info-widget-section">
+
+                        <div class="developer-game-info-title-section">
+                            <header class="developer-game-info-title-text">{{ game.name }}</header>
+                        </div>
+
+                        <div class="developer-game-info-tags-section">
+                            {% for tag in game.tags %}
+                                {% if forloop.counter < 5 %}
+                                    <div class="game-tag-block">
+                                        {{ tag }}         
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+        </div>
+        
+    </div>
+
+{% endblock %}

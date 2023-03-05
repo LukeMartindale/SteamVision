@@ -32,7 +32,7 @@
 
         <div class="developer-list-section">
             {% for developer in developers %}
-                <div class="developer-widget-wrapper">
+                <div class="developer-widget-wrapper" id="developer-widget-{{developer.id}}">
 
                     <div class="developer-top-game-image-wrapper">
                         {% for game in games %}
