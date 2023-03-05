@@ -77,17 +77,36 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: #272C30;
+    box-shadow: 0px 0px 10px black;
+    padding: 15px;
+}
+
+.developer-games-list-section-title-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #bec5cb;
+}
+
+.developer-games-list-section-title-text {
+    font-size: 32px;
+    text-align: center;
+    white-space: nowrap;
 }
 
 .developer-game-widget-wrapper {
     width: 100%;
-    height: 105px;
     border-radius: 6px;
-    background-color: #272C30;
+    background-color: #393d41;
     box-shadow: 0px 0px 10px black;
     display: flex;
     flex-direction: row;
     cursor: pointer;
+    margin-bottom: 15px;
 }
 
 .developer-game-widget-wrapper:hover {
@@ -125,7 +144,8 @@
 }
 
 .developer-game-info-title-text {
-    font-size: 32px;
+    font-size: 22px;
+    text-align: center;
 }
 
 .developer-game-info-tags-section {
@@ -148,4 +168,39 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+@media only screen and (max-width: 600px){
+
+    .developer-game-widget-wrapper {
+        align-items: center;
+        flex-direction: column;
+        width: 300px;
+        flex-grow: 20;
+    }
+
+    .developer-game-info-title-section {
+        margin-top: 10px;
+    }
+
+    .developer-game-info-title-text {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .developer-game-info-tags-section {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        flex-wrap: wrap;
+    }
+
+    .developer-game-widget-image-wrapper {
+        width: 300px;
+        height: 144px;
+    }
+
+    .developer-game-widget-image {
+        border-radius: 6px;
+    }
+
 }
