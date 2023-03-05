@@ -65,9 +65,16 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    background-color: #272C30;
+    border: 0;
+    color: #bec5cb;
 }
 
 .developer-content-selector-button-wrapper:hover {
+    background-color: rgba(217, 217, 217, 0.3);
+}
+
+.developer-content-selector-button-wrapper:focus {
     background-color: rgba(217, 217, 217, 0.3);
 }
 
@@ -111,6 +118,11 @@
 
 .developer-game-widget-wrapper:hover {
     box-shadow: 0px 0px 10px white;
+}
+
+.developer-game-widget-wrapper:focus {
+    box-shadow: 0px 0px 10px white;
+    border: 0;
 }
 
 .developer-game-widget-image-wrapper {

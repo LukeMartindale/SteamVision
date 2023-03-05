@@ -3,6 +3,7 @@ from django.core.paginator import Paginator
 
 from home.models import (
     Game,
+    Review,
     Developer
 )
 
@@ -37,9 +38,15 @@ def DeveloperDetail(request, pk):
     developer = Developer.objects.get(id=pk)
 
     dev_games = []
+    dev_games_id = []
     for dev_game in developer.games:
         game = Game.objects.get(app_id=dev_game["app_id"])
         dev_games.append(game)
+        dev_games_id.append(dev_game["app_id"])
+
+    reviews = Review.objects.filter(app_id__app_id__in=dev_games_id)
+
+    print(reviews)
 
 
     context = {"developer": developer, "games": dev_games}

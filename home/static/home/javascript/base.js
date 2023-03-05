@@ -16,6 +16,11 @@ $(function(){
     // Open Sidebar Functionality
     $(".sidebar-widget-highlight").click(function(){
 
+        // Remove mini sidebar from tabindex
+        $(".sidebar-mini-option-highlight").attr("tabindex", "-1")
+        // Add big sidebar to tab index
+        $(".sidebar-option-highlight").attr("tabindex", "0")
+
         $(".sidebar").toggleClass("hidden")
         $(".display-draw").toggleClass("hidden-none")
         $('body').toggleClass("stop-scrolling")
@@ -24,9 +29,16 @@ $(function(){
 
     //Close sidebar when display-drawer is clicked
     $(".display-draw").click(function(){
+
+        // Add mini sidebar from tabindex
+        $(".sidebar-mini-option-highlight").attr("tabindex", "0")
+        // Remove big sidebar to tab index
+        $(".sidebar-option-highlight").attr("tabindex", "-1")
+
         $(".sidebar").toggleClass("hidden")
         $(".display-draw").toggleClass("hidden-none")
         $('body').toggleClass("stop-scrolling")
+
     })
 
     // Close Dropdown & Sidebar when document clicked

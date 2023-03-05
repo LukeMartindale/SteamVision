@@ -143,6 +143,12 @@ body {
     cursor: pointer;
 }
 
+.sidebar-mini-option-highlight:focus {
+    background-color: rgba(217, 217, 217, 0.3);
+    outline: none;
+    cursor: pointer;
+}
+
 .sidebar-mini-option-icon {
     color: #bec5cb;
 }

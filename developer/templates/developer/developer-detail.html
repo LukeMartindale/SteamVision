@@ -23,9 +23,12 @@
         </div>
 
         <div class="developer-content-selector-wrapper">
-            <div class="developer-content-selector-button-wrapper">
+            <button class="developer-content-selector-button-wrapper">
                 <b>Games List</b>
-            </div>
+            </button>
+            <button class="developer-content-selector-button-wrapper">
+                <b>Developer Reviews</b>
+            </button>
         </div>
 
         <div class="developer-games-list-section-wrapper">
@@ -36,7 +39,7 @@
 
             {% for game in games %}
 
-                <div class="developer-game-widget-wrapper">
+                <div class="developer-game-widget-wrapper" tabindex="0">
                     <div class="developer-game-widget-image-wrapper">
                         <img src="{{ game.header_image }}" alt="" class="developer-game-widget-image">
                     </div>
