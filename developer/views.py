@@ -41,36 +41,20 @@ def DeveloperDetail(request, pk):
     developer = Developer.objects.get(id=pk)
 
     dev_games = []
-    dev_games_id = [646270]
+    dev_games_id = []
     for dev_game in developer.games:
         game = Game.objects.get(app_id=dev_game["app_id"])
         dev_games.append(game)
         dev_games_id.append(dev_game["app_id"])
 
     filters = [developer.name, "developer", "dev"]
-    # reviews = Review.objects.all()
-
-    # for filter in filters:
     reviews = Review.objects.filter(reduce(or_, [Q(review_text__icontains=developer.name) for q in filters]), app_id__app_id__in=dev_games_id).order_by('-time_created')
 
-    print(reviews)
+    print(len(reviews))
 
-    # for review in reviews:
-    #     print(review.review_text)
+    if(len(reviews) > 10):
+        reviews = reviews[:10]
 
-    if(reviews):
-
-        if(len(reviews) > 15):
-            print("Not Yet Implemented")
-        else:
-            print("Not Yet Implemented")
-
-        print(reviews)
-        print(len(reviews))
-
-        print(reviews[0].time_created)
-
-
-    context = {"developer": developer, "games": dev_games}
+    context = {"developer": developer, "games": dev_games, "reviews": reviews}
 
     return render(request, 'developer/developer-detail.html', context)
