@@ -39,7 +39,7 @@
 
             {% for game in games %}
 
-                <div class="developer-game-widget-wrapper" tabindex="0">
+                <div class="developer-game-widget-wrapper" id="game-app-{{ game.app_id }}" tabindex="0">
                     <div class="developer-game-widget-image-wrapper">
                         <img src="{{ game.header_image }}" alt="" class="developer-game-widget-image">
                     </div>
