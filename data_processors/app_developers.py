@@ -30,6 +30,7 @@ def get_developers_all():
     games = Game.objects.all()
 
     for game in games:
+        print(game.name)
         for developer in game.developer:
 
             # Check if this developer already exists
@@ -46,9 +47,13 @@ def get_developers_all():
             if not dev_games:
                 dev_games.append({"app_id": game.app_id, "name": game.name, "role": "developer"})
             else:
-                for dg in dev_games:
-                    if game.app_id not in dg.values():
-                        dev_games.append({"app_id": game.app_id, "name": game.name, "role": "developer"})
+                found = False
+                for dev_game in dev_games:
+                    if game.app_id in dev_game.values():
+                        print(dev_game.values())
+                        found = True                        
+                if not found:
+                    dev_games.append({"app_id": game.app_id, "name": game.name, "role": "developer"})
 
             dev.games = dev_games
             dev.save()
