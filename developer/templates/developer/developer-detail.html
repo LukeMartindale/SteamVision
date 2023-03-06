@@ -39,7 +39,7 @@
 
             {% for game in games %}
 
-                <div class="developer-game-widget-wrapper" id="game-app-{{ game.app_id }}" tabindex="0">
+                <a class="developer-game-widget-wrapper" id="game-app-{{ game.app_id }}" href="#" tabindex="0">
                     <div class="developer-game-widget-image-wrapper">
                         <img src="{{ game.header_image }}" alt="" class="developer-game-widget-image">
                     </div>
@@ -62,7 +62,7 @@
 
                     </div>
 
-                </div>
+                </a>
 
             {% endfor %}
         </div>
