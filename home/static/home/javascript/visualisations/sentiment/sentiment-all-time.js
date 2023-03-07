@@ -170,29 +170,28 @@ function sentiment_all_time(id) {
             .text("Number of Reviews");
     }
 
-    // GRAPH LABEL
+    // GRAPH TITLE
     if ($(window).width() <= 475) {
-        // GRAPH LABEL
+        // GRAPH TITLE
         chartContainer
             .append('text')
-            .attr('y', 15)
-            .attr('x', svgWidth/2.8)
+            .attr('y', 12)
+            .attr('x', svgWidth/2.05)
+            .attr('fill', '#bec5cb')
+            .attr('font-size', 14)
+            .attr('font-weight', 'bold')
+            .text("All Time");
+    } else {
+        // GRAPH TITLE
+        chartContainer
+            .append('text')
+            .attr('y', 10)
+            .attr('x', svgWidth/1.92)
             .attr('fill', '#bec5cb')
             .attr('font-size', 16)
             .attr('font-weight', 'bold')
-            .text("Sentiment All Time");
-    } else {
-        // GRAPH LABEL
-        chartContainer
-            .append('text')
-            .attr('y', 15)
-            .attr('x', svgWidth/2.25)
-            .attr('fill', '#bec5cb')
-            .attr('font-size', 20)
-            .attr('font-weight', 'bold')
-            .text("Sentiment All Time");
+            .text("All Time");
     }
-
 
     //BARS
     chart
