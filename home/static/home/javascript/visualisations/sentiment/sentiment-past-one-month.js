@@ -28,7 +28,7 @@ function sentiment_past_one_month(id){
 
     $('#sentiment-graph').empty()
 
-    let margins = {top: 0, bottom: 0, left: 40, right: 0}
+    let margins = {top: 10, bottom: 0, left: 40, right: 0}
     let svgWidth = $('#sentiment-container-content').width() - margins.left - margins.right
     let svgHeight = 440 - margins.top - margins.bottom
     // let svgHeight = ($('#sentiment-box').width()*0.7) - margins.top - margins.bottom
@@ -46,7 +46,7 @@ function sentiment_past_one_month(id){
     
     let chart = chartContainer
         .append('g')
-        .attr("transform", `translate(${margins.left})`);
+        .attr("transform", `translate(${margins.left},${margins.top})`);
     
     if($(window).width() <= 800 && $(window).width() > 400){
         //X-AXIS LABELS
