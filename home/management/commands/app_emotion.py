@@ -18,23 +18,29 @@ class Command(BaseCommand):
         parser.add_argument("--process")
 
     def handle(self, *args, **options):
-        if options["time"].lower() == "all-time" or None:
-            if options["id"].lower() == "all":
-                app_emotion_all_time_month_all()
-            else:
-                app_emotion_all_time_month(options["id"])
-        elif options["time"].lower() == "one-month":
-            if options["id"].lower() == "all":
-                app_emotion_past_one_month_all()
-            else:
-                app_emotion_past_one_month(options["id"])
-        elif options["time"].lower() == "two-weeks":
-            if options["id"].lower() == "all":
-                app_emotion_past_two_weeks_all()
-            else:
-                app_emotion_past_two_weeks(options["id"])
-        elif options["time"].lower() == "one-week":
-            if options["id"].lower() == "all":
-                app_emotion_past_one_week_all()
-            else:
-                app_emotion_past_one_week(options["id"])
+        if options["process"].lower() == "true":
+            app_emotion_all_time_month_all()
+            app_emotion_past_one_month_all()
+            app_emotion_past_two_weeks_all()
+            app_emotion_past_one_week_all()
+        else:
+            if options["time"].lower() == "all-time" or None:
+                if options["id"].lower() == "all":
+                    app_emotion_all_time_month_all()
+                else:
+                    app_emotion_all_time_month(options["id"])
+            elif options["time"].lower() == "one-month":
+                if options["id"].lower() == "all":
+                    app_emotion_past_one_month_all()
+                else:
+                    app_emotion_past_one_month(options["id"])
+            elif options["time"].lower() == "two-weeks":
+                if options["id"].lower() == "all":
+                    app_emotion_past_two_weeks_all()
+                else:
+                    app_emotion_past_two_weeks(options["id"])
+            elif options["time"].lower() == "one-week":
+                if options["id"].lower() == "all":
+                    app_emotion_past_one_week_all()
+                else:
+                    app_emotion_past_one_week(options["id"])
