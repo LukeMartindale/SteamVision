@@ -28,7 +28,7 @@ function sentiment_past_one_week(id){
 
     $('#sentiment-graph').empty()
 
-    let margins = {top: 10, bottom: 0, left: 40, right: 20}
+    let margins = {top: 0, bottom: 0, left: 40, right: 0}
     let svgWidth = $('#sentiment-container-content').width() - margins.left - margins.right
     let svgHeight = 400 - margins.top - margins.bottom
     // let svgHeight = ($('#sentiment-box').width()*0.7) - margins.top - margins.bottom
@@ -48,13 +48,44 @@ function sentiment_past_one_week(id){
         .append('g')
         .attr("transform", `translate(${margins.left})`);
     
-    //X-AXIS LABELS
-    chart
-        .append('g')
-        .call(d3.axisBottom(x).tickSizeOuter(0))
-        .attr('transform', `translate(0, ${svgHeight})`)
-        .attr('color', '#bec5cb')
-        .attr('font-size', 20);
+    if($(window).width() <= 800 && $(window).width() > 400){
+        //X-AXIS LABELS
+        chart
+            .append('g')
+            .call(d3.axisBottom(x).tickSizeOuter(0))
+            .attr('transform', `translate(0, ${svgHeight})`)
+            .attr('color', '#bec5cb')
+            .attr('font-size', 15)
+            .attr('font-weight', 'bold')
+            .selectAll("text")  
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", "rotate(-65)");
+    } else if ($(window).width() <= 400) {
+        //X-AXIS LABELS
+        chart
+            .append('g')
+            .call(d3.axisBottom(x).tickSizeOuter(0))
+            .attr('transform', `translate(0, ${svgHeight})`)
+            .attr('color', '#bec5cb')
+            .attr('font-size', 13)
+            .attr('font-weight', 'bold')
+            .selectAll("text")  
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", "rotate(-65)");
+    } else {
+        //X-AXIS LABELS
+        chart
+            .append('g')
+            .call(d3.axisBottom(x).tickSizeOuter(0))
+            .attr('transform', `translate(0, ${svgHeight})`)
+            .attr('color', '#bec5cb')
+            .attr('font-size', 15)
+            .attr('font-weight', 'bold');
+    }
     
     //Y-AXIS LABELS
     chart
