@@ -284,8 +284,8 @@
 }
 
 .visualisation-container-content {
-    height: 450px;
-    max-height: 450px;
+    height: 480px;
+    max-height: 600px;
     padding-left: 30px;
     padding-right: 30px;
     padding-top: 10px;
