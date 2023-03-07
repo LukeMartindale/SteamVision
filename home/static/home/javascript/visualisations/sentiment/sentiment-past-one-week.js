@@ -52,7 +52,7 @@ function sentiment_past_one_week(id){
     let y = d3.scaleLinear().range([svgHeight, 0]);
     
     x.domain(reviews_data.map(data => data.label));
-    y.domain([0, Math.floor((d3.max(reviews_data, data=> data.value) + ((d3.max(reviews_data, data => data.value))*0.1)) / 10) * 10]);
+    y.domain([0, Math.floor((d3.max(reviews_data, data=> data.value) + (d3.max(reviews_data, data => data.value))*0.1))]);
 
     // let max_val = Math.floor((d3.max(reviews_data, data=> data.value) + ((d3.max(reviews_data, data => data.value))*0.1)) / 10) * 10
     
@@ -180,7 +180,7 @@ function sentiment_past_one_week(id){
             .attr('fill', '#bec5cb')
             .attr('font-size', 14)
             .attr('font-weight', 'bold')
-            .text("Past One Week");
+            .text("Past One Weeks");
     } else {
         // GRAPH TITLE
         chartContainer

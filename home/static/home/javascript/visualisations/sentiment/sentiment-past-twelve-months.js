@@ -52,7 +52,7 @@ function sentiment_past_twelve_months(id){
     let y = d3.scaleLinear().range([svgHeight, 0]);
     
     x.domain(reviews_data.map(data => data.label));
-    y.domain([0, Math.floor((d3.max(reviews_data, data=> data.value) + ((d3.max(reviews_data, data => data.value))*0.1)) / 10) * 10]);
+    y.domain([0, Math.floor((d3.max(reviews_data, data=> data.value) + (d3.max(reviews_data, data => data.value))*0.1))]);
 
     // let max_val = Math.floor((d3.max(reviews_data, data=> data.value) + ((d3.max(reviews_data, data => data.value))*0.1)) / 10) * 10
     
