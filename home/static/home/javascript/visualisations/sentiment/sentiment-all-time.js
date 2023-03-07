@@ -83,7 +83,7 @@ function sentiment_all_time(id) {
             .call(d3.axisBottom(x).tickSizeOuter(0))
             .attr('transform', `translate(0, ${svgHeight})`)
             .attr('color', '#bec5cb')
-            .attr('font-size', 13)
+            .attr('font-size', 11)
             .attr('font-weight', 'bold')
             .selectAll("text")  
             .style("text-anchor", "end")
