@@ -24,6 +24,14 @@ function sentiment_past_twelve_months(id){
 
     let reviews_data = get_data_sentiment_past_twelve_months(id)
 
+    // CHECK WHAT MAX VALUE IS
+    let max_value = 0
+    reviews_data.forEach(function(item, index){
+        if(item.value > max_value){
+            max_value = item.value
+        }
+    })
+
     $('#sentiment-graph').empty()
 
     let margins = {top: 0, bottom: 0, left: 0, right: 0}
@@ -130,21 +138,39 @@ function sentiment_past_twelve_months(id){
             .text("Sentiment Score");
     }
 
+
     // Y AXIS TICKS
     if ($(window).width() <= 400) {
+        if(max_value < 10) {
         //Y-AXIS TICKS
         chart
             .append('g')
-            .call(d3.axisLeft(y).tickSizeInner(-svgWidth))
+            .call(d3.axisLeft(y).tickSizeInner(-svgWidth).ticks(max_value))
             .attr('color', '#bec5cb')
             .attr('font-size', 12);
+        } else {
+            chart
+            .append('g')
+            .call(d3.axisLeft(y).tickSizeInner(-svgWidth).ticks(10))
+            .attr('color', '#bec5cb')
+            .attr('font-size', 12);
+        }
     } else {
+        if(max_value < 10) {
         //Y-AXIS TICKS
         chart
             .append('g')
-            .call(d3.axisLeft(y).tickSizeInner(-svgWidth))
+            .call(d3.axisLeft(y).tickSizeInner(-svgWidth).ticks(max_value))
             .attr('color', '#bec5cb')
             .attr('font-size', 15)
+        } else {
+            chart
+            .append('g')
+            .call(d3.axisLeft(y).tickSizeInner(-svgWidth).ticks(10))
+            .attr('color', '#bec5cb')
+            .attr('font-size', 15)
+        }
+
     }
 
     // Y AXIS LABELS
