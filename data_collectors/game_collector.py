@@ -1,15 +1,17 @@
 from data_collectors.collector_helpers import convertDate, descriptionStripper, tagStripper, newDescriptors, requirementsStripper
 
-from home.models import Game
+from home.models import Game, GameStat
 import requests
 from bs4 import BeautifulSoup
+
+from data_processors.app_developers import get_developers
 
 def game_collector(game_id):
 
     api_url = "http://store.steampowered.com/api/appdetails?appids={}&cc=UK".format(game_id)
     response_app = requests.get(api_url).json()
 
-    print(response_app[game_id]["data"]["package_groups"][0]["price_in_cents_with_discount"])
+    # print(response_app[game_id]["data"]["package_groups"][0]["price_in_cents_with_discount"])
     
     tag_url = "https://store.steampowered.com/apphoverpublic/{}".format(game_id)
     response_tags = requests.get(tag_url)
@@ -59,6 +61,13 @@ def game_collector(game_id):
     game.header_image = response_app[game_id]["data"]["header_image"]
 
     game.save()
+
+    game_stats = GameStat()
+    game_stats.app_id = game
+
+    game_stats.save()
+
+    get_developers(game.app_id)
 
 def game_recollector():
 
