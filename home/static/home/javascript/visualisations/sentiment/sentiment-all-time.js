@@ -24,8 +24,6 @@ function sentiment_all_time(id) {
 
     let reviews_data = get_data_sentiment_all_time(id)
 
-    console.log(reviews_data)
-
     $('#sentiment-graph').empty()
 
     let margins = {top: 0, bottom: 0, left: 0, right: 0}
@@ -56,7 +54,7 @@ function sentiment_all_time(id) {
     x.domain(reviews_data.map(data => data.label));
     y.domain([0, Math.floor((d3.max(reviews_data, data=> data.value) + ((d3.max(reviews_data, data => data.value))*0.1)) / 10) * 10]);
 
-    let max_val = Math.floor((d3.max(reviews_data, data=> data.value) + ((d3.max(reviews_data, data => data.value))*0.1)) / 10) * 10
+    // let max_val = Math.floor((d3.max(reviews_data, data=> data.value) + ((d3.max(reviews_data, data => data.value))*0.1)) / 10) * 10
     
     let chart = chartContainer
         .append('g')
@@ -66,7 +64,7 @@ function sentiment_all_time(id) {
         //X-AXIS TICKS
         chart
             .append('g')
-            .call(d3.axisBottom(x).tickSizeOuter(0))
+            .call(d3.axisBottom(x).tickSizeOuter(5))
             .attr('transform', `translate(0, ${svgHeight})`)
             .attr('color', '#bec5cb')
             .attr('font-size', 15)
@@ -76,11 +74,12 @@ function sentiment_all_time(id) {
             .attr("dx", "-.8em")
             .attr("dy", ".15em")
             .attr("transform", "rotate(-90)");
+
     } else if ($(window).width() <= 400) {
         //X-AXIS TICKS
         chart
             .append('g')
-            .call(d3.axisBottom(x).tickSizeOuter(0))
+            .call(d3.axisBottom(x).tickSizeOuter(5))
             .attr('transform', `translate(0, ${svgHeight})`)
             .attr('color', '#bec5cb')
             .attr('font-size', 11)
@@ -94,7 +93,7 @@ function sentiment_all_time(id) {
         //X-AXIS TICKS
         chart
             .append('g')
-            .call(d3.axisBottom(x).tickSizeOuter(0))
+            .call(d3.axisBottom(x).tickSize(5))
             .attr('transform', `translate(0, ${svgHeight})`)
             .attr('color', '#bec5cb')
             .attr('font-size', 15)
@@ -136,16 +135,16 @@ function sentiment_all_time(id) {
         //Y-AXIS TICKS
         chart
             .append('g')
-            .call(d3.axisLeft(y))
+            .call(d3.axisLeft(y).tickSizeInner(-svgWidth))
             .attr('color', '#bec5cb')
             .attr('font-size', 12);
     } else {
         //Y-AXIS TICKS
         chart
             .append('g')
-            .call(d3.axisLeft(y))
+            .call(d3.axisLeft(y).tickSizeInner(-svgWidth))
             .attr('color', '#bec5cb')
-            .attr('font-size', 15);
+            .attr('font-size', 15)
     }
 
     // Y AXIS LABELS
@@ -171,10 +170,30 @@ function sentiment_all_time(id) {
             .text("Number of Reviews");
     }
 
+    // GRAPH LABEL
+    if ($(window).width() <= 475) {
+        // GRAPH LABEL
+        chartContainer
+            .append('text')
+            .attr('y', 15)
+            .attr('x', svgWidth/2.8)
+            .attr('fill', '#bec5cb')
+            .attr('font-size', 16)
+            .attr('font-weight', 'bold')
+            .text("Sentiment All Time");
+    } else {
+        // GRAPH LABEL
+        chartContainer
+            .append('text')
+            .attr('y', 15)
+            .attr('x', svgWidth/2.25)
+            .attr('fill', '#bec5cb')
+            .attr('font-size', 20)
+            .attr('font-weight', 'bold')
+            .text("Sentiment All Time");
+    }
 
-     
 
-    
     //BARS
     chart
         .selectAll('.bar')
