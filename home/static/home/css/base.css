@@ -83,10 +83,12 @@ body {
     padding-top: 5px;
     padding-bottom: 5px;
     background-color: #272c30;
+    filter: brightness(115%);
     border-radius: 6px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    box-shadow: 0px 0px 10px white;
 }
 
 .dropdown-highlight {
