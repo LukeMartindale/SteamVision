@@ -28,12 +28,6 @@ def GameList(request):
     tagsParams = ""
     categoriesParams = ""
     
-    # print(request.GET.get('search_text', False))
-    # print(request.GET.get('genres', False))
-    # print(request.GET.get('tags', False))
-    # print(request.GET.get('categories', False))
-
-    
     # If user has posted from the filter form
     if request.method == "POST":
 

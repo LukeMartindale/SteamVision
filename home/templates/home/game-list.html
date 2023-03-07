@@ -48,8 +48,6 @@
                     </div>
                 </div>
 
-                {{ search_text }}
-
                 {% if search_text %}
                     <div class="search-input-text-display-wrapper">
                         <div class="search-input-text-display-widget">
@@ -158,116 +156,37 @@
 
             <div class="game-list-wrapper">
 
-                    <div class="game-tabs-header">
-                        <div class="game-tabs-header-text name-header">Name</div>
-                        <div class="game-tabs-header-text genres-header">Genres</div>
-                        <div class="game-tabs-header-text tag-header">Tags</div>
-                        <div class="game-tabs-header-text category-header">Categories</div>
-                        <div class="game-tabs-header-hidden more-info-header">More Info</div>
+                    <div class="games-list-section-title-wrapper">
+                        <header class="games-list-section-title-text">Games List</header>
                     </div>
 
                     {% for game in games %}
-                        <div class="game-tab-wrapper">
-                            <div class="game-tab" id="{{ game.app_id }}">
-                                <div class="game-tab-block name-tab-block" >
-                                    {{game.name}}
+
+                        <a class="game-widget-wrapper" id="game-app-{{ game.app_id }}" href="/games/{{game.app_id}}" tabindex="0">
+                            <div class="game-widget-image-wrapper">
+                                <img src="{{ game.header_image }}" alt="" class="game-widget-image">
+                            </div>
+        
+                            <div class="game-info-widget-section">
+        
+                                <div class="game-info-title-section">
+                                    <header class="game-info-title-text">{{ game.name }}</header>
                                 </div>
-                                <div class="game-tab-block genres-tab-block">
-                                    {% for genre in game.genres %}
-                                        <div class="game-descriptor-box">
-                                            {{ genre }}
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                                <div class="game-tab-block tag-tab-block">
+        
+                                <div class="game-info-tags-section">
                                     {% for tag in game.tags %}
                                         {% if forloop.counter < 5 %}
-                                            <div class="game-descriptor-box">
-                                                {{ tag }}
+                                            <div class="game-tag-block">
+                                                {{ tag }}         
                                             </div>
                                         {% endif %}
                                     {% endfor %}
                                 </div>
-                                <div class="game-tab-block category-tab-block">
-                                    {% for category in game.categories %}
-                                        {% for descriptor in descriptors %}
-                                            {% if descriptor.name == category %}
-                                                {% if descriptor.type == 'Categories' %}
-                                                    <div class="category-widget" title="{{ descriptor.name }}">
-                                                        <i class="bi {{ descriptor.symbol }} category-widget-image"></i>
-                                                    </div>
-                                                {% endif %}
-                                            {% endif %}
-                                        {% endfor %}
-                                    {% endfor %}
-                                </div>
-                                <div class="game-tab-block-more">
-                                    <div class="more-info-button-wrapper">
-                                        <div class="more-info-button-highlight" id="more-game-tab">
-                                            <i class="bi bi-card-text more-info-button" id="more-game-tab-img"></i>
-                                        </div>
-                                    </div>
-                                </div>
+        
                             </div>
+        
+                        </a>
 
-                            <div class="game-tab-more-info-wrapper hide-none" id="game-tab-more-{{ game.app_id }}">
-                                <div class="game-tab-more-info-section-wrapper">
-                                    <div class="game-tab-more-info-section-first">
-                                        <img class="more-info-image" src="{{ game.header_image }}">
-                                    </div>
-                                    <div class="game-tab-more-info-section-second">
-                                        <header class="description-label">Description</header> 
-                                        <div class="description-box">
-                                            {{ game.description }}
-                                        </div>
-                                        <div class="descriptors-box">
-                                            <div class="descriptors-box-labels">
-                                                <div class="descriptors-box-labels-text">
-                                                    Ganres
-                                                </div>
-                                                <div class="descriptors-box-labels-text">
-                                                    Tags
-                                                </div>
-                                                <div class="descriptors-box-labels-text">
-                                                    Categories
-                                                </div>
-                                            </div>
-                                            <div class="descriptors-box-content">
-                                                <div class="descriptors-box-section">
-                                                    {% for genre in game.genres %}
-                                                        <div class="game-descriptor-box">
-                                                            {{ genre }}
-                                                        </div>
-                                                    {% endfor %}
-                                                </div>
-                                                <div class="descriptors-box-section">
-                                                    {% for tag in game.tags %}
-                                                        {% if forloop.counter < 5 %}
-                                                            <div class="game-descriptor-box">
-                                                                {{ tag }}
-                                                            </div>
-                                                        {% endif %}
-                                                    {% endfor %}
-                                                </div>
-                                                <div class="descriptors-box-section">
-                                                    {% for category in game.categories %}
-                                                        {% for descriptor in descriptors %}
-                                                            {% if descriptor.name == category %}
-                                                                {% if descriptor.type == 'Categories' %}
-                                                                    <div class="category-widget" title="{{ descriptor.name }}">
-                                                                        <i class="bi {{ descriptor.symbol }} category-widget-image"></i>
-                                                                    </div>
-                                                                {% endif %}
-                                                            {% endif %}
-                                                        {% endfor %}
-                                                    {% endfor %}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     {% endfor %}
 
                     <div class="page-selector">

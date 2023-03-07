@@ -358,6 +358,8 @@
 .game-list-wrapper {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    padding: 15px;
 }
 
 .game-tab-wrapper {
@@ -590,6 +592,137 @@
     padding-top: 10px;
     padding-bottom: 10px;
     border-top: 1px solid #bec5cb;
+}
+
+.game-widget-wrapper {
+    width: 100%;
+    border-radius: 6px;
+    background-color: #393d41;
+    box-shadow: 0px 0px 10px black;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    margin-bottom: 15px;
+    text-decoration: none;
+    color: #bec5cb;
+}
+
+.game-widget-wrapper:hover {
+    box-shadow: 0px 0px 10px white;
+}
+
+.game-widget-wrapper:focus {
+    box-shadow: 0px 0px 10px white;
+    outline: none;
+}
+
+.game-widget-image-wrapper {
+    width: 210px;
+    min-width: 210px;
+    height: 100%;
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+}
+
+.game-widget-image {
+    width: 100%;
+    height: 100%;
+}
+
+.game-info-widget-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.game-info-title-section {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-info-title-text {
+    font-size: 22px;
+    text-align: center;
+}
+
+.game-info-tags-section {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.game-tag-block {
+    background-color: #4169E1;
+    height: 28px;
+    padding-left: 7.5px;
+    padding-right: 7.5px;
+    border-radius: 4px;
+    margin-right: 3px;
+    margin-bottom: 3px;
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.games-list-section-title-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #bec5cb;
+}
+
+.games-list-section-title-text {
+    font-size: 32px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+@media only screen and (max-width: 700px){
+
+    .game-widget-wrapper {
+        align-items: center;
+        flex-direction: column;
+        width: 300px;
+        flex-grow: 20;
+    }
+
+    .game-info-title-section {
+        margin-top: 10px;
+    }
+
+    .game-info-title-text {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .game-info-tags-section {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        flex-wrap: wrap;
+    }
+
+    .game-widget-image-wrapper {
+        width: 300px;
+        height: 144px;
+    }
+
+    .game-widget-image {
+        border-radius: 6px;
+    }
+
 }
 
 @media only screen and (max-width: 710px){
