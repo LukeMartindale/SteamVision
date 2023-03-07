@@ -145,7 +145,7 @@ function sentiment_past_twelve_months(id){
         //Y-AXIS TICKS
         chart
             .append('g')
-            .call(d3.axisLeft(y).tickSizeInner(-svgWidth).ticks(max_value))
+            .call(d3.axisLeft(y).tickSizeInner(-svgWidth).ticks(max_value+1))
             .attr('color', '#bec5cb')
             .attr('font-size', 12);
         } else {
@@ -160,7 +160,7 @@ function sentiment_past_twelve_months(id){
         //Y-AXIS TICKS
         chart
             .append('g')
-            .call(d3.axisLeft(y).tickSizeInner(-svgWidth).ticks(max_value))
+            .call(d3.axisLeft(y).tickSizeInner(-svgWidth).ticks(max_value+1))
             .attr('color', '#bec5cb')
             .attr('font-size', 15)
         } else {
