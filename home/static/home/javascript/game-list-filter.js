@@ -15,6 +15,14 @@ $(function(){
             }
         })
 
+        $(".dropdown-button").each(function(){
+            if($(this).attr("tabindex") == -1){
+                $(this).attr("tabindex", 0)
+            } else {
+                $(this).attr("tabindex", -1)
+            }
+        })
+
         setTimeout(function(){
             $(".bottom-filter").toggleClass("hide");
             $(".filter-break").toggleClass("hide-none");
