@@ -22,9 +22,26 @@ def GameList(request):
 
     descriptors = Descriptor.objects.all().order_by('name').values()
 
+    pass_search = False
+    searchtextParams = ""
+    genresParams = ""
+    tagsParams = ""
+    categoriesParams = ""
+    
+    # print(request.GET.get('search_text', False))
+    # print(request.GET.get('genres', False))
+    # print(request.GET.get('tags', False))
+    # print(request.GET.get('categories', False))
+
+    
+    # If user has posted from the filter form
     if request.method == "POST":
 
+        print("POST")
+        pass_search = True
+
         games = Game.objects.filter(name__contains=request.POST["search"])
+        searchtextParams = request.POST["search"]
 
         if(request.POST["genres"]):
 
@@ -59,10 +76,66 @@ def GameList(request):
 
             games = filtered_games
 
-        context = {"games": games, "descriptors": descriptors}
+    elif request.GET.get('search_text', False) or request.GET.get('genres', False) or request.GET.get('tags', False) or request.GET.get('categories', False):
+        print("GET")
+        pass_search = True
+        games = Game.objects.filter(name__contains=request.GET.get('search_text', False))
+        searchtextParams = request.GET.get('search_text', False)
+
+        if(request.GET.get('genres', False)):
+
+            genres = request.GET.get('genres', False).split(",")
+            filtered_games = []
+
+            for index, game in enumerate(games):
+                if(all(g in game.genres for g in genres)):
+                    filtered_games.append(game)
+
+            games = filtered_games
+
+
+
+        if(request.GET.get('tags', False)):
+
+            tags = request.GET.get('tags', False).split(",")
+            filtered_games = []
+
+            for index, game in enumerate(games):
+                if(all(g in game.tags for g in tags)):
+                    filtered_games.append(game)
+
+            games = filtered_games
+
+
+
+        if(request.GET.get('categories', False)):
+
+            categories = request.GET.get('categories', False).split(",")
+            filtered_games = []
+
+            for index, game in enumerate(games):
+                if(all(g in game.categories for g in categories)):
+                    filtered_games.append(game)
+
+            games = filtered_games
 
     else:
-        context = {"games": Game.objects.all(), "descriptors": descriptors}
+        print("ELSE")
+        games =  Game.objects.all().order_by("name")
+
+    paginator = Paginator(games, 10)
+    page_number = request.GET.get('page')
+    paginated_games = paginator.get_page(page_number)
+
+    context = {
+        "games": paginated_games, 
+        "descriptors": descriptors,
+        "pass_search": pass_search,
+        "search_text": searchtextParams, 
+        "genres": genresParams,
+        "tags": tagsParams,
+        "categories": categoriesParams
+    }
 
     return render(request, 'home/game-list.html', context)
 

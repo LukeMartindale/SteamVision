@@ -6,14 +6,25 @@
     <!-- MY CSS -->
     <link rel="stylesheet" href="{% static 'home/css/game-list.css' %}">
 
+    <script>
+        const searchtextParamConst = '{{ search_text }}'
+    </script>
+
     <div class="block-wrapper">
 
         <div class="filter-block">
 
-            <form action="" method="POST" class="filter-form" id="filter-form" onsubmit="on_form_submit()">
+            <form action="/games/" method="POST" class="filter-form" id="filter-form" onsubmit="on_form_submit()">
                 {% csrf_token %}
 
                 <div class="top-filter-section">
+
+                    <div class="clear-filters-wrapper">
+                        <button class="filter-clear-wrapper" type="button" title="clear all filters">
+                            <i class="bi bi-x-lg clear-icon"></i>
+                        </button>
+                    </div>
+
                     <div class="search-filter-wrapper">
 
                         <div class="search-bar-wrapper">
@@ -37,6 +48,17 @@
                     </div>
                 </div>
 
+                {{ search_text }}
+
+                {% if search_text %}
+                    <div class="search-input-text-display-wrapper">
+                        <div class="search-input-text-display-widget">
+                            <p class="search-input-text-display">{{ search_text }}</p>
+                            <i class="bi bi-x-lg clear-search-icon"></i>
+                        </div>
+                    </div>
+                {% endif %}
+
                 <div class="filter-break hide-none"></div>
 
                 <div class="bottom-filter hide">
@@ -58,7 +80,7 @@
                                 <div class="dropdown-menu-item-wrapper hide-none">
                                     {% for descriptor in descriptors %}
                                         {% if descriptor.type == 'Genres' %}
-                                            <div class="dropdown-menu-item" id="{{ descriptor.name }}">
+                                            <div class="dropdown-menu-item" id="genre-{{ descriptor.name }}">
                                                 {{ descriptor.name }}
                                             </div>
                                         {% endif %}
@@ -83,7 +105,7 @@
                                 <div class="dropdown-menu-item-wrapper hide-none">
                                     {% for descriptor in descriptors %}
                                         {% if descriptor.type == 'Tags' %}
-                                            <div class="dropdown-menu-item" id="{{ descriptor.name }}">
+                                            <div class="dropdown-menu-item" id="tag-{{ descriptor.name }}">
                                                 {{ descriptor.name }}
                                             </div>
                                         {% endif %}
@@ -107,7 +129,7 @@
                                 <div class="dropdown-menu-item-wrapper hide-none">
                                     {% for descriptor in descriptors %}
                                         {% if descriptor.type == 'Categories' %}
-                                            <div class="dropdown-menu-item" id="{{ descriptor.name }}">
+                                            <div class="dropdown-menu-item" id="category-{{ descriptor.name }}">
                                                 {{ descriptor.name }}
                                             </div>
                                         {% endif %}
@@ -247,6 +269,32 @@
                             </div>
                         </div>
                     {% endfor %}
+
+                    <div class="page-selector">
+                        {% if games.has_previous %}
+                            {% if pass_search %}
+                                <a href="?search_text={{ search_text }}&genres={{ genresParams }}&tags={{ tagsParams }}&categories={{ categoriesParams }}&page={{ games.previous_page_number }}">Previous</a>
+                            {% else %}
+                                <a href="?page={{ games.previous_page_number }}">Previous</a>
+                            {% endif %}
+                        {% endif %}
+
+                        <span class="current">
+                            {% if games %}
+                                Page {{ games.number }} of {{ games.paginator.num_pages }}
+                            {% endif %}
+                        </span>
+
+                        {% if games.has_next %}
+                            {% if pass_search %}
+                                <a href="?search_text={{ search_text }}&genres={{ genresParams }}&tags={{ tagsParams }}&categories={{ categoriesParams }}&page={{ games.next_page_number }}">Next</a>
+                            {% else %}
+                                <a href="?page={{ games.next_page_number }}">Next</a>
+                            {% endif %}
+                        {% endif %}
+
+                    </div>
+
                 </div>
             </div>
         </div>

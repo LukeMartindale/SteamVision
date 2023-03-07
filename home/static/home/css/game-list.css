@@ -21,6 +21,7 @@
     margin-bottom: 36px;
     display: flex;
     flex-direction: row;
+    box-shadow: 0px 0px 10px black;
 }
 
 .filter-form {
@@ -44,12 +45,42 @@
 }
 
 .search-filter-wrapper {
-    width: 90%;
+    width: 80%;
     height: 100%;
-    margin-left: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-input-text-display-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.search-input-text-display-widget {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 6px;
+    background-color: #363C41;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.clear-search-icon {
+    margin-left: 7.5px;
+}
+
+.search-input-text-display {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    bottom: 0;
+    font-size: 18px;
 }
 
 .search-bar-wrapper {
@@ -80,6 +111,16 @@
     cursor: pointer;
 }
 
+.clear-filters-wrapper {
+    min-width: 60px;
+    width: 10%;
+    height: 100%;
+    margin-right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .more-filter-wrapper {
     min-width: 60px;
     width: 10%;
@@ -88,6 +129,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.filter-clear-wrapper {
+    min-width: 50px;
+    min-height: 50px;
+    border-radius: 4px;
+    background-color: #393d41;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 0;
 }
 
 .filter-dropdown-wrapper {
@@ -200,6 +253,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #bec5cb;
 }
 
 .dropdown-button-arrow-wrapper {
@@ -278,6 +332,13 @@
     z-index: 900;
 }
 
+.clear-icon {
+    color: #bec5cb;
+    font-size: 30px;
+    transition: 0.5s;
+    z-index: 900;
+}
+
 .filter-icon-down {
     transform: rotate(-180deg);
 }
@@ -291,6 +352,7 @@
     width: 100%;
     border-radius: 12px;
     background-color: #272C30;
+    box-shadow: 0px 0px 10px black;
 }
 
 .game-list-wrapper {
@@ -518,6 +580,16 @@
 
 .hide-none {
     display: none;
+}
+
+.page-selector {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 1px solid #bec5cb;
 }
 
 @media only screen and (max-width: 710px){

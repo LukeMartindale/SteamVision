@@ -23,6 +23,11 @@ $(function(){
 
     })
 
+    // CLEAR filters button
+    $(".clear-filters-wrapper").click(function(){
+        window.location.href = "/games/"
+    })
+
     //Open dropdown on filter options
     $(".dropdown-button").click(function(){
 
@@ -46,12 +51,14 @@ $(function(){
     // Add selected item to relevant input
     $(".dropdown-menu-item").click(function(){
 
+        console.log("CLICK BUTTON TEST")
+
         let selected = $(this).closest(".dropdown-wrapper").children("input").val()
 
         if($(this).hasClass("dropdown-menu-item-selected")){
             //If item  selected, unselect and remove value from input
             let values = selected.split(",")
-            values.splice($.inArray($(this).attr('id'), values), 1)
+            values.splice($.inArray($(this).attr('id').split("-")[1], values), 1)
 
             selected = values
 
@@ -61,65 +68,115 @@ $(function(){
         } else {
             //If item not selected, select and add value to input
             if($(this).closest(".dropdown-wrapper").children("input").val()){
-                selected = selected + ',' + $(this).attr('id')
+                selected = selected + ',' + $(this).attr('id').split("-")[1]
             } else {
-                selected = $(this).attr('id')
+                selected = $(this).attr('id').split("-")[1]
             }
 
             //remove element from display
-            $(this).closest('.dropdown-wrapper').children(".dropdown-button").children(".dropdown-button-display").append('<div class="dropdown-button-display-widget" id="' + $(this).attr('id') + '">' + $(this).attr('id') + '</div>')
+            $(this).closest('.dropdown-wrapper').children(".dropdown-button").children(".dropdown-button-display").append('<div class="dropdown-button-display-widget" id="' + $(this).attr('id') + '">' + $(this).attr('id').split("-")[1] + '</div>')
 
         }
 
         $(this).closest(".dropdown-wrapper").children("input").val(selected)
         $(this).toggleClass("dropdown-menu-item-selected")
 
+        let action_input = `/games/?genres=${$("#genres-input").val()}&tags=${$("#tags-input").val()}&categories=${$("#categories-input").val()}`
+        $("#filter-form").attr('action', action_input)
     })
 })
 
 $(function(){
 
-    let genres = sessionStorage.getItem("genres").split(",")
-    let tags = sessionStorage.getItem("tags").split(",")
-    let categories = sessionStorage.getItem("categories").split(",")
+    let searchParams = new URLSearchParams(window.location.search)
+    let searchtextParams = ""
+    let genresParams = ""
+    let tagsParams = ""
+    let categoriesParams = ""
+    
+    if(searchParams.has("genres")){
+        $("#genres-input").val(searchParams.get("genres"))
+        genresParams = searchParams.get("genres").split(",")
 
-    //Add data to hidden inputs
-    $("#genres-input").val(genres)
-    $("#tags-input").val(tags)
-    $("#categories-input").val(categories)
-
-    //Pre Input selected filters for genres
-    genres.forEach(function(value, index, array){
-        if(value){
-            $("[id='" + value +"']").addClass("dropdown-menu-item-selected")
-            $("#genres-dropdown-wrapper").find(".dropdown-button-display").append('<div class="dropdown-button-display-widget" id="' + value + '">' + value + '</div>')
+        if(!genresParams[0] == ""){
+            genresParams.forEach(function(value, index, array){
+                $("[id='genre-" + value +"']").addClass("dropdown-menu-item-selected")
+                $("#genres-dropdown-wrapper").find(".dropdown-button-display").append('<div class="dropdown-button-display-widget" id="genre-' + value + '">' + value + '</div>')
+            })
         }
-    })
 
-    //Pre Input selected filters for tags
-    tags.forEach(function(value, index, array){
-        if(value){
-            $("[id='" + value +"']").addClass("dropdown-menu-item-selected")
-            $("#tags-dropdown-wrapper").find(".dropdown-button-display").append('<div class="dropdown-button-display-widget" id="' + value + '">' + value + '</div>')
-        }
-    })
+        $("#genres-input").val(genresParams)
 
-    //Pre Input selected filters for categories
-    categories.forEach(function(value, index, array){
-        if(value){
-            $("[id='" + value +"']").addClass("dropdown-menu-item-selected")
-            $("#categories-dropdown-wrapper").find(".dropdown-button-display").append('<div class="dropdown-button-display-widget" id="' + value + '">' + value + '</div>')
+    }
+
+    if(searchParams.has("tags")){
+        $("#tags-input").val(searchParams.get("tags"))
+        tagsParams = searchParams.get("tags").split(",")
+
+        if(!tagsParams[0] == ""){
+            tagsParams.forEach(function(value, index, array){
+                $("[id='tag-" + value +"']").addClass("dropdown-menu-item-selected")
+                $("#tags-dropdown-wrapper").find(".dropdown-button-display").append('<div class="dropdown-button-display-widget" id="tag-' + value + '">' + value + '</div>')
+            })
         }
-    })
+
+        $("#tags-input").val(tagsParams)
+
+    }
+
+    if(searchParams.has("categories")){
+        $("#categories-input").val(searchParams.get("categories"))
+        categoriesParams = searchParams.get("categories").split(",")
+
+        if(!categoriesParams[0] == ""){
+            categoriesParams.forEach(function(value, index, array){
+                $("[id='category-" + value +"']").addClass("dropdown-menu-item-selected")
+                $("#categories-dropdown-wrapper").find(".dropdown-button-display").append('<div class="dropdown-button-display-widget" id="category-' + value + '">' + value + '</div>')
+            })
+        }
+
+        $("#categories-input").val(categoriesParams)
+
+    }
+
+    if($("#search-input").val()){
+        console.log("SEARCH INPUT")
+        searchtextParams = $("#search-input").val()
+    } else if ($(".search-input-text-display").text()){
+        console.log("SEARCH DISPLAY")
+        console.log($(".search-input-text-display").text())
+        searchtextParams = $(".search-input-text-display").text()
+    } else if (searchParams.has("search_text")){
+        console.log("SEARCH TEXT")
+        console.log(searchParams.has("search_text"))
+        searchtextParams = searchParams.get("search_text")
+    } else {
+        searchtextParams = searchtextParamConst
+    }
+
+    let action_input = `/games/?search_text=${searchtextParams}&genres=${genresParams}&tags=${tagsParams}&categories=${categoriesParams}`
+    $("#filter-form").attr('action', action_input)
 
 })
 
 function on_form_submit(){
 
-    sessionStorage.clear()
+    let searchParams = new URLSearchParams(window.location.search)
+    let searchtextParams = ""
+    let genresParams = $("#genres-input").val()
+    let tagsParams = $("#tags-input").val()
+    let categoriesParams = $("#categories-input").val()
 
-    sessionStorage.setItem("genres", $("#genres-input").val())
-    sessionStorage.setItem("tags", $("#tags-input").val())
-    sessionStorage.setItem("categories", $("#categories-input").val())
+    if($("#search-input").val()){
+        searchtextParams = $("#search-input").val()
+    } else if ($(".search-input-text-display").text()){
+        searchtextParams = $(".search-input-text-display").text()
+        $("#search-input").val($(".search-input-text-display").text())
+    } else if (searchParams.has("search_text")){
+        searchtextParams = searchParams.get("search_text")
+    }
+
+    let action_input = `/games/?search_text=${searchtextParams}&genres=${genresParams}&tags=${tagsParams}&categories=${categoriesParams}`
+    $("#filter-form").attr('action', action_input)
 
 }
