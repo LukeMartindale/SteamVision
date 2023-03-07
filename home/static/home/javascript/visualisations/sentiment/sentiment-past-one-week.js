@@ -30,7 +30,7 @@ function sentiment_past_one_week(id){
 
     let margins = {top: 0, bottom: 0, left: 40, right: 0}
     let svgWidth = $('#sentiment-container-content').width() - margins.left - margins.right
-    let svgHeight = 400 - margins.top - margins.bottom
+    let svgHeight = 440 - margins.top - margins.bottom
     // let svgHeight = ($('#sentiment-box').width()*0.7) - margins.top - margins.bottom
     
     let x = d3.scaleBand().rangeRound([0, svgWidth]).padding(0.1);
