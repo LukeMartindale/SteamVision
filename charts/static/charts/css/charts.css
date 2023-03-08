@@ -447,7 +447,7 @@
 }
 
 @media only screen and (max-width: 750px){
-    .filter-block {
+    .chart-filter-form {
         flex-direction: column;
         justify-content: center;
         align-items: center ;
