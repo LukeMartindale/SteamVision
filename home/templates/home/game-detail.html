@@ -140,10 +140,13 @@
         </div>
 
         <div class="game-content-selector">
-            <div class="game-content-selector-widget content-selected" id="review-selector-button">
-                <b>Reviews</b> 
+            <div class="game-content-selector-widget content-selected" id="review-selector-button" tabindex="0">
+                <b>Reviews Stats</b> 
             </div>
-            <div class="game-content-selector-widget" id="players-selector-button">
+            <div class="game-content-selector-widget" id="recent-reviews-selector-button" tabindex="0">
+                <b>Recent Reviews</b> 
+            </div>
+            <div class="game-content-selector-widget" id="players-selector-button" tabindex="0">
                 <b>Players</b> 
             </div>
         </div>
@@ -307,9 +310,120 @@
 
         </div>
 
+        <div class="game-recent-review-wrapper" id="recent-reviews-section">
+
+            {% if reviews %}
+
+                {% for review in reviews %}
+
+                    <div class="review-wrapper">
+
+                        <div class="review-info-section">
+
+                            <div class="review-info-sub-section">
+                                <div class="review-info-sub-section-label">
+                                    Review Rating:
+                                </div>
+                                <div class="review-info-sub-section-info">
+                                    {% if review.voted_up %}
+                                        <p class="positive-text">Positive</p> 
+                                    {% else %}
+                                        <p class="negative-text">Negative</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="section-divider"></div>
+
+                            <div class="review-info-sub-section sentiment-label-section">
+                                <div class="review-info-sub-section-label">
+                                    Sentiment Score:
+                                </div>
+                                <div class="review-info-sub-section-info">
+                                    {% if review.sentiment_polarity > 0 %}
+                                        <p class="positive-text">{{ review.sentiment_polarity|floatformat:"3" }}</p>
+                                    {% elif review.sentiment_polarity < 0 %}
+                                        <p class="negative-text">{{ review.sentiment_polarity|floatformat:"3" }}</p>
+                                    {% else %}
+                                        <p class="neutral-text">{{ review.sentiment_polarity|floatformat:"3" }}</p>
+                                    {% endif %}
+                                    
+                                </div>
+                            </div>
+
+                            <div class="section-divider"></div>
+
+                            <div class="review-info-sub-section emotion-label-section">
+                                <div class="review-info-sub-section-label">
+                                    Prominent Emotions:
+                                </div>
+                                <div class="review-info-sub-section-info">
+                                    {% for emotion in review.emotion_prominent %}
+                                        {% if emotion == 'Happy' %}
+                                            {% if not forloop.last %}
+                                                <p class="happy-text"> {{ emotion }}, </p>
+                                            {% else %}
+                                                <p class="happy-text"> {{ emotion }}</p>
+                                            {% endif %}
+                                        {% elif emotion == 'Angry' %}
+                                            {% if not forloop.last %}
+                                                <p class="angry-text"> {{ emotion }}, </p>
+                                            {% else %}
+                                                <p class="angry-text"> {{ emotion }}</p>
+                                            {% endif %}
+                                        {% elif emotion == 'Surprise' %}
+                                            {% if not forloop.last %}
+                                                <p class="surprise-text"> {{ emotion }}, </p>
+                                            {% else %}
+                                                <p class="surprise-text"> {{ emotion }} </p>
+                                            {% endif %}
+                                        {% elif emotion == 'Sad' %}
+                                            {% if not forloop.last %}
+                                                <p class="sad-text"> {{ emotion }}, </p>
+                                            {% else %}
+                                                <p class="sad-text"> {{ emotion }} </p>
+                                            {% endif %}
+                                        {% elif emotion == 'Fear' %}
+                                            {% if not forloop.last %}
+                                                <p class="fear-text"> {{ emotion }}, </p>
+                                            {% else %}
+                                                <p class="fear-text"> {{ emotion }} </p>
+                                            {% endif %}
+                                        {% else %}
+                                            <p class="neutral-text">{{ emotion }}</p>
+                                        {% endif %}
+
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="review-text-section">
+                            <pre style="white-space: pre-wrap; text-align: justify;" class="review-text-pre">{{ review.review_text }}</pre>
+                        </div>
+
+                    </div>
+
+                    
+                {% endfor %}
+            {% else %}
+
+                <div class="no-reviews-wrapper">
+                    <div class="no-reviews-wrapper-content">
+                        <div class="no-reviews-content-area">
+                            <header>Sorry, we could not find any reviews which mention this developer!</header>
+                        </div>
+                    </div>
+                </div>
+
+            {% endif %}
 
 
-        <div class="game-player-wrapper hide-section" id="players-section">
+
+        </div>
+
+        <div class="game-player-wrapper" id="players-section">
             <div class="game-section">
 
                 <div class="detail-title-wrapper">

@@ -149,7 +149,23 @@ def GameDetail(request, pk):
     total_reviews = len(Review.objects.filter(app_id=game))
     sentiment_score = GameStat.objects.get(app_id=game).current_sentiment_score
 
-    context = {'game': game, 'descriptors': descriptors, 'total_reviews': total_reviews, 'sentiment_score': sentiment_score}
+    reviews_format = ["[list]", "[/list]", "[i]", "[/i]", "[b]", "[/b]", "[h1]", "[/h1]", "[code]", "[/code]", "[/url]", "[spoiler]", "[/spoiler]"]
+    reg = "\[url=[^\]]*]"
+
+    reviews = Review.objects.filter(app_id=game).order_by('-time_created')
+
+    if(len(reviews) > 10):
+        reviews = reviews[:10]
+
+    # Formated reviews by removing unecceseray content
+    for review in reviews:
+        for format in reviews_format:
+            review.review_text = review.review_text.replace(format, '')
+
+    for review in reviews:
+        review.review_text = re.sub(reg, '', review.review_text)
+
+    context = {'game': game, 'descriptors': descriptors, 'total_reviews': total_reviews, 'sentiment_score': sentiment_score, "reviews": reviews}
 
     return render(request, 'home/game-detail.html', context)
 

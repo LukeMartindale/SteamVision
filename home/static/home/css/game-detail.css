@@ -226,9 +226,14 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    text-align: center;
 }
 
 .game-content-selector-widget:hover {
+    background-color: rgba(217, 217, 217, 0.3);
+}
+
+.game-content-selector-widget:focus {
     background-color: rgba(217, 217, 217, 0.3);
 }
 
@@ -238,6 +243,12 @@
 
 .game-review-wrapper {
     max-width: 960px;
+    margin-bottom: 30px;
+}
+
+.game-recent-review-wrapper {
+    max-width: 960px;
+    padding-top: 30px;
     margin-bottom: 30px;
 }
 
@@ -449,6 +460,138 @@ select option {
     height: 0;
     overflow: hidden;
     transition: 1s;
+}
+
+.review-wrapper {
+    width: 100%;
+    max-width: 960px;
+    border-radius: 12px;
+    background-color: #272C30;
+    margin-bottom: 36px;
+    box-shadow: 0px 0px 10px black;
+}
+
+.review-info-section {
+    height: 100%;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.review-info-sub-section {
+    width: 300px;
+    margin-left: 15px;
+    margin-right: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.review-info-sub-section-label {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.review-info-sub-section-info {
+    width: 50%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.review-text-section {
+    padding: 15px;
+    border-top: 0.5px solid #bec5cb;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.review-text-section {
+    padding: 15px;
+    border-top: 0.5px solid #bec5cb;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.review-text-pre {
+    width: 100%;
+    overflow: hidden;
+    max-height: 350px;
+}
+
+.review-expanded {
+    max-height: none;
+    border-bottom: 0px;
+}
+
+.expandable-review {
+    border-bottom: 0.5px dashed #bec5cb;
+}
+
+.positive-text {
+    margin: 0;
+    color: #6c3;
+}
+
+.negative-text {
+    margin: 0;
+    color: #ff683b;
+}
+
+.neutral-text {
+    margin: 0;
+}
+
+.happy-text {
+    margin: 0;
+    margin-right: 4px;
+    color: #6c3;
+}
+
+.angry-text {
+    margin: 0;
+    margin-right: 4px;
+    color: #ff683b;
+}
+
+.surprise-text {
+    margin: 0;
+    margin-right: 4px;
+    color: #FFFF00;
+}
+
+.sad-text {
+    margin: 0;
+    margin-right: 4px;
+    color: #006ee6;
+}
+
+.fear-text {
+    margin: 0;
+    margin-right: 4px;
+    color: #CC8899;
+}
+
+.section-divider {
+    height: 20px;
+    border: 1px solid #bec5cb;
+}
+
+.hide-section {
+    display: none;
 }
 
 @media only screen and (max-width: 800px){
