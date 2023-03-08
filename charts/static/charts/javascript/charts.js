@@ -2,22 +2,24 @@ $(function(){
 
     console.log("Charts Load Test")
 
-    // $('#subject-select').on('change', function (e) {
+    $('#subject-select').on('change', function (e) {
 
-    //     $('#type-select').val("current")
-    //     let option = $(this).children("option:selected").val()
+        $("#chart-form").submit()
 
-    //     if(option == "player-count"){
+        // $('#type-select').val("current")
+        // let option = $(this).children("option:selected").val()
 
-    //         DisplayPlayerCountCurrent()
+        // if(option == "player-count"){
 
-    //     } else if (option == "reviews"){
+        //     DisplayPlayerCountCurrent()
 
-    //         DisplayReviewsCurrent()
+        // } else if (option == "reviews"){
 
-    //     }
+        //     DisplayReviewsCurrent()
 
-    // })
+        // }
+
+    })
 
     // $('#type-select').on('change', function (e) {
 

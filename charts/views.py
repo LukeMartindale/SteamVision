@@ -2,24 +2,69 @@ from django.shortcuts import render
 from django.db.models import Max
 from home.models import Game, GameStat, PlayerCount
 
+from django.core.paginator import Paginator
+
 # Create your views here.
 
 def Charts(request):
     games = Game.objects.all()
 
-    # Get List of current most played games
-    players_current = []
-    for game in games:
+    games_sorted = []
+    games_subject = "player_count"
+    games_type = "current"
 
-        current = {}
-        player_count = PlayerCount.objects.filter(app_id=game).last()
+    if request.method == 'POST':
+        print("POST")
+        if(request.POST["subject"] == "player-count"):
 
-        current["app"] = game
-        current["player_count"] = player_count.player_count
-        players_current.append(current)
+            print(request.POST["subject"])
 
-    players_current = sorted(players_current, key=lambda x:x['player_count'], reverse=True)
+            # Get List of current most played games
+            for game in games:
 
-    context = {"games": players_current}
+                current = {}
+                player_count = PlayerCount.objects.filter(app_id=game).last()
+
+                current["app"] = game
+                current["player_count"] = player_count.player_count
+                games_sorted.append(current)
+
+            games_sorted = sorted(games_sorted, key=lambda x:x['player_count'], reverse=True)
+            games_subject = "player_count"
+            games_type = "current"
+            
+        elif (request.POST["subject"] == "reviews"):
+
+            print(request.POST["subject"])
+
+            # Get List of current most played games
+            for game in games:
+
+                current = {}
+                review_percentage = GameStat.objects.get(app_id=game).current_review_score
+
+                current["app"] = game
+                current["reviews_percentage"] = review_percentage
+                games_sorted.append(current)
+
+            games_sorted = sorted(games_sorted, key=lambda x:x['reviews_percentage'], reverse=True)
+            games_subject = "reviews"
+            games_type = "current"
+
+    else:
+        print("ELSE")
+        # Get List of current most played games
+        for game in games:
+
+            current = {}
+            player_count = PlayerCount.objects.filter(app_id=game).last()
+
+            current["app"] = game
+            current["player_count"] = player_count.player_count
+            games_sorted.append(current)
+
+        games_sorted = sorted(games_sorted, key=lambda x:x['player_count'], reverse=True)
+
+    context = {"games": games_sorted, "games_subject": games_subject, "games_type": games_type}
 
     return render(request, 'charts/charts.html', context)

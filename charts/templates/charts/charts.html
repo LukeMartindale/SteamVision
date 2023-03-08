@@ -14,19 +14,29 @@
 
         <div class="filter-block">
 
-            <div class="chart-select-wrapper">
-                <select class="chart-select" id="subject-select">
-                    <option class="chart-select-option" value="player-count">Player Count</option>
-                    <option class="chart-select-option" value="reviews">Reviews</option>
-                </select>
-            </div>
+            <form action="" method="post" class="chart-filter-form" id="chart-form">
+                {% csrf_token %}
 
-            <div class="chart-select-wrapper">
-                <select class="chart-select" id="type-select">
-                    <option class="chart-select-option" value="current">Current</option>
-                    <option class="chart-select-option" value="all-time">All Time</option>
-                </select>
-            </div>
+                <div class="chart-select-wrapper">
+                    <select class="chart-select" id="subject-select" name="subject">
+                        {% if games_subject == "player_count" %}
+                            <option class="chart-select-option" value="player-count" selected>Player Count</option>
+                            <option class="chart-select-option" value="reviews">Reviews</option>
+                        {% elif games_subject == "reviews" %}
+                            <option class="chart-select-option" value="player-count">Player Count</option>
+                            <option class="chart-select-option" value="reviews" selected>Reviews</option>
+                        {% endif %}
+                    </select>
+                </div>
+    
+                <div class="chart-select-wrapper">
+                    <select class="chart-select" id="type-select" name="type">
+                        <option class="chart-select-option" value="current">Current</option>
+                        <option class="chart-select-option" value="all-time">All Time</option>
+                    </select>
+                </div>
+
+            </form>
 
         </div>
 
@@ -61,10 +71,19 @@
 
                         <div class="game-detail-section">
                             <div class="game-detail-section-label">
-                                Player Count:
+                                {% if games_subject == "player_count" %}
+                                    Player Count:
+                                {% elif games_subject == "reviews" %}
+                                    Reviews %
+                                {% endif %}
                             </div>
                             <div class="game-detail-section-content">
-                                {{ game.player_count }}
+                                {% if games_subject == "player_count" %}
+                                    {{ game.player_count }}
+                                {% elif games_subject == "reviews" %}
+                                    {{ game.reviews_percentage }}
+                                {% endif %}
+
                             </div>
                         </div>
 

@@ -428,6 +428,14 @@
     font-weight: bold;
 }
 
+.chart-filter-form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @media only screen and (max-width: 750px){
     .filter-block {
         flex-direction: column;
