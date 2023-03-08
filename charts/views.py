@@ -40,7 +40,7 @@ def Charts(request):
                 review_percentage = GameStat.objects.get(app_id=game).current_review_score
 
                 current["app"] = game
-                current["reviews_percentage"] = review_percentage
+                current["reviews_percentage"] = round(review_percentage*100, 1)
                 games_sorted.append(current)
 
             games_sorted = sorted(games_sorted, key=lambda x:x['reviews_percentage'], reverse=True)
@@ -73,7 +73,7 @@ def Charts(request):
                 review_percentage = GameStat.objects.get(app_id=game).current_review_score
 
                 current["app"] = game
-                current["reviews_percentage"] = review_percentage
+                current["reviews_percentage"] = round(review_percentage*100, 1)
                 games_sorted.append(current)
 
             games_sorted = sorted(games_sorted, key=lambda x:x['reviews_percentage'], reverse=True)
