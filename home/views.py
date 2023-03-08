@@ -129,10 +129,6 @@ def GameList(request):
     page_number = request.GET.get('page')
     paginated_games = paginator.get_page(page_number)
 
-    print("genres: ", genresParams)
-    print("tags: ", tagsParams)
-    print("categories", categoriesParams)
-
     context = {
         "games": paginated_games, 
         "descriptors": descriptors,
