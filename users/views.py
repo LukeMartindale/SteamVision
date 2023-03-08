@@ -8,6 +8,8 @@ from .decorators import unauthrosied_user
 
 from django.contrib.auth.models import User
 
+from users.models import Profile
+
 # Create your views here.
 
 def base(request):
@@ -21,6 +23,10 @@ def registerPage(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
+            user = User.objects.get(username=request.POST["username"])
+            profile = Profile()
+            profile.user = user
+            profile.save()
 
     context = {'form': form}
     return render(request, 'users/register.html', context)
