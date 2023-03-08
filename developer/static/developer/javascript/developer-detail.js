@@ -74,3 +74,10 @@ $(function(){
     })
 
 })
+
+// Hide Sections
+$(function(){
+
+    $("#developer-reviews-about").addClass("hide-section")
+
+})
