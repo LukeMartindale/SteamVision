@@ -40,6 +40,7 @@ def GameList(request):
         if(request.POST["genres"]):
 
             genres = request.POST["genres"].split(",")
+            genresParams = request.POST["genres"]
             filtered_games = []
 
             for index, game in enumerate(games):
@@ -51,6 +52,7 @@ def GameList(request):
         if(request.POST["tags"]):
 
             tags = request.POST["tags"].split(",")
+            tagsParams = request.POST["tags"]
             filtered_games = []
 
             for index, game in enumerate(games):
@@ -62,6 +64,7 @@ def GameList(request):
         if(request.POST["categories"]):
 
             categories = request.POST["categories"].split(",")
+            categoriesParams =  request.POST["categories"]
             filtered_games = []
 
             for index, game in enumerate(games):
@@ -81,6 +84,7 @@ def GameList(request):
         if(request.GET.get('genres', False)):
 
             genres = request.GET.get('genres', False).split(",")
+            genresParams = request.GET.get('genres', False)
             filtered_games = []
 
             for index, game in enumerate(games):
@@ -94,6 +98,7 @@ def GameList(request):
         if(request.GET.get('tags', False)):
 
             tags = request.GET.get('tags', False).split(",")
+            tagsParams = request.GET.get('tags', False)
             filtered_games = []
 
             for index, game in enumerate(games):
@@ -107,6 +112,7 @@ def GameList(request):
         if(request.GET.get('categories', False)):
 
             categories = request.GET.get('categories', False).split(",")
+            categoriesParams = request.GET.get('categories', False)
             filtered_games = []
 
             for index, game in enumerate(games):
