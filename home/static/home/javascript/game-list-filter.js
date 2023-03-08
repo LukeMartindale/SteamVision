@@ -178,6 +178,12 @@ function on_form_submit(){
     let tagsParams = $("#tags-input").val()
     let categoriesParams = $("#categories-input").val()
 
+    console.log("Genres:", genresParams)
+    console.log("Tags: ", tagsParams)
+    console.log("Categories: ", categoriesParams)
+
+    alert()
+
     if($("#search-input").val()){
         searchtextParams = $("#search-input").val()
     } else if ($(".search-input-text-display").text()){

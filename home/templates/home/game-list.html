@@ -189,10 +189,16 @@
 
                     {% endfor %}
 
+                    {{ genres }}
+
+                    {{ tags }}
+
+                    {{ categories }}
+
                     <div class="page-selector">
                         {% if games.has_previous %}
                             {% if pass_search %}
-                                <a href="?search_text={{ search_text }}&genres={{ genresParams }}&tags={{ tagsParams }}&categories={{ categoriesParams }}&page={{ games.previous_page_number }}">Previous</a>
+                                <a href="?search_text={{ search_text }}&genres={{ genres }}&tags={{ tags }}&categories={{ categories }}&page={{ games.previous_page_number }}">Previous</a>
                             {% else %}
                                 <a href="?page={{ games.previous_page_number }}">Previous</a>
                             {% endif %}
@@ -206,7 +212,7 @@
 
                         {% if games.has_next %}
                             {% if pass_search %}
-                                <a href="?search_text={{ search_text }}&genres={{ genresParams }}&tags={{ tagsParams }}&categories={{ categoriesParams }}&page={{ games.next_page_number }}">Next</a>
+                                <a href="?search_text={{ search_text }}&genres={{ genres }}&tags={{ tags }}&categories={{ categories }}&page={{ games.next_page_number }}">Next</a>
                             {% else %}
                                 <a href="?page={{ games.next_page_number }}">Next</a>
                             {% endif %}
