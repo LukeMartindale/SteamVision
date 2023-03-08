@@ -436,6 +436,16 @@
     align-items: center;
 }
 
+.page-selector {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 1px solid #bec5cb;
+}
+
 @media only screen and (max-width: 750px){
     .filter-block {
         flex-direction: column;

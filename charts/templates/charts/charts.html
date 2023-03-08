@@ -99,11 +99,32 @@
 
                 {% endfor %}
 
-                {{ games.number }}
-
-                {{ games.object_list }}
-
             </div> 
+
+            <div class="page-selector">
+                {% if games.has_previous %}
+                    {% if pass_search %}
+                        <a href="?subject={{ games_subject }}&type={{ games_type }}&page={{ games.previous_page_number }}">Previous</a>
+                    {% else %}
+                        <a href="?page={{ games.previous_page_number }}">Previous</a>
+                    {% endif %}
+                {% endif %}
+
+                <span class="current">
+                    {% if games %}
+                        Page {{ games.number }} of {{ games.paginator.num_pages }}
+                    {% endif %}
+                </span>
+
+                {% if games.has_next %}
+                    {% if pass_search %}
+                        <a href="?subject={{ games_subject }}&type={{ games_type }}&page={{ games.next_page_number }}">Next</a>
+                    {% else %}
+                        <a href="?page={{ games.next_page_number }}">Next</a>
+                    {% endif %}
+                {% endif %}
+
+            </div>
 
         </div>
 
