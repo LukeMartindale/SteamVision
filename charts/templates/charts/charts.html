@@ -90,7 +90,7 @@
                         <div class="game-rank-section">
                             <div class="game-rank-wrapper">
                                 <div class="game-rank">
-                                    1
+                                    {{ forloop.counter|add:sub_num }}
                                 </div>
                             </div>
                         </div>
@@ -98,6 +98,10 @@
                     </a>
 
                 {% endfor %}
+
+                {{ games.number }}
+
+                {{ games.object_list }}
 
             </div> 
 

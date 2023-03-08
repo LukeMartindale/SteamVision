@@ -65,6 +65,11 @@ def Charts(request):
 
         games_sorted = sorted(games_sorted, key=lambda x:x['player_count'], reverse=True)
 
-    context = {"games": games_sorted, "games_subject": games_subject, "games_type": games_type}
+    paginator = Paginator(games_sorted, 10)
+    page_number = request.GET.get('page')
+    paginated_games = paginator.get_page(page_number)
+    sub_num = 10*(paginated_games.number-1)
+
+    context = {"games": paginated_games, "games_subject": games_subject, "games_type": games_type, "sub_num": sub_num}
 
     return render(request, 'charts/charts.html', context)
