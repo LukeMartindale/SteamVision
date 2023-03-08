@@ -20,4 +20,6 @@ def Charts(request):
 
     players_current = sorted(players_current, key=lambda x:x['player_count'], reverse=True)
 
-    return render(request, 'charts/charts.html', {"players_current": players_current})
+    context = {"games": players_current}
+
+    return render(request, 'charts/charts.html', context)

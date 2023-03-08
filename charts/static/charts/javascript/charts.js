@@ -2,29 +2,29 @@ $(function(){
 
     console.log("Charts Load Test")
 
-    $('#subject-select').on('change', function (e) {
+    // $('#subject-select').on('change', function (e) {
 
-        $('#type-select').val("current")
-        let option = $(this).children("option:selected").val()
+    //     $('#type-select').val("current")
+    //     let option = $(this).children("option:selected").val()
 
-        if(option == "player-count"){
+    //     if(option == "player-count"){
 
-            DisplayPlayerCountCurrent()
+    //         DisplayPlayerCountCurrent()
 
-        } else if (option == "reviews"){
+    //     } else if (option == "reviews"){
 
-            DisplayReviewsCurrent()
+    //         DisplayReviewsCurrent()
 
-        }
+    //     }
 
-    })
+    // })
 
-    $('#type-select').on('change', function (e) {
+    // $('#type-select').on('change', function (e) {
 
-        console.log("Type Change")
+    //     console.log("Type Change")
 
-    })
+    // })
 
-    DisplayPlayerCountCurrent()
+    // DisplayPlayerCountCurrent()
 
 })

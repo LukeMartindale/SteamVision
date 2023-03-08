@@ -34,13 +34,51 @@
 
             <div class="game-list-wrapper">
 
-                <div class="game-tabs-header">
-                    <div class="game-tabs-header-rank rank-header">Rank</div>
-                    <div class="game-tabs-header-text name-header">Name</div>
-                    <div class="game-tabs-header-text genres-header">Genres</div>
-                    <div class="game-tabs-header-text category-header">Player Count</div>
-                    <div class="game-tabs-header-more more-info-header">More Info</div>
-                </div>
+                {% for game in games %}
+
+                    <a class="game-widget-wrapper" id="game-app-{{ game.app.app_id }}" href="/games/{{game.app.app_id}}/" tabindex="0">
+                        <div class="game-widget-image-wrapper">
+                            <img src="{{ game.app.header_image }}" alt="" class="game-widget-image">
+                        </div>
+
+                        <div class="game-info-widget-section">
+
+                            <div class="game-info-title-section">
+                                <header class="game-info-title-text">{{ game.app.name }}</header>
+                            </div>
+
+                            <div class="game-info-tags-section">
+                                {% for tag in game.app.tags %}
+                                    {% if forloop.counter < 5 %}
+                                        <div class="game-tag-block">
+                                            {{ tag }}         
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+
+                        </div>
+
+                        <div class="game-detail-section">
+                            <div class="game-detail-section-label">
+                                Player Count:
+                            </div>
+                            <div class="game-detail-section-content">
+                                {{ game.player_count }}
+                            </div>
+                        </div>
+
+                        <div class="game-rank-section">
+                            <div class="game-rank-wrapper">
+                                <div class="game-rank">
+                                    1
+                                </div>
+                            </div>
+                        </div>
+
+                    </a>
+
+                {% endfor %}
 
             </div> 
 
