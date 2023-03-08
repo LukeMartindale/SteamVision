@@ -103,6 +103,7 @@ $(function(){
     let categoriesParams = ""
     
     if(searchParams.has("genres")){
+        console.log("Has Genres")
         $("#genres-input").val(searchParams.get("genres"))
         genresParams = searchParams.get("genres").split(",")
 
@@ -118,6 +119,7 @@ $(function(){
     }
 
     if(searchParams.has("tags")){
+        console.log("Has Tags")
         $("#tags-input").val(searchParams.get("tags"))
         tagsParams = searchParams.get("tags").split(",")
 
@@ -133,6 +135,7 @@ $(function(){
     }
 
     if(searchParams.has("categories")){
+        console.log("Has Categories")
         $("#categories-input").val(searchParams.get("categories"))
         categoriesParams = searchParams.get("categories").split(",")
 

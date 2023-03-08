@@ -72,6 +72,8 @@ def GameList(request):
 
     elif request.GET.get('search_text', False) or request.GET.get('genres', False) or request.GET.get('tags', False) or request.GET.get('categories', False):
         print("GET")
+        print(request.GET.get('search_text', False))
+        print(request.GET.get('genres', False))
         pass_search = True
         games = Game.objects.filter(name__contains=request.GET.get('search_text', False))
         searchtextParams = request.GET.get('search_text', False)
