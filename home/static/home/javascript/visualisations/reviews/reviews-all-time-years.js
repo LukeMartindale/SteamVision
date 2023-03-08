@@ -67,6 +67,10 @@ function review_all_time_year(id){
             .attr('font-size', 15)
             .attr('font-weight', 'bold')
             .selectAll("text")  
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", "rotate(-65)");
 
     } else if ($(window).width() <= 400) {
         //X-AXIS TICKS
@@ -90,7 +94,12 @@ function review_all_time_year(id){
             .attr('transform', `translate(0, ${svgHeight})`)
             .attr('color', '#bec5cb')
             .attr('font-size', 15)
-            .attr('font-weight', 'bold');
+            .attr('font-weight', 'bold')
+            .selectAll("text")  
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", "rotate(-65)");
     }
 
     // X-AXIS LABELS
@@ -98,7 +107,7 @@ function review_all_time_year(id){
         // X AXIS LABELS 
         chart
             .append('text')
-            .attr('transform', `translate(${svgWidth/2 - margins.left + 30}, ${svgHeight + 58})`)
+            .attr('transform', `translate(${svgWidth/2 - margins.left + 10}, ${svgHeight + 115})`)
             .attr('fill', '#bec5cb')
             .attr('font-size', 20)
             .attr('font-weight', 'bold')
@@ -107,7 +116,7 @@ function review_all_time_year(id){
         // X AXIS LABELS 
         chart
             .append('text')
-            .attr('transform', `translate(${svgWidth/2 - margins.left + 10}, ${svgHeight + 58})`)
+            .attr('transform', `translate(${svgWidth/2 - margins.left}, ${svgHeight + 115})`)
             .attr('fill', '#bec5cb')
             .attr('font-size', 15)
             .attr('font-weight', 'bold')
@@ -116,7 +125,7 @@ function review_all_time_year(id){
         // X AXIS LABELS 
         chart
             .append('text')
-            .attr('transform', `translate(${svgWidth/2 - margins.left + 25}, ${svgHeight + 50})`)
+            .attr('transform', `translate(${svgWidth/2 - margins.left + 10}, ${svgHeight + 115})`)
             .attr('fill', '#bec5cb')
             .attr('font-size', 20)
             .attr('font-weight', 'bold')

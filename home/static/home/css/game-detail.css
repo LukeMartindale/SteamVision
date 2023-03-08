@@ -292,6 +292,11 @@
     overflow: visible;
 }
 
+.reviews-container-content {
+    max-height: 800px;
+    height: 550px;
+}
+
 .visualisation-container-content-no-data {
     width: 100%;
     height: 100%;

@@ -26,7 +26,7 @@ function reviews_resize_handler(active_vis){
     } else if (active_vis == "past_twelve_months"){
         reviews_past_twelve_months(game_id)
     } else if (active_vis == "past_six_months"){
-        reviews_past_six_motnhs(game_id)
+        reviews_past_six_months(game_id)
     } else if (active_vis == "past_one_month"){
         reviews_past_one_month(game_id)
     } else if (active_vis == "past_two_weeks"){
