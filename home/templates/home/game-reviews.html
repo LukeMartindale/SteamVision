@@ -131,8 +131,6 @@
                             </div>
                         </div>
 
-                        <div class="section-divider"></div>
-
                         <div class="review-info-sub-section emotion-label-section">
                             <div class="review-info-sub-section-label">
                                 Prominent Emotions:
@@ -177,7 +175,20 @@
                             </div>
                         </div>
 
+                        <div class="section-divider"></div>
+
+                        <div class="review-about-section">
+                            <div class="review-about-label-section">
+                                Date Created:
+                            </div>
+                            <div class="review-about-content-section">
+                                {{ review.time_created }}
+                            </div>
+                        </div>
+
                     </div>
+
+
 
                     <div class="review-text-section">
                         <pre style="white-space: pre-wrap; text-align: justify;" class="review-text-pre">{{ review.review_text }}</pre>
@@ -204,7 +215,7 @@
 
                 {% if reviews.has_next %}
                     {% if pass_search %}
-                        <a href="?search_text={{ search_text }}&review_score={{ review_score }}&sentiment_range={{ sentiment_range }}&prominent_emotion={{ prominent_emotion }}&page={{ reviews.next_page_number }}">Previous</a>
+                        <a href="?search_text={{ search_text }}&review_score={{ review_score }}&sentiment_range={{ sentiment_range }}&prominent_emotion={{ prominent_emotion }}&page={{ reviews.next_page_number }}">Next</a>
                     {% else %}
                         <a href="?page={{ reviews.next_page_number }}">Next</a>
                     {% endif %}

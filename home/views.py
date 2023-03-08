@@ -229,7 +229,7 @@ def GameReviews(request, pk):
         prominent_emotion = request.GET.get('prominent_range', False)
 
     else:
-        reviews = Review.objects.filter(app_id=game).order_by('time_created')
+        reviews = Review.objects.filter(app_id=game).order_by('-time_created')
 
     # Formated reviews by removing unecceseray content
     for review in reviews:
@@ -239,7 +239,7 @@ def GameReviews(request, pk):
     for review in reviews:
         review.review_text = re.sub(reg, '', review.review_text)
 
-    paginator = Paginator(reviews, 5)
+    paginator = Paginator(reviews, 20)
     page_number = request.GET.get('page')
     paginated_reviews = paginator.get_page(page_number)
 
