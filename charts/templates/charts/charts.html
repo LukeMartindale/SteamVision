@@ -81,7 +81,7 @@
                                 {% if games_subject == "player_count" %}
                                     {{ game.player_count }}
                                 {% elif games_subject == "reviews" %}
-                                    {{ game.reviews_percentage }}
+                                    {{ game.reviews_percentage|floatformat:1 }}
                                 {% endif %}
 
                             </div>
