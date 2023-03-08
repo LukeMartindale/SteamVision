@@ -250,6 +250,10 @@
     max-width: 960px;
     padding-top: 30px;
     margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .game-player-wrapper {
@@ -592,6 +596,51 @@ select option {
 
 .hide-section {
     display: none;
+}
+
+.no-reviews-wrapper {
+    width: 100%;
+    max-width: 960px;
+    min-width: 240px;
+    border-radius: 12px;
+    background-color: #272C30;
+    box-shadow: 0px 0px 10px black;
+}
+
+.no-reviews-wrapper-content {
+    width: 100%;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.no-reviews-content-area  {
+    width: 80%;
+    padding: 15px;
+    background-color: #383c40;
+    border: 1px solid #bec5cb;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.more-reviews-button-wrapper {
+    width: 300px;
+    height: 56px;
+    background-color: rgb(65, 105, 225);
+    border-radius: 6px;
+    border: 0;
+    font-size: 24px;
+    color: #BEC5CB;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 800px){
