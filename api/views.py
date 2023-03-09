@@ -409,3 +409,10 @@ def getReviewPercentageCurrent(request):
     reviews_current = sorted(reviews_current, key=lambda x:x['reviews_percentage'], reverse=True)
 
     return Response(reviews_current)
+
+@api_view(['GET'])
+def test(request):
+
+    print(request.session)
+
+    return Response({"test": "text"})

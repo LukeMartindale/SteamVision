@@ -38,4 +38,5 @@ urlpatterns = [
     path('get-player-count/past-24-hours/<int:id>/', views.getPlayerCountPast24Hours),
     path('charts/get-player-count-current/', views.getPlayerCountCurrent),
     path('charts/get-reviews-percentage-current/', views.getReviewPercentageCurrent),
+    path('test/', views.test)
 ]

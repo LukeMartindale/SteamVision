@@ -76,3 +76,10 @@ $(function(){
     })
 
 })
+
+function FollowButton(){
+
+    $("#button-form-input").val("follow")
+    $("#detail-button-form").submit()
+
+}

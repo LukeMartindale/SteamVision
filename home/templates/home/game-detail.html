@@ -137,6 +137,19 @@
 
             </div>
 
+            <div class="detail-button-section">
+                <form action="" method="POST" id="detail-button-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="button-form-input" id="button-form-input" value>
+                    <button class="detail-button" id="follow-game-button" type="button" onclick="FollowButton()">
+                        Follow
+                    </button>
+                    <button class="detail-button" id="compare-game-button" type="button">
+                        Compare
+                    </button>
+                </form>
+            </div>
+
         </div>
 
         <div class="game-content-selector">

@@ -165,6 +165,9 @@ def GameDetail(request, pk):
     for review in reviews:
         review.review_text = re.sub(reg, '', review.review_text)
 
+    if(request.method == "POST"):
+        print("POST")
+
     context = {'game': game, 'descriptors': descriptors, 'total_reviews': total_reviews, 'sentiment_score': sentiment_score, "reviews": reviews}
 
     return render(request, 'home/game-detail.html', context)
@@ -252,13 +255,3 @@ def GameReviewsContinue(request, pk, search):
     context = {}
 
     return render(request, 'home/game-reviews.html', context)
-
-class OldGameListView(ListView):
-    model = Game
-    template_name = 'home/old_game_list.html'
-    context_object_name = 'games'
-
-class GameDetailView(DetailView):
-    model = Game
-    template_name: str = 'home/old_game_detail.html'
-    context_object_name: str = 'games'
