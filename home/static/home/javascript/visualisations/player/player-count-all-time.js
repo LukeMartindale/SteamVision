@@ -22,7 +22,7 @@ function get_data_player_count_all_time(id){
 
 function player_count_all_time(id){
 
-    let player_data = get_data_player_count_past_24_hours(id)
+    let player_data = get_data_player_count_all_time(id)
 
     player_data.forEach(function(data, index){
         player_data[index].timestamp = new Date(data.timestamp)
