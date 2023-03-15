@@ -127,6 +127,49 @@ $(function(){
     
 })
 
+// PLAYER VISUALISATION SELECT OPTIONS
+$(function(){
+
+    $('#player-select').on('change', function (e) {
+
+        let option = $(this).children("option:selected").val()
+
+        if(option == "player-all-time"){
+
+            player_count_all_time(game_id)
+            active_player_vis = "all_time"
+
+        } else if (option == "player-past-1-month"){
+
+            console.log("NOT YET IMPLEMENTED")
+
+        } else if (option == "player-past-2-weeks"){
+
+            console.log("NOT YET IMPLEMENTED")
+            
+        } else if (option == "player-past-1-week"){
+
+            console.log("NOT YET IMPLEMENTED")
+            
+        } else if (option == "player-past-72-hours"){
+
+            console.log("NOT YET IMPLEMENTED")
+            
+        } else if (option == "player-past-48-hours"){
+
+            console.log("NOT YET IMPLEMENTED")
+            
+        } else if (option == "player-past-24-hours"){
+
+            player_count_past_24_hours(game_id)
+            active_player_vis = "past_24_hours"
+            
+        } 
+
+    })
+    
+})
+
 function no_reviews_neutral_bar(){
 
     $(".neg-bar").each(function(){

@@ -75,5 +75,19 @@ function emotion_resize_handler(active_vis){
 
 // Player Resize Function
 function player_resize_handelr(active_vis) {
-    player_count_past_24_hours(game_id)
+    if (active_vis == "all_time"){
+        player_count_all_time(game_id)
+    } else if (active_vis == "past_one_month"){
+        console.log("NOT YET IMPLEMENTED")
+    } else if (active_vis == "past_two_weeks"){
+        console.log("NOT YET IMPLEMENTED")
+    } else if (active_vis == "past_one_week"){
+        console.log("NOT YET IMPLEMENTED")
+    } else if (active_vis == "past_72_hours"){
+        console.log("NOT YET IMPLEMENTED")
+    } else if (active_vis == "past_48_hours"){
+        console.log("NOT YET IMPLEMENTED")
+    } else if (active_vis == "past_24_hours"){
+        player_count_past_24_hours(game_id)
+    }
 }
