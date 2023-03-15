@@ -312,6 +312,13 @@ def getCategories(request):
     return Response(serializer.data)
 
 @api_view(['GET'])
+def getPlayerAllTime(request, id):
+    player_count = PlayerCount.objects.filter(app_id__app_id=id).order_by("timestamp")
+    serialiser = PlayerCountSerializer(player_count, many=True)
+
+    return Response(serialiser.data)
+
+@api_view(['GET'])
 def getPlayerCountPastOneMonth(request, id):
     start_date = timezone.now() + timezone.timedelta(days=-30)
     end_date = timezone.now()
