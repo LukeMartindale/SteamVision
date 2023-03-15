@@ -11,7 +11,7 @@ $(function(){
     // Draw emotion graph
     emotion_all_time(game_id)
     // Draw Player Count
-    player_count_past_24_hours(game_id)
+    player_count_all_time(game_id)
 })
 
 // make reviews collapse if they are too big
