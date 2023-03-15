@@ -11,7 +11,7 @@ $(function(){
             reviews_resize_handler(active_review_vis)
             sentiment_resize_handler(active_sentiment_vis)
             emotion_resize_handler(active_emotion_vis)
-            player_resize_handelr("TEST")
+            player_resize_handler(active_player_vis)
 
         }, 100)
     
@@ -74,11 +74,11 @@ function emotion_resize_handler(active_vis){
 }
 
 // Player Resize Function
-function player_resize_handelr(active_vis) {
+function player_resize_handler(active_vis) {
     if (active_vis == "all_time"){
         player_count_all_time(game_id)
     } else if (active_vis == "past_one_month"){
-        console.log("NOT YET IMPLEMENTED")
+        player_count_past_one_month(game_id)
     } else if (active_vis == "past_two_weeks"){
         console.log("NOT YET IMPLEMENTED")
     } else if (active_vis == "past_one_week"){

@@ -141,7 +141,8 @@ $(function(){
 
         } else if (option == "player-past-1-month"){
 
-            console.log("NOT YET IMPLEMENTED")
+            player_count_past_one_month(game_id)
+            active_player_vis = "past_one_month"
 
         } else if (option == "player-past-2-weeks"){
 
