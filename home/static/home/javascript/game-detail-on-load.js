@@ -56,3 +56,7 @@ $(function(){
     $("#players-section").addClass("hide-section")
 
 })
+
+window.onbeforeunload = function () {
+    window.scrollTo(0, 0);
+  }

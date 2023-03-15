@@ -11,6 +11,7 @@ $(function(){
             reviews_resize_handler(active_review_vis)
             sentiment_resize_handler(active_sentiment_vis)
             emotion_resize_handler(active_emotion_vis)
+            player_resize_handelr("TEST")
 
         }, 100)
     
@@ -70,4 +71,9 @@ function emotion_resize_handler(active_vis){
         emotion_past_one_week(game_id)
     }
 
+}
+
+// Player Resize Function
+function player_resize_handelr(active_vis) {
+    player_count_past_24_hours(game_id)
 }
