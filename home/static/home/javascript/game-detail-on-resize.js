@@ -84,7 +84,7 @@ function player_resize_handler(active_vis) {
     } else if (active_vis == "past_one_week"){
         player_count_past_one_week(game_id)
     } else if (active_vis == "past_72_hours"){
-        console.log("NOT YET IMPLEMENTED")
+        player_count_past_72_hours(game_id)
     } else if (active_vis == "past_48_hours"){
         console.log("NOT YET IMPLEMENTED")
     } else if (active_vis == "past_24_hours"){
