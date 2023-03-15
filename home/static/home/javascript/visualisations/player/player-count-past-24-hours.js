@@ -159,15 +159,13 @@ function player_count_past_24_hours(id){
 
     let player_data = get_data_player_count_past_24_hours(id)
 
-    temp_data.forEach(function(data, index){
-        temp_data[index].timestamp = new Date(data.timestamp)
-        // console.log(index)
-        // console.log(data)
+    player_data.forEach(function(data, index){
+        player_data[index].timestamp = new Date(data.timestamp)
     })
 
-    player_data = temp_data
+    // player_data = temp_data
 
-    console.log(temp_data)
+    // console.log(temp_data)
     console.log(player_data)
 
 
