@@ -6,5 +6,4 @@ urlpatterns = [
     path('games/', views.GameList, name='game-list'),
     path('games/<int:pk>/', views.GameDetail, name='game-detail'),
     path('games/<int:pk>/reviews/', views.GameReviews, name='game-reviews'),
-    path('games/<int:pk>/reviews/<int:search>/', views.GameReviewsContinue, name='game-reviews-continue')
 ]

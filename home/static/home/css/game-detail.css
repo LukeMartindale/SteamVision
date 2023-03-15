@@ -159,6 +159,40 @@
     padding-bottom: 5px;
     margin-bottom: 5px;
     box-shadow: 0px 0px 10px black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.widget-section-label {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.widget-section-label-text {
+    text-align: center;
+}
+
+.widget-section-content {
+    width: 100%;
+    display: flex;
+}
+
+.widget-section-content-left {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.widget-section-content-right {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .descriptors-label-wrapper {

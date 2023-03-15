@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from . models import Game, GameStat, Descriptor, Review
+from . models import Game, GameStat, Descriptor, Review, PlayerCount
 from django.views.generic import (
     ListView,
     DetailView,
@@ -144,7 +144,9 @@ def GameList(request):
 def GameDetail(request, pk):
 
     game = Game.objects.get(app_id=pk)
+    game_stats = GameStat.objects.get(app_id__app_id=pk)
     descriptors = Descriptor.objects.all().order_by('name').values()
+    player_count = PlayerCount.objects.filter(app_id=game).last()
 
     total_reviews = len(Review.objects.filter(app_id=game))
     sentiment_score = GameStat.objects.get(app_id=game).current_sentiment_score
@@ -168,7 +170,7 @@ def GameDetail(request, pk):
     if(request.method == "POST"):
         print("POST")
 
-    context = {'game': game, 'descriptors': descriptors, 'total_reviews': total_reviews, 'sentiment_score': sentiment_score, "reviews": reviews}
+    context = {'game': game, 'game_stats': game_stats, 'descriptors': descriptors, 'total_reviews': total_reviews, 'sentiment_score': sentiment_score, "reviews": reviews}
 
     return render(request, 'home/game-detail.html', context)
 

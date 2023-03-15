@@ -122,7 +122,18 @@
 
                 <div class="widgets-section-wrapper">
                     <div class="widget-section">
-
+                        <div class="widget-section-label">
+                            <label class="widget-section-label-text">Player Count</label>
+                        </div>
+                        <div class="widget-section-content">
+                            <div class="widget-section-content-left">
+                                LEFT
+                            </div>
+                            <div class="widget-section-content-right">
+                                RIGHT
+                                {{ game_stats }}
+                            </div>
+                        </div>
                     </div>
                     <div class="widget-section">
                         
@@ -475,7 +486,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="visualisation-container-content" id="player-count-container-content"></div>
+                    <div class="visualisation-container-content" id="player-count-container-content">
+                        <svg class="visualisation-svg" id="player-graph">
+    
+                        </svg>
+                    </div>
                 </div>
 
                 <div class="visualisation-widgets-drawer">
