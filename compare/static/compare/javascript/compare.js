@@ -6,7 +6,7 @@ $(function(){
 
     $("#test-button").click(function(){
         numbers.push($("#test-number").val())
-        let player = get_data_player_count_past_24_hours_compare(numbers)
+        let player = player_count_past_24_hours_compare(numbers)
 
         console.log(player)
 
