@@ -1,0 +1,25 @@
+{% extends "home/base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <!-- MY CSS -->
+    <link rel="stylesheet" href="{% static 'compare/css/compare.css' %}">
+
+    <!-- D3 -->
+    <script src="https://d3js.org/d3.v7.min.js" charset="utf-8" defer></script>
+
+
+    <div class="block-wrapper">
+
+        <div class="detail-block-wrapper">
+
+            
+
+        </div>
+
+    </div>
+
+    <script src="{% static 'compare/javascript/visualisations/player/player-count-past-24-hours-compare.js' %}"></script>
+
+{% endblock %}

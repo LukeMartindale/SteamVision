@@ -25,7 +25,7 @@ urlpatterns = [
     path('', include('home.urls')),
     path('charts/', include('charts.urls')),
     path('developer/', include('developer.urls')),
-
+    path('compare/', include('compare.urls')),
 ]
 
 if settings.DEBUG:

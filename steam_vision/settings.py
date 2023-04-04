@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'charts.apps.ChartsConfig',
     'developer.apps.DeveloperConfig',
+    'compare.apps.CompareConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
