@@ -9,17 +9,21 @@
     <!-- D3 -->
     <script src="https://d3js.org/d3.v7.min.js" charset="utf-8" defer></script>
 
-
     <div class="block-wrapper">
 
         <div class="detail-block-wrapper">
 
-            
+            <input type="number" name="test-number" id="test-number">
+            <button id="test-button"></button>
 
         </div>
 
     </div>
 
+    <!-- PLAYER COUNT VISUALISATIONS -->
     <script src="{% static 'compare/javascript/visualisations/player/player-count-past-24-hours-compare.js' %}"></script>
+
+    <!-- Javascript -->
+    <script src="{% static 'compare/javascript/compare.js' %}"></script>
 
 {% endblock %}
