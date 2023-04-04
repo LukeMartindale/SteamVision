@@ -244,6 +244,8 @@ function player_count_past_24_hours_compare(ids) {
         }
 
         player_data.forEach(function(value, index){
+            console.log("DATA BREAKER")
+            console.log(value)
             // ADD CHART LINE
             chart
                 .append("path")
