@@ -91,6 +91,7 @@ function player_count_past_24_hours_compare(ids) {
             .attr('width', svgWidth + margins.left + margins.right)
             .attr('height', svgHeight + margins.top + margins.bottom);
 
+        console.log(highest_set)
         
         let x = d3.scaleTime()
             .domain(d3.extent(highest_set, function(data) {return data.timestamp; }))
