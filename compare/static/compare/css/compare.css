@@ -1,0 +1,66 @@
+.block-wrapper {
+    color: #bec5cb;
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 25px;
+    min-width: 280px;
+}
+
+.game-selector-wrapper {
+    max-width: 960px;
+    border-radius: 12px;
+    background-color: #272C30;
+    display: flex;
+    flex-direction: column;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    box-shadow: 0px 0px 10px black;
+}
+
+.section-block-wrapper {
+    max-width: 960px;
+    border-radius: 12px;
+    background-color: #272C30;
+    display: flex;
+    flex-direction: column;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    box-shadow: 0px 0px 10px black;
+    margin-top: 30px;
+}
+
+.visualisation-container {
+    width: 100%;
+    max-width: 900px;
+    margin-top: 15px;
+    background-color: #383c40;
+    border: 1px solid #bec5cb;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0px 0px 10px black;
+}
+
+.visualisation-container-header {
+    width: 100%;
+    height: 50px;
+    background-color: #383c40;
+    border-bottom: 1px solid #bec5cb;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.visualisation-container-content {
+    height: 480px;
+    max-height: 600px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
+    overflow: visible;
+}

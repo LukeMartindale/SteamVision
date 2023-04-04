@@ -11,11 +11,43 @@
 
     <div class="block-wrapper">
 
-        <div class="detail-block-wrapper">
+        <div class="game-selector-wrapper">
 
             <input type="number" name="test-number" id="test-number">
             <button id="test-button"></button>
 
+        </div>
+
+        <div class="section-block-wrapper">
+
+            <div class="visualisation-container">
+                <div class="visualisation-container-header">
+                    <div class="visualisation-container-options-wrapper">
+                        <select class="visualisation-select" id="player-select">
+                            <option class="visualisation-select-option" value="player-all-time">All Time</option>
+                            <option class="visualisation-select-option" value="player-past-1-month">Past Month</option>
+                            <option class="visualisation-select-option" value="player-past-2-weeks">Past 2 Weeks</option>
+                            <option class="visualisation-select-option" value="player-past-1-week">Past 7 Days</option>
+                            <option class="visualisation-select-option" value="player-past-72-hours">Past 72 Hours</option>
+                            <option class="visualisation-select-option" value="player-past-48-hours">Past 48 Hours</option>
+                            <option class="visualisation-select-option" value="player-past-24-hours">Past 24 Hours</option>
+                        </select>
+                    </div>
+                    <div class="visualisation-container-header-detail-widget">
+                        <div class="visualisation-container-header-detail-widget-left">
+                            <b>Total Reviews:</b> 
+                        </div>
+                        <div class="visualisation-container-header-detail-widget-right">
+                            Placeholder
+                        </div>
+                    </div>
+                </div>
+                <div class="visualisation-container-content players-container-content" id="player-count-container-content">
+                    <svg class="visualisation-svg" id="player-graph">
+    
+                    </svg>
+                </div>
+            </div>
         </div>
 
     </div>
