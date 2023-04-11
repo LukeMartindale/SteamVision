@@ -18,6 +18,28 @@
 
         </div>
 
+        <div class="game-selector-wrapper">
+
+            <div class="top-filter-section">
+
+                <div class="search-filter-wrapper">
+
+                    <div class="search-bar-wrapper">
+    
+                        <input type="text" name="search" id="search-input" class="search-bar-input"></input>
+    
+                        <button type="submit" class="search-bar-button" tabindex="-1">
+                            <i class="bi bi-search search-icon"></i>
+                        </button>
+    
+                    </div>
+    
+                </div>
+    
+            </div>
+
+        </div>
+
         <div class="section-block-wrapper">
 
             <div class="visualisation-container">
@@ -57,5 +79,6 @@
 
     <!-- Javascript -->
     <script src="{% static 'compare/javascript/compare.js' %}"></script>
+    <script src="{% static 'compare/javascript/compare-search.js' %}"></script>
 
 {% endblock %}
