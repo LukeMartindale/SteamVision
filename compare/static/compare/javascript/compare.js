@@ -1,18 +1,18 @@
-$(function(){
+// $(function(){
 
-    console.log("COMPARE LOAD TEST")
+//     console.log("COMPARE LOAD TEST")
 
-    let numbers = []
+//     let numbers = []
 
-    $("#test-button").click(function(){
-        numbers.push($("#test-number").val())
-        let player = player_count_past_24_hours_compare(numbers)
+//     $("#test-button").click(function(){
+//         numbers.push($("#test-number").val())
+//         let player = player_count_past_24_hours_compare(numbers)
 
-        console.log(player)
+//         console.log(player)
 
-    })
+//     })
 
-})
+// })
 
 $(function(){
 
@@ -40,10 +40,23 @@ $(function(){
         console.log(game_ids)
         numbers = game_ids
 
+        console.log(games)
+        player_count_past_24_hours_compare(numbers)
+
     }
 
-    console.log(games)
-    player_count_past_24_hours_compare(numbers)
+    $("#test-button").click(function(){
+        if(!numbers.includes($("#test-number").val())){
+            numbers.push($("#test-number").val())
+        }
+        let player = player_count_past_24_hours_compare(numbers)
+
+        console.log(player)
+
+        console.log("number")
+        console.log(numbers)
+
+    })
 
 })
 
