@@ -458,6 +458,33 @@ def userFollowGame(request, id):
         return Response({"message": "This game does not exist"}, status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['GET'])
+def userUnfollowGame(request, id):
+
+    # Check that user is logged in
+
+    # Get user profile
+    profile = Profile.objects.get(user=request.user)
+    # Check that game is being followed
+    if any (d.get('app_id', 'default') == id for d in profile.followed_games):
+        # get rank of removed game
+        removed_rank = next((x for x in profile.followed_games if (x["app_id"]) == id), None)
+        if removed_rank: removed_rank = removed_rank["rank"]
+        # remove game from followed list
+        new_list = [i for i in profile.followed_games if not (i["app_id"] == id)]
+        # update game ranks
+        for item in new_list:
+            if item["rank"] > removed_rank: item["rank"]-=1
+        # set profile followed games to new list
+        profile.followed_games = new_list
+        # save profile
+        profile.save()
+        return Response({"message": "Game successfully unfollowed"})
+    else:
+        return Response({"message": "This game is not being followed"})
+
+
+
+@api_view(['GET'])
 def test(request):
 
     print(request.session)
