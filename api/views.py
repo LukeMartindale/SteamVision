@@ -487,8 +487,15 @@ def userGetFollowedGames(request):
     # Check if user is logged in
     # Get user profile
     profile = Profile.objects.get(user__username=request.user)
+    game_ids = [i["app_id"] for i in profile.followed_games]
+    print(game_ids)
+    # Get game objects
+    followed_games = Game.objects.filter(app_id__in=game_ids)
+    print(followed_games)
+    # serialize followed games
+    serializer = GameSerializer(followed_games, many=True)
     # Return followed games list
-    return Response({"message": "Followed games list retrieved", "followed_games": profile.followed_games})
+    return Response({"message": "Followed games list retrieved", "games": serializer.data})
 
 
 @api_view(['GET'])
