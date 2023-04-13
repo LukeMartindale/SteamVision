@@ -15,6 +15,9 @@ from home.models import (
     Descriptor, 
     PlayerCount,
     )
+from users.models import (
+    Profile
+)
 from data_processors.processor_helpers import sentiment_past_time_calc
 from django.utils import timezone
 import datetime
@@ -418,8 +421,47 @@ def getReviewPercentageCurrent(request):
     return Response(reviews_current)
 
 @api_view(['GET'])
+def userFollowGame(request, id):
+
+    # Check that user is logged in
+
+    # Check that game exists
+    if Game.objects.filter(app_id=id).exists():
+        # Get user profile
+        profile = Profile.objects.get(user=request.user)
+
+        # Create dictionary object
+        followed_entry = dict()
+        # check if followed game is empty or not
+        if profile.followed_games == {}:
+            followed_list = []
+        else:
+            followed_list = profile.followed_games
+        # Check if game already being followed
+        if not any (d.get('app_id', 'default') == id for d in followed_list):
+            # Set app_id in followed_entry
+            followed_entry["app_id"] = id
+            # Get current date/time and set in followed_entry
+            followed_entry["date_and_time"] = timezone.now().strftime("%Y-%m-%d %H:%M:%S")
+            # Figure out followed rank should be
+            followed_entry["rank"] = len(followed_list) + 1
+            # add game to followed games list
+            followed_list.append(followed_entry)
+            # set profile followed game to file_list
+            profile.followed_games = followed_list
+            # Save profile
+            profile.save()
+            return Response({"message": "Game successfully followed"}, status=status.HTTP_200_OK)
+        else:
+            return Response({"message": "User is already following this game"}, status=status.HTTP_200_OK)
+    else:
+        return Response({"message": "This game does not exist"}, status=status.HTTP_404_NOT_FOUND)
+
+@api_view(['GET'])
 def test(request):
 
     print(request.session)
+    print(request.user)
+    print(request)
 
     return Response({"test": "text"})
