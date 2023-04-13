@@ -482,6 +482,13 @@ def userUnfollowGame(request, id):
     else:
         return Response({"message": "This game is not being followed"})
 
+@api_view(['GET'])
+def userGetFollowedGames(request):
+    # Check if user is logged in
+    # Get user profile
+    profile = Profile.objects.get(user__username=request.user)
+    # Return followed games list
+    return Response({"message": "Followed games list retrieved", "followed_games": profile.followed_games})
 
 
 @api_view(['GET'])

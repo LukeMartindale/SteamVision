@@ -41,5 +41,6 @@ urlpatterns = [
     path('charts/get-reviews-percentage-current/', views.getReviewPercentageCurrent),
     path('user/followgame/<int:id>/', views.userFollowGame),
     path('user/unfollowgame/<int:id>/', views.userUnfollowGame),
+    path('user/getfollowedgames/', views.userGetFollowedGames),
     path('test/', views.test)
 ]
