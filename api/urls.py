@@ -42,5 +42,6 @@ urlpatterns = [
     path('user/followgame/<int:id>/', views.userFollowGame),
     path('user/unfollowgame/<int:id>/', views.userUnfollowGame),
     path('user/getfollowedgames/', views.userGetFollowedGames),
+    path('user/checkfollowgame/<int:id>/', views.userCheckFollowingGame),
     path('test/', views.test)
 ]

@@ -1,3 +1,6 @@
+// SET Variables
+let follow_status = "unknown"
+
 // GENERAL PAGE FUNCTIONALITY
 $(function(){
 
@@ -77,9 +80,88 @@ $(function(){
 
 })
 
+$(function(){
+
+    let api_url = `/api/user/checkfollowgame/${game_id}`
+
+    let response = function(){
+        let data = null;
+        $.ajax({
+            async: false,
+            type: 'GET',
+            dataType: 'json',
+            url: api_url,
+            success: function(result){
+                data = result
+            }
+        });
+        return data
+    }();
+
+    if(response.code == 1){
+        follow_status = "following"
+    } else if (response.code == 2) {
+        follow_status = "not following"
+    }
+
+    console.log(follow_status)
+
+})
+
 function FollowButton(){
 
-    $("#button-form-input").val("follow")
-    $("#detail-button-form").submit()
+    console.log("Follow Button")
+    console.log(follow_status)
 
+    if (follow_status == "not following") {
+        console.log("TEST 1")
+        let api_url = `/api/user/followgame/${game_id}/`
+
+        let response = function(){
+            let data = null;
+            $.ajax({
+                async: false,
+                type: 'GET',
+                dataType: 'json',
+                url: api_url,
+                success: function(result){
+                    data = result
+                }
+            });
+            return data
+        }();
+
+        follow_status = "following"
+
+    } else if (follow_status == "following") {
+        console.log("TEST 2")
+        let api_url = `/api/user/unfollowgame/${game_id}/`
+
+        let response = function(){
+            let data = null;
+            $.ajax({
+                async: false,
+                type: 'GET',
+                dataType: 'json',
+                url: api_url,
+                success: function(result){
+                    data = result
+                }
+            });
+            return data
+        }();
+
+        follow_status = "not following"
+    }
+
+}
+
+function CompareButton(){
+
+    console.log("Compare Button")
+
+    let url = `/compare/?games=${game_id}`
+
+    window.location.href = url
+    
 }

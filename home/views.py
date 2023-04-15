@@ -167,8 +167,8 @@ def GameDetail(request, pk):
     for review in reviews:
         review.review_text = re.sub(reg, '', review.review_text)
 
-    if(request.method == "POST"):
-        print("POST")
+    # if(request.method == "POST"):
+    #     print("POST")
 
     context = {'game': game, 'game_stats': game_stats, 'descriptors': descriptors, 'total_reviews': total_reviews, 'sentiment_score': sentiment_score, "reviews": reviews}
 

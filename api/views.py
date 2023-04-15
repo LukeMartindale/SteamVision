@@ -495,6 +495,19 @@ def userGetFollowedGames(request):
     # Return followed games list
     return Response({"message": "Followed games list retrieved", "games": serializer.data})
 
+@api_view(['GET'])
+def userCheckFollowingGame(request, id):
+
+    # check if user is logged in
+
+    profile = Profile.objects.get(user=request.user)
+    # check if user is following game
+    if any (d.get('app_id', 'default') == id for d in profile.followed_games):
+        # user is following game
+        return Response({"follow_status": "following", "code": "1"})
+    else:
+        # user is not following game
+        return Response({"follow_status": "not following", "code": "2"})
 
 @api_view(['GET'])
 def test(request):
