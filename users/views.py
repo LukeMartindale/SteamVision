@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from .decorators import unauthrosied_user
 
 from django.contrib.auth.models import User
-
+from home.models import Game
 from users.models import Profile
 
 # Create your views here.
@@ -55,8 +55,14 @@ def logoutPage(request):
 @login_required
 def profilePage(request):
     user = User.objects.get(username=request.user)
+    profile = Profile.objects.get(user=user)
+    game_ids = [i["app_id"] for i in profile.followed_games]
 
-    context = {'user': user}
+    print(game_ids)
+    # Get game objects
+    followed_games = Game.objects.filter(app_id__in=game_ids).order_by('name')
+
+    context = {'user': user, 'profile': profile, 'followed_games': followed_games}
 
     return render(request, 'users/profile.html', context)
 

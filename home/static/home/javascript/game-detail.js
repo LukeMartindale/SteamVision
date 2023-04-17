@@ -80,6 +80,7 @@ $(function(){
 
 })
 
+// CHECK IF USER IF FOLLOWING GAME
 $(function(){
 
     let api_url = `/api/user/checkfollowgame/${game_id}`
@@ -100,6 +101,8 @@ $(function(){
 
     if(response.code == 1){
         follow_status = "following"
+        $('#follow-game-button').text("Unfollow")
+        $('#follow-game-button').addClass("alternate-detail-button")
     } else if (response.code == 2) {
         follow_status = "not following"
     }
@@ -131,7 +134,12 @@ function FollowButton(){
             return data
         }();
 
+        console.log("1")
+
         follow_status = "following"
+
+        $('#follow-game-button').text("Unfollow")
+        $('#follow-game-button').addClass("alternate-detail-button")
 
     } else if (follow_status == "following") {
         console.log("TEST 2")
@@ -151,7 +159,12 @@ function FollowButton(){
             return data
         }();
 
+        console.log("2")
+
         follow_status = "not following"
+        
+        $('#follow-game-button').text("Follow")
+        $('#follow-game-button').removeClass("alternate-detail-button")
     }
 
 }

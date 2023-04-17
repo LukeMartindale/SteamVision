@@ -43,7 +43,10 @@
         </div>
 
         <div class="profile-content-selector">
-            <div class="profile-content-selector-widget content-selected" id="system-info-selector-button">
+            <div class="profile-content-selector-widget content-selected" id="followed-games-selector-button">
+                <b>Followed Games</b> 
+            </div>
+            <div class="profile-content-selector-widget" id="system-info-selector-button">
                 <b>System Info</b> 
             </div>
             <div class="profile-content-selector-widget" id="edit-profile-selector-button">
@@ -51,7 +54,62 @@
             </div>
         </div>
 
-        <div class="content-section" id="system-info-section">
+        <div class="content-section" id="followed-games-section">
+
+            <div class="content-section-box">
+                <div class="content-title-wrapper">
+                    <header class="content-title-text">
+                        Followed Games
+                    </header>
+                </div>
+
+                {% for game in followed_games %}
+                    <div class="game-widget-wrapper" id="game-app-{{ game.app_id }}" href="/games/{{game.app_id}}/" tabindex="0">
+                        <div class="game-widget-image-wrapper">
+                            <img src="{{ game.header_image }}" alt="" class="game-widget-image">
+                        </div>
+
+                        <div class="game-info-widget-section">
+                            <div class="game-info-title-section">
+                                <header class="game-info-title-text">{{ game.name }}</header>
+                            </div>
+                            <div class="game-info-tags-section">
+                                {% for tag in game.tags %}
+                                    {% if forloop.counter < 5 %}
+                                        <div class="game-tag-block">
+                                            {{ tag }}         
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <div class="game-info-detail-section">
+                            
+                            </div>
+                        </div>
+
+                        <div class="game-end-section-wrapper">
+                            <div class="game-end-section-top-wrapper">
+
+                            </div>
+                            <div class="game-end-section-bottom-wrapper">
+                                <div class="unfollow-button" type="button" id="game-unfollow-{{ game.app_id }}">
+                                    Unfollow
+                                </div>
+                                <!-- <button class="unfollow-button" type="button" id="game-unfollow-{{ game.app_id }}" onclick="unfollowButton(event, this.id)" onkeypress="">
+                                    Unfollow
+                                </button> -->
+                            </div>
+                        </div>
+
+                    </div>
+                {% endfor %}
+            </div>
+
+
+
+        </div>
+
+        <div class="content-section hide-section" id="system-info-section">
             <div class="content-section-box">
                 <div class="content-title-wrapper">
                     <header class="content-title-text">

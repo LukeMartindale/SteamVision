@@ -16,6 +16,7 @@
     padding-right: 30px;
     padding-top: 15px;
     padding-bottom: 15px;
+    box-shadow: 0px 0px 10px black;
 }
 
 .profile-info-section {
@@ -79,6 +80,7 @@
     padding-top: 15px;
     padding-bottom: 15px;
     margin-top: 30px;
+    box-shadow: 0px 0px 10px black;
 }
 
 .profile-content-selector-widget {
@@ -120,11 +122,13 @@
     padding-top: 15px;
     padding-bottom: 15px;
     margin-top: 30px;
+    box-shadow: 0px 0px 10px black;
 }
 
 .content-title-wrapper {
     width: 100%;
     border-bottom: 1px solid #bec5cb;
+    margin-bottom: 15px;
 }
 
 .content-title-text {
@@ -187,6 +191,192 @@
 .hide-section {
     display: none;
     overflow: hidden;
+}
+
+/* CSS FOR GAME WIDGETS */
+
+.game-list-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+}
+
+.game-widget-wrapper {
+    width: 100%;
+    border-radius: 6px;
+    background-color: #393d41;
+    box-shadow: 0px 0px 10px black;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    margin-bottom: 15px;
+    text-decoration: none;
+    color: #bec5cb;
+}
+
+.game-widget-wrapper:hover {
+    box-shadow: 0px 0px 10px white;
+}
+
+.game-widget-wrapper:focus {
+    box-shadow: 0px 0px 10px white;
+    outline: none;
+}
+
+.game-widget-image-wrapper {
+    width: 210px;
+    min-width: 210px;
+    height: 100%;
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    margin-right: 10px;
+}
+
+.game-widget-image {
+    width: 100%;
+    height: 100%;
+}
+
+.game-info-widget-section {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.game-info-title-section {
+    width: 100%;
+    height: 40%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.game-info-title-text {
+    font-size: 19px;
+    text-align: start;
+}
+
+.game-info-tags-section {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.game-tag-block {
+    background-color: #4169E1;
+    height: 14px;
+    padding-left: 4.5px;
+    padding-right: 4.5px;
+    border-radius: 4px;
+    margin-right: 1px;
+    margin-bottom: 1px;
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+}
+
+.game-info-detail-section {
+    width: 100%;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.game-end-section-wrapper {
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-end-section-top-wrapper {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-end-section-bottom-wrapper {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.unfollow-button {
+    color: #bec5cb;
+    border-bottom: 1px dotted #bec5cb;
+}
+
+.unfollow-button:hover {
+    color: red;
+    border-bottom: 1px dotted red;
+}
+
+@media only screen and (max-width: 700px){
+
+    .game-widget-wrapper {
+        align-items: center;
+        flex-direction: column;
+        width: 300px;
+        flex-grow: 20;
+    }
+
+    .game-info-widget-section {
+        padding: 0;
+        width: 100%;
+    }
+
+    .game-info-title-section {
+        margin-top: 10px;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .game-info-title-text {
+        padding-left: 5px;
+        padding-right: 5px;
+        text-align: center;
+    }
+
+    .game-info-tags-section {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .game-widget-image-wrapper {
+        width: 300px;
+        height: 144px;
+        margin-right: 0px;
+    }
+
+    .game-widget-image {
+        border-radius: 6px;
+    }
+
+    .game-end-section-wrapper {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
 }
 
 @media only screen and (max-width:610px){
