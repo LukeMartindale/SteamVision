@@ -51,6 +51,17 @@ def getGameStats(request, id):
 
     return Response(serializer.data)
 
+# Get a list of games which match the search arguments
+@api_view(['GET'])
+def getGameSearch(request, search):
+
+    print(search)
+    games = Game.objects.filter(name__contains=search)
+    print(games)
+    serializer = GameSerializer(games, many=True)
+
+    return Response({"games": serializer.data})
+
 # Get the all time year reviews data form game stat object by its app_id / pk of the game
 @api_view(['GET'])
 def getReviewsAllTimeYear(request, id):

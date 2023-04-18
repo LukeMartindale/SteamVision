@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     path('get-games/', views.getAllGames),
     path('get-games/<int:id>/', views.getGame),
+    path('get-games-search/<str:search>/', views.getGameSearch),
     path('get-games-stats/<int:id>/', views.getGameStats),
     path('get-reviews/all-time-year/<int:id>/', views.getReviewsAllTimeYear),
     path('get-reviews/all-time-month/<int:id>/', views.getReviewsAllTimeMonth),
