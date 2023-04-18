@@ -1,18 +1,4 @@
-// $(function(){
-
-//     console.log("COMPARE LOAD TEST")
-
-//     let numbers = []
-
-//     $("#test-button").click(function(){
-//         numbers.push($("#test-number").val())
-//         let player = player_count_past_24_hours_compare(numbers)
-
-//         console.log(player)
-
-//     })
-
-// })
+let compare_game_ids = []
 
 $(function(){
 
@@ -39,6 +25,7 @@ $(function(){
 
         console.log(game_ids)
         numbers = game_ids
+        compare_game_ids = game_ids
 
         console.log(games)
         player_count_past_24_hours_compare(numbers)
