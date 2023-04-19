@@ -156,16 +156,25 @@ function deleteItemClickEvent(){
         $(`#selected-game-${id}`).remove()
 
         console.log("Before: ", compare_game_data)
+        console.log("Before: ", compare_game_ids)
 
+        // remove game data from selected game data
         let filtered_games = compare_game_data.filter(function(value, index){
             return value.app_id !=  id
         })
 
+        // remove game id from selected game ids
+        let filtered_ids = compare_game_ids.filter(function(value, index){
+            return value != id
+        })
+
         compare_game_data = filtered_games
+        compare_game_ids = filtered_ids
 
         drawGraphs()
 
         console.log("After: ", compare_game_data)
+        console.log("ids: ", compare_game_ids)
 
         console.log(id)
     })
