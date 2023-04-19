@@ -6,9 +6,6 @@ $(function(){
 
     let params = new URLSearchParams(document.location.search);
     let games = params.get("games");
-
-    let game_ids = []
-    let numbers = []
     
     // Check games is not null or empty
     if(games){
@@ -18,10 +15,8 @@ $(function(){
 
         game_data.forEach(function(value, index){
             compare_game_ids.push(value[0]["app_id"])
-            compare_game_data.push(game_data[0])
+            compare_game_data.push(value[0])
         })
-
-        compare_game_data.push(game_data)
 
         console.log(compare_game_data)
 

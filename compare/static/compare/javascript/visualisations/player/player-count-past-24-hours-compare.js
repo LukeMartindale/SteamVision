@@ -1,7 +1,5 @@
 function get_data_player_count_past_24_hours_compare(ids) {
 
-    console.log(ids)
-
     let api_url = "/api/get-player-count/past-24-hours/"
     let temp_data = []
     let player_data = []
@@ -9,7 +7,6 @@ function get_data_player_count_past_24_hours_compare(ids) {
     ids.forEach(function(value, index){
 
         api_url = `/api/get-player-count/past-24-hours/${value}/`
-        console.log(api_url)
 
         temp_data = function(){
             let data = null;
@@ -25,7 +22,6 @@ function get_data_player_count_past_24_hours_compare(ids) {
             return data
         }();
 
-        console.log(temp_data)
         player_data.push(temp_data)
 
     })
@@ -63,9 +59,6 @@ function player_count_past_24_hours_compare(ids) {
             highest_set = player_data[0]
         }
 
-
-        console.log(player_data)
-
         $("#player-graph").empty()
 
         let margins = {top: 0, bottom: 0, left: 0, right: 0}
@@ -84,14 +77,10 @@ function player_count_past_24_hours_compare(ids) {
         let svgWidth = $('#player-graph').width() - margins.left - margins.right
         let svgHeight = 440 - margins.top - margins.bottom
 
-        console.log(svgWidth)
-
         let chartContainer = d3
             .select('#player-graph')
             .attr('width', svgWidth + margins.left + margins.right)
             .attr('height', svgHeight + margins.top + margins.bottom);
-
-        console.log(highest_set)
         
         let x = d3.scaleTime()
             .domain(d3.extent(highest_set, function(data) {return data.timestamp; }))
@@ -244,8 +233,6 @@ function player_count_past_24_hours_compare(ids) {
         }
 
         player_data.forEach(function(value, index){
-            console.log("DATA BREAKER")
-            console.log(value)
             // ADD CHART LINE
             chart
                 .append("path")
