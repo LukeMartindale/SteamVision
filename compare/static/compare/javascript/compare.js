@@ -16,6 +16,7 @@ $(function(){
         game_data.forEach(function(value, index){
             compare_game_ids.push(value[0]["app_id"])
             compare_game_data.push(value[0])
+            selectedItemDisplayAppend(value[0])
         })
 
         console.log(compare_game_data)

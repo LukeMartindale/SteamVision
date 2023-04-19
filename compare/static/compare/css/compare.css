@@ -224,14 +224,48 @@
     width: 240px;
     height: 100%;
     border-radius: 12px 0px 0px 12px;
-    background-color: blue;
+}
+
+.selected-game-image {
+    width: 100%;
+    min-height: 100%;
+    border-radius: 12px 0px 0px 12px;
 }
 
 .selected-game-button-wrapper {
     width: 60px;
     height: 100%;
     border-radius: 0px 12px 12px 0px;
-    background-color: red;
+    background-color: #272C30;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-button-widget {
+    background-color: #393d41;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 55px;
+    width: 55px;
+    cursor: pointer;
+}
+
+.game-button-widget:hover {
+    box-shadow: 0px 0px 10px white;
+}
+
+.remove-icon {
+    border-radius: 30px;
+    color: #bec5cb;
+    font-size: 30px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 

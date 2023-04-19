@@ -29,6 +29,7 @@ $(function(){
             if($("#search-input").val()){
                 $(".search-display-wrapper").removeClass("hide")
                 let games = searchApiCall()
+                searched_game_data = games
 
                 // Check if search has returned any games
                 if(games.length){
@@ -100,19 +101,73 @@ function searchItemClickEvent(){
         if(!compare_game_ids.includes(id)){
             compare_game_ids.push(id)
         }
-        // Add selected item to selected items display
-        selectedItemDisplayAppend("test")
-        // Draw Graphs
-        drawGraphs()
+        // Add selcted game data to selected_game_data
+        let selected_data
+        console.log("Search Game Data: ", searched_game_data)
+        for (let i = 0; i < searched_game_data.length; i++){
+            if(searched_game_data[i]["app_id"] == id){
+                selected_data = searched_game_data[i]
+                console.log(i)
+                break
+            }
+        }
+        if(!compare_game_data.includes(selected_data)){
+            // Add data to compare_game_data
+            compare_game_data.push(selected_data)
+            // Add selected item to selected items display
+            selectedItemDisplayAppend(selected_data)
+            // Draw Graphs
+            drawGraphs()
+        }
+
     })
 }
 
-function selectedItemDisplayAppend(game_id){
+function selectedItemDisplayAppend(game){
 
-    $(".selected-games-wrapper").append(`<div class="selected-game-widget-wrapper" id="selected-game-${game_id}"><div>`)
+    // Get game data from selcetd_game_data
 
-    $(`#selected-game-${game_id}`).append('<div class="selected-game-image-wrapper"></div>')
+    $(".selected-games-wrapper").append(`<div class="selected-game-widget-wrapper" id="selected-game-${game.app_id}"><div>`)
 
-    $(`#selected-game-${game_id}`).append('<div class="selected-game-button-wrapper"></div>')
+    let selected_wrapper = $(`#selected-game-${game.app_id}`)
+
+    selected_wrapper.append('<div class="selected-game-image-wrapper"></div>')
+    selected_wrapper
+        .find(".selected-game-image-wrapper")
+        .append(`<img class="selected-game-image" src="${game.header_image}"></img>`)
+
+    selected_wrapper.append('<div class="selected-game-button-wrapper"></div>')
+    selected_wrapper
+        .find(".selected-game-button-wrapper")
+        .append(`<div class="game-button-widget" id="remove-button-${game.app_id}"></div>`)
+
+    selected_wrapper
+        .find(".game-button-widget")
+        .append('<i class="bi bi-x-lg remove-icon"></i>')
+
+    deleteItemClickEvent()
+
+}
+
+function deleteItemClickEvent(){
+    $(".game-button-widget").click(function(){
+        let id = this.id.split("-")[2]
+
+        $(`#selected-game-${id}`).remove()
+
+        console.log("Before: ", compare_game_data)
+
+        let filtered_games = compare_game_data.filter(function(value, index){
+            return value.app_id !=  id
+        })
+
+        compare_game_data = filtered_games
+
+        drawGraphs()
+
+        console.log("After: ", compare_game_data)
+
+        console.log(id)
+    })
 
 }
