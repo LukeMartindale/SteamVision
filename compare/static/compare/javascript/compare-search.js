@@ -24,6 +24,7 @@ $(function(){
 
         clearTimeout(timeout)
 
+        // Wait 1 second before 
         timeout = setTimeout(function(){
             if($("#search-input").val()){
                 $(".search-display-wrapper").removeClass("hide")
@@ -31,8 +32,6 @@ $(function(){
 
                 // Check if search has returned any games
                 if(games.length){
-
-                    console.log("Games Found")
 
                     $(".search-display-wrapper").empty()
                     let wrapper = $(".search-display-wrapper")
@@ -55,16 +54,8 @@ $(function(){
                     searchItemClickEvent()
 
                 } else {
-
                     $(".search-display-wrapper").empty()
-
-                    console.log("No Games Founds")
-
                 }
-
-                console.log(games)
-                console.log(games[0])
-
             } else {
                 console.log("Search Empty")
             }
@@ -109,7 +100,19 @@ function searchItemClickEvent(){
         if(!compare_game_ids.includes(id)){
             compare_game_ids.push(id)
         }
-        console.log(compare_game_ids)
+        // Add selected item to selected items display
+        selectedItemDisplayAppend("test")
+        // Draw Graphs
         drawGraphs()
     })
+}
+
+function selectedItemDisplayAppend(game_id){
+
+    $(".selected-games-wrapper").append(`<div class="selected-game-widget-wrapper" id="selected-game-${game_id}"><div>`)
+
+    $(`#selected-game-${game_id}`).append('<div class="selected-game-image-wrapper"></div>')
+
+    $(`#selected-game-${game_id}`).append('<div class="selected-game-button-wrapper"></div>')
+
 }

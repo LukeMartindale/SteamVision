@@ -196,6 +196,44 @@
     background: #bec5cb; 
 }
 
+.selected-games-wrapper {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.selected-game-widget-wrapper {
+    width: 300px;
+    min-width: 240px;
+    height: 120px;
+    margin: 10px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 10px black;
+    background-color: #272C30;
+    text-decoration: none;
+    color: #bec5cb;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.selected-game-image-wrapper {
+    width: 240px;
+    height: 100%;
+    border-radius: 12px 0px 0px 12px;
+    background-color: blue;
+}
+
+.selected-game-button-wrapper {
+    width: 60px;
+    height: 100%;
+    border-radius: 0px 12px 12px 0px;
+    background-color: red;
+}
+
 
 /* Hide when dont want to see */
 .hide {

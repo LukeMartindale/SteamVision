@@ -1,8 +1,8 @@
 let compare_game_ids = []
+let searched_game_data = []
+let compare_game_data = []
 
 $(function(){
-
-    console.log("TEST")
 
     let params = new URLSearchParams(document.location.search);
     let games = params.get("games");
@@ -16,34 +16,18 @@ $(function(){
         split_games = games.split(",");
         let game_data = getGame(split_games)
 
-        console.log("True")
-        console.log(game_data)
-
         game_data.forEach(function(value, index){
-            game_ids.push(value[0]["app_id"])
+            compare_game_ids.push(value[0]["app_id"])
+            compare_game_data.push(game_data[0])
         })
 
-        console.log(game_ids)
-        numbers = game_ids
-        compare_game_ids = game_ids
+        compare_game_data.push(game_data)
 
-        console.log(games)
-        player_count_past_24_hours_compare(numbers)
+        console.log(compare_game_data)
+
+        player_count_past_24_hours_compare(compare_game_ids)
 
     }
-
-    $("#test-button").click(function(){
-        if(!numbers.includes($("#test-number").val())){
-            numbers.push($("#test-number").val())
-        }
-        let player = player_count_past_24_hours_compare(numbers)
-
-        console.log(player)
-
-        console.log("number")
-        console.log(numbers)
-
-    })
 
 })
 
