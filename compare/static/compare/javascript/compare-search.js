@@ -50,6 +50,14 @@ $(function(){
                         item
                             .find(".search-item-image-wrapper")
                             .append(`<img class="search-item-image" src="${game.header_image}"></img>`)
+
+                        item
+                            .append('<div class="search-item-title-wrapper"></div>')
+
+                        item
+                            .find(".search-item-title-wrapper")
+                            .append(`<div class="search-item-title-text">${game.name}</div>`)
+
                     })
 
                     searchItemClickEvent()
