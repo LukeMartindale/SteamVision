@@ -171,6 +171,10 @@ def GameDetail(request, pk):
     for review in reviews:
         review.review_text = re.sub(reg, '', review.review_text)
 
+    reviews_percentage = round((game_stats.current_review_score * 100), 1)
+
+    print(reviews_percentage)
+
     context = {
         'game': game, 
         'game_stats': game_stats, 
@@ -181,10 +185,9 @@ def GameDetail(request, pk):
         "negative_reviews": negative_reviews,
         'sentiment_score': sentiment_score, 
         "reviews": reviews,
-        "reviews_percentage": (round(game_stats.current_review_score * 100), 1)
+        "reviews_percentage": reviews_percentage
         }
-    
-    print((round(game_stats.current_review_score * 100), 1))
+
 
     return render(request, 'home/game-detail.html', context)
 
