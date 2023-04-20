@@ -185,23 +185,25 @@ $(function(){
 
     // Review percentages colour
     let widget = $("#top-widget-current-review-score")
-    let percentage = widget.text()
+    let percentage = reviews_percentage
+
+    console.log(percentage)
 
     if (percentage >= 70){
         widget.css("color", "#80a45c")
-        widget.text(`${percentage}%`)
+        widget.text(`${(percentage * 100).toFixed(1)}%`)
     } else if (percentage >= 60) {
         widget.css("color", "#c0d4ac")
-        widget.text(`${percentage}%`)
+        widget.text(`${(percentage * 100).toFixed(1)}%`)
     } else if (percentage >= 50) {
         widget.css("color", "#f4ff50")
-        widget.text(`${percentage}%`)
+        widget.text(`${(percentage * 100).toFixed(1)}%`)
     } else if (percentage >= 40) {
         widget.css("color", "#f89c3c")
-        widget.text(`${percentage}%`)
+        widget.text(`${(percentage * 100).toFixed(1)}%`)
     } else {
         widget.css("color", "#f03424")
-        widget.text(`${percentage}%`)
+        widget.text(`${(percentage * 100).toFixed(1)}%`)
     }
 
     // Sentiment score colour
@@ -240,7 +242,7 @@ $(function(){
         // Get the prominent emotions, prominent emotions are those with a percentage of 20% or higher
         emotions_base.forEach(function(value, index){
             // Get the prominent emotions
-            if(emotion_data[value] / total_emotion >= 0.2){
+            if(emotion_data[value] / total_emotion >= 0.15){
                 prominent.push(value)
             }
         })
