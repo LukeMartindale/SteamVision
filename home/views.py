@@ -181,7 +181,10 @@ def GameDetail(request, pk):
         "negative_reviews": negative_reviews,
         'sentiment_score': sentiment_score, 
         "reviews": reviews,
+        "reviews_percentage": (round(game_stats.current_review_score * 100))
         }
+    
+    print((round(game_stats.current_review_score * 100)))
 
     return render(request, 'home/game-detail.html', context)
 
