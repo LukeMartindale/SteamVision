@@ -122,27 +122,85 @@
 
                 <div class="widgets-section-wrapper">
                     <div class="widget-section">
-                        <div class="widget-section-label">
-                            <label class="widget-section-label-text">Player Count</label>
-                        </div>
                         <div class="widget-section-content">
                             <div class="widget-section-content-left">
-                                LEFT
+                                <div class="widget-section-content-top">
+                                    <div class="widget-section-content-top-text" style="color: #4169E1" title="All time highest recorded player count">
+                                        {{ game_stats.highest_player_count }}
+                                    </div>
+                                </div>
+                                <div class="widget-section-content-bottom">
+                                    All Time Players
+                                </div>
                             </div>
                             <div class="widget-section-content-right">
-                                RIGHT
-                                {{ game_stats }}
+                                <div class="widget-section-content-top">
+                                    <div class="widget-section-content-top-text" title="Current player count">
+                                        {{ player_count.player_count }}
+                                    </div>
+                                </div>
+                                <div class="widget-section-content-bottom">
+                                    Current Players
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="widget-section">
-                        
+                        <div class="widget-section-content">
+                            <div class="widget-section-content-left">
+                                <div class="review-widget-percentage-text" id="top-widget-current-review-score">
+                                    {{game_stats.current_review_score|floatformat:1}}
+                                </div>
+                            </div>
+                            <div class="widget-section-content-right">
+                                <div class="widget-section-content-vertical">
+                                    <i class="bi bi-arrow-up" style="color: #80a45c;"></i>
+                                    <div class="review-widget-positive-text" title="Positive Reviews">
+                                        {{ positive_reviews }}
+                                    </div>
+                                </div>
+                                <div class="widget-section-content-vertical">
+                                    <i class="bi bi-arrow-down" style="color: #f03424;"></i>
+                                    <div class="review-widget-negative-text" title="Negative Reviews">
+                                        {{ negative_reviews }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="widget-section">
-                        
+                        <div class="widget-section-content">
+                            <div class="widget-section-content-left">
+                                <div class="widget-section-content-top">
+                                    <div class="widget-section-content-top-text" id="widget-section-highest-sentiment-score" style="color: #4169E1" title="All time highest recorded sentiment score">
+                                        {{ game_stats.highest_sentiment_score }}
+                                    </div>
+                                </div>
+                                <div class="widget-section-content-bottom">
+                                    All Time Sentiment
+                                </div>
+                            </div>
+                            <div class="widget-section-content-right">
+                                <div class="widget-section-content-top">
+                                    <div class="widget-section-content-top-text" id="widget-section-current-sentiment-score" title="Current Sentiment Score">
+                                        {{ game_stats.current_sentiment_score }}
+                                    </div>
+                                </div>
+                                <div class="widget-section-content-bottom">
+                                    Current Sentiment
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="widget-section">
-                        
+                        <div class="widget-section-content" style="flex-direction: column;">
+                            <div class="widget-section-content-top emotion-container-flexer" id="content-widgets-prominent-emotions">
+
+                            </div>
+                            <div class="widget-section-content-bottom">
+                                Prominent Emotions
+                            </div>
+                        </div>
                     </div>
                 </div>
 

@@ -148,7 +148,11 @@ def GameDetail(request, pk):
     descriptors = Descriptor.objects.all().order_by('name').values()
     player_count = PlayerCount.objects.filter(app_id=game).last()
 
+    #reviews 
     total_reviews = len(Review.objects.filter(app_id=game))
+    positive_reviews = len(Review.objects.filter(app_id=game, voted_up=True))
+    negative_reviews = len(Review.objects.filter(app_id=game, voted_up=False))
+
     sentiment_score = GameStat.objects.get(app_id=game).current_sentiment_score
 
     reviews_format = ["[list]", "[/list]", "[i]", "[/i]", "[b]", "[/b]", "[h1]", "[/h1]", "[code]", "[/code]", "[/url]", "[spoiler]", "[/spoiler]"]
@@ -167,10 +171,17 @@ def GameDetail(request, pk):
     for review in reviews:
         review.review_text = re.sub(reg, '', review.review_text)
 
-    # if(request.method == "POST"):
-    #     print("POST")
-
-    context = {'game': game, 'game_stats': game_stats, 'descriptors': descriptors, 'total_reviews': total_reviews, 'sentiment_score': sentiment_score, "reviews": reviews}
+    context = {
+        'game': game, 
+        'game_stats': game_stats, 
+        'player_count': player_count, 
+        'descriptors': descriptors, 
+        'total_reviews': total_reviews,
+        "positive_reviews": positive_reviews,
+        "negative_reviews": negative_reviews,
+        'sentiment_score': sentiment_score, 
+        "reviews": reviews,
+        }
 
     return render(request, 'home/game-detail.html', context)
 
