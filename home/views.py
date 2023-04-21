@@ -8,6 +8,8 @@ from django.views.generic import (
 from django.core.paginator import Paginator
 import re
 
+import time
+
 from .views_helper import (
     reviews_score_search_filter_value,
     sentiment_score_search_filter_value
@@ -143,6 +145,8 @@ def GameList(request):
 
 def GameDetail(request, pk):
 
+    start = time.time() 
+
     game = Game.objects.get(app_id=pk)
     game_stats = GameStat.objects.get(app_id__app_id=pk)
     descriptors = Descriptor.objects.all().order_by('name').values()
@@ -155,6 +159,8 @@ def GameDetail(request, pk):
 
     sentiment_score = GameStat.objects.get(app_id=game).current_sentiment_score
 
+    time_check_1 = time.time() 
+
     reviews_format = ["[list]", "[/list]", "[i]", "[/i]", "[b]", "[/b]", "[h1]", "[/h1]", "[code]", "[/code]", "[/url]", "[spoiler]", "[/spoiler]"]
     reg = "\[url=[^\]]*]"
 
@@ -163,13 +169,19 @@ def GameDetail(request, pk):
     if(len(reviews) > 10):
         reviews = reviews[:10]
 
+    time_check_2 = time.time() 
+
     # Formated reviews by removing unecceseray content
     for review in reviews:
         for format in reviews_format:
             review.review_text = review.review_text.replace(format, '')
 
+    time_check_3 = time.time() 
+
     for review in reviews:
         review.review_text = re.sub(reg, '', review.review_text)
+
+    time_check_4 = time.time() 
 
     reviews_percentage = round((game_stats.current_review_score * 100), 1)
 
@@ -187,7 +199,11 @@ def GameDetail(request, pk):
         "reviews": reviews,
         "reviews_percentage": reviews_percentage
         }
-
+    
+    print("Check 1: ", time_check_1-start)
+    print("Check 2: ", time_check_2-start)
+    print("Check 3: ", time_check_3-start)
+    print("Check 4: ", time_check_4-start)
 
     return render(request, 'home/game-detail.html', context)
 
