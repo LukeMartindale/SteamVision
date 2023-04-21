@@ -155,9 +155,9 @@ def GameDetail(request, pk):
     time_check_0 = time.time()
 
     #reviews 
-    total_reviews = len(Review.objects.filter(app_id=game))
-    positive_reviews = len(Review.objects.filter(app_id=game, voted_up=True))
-    negative_reviews = len(Review.objects.filter(app_id=game, voted_up=False))
+    # total_reviews = len(Review.objects.filter(app_id=game))
+    # positive_reviews = len(Review.objects.filter(app_id=game, voted_up=True))
+    # negative_reviews = len(Review.objects.filter(app_id=game, voted_up=False))
 
     time_check_0_5 = time.time()
 
