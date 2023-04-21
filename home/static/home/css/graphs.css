@@ -45,3 +45,8 @@
 #sentiment-bar--08, #sentiment-bar--09, #sentiment-bar--1 {
     fill: #f03424;
 }
+
+/* pie chart */
+.pie-part:hover {
+    filter: brightness(130%);
+}

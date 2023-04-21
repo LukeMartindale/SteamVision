@@ -24,7 +24,7 @@ function emotion_past_one_week(id){
 
     let raw_data = get_data_emotion_past_one_week(id)
 
-    let emotion = EmotionSection(raw_data, ["#0000FF","#0052FF","#007AFF","#00A3FF","#00CCFF"])
+    let emotion = EmotionSection(raw_data, ["#006ee6","#CC8899","#ff683b","#6c3","#FFFF00"])
     let reviews_data = emotion.section_data
 
     if(emotion.status){
@@ -73,6 +73,7 @@ function emotion_past_one_week(id){
             .attr('fill', function(d){return(colour(d.data[1])) })
             .style("stroke-width", "2px")
             .style("opacity", 0.7)
+            .classed('pie-part', true)
             .append('title')
             .text((data) => `Emotion: ${data.data[0]}\nEmotion Percentage: ${(data.data[1]/emotion.total * 100).toFixed(1)}%`);
     
@@ -88,6 +89,7 @@ function emotion_past_one_week(id){
             .style("font-weight","bold")
             .style("text-transform", "uppercase")
             .style("fill", "#bec5cb")
+            .style("text-shadow", "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000")
             .append('title')
             .text((data) => `Emotion: ${data.data[0]}\nEmotion Percentage: ${(data.data[1]/emotion.total * 100).toFixed(1)}%`);
 
