@@ -78,6 +78,16 @@ $(function(){
         $(this).children().toggleClass("widgets-icon-up")
     })
 
+    // Visualisation info widget
+    $(".visualisation-legend-bar-info-cirlce").on({
+        mouseenter: function() {
+            $(this).parents().siblings(".absolute-anchor").find(".vis-info-box-wrapper").removeClass("hide-section")
+        },
+        mouseleave: function() {
+            $(this).parents().siblings(".absolute-anchor").find(".vis-info-box-wrapper").addClass("hide-section")
+        }
+    })
+
 })
 
 // CHECK IF USER IF FOLLOWING GAME
