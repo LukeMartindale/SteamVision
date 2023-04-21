@@ -24,7 +24,8 @@ function emotion_all_time(id){
 
     let raw_data = get_data_emotion_all_time(id)
 
-    let emotion = EmotionSection(raw_data, ["#0000FF","#0052FF","#007AFF","#00A3FF","#00CCFF"])
+    // heroku order sad, fear, angry, happy, surprise
+    let emotion = EmotionSection(raw_data, ["#006ee6","#CC8899","#ff683b","#6c3","#FFFF00"])
     let reviews_data = emotion.section_data
 
     if(emotion.status){
