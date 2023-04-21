@@ -34,7 +34,7 @@ def GameList(request):
         print("POST")
         pass_search = True
 
-        games = Game.objects.filter(name__contains=request.POST["search"])
+        games = Game.objects.filter(name__icontains=request.POST["search"]).order_by('name')
         searchtextParams = request.POST["search"]
 
         if(request.POST["genres"]):

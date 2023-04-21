@@ -56,7 +56,7 @@ def getGameStats(request, id):
 def getGameSearch(request, search):
 
     print(search)
-    games = Game.objects.filter(name__contains=search)
+    games = Game.objects.filter(name__icontains=search)
     print(games)
     serializer = GameSerializer(games, many=True)
 
