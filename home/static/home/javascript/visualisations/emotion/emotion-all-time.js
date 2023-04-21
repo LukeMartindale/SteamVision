@@ -91,6 +91,7 @@ function emotion_all_time(id){
             .style("text-transform", "uppercase")
             .style("fill", "#bec5cb")
             .style("text-shadow", "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000")
+            .style("pointer-events", "none")
             .append('title')
             .text((data) => `Emotion: ${data.data[0]}\nEmotion Percentage: ${(data.data[1]/emotion.total * 100).toFixed(1)}%`);
 
