@@ -56,7 +56,13 @@ def logoutPage(request):
 def profilePage(request):
     user = User.objects.get(username=request.user)
     profile = Profile.objects.get(user=user)
-    game_ids = [i["app_id"] for i in profile.followed_games]
+
+    print(profile.followed_games)
+
+    if profile.followed_games != [] or {} or [{}]:
+        game_ids = [i["app_id"] for i in profile.followed_games]
+    else:
+        game_ids = []
 
     print(game_ids)
     # Get game objects
