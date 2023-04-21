@@ -200,16 +200,16 @@ $(function(){
 
     console.log(percentage)
 
-    if (percentage >= 70){
+    if (percentage >= 0.70){
         widget.css("color", "#80a45c")
         widget.text(`${(percentage * 100).toFixed(1)}%`)
-    } else if (percentage >= 60) {
+    } else if (percentage >= 0.60) {
         widget.css("color", "#c0d4ac")
         widget.text(`${(percentage * 100).toFixed(1)}%`)
-    } else if (percentage >= 50) {
+    } else if (percentage >= 0.50) {
         widget.css("color", "#f4ff50")
         widget.text(`${(percentage * 100).toFixed(1)}%`)
-    } else if (percentage >= 40) {
+    } else if (percentage >= 0.40) {
         widget.css("color", "#f89c3c")
         widget.text(`${(percentage * 100).toFixed(1)}%`)
     } else {
