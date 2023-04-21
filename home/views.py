@@ -163,8 +163,7 @@ def GameDetail(request, pk):
 
     reviews = Review.objects.filter(app_id=game).order_by('-time_created')
 
-    if(len(reviews) > 10):
-        reviews = reviews[:10]
+    reviews = reviews[0:10]
 
     time_check_2 = time.time() 
 
