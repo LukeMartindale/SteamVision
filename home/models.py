@@ -75,6 +75,15 @@ class GameStat(models.Model):
     #current_review_score
     current_review_score = models.FloatField(default=0.0)
 
+    #number_of_reviews
+    number_of_reviews = models.IntegerField(default=0)
+
+    #number_reviews_positive
+    number_reviews_positive = models.IntegerField(default=0)
+
+    #number_reviews_negative
+    number_reviews_negative = models.IntegerField(default=0)
+
     #reviews_all_time_year
     reviews_all_time_year = models.JSONField(default=dict)
 

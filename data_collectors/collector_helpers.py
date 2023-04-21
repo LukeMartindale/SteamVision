@@ -1,6 +1,7 @@
 import datetime
 from bs4 import BeautifulSoup
 from home.models import Descriptor
+import re
 
 def convertDate(string_date):
 
@@ -142,3 +143,15 @@ def requirementsStripper(raw_requirements):
         'linux_recommended': linux_recommended,
         }
 
+def format_review_text(review_text):
+
+    reviews_format = ["[list]", "[/list]", "[i]", "[/i]", "[b]", "[/b]", "[h1]", "[/h1]", "[code]", "[/code]", "[/url]", "[spoiler]", "[/spoiler]"]
+    reg = "\[url=[^\]]*]"
+
+    # Formated reviews by removing unecceseray content
+    for format in reviews_format:
+        formatted_text = review_text.replace(format, '')
+
+    formatted_text = re.sub(reg, '', review_text)
+
+    return formatted_text

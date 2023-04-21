@@ -4,6 +4,7 @@ import urllib.parse
 from home.models import Review, Game, GameStat
 from data_processors.reviews_sentiment import reviews_sentiment
 from data_processors.reviews_emotions import reviews_emotions
+from data_processors.processor_helpers import format_review_text
 from datetime import datetime
 from django.utils import timezone
 
@@ -182,7 +183,7 @@ def reviews_new_all_collector():
                     review.author_id = response_reviews["reviews"][i]["author"]["steamid"]
 
                     review.language = response_reviews["reviews"][i]["language"]
-                    review.review_text = response_reviews["reviews"][i]["review"]
+                    review.review_text = format_review_text(response_reviews["reviews"][i]["review"])
 
                     review.time_created = datetime.fromtimestamp(response_reviews["reviews"][i]["timestamp_created"])
                     if response_reviews["reviews"][i]["author"].get("playtime_at_review"):review.playtime_at_review = response_reviews["reviews"][i]["author"]["playtime_at_review"]

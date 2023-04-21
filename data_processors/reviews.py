@@ -3,6 +3,10 @@ from django.utils import timezone
 import datetime
 import calendar
 
+import re
+
+from data_processors.processor_helpers import format_review_text
+
 def reviews_all_time_year_legacy(id):
 
     reviews = Review.objects.filter(app_id__app_id__contains=id).order_by("time_created")
@@ -367,3 +371,29 @@ def reviews_past_month_all():
 
         stat.reviews_past_one_month = reviews_percentages
         stat.save()
+
+def format_current_reviews_text():
+
+    reviews = Review.objects.all()
+
+    reviews_format = ["[list]", "[/list]", "[i]", "[/i]", "[b]", "[/b]", "[h1]", "[/h1]", "[code]", "[/code]", "[/url]", "[spoiler]", "[/spoiler]"]
+    reg = "\[url=[^\]]*]"
+
+    review_total = len(reviews)
+
+    print(len(reviews))
+    index = 0
+
+    for review in reviews:
+        for format in reviews_format:
+            review.review_text = review.review_text.replace(format, '')
+        review.review_text = re.sub(reg, '', review.review_text)
+        review.save()
+        index +=1
+        print(index, "/", review_total)
+
+    # for review in reviews:
+    #     print(index)
+    #     review.review_text = format_review_text(review.review_text)
+    #     review.save()
+    #     index += 1

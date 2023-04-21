@@ -260,12 +260,12 @@ def GameReviews(request, pk):
         reviews = Review.objects.filter(app_id=game).order_by('-time_created')
 
     # Formated reviews by removing unecceseray content
-    for review in reviews:
-        for format in reviews_format:
-            review.review_text = review.review_text.replace(format, '')
+    # for review in reviews:
+    #     for format in reviews_format:
+    #         review.review_text = review.review_text.replace(format, '')
 
-    for review in reviews:
-        review.review_text = re.sub(reg, '', review.review_text)
+    # for review in reviews:
+    #     review.review_text = re.sub(reg, '', review.review_text)
 
     paginator = Paginator(reviews, 20)
     page_number = request.GET.get('page')

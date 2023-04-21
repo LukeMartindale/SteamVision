@@ -1,3 +1,5 @@
+import re
+
 def split_list(list, end_range, start_range):
     split = list[start_range:end_range]
     return split
@@ -63,3 +65,19 @@ def sentiment_past_time_calc(sentiment_data):
                     sentiment["value"] += data_sentiment["value"]
 
     return sentiment_calc
+
+def format_review_text(review_text):
+
+    reviews_format = ["[list]", "[/list]", "[i]", "[/i]", "[b]", "[/b]", "[h1]", "[/h1]", "[code]", "[/code]", "[/url]", "[spoiler]", "[/spoiler]"]
+    reg = "\[url=[^\]]*]"
+
+    # Formated reviews by removing unecceseray content
+    for format in reviews_format:
+        formatted_text = review_text.replace(format, '')
+
+    formatted_text = re.sub(reg, '', formatted_text)
+
+    print("formatted")
+    print(formatted_text)
+
+    return formatted_text
