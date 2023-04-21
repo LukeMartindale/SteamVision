@@ -274,9 +274,3 @@ def GameReviews(request, pk):
     context = {'game': game, 'reviews': paginated_reviews, 'pass_search': pass_search, "search_text": search_text, "review_score": review_score, "sentiment_range": sentiment_range, "prominent_emotion": prominent_emotion}
 
     return render(request, 'home/game-reviews.html', context)
-
-def GameReviewsContinue(request, pk, search):
-
-    context = {}
-
-    return render(request, 'home/game-reviews.html', context)
