@@ -193,31 +193,10 @@ function CompareButton(){
 // Set specific colours of parts of the page
 $(function(){
 
-    let api_url = `/api/get-games-detail/reviews/${game_id}/`
-
-    let reviews_detail = function(){
-        let data = null;
-        $.ajax({
-            async: false,
-            type: 'GET',
-            dataType: 'json',
-            url: api_url,
-            success: function(result){
-                data = result
-            }
-        });
-        return data
-    }();
-
     // Review percentages colour
     let widget = $("#top-widget-current-review-score")
 
-    console.log("TEST")
-
-    $("#top-widget-current-reviews-positive").text(reviews_detail.positive_reviews)
-    $("#top-widget-current-reviews-negative").text(reviews_detail.negative_reviews)
-
-    let percentage = reviews_detail.current_review_score
+    let percentage = reviews_percentage
 
     console.log(percentage)
 

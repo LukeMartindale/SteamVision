@@ -222,8 +222,15 @@ def reviews_new_all_collector():
         game_reviews = Review.objects.filter(app_id=game).count()
         game_reviews_up = Review.objects.filter(app_id=game, voted_up=True).count()
 
+        total_reviews = len(Review.objects.filter(app_id=game))
+        positive_reviews = len(Review.objects.filter(app_id=game, voted_up=True))
+        negative_reviews = len(Review.objects.filter(app_id=game, voted_up=False))
+
         review_score = game_reviews_up / game_reviews
         game_stats.current_review_score = review_score
+        game_stats.number_of_reviews = total_reviews
+        game_stats.number_reviews_positive = positive_reviews
+        game_stats.number_reviews_negative = negative_reviews
 
         if(review_score > game_stats.highest_review_score):
             game_stats.highest_review_score = review_score

@@ -154,11 +154,15 @@
                             <div class="widget-section-content-right">
                                 <div class="widget-section-content-vertical">
                                     <i class="bi bi-arrow-up" style="color: #80a45c;"></i>
-                                    <div class="review-widget-positive-text" id="top-widget-current-reviews-positive" title="Positive Reviews"></div>
+                                    <div class="review-widget-positive-text" id="top-widget-current-reviews-positive" title="Positive Reviews">
+                                        {{ game_stats.number_reviews_positive }}
+                                    </div>
                                 </div>
                                 <div class="widget-section-content-vertical">
                                     <i class="bi bi-arrow-down" style="color: #f03424;"></i>
-                                    <div class="review-widget-negative-text" id="top-widget-current-reviews-negative" title="Negative Reviews"></div>
+                                    <div class="review-widget-negative-text" id="top-widget-current-reviews-negative" title="Negative Reviews">
+                                        {{ game_stats.number_reviews_negative }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
