@@ -46,8 +46,12 @@ function emotion_past_one_week(id){
             .append("svg")
                 .attr("width", svgWidth)
                 .attr("height", svgHeight)
+                .attr('id', "emotion-graph")
+                .attr('overflow', 'visible')
             .append("g")
                 .attr("transform", `translate(${svgWidth/2}, ${svgHeight/2})`);
+
+        let chartContainer = d3.select("#emotion-graph")
     
         //set the colour scale
         let colour = d3.scaleOrdinal()
@@ -79,6 +83,30 @@ function emotion_past_one_week(id){
             .append('title')
             .text((data) => `Emotion: ${data.data[0]}\nEmotion Percentage: ${(data.data[1]/emotion.total * 100).toFixed(1)}%`);
     
+        // GRAPH TITLE
+        if ($(window).width() <= 475) {
+            // GRAPH TITLE
+            chartContainer
+                .append('text')
+                .attr('y', 32)
+                .attr('x', svgWidth/2.55)
+                .attr('fill', '#bec5cb')
+                .attr('font-size', 14)
+                .attr('font-weight', 'bold')
+                .text("Past One Week");
+        } else {
+            // GRAPH TITLE
+            chartContainer
+                .append('text')
+                .attr('y', 10)
+                .attr('x', svgWidth/2.30)
+                .attr('fill', '#bec5cb')
+                .attr('font-size', 16)
+                .attr('font-weight', 'bold')
+                .text("Past One Week");
+        }
+
+
         //add labels to the chart
         svg
             .selectAll("slices")

@@ -89,7 +89,7 @@ function emotion_past_one_month(id){
             chartContainer
                 .append('text')
                 .attr('y', 32)
-                .attr('x', svgWidth/2.55)
+                .attr('x', svgWidth/2.95)
                 .attr('fill', '#bec5cb')
                 .attr('font-size', 14)
                 .attr('font-weight', 'bold')
