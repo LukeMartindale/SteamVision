@@ -519,6 +519,19 @@ def userCheckFollowingGame(request, id):
     else:
         # user is not following game
         return Response({"follow_status": "not following", "code": "2"})
+    
+@api_view(['GET'])
+def gameDetailReviewsStats(request, id):
+
+    game = Game.objects.get(app_id=id)
+
+    game_stats = GameStat.objects.get(app_id=game)
+
+    total_reviews = len(Review.objects.filter(app_id=game))
+    positive_reviews = len(Review.objects.filter(app_id=game, voted_up=True))
+    negative_reviews = len(Review.objects.filter(app_id=game, voted_up=False))
+
+    return Response({"current_review_score": game_stats.current_review_score, "total_reviews": total_reviews, "positive_reviews": positive_reviews, "negative_reviews": negative_reviews})
 
 @api_view(['GET'])
 def test(request):

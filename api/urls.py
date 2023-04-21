@@ -6,6 +6,7 @@ urlpatterns = [
     path('get-games/<int:id>/', views.getGame),
     path('get-games-search/<str:search>/', views.getGameSearch),
     path('get-games-stats/<int:id>/', views.getGameStats),
+    path('get-games-detail/reviews/<int:id>/', views.gameDetailReviewsStats),
     path('get-reviews/all-time-year/<int:id>/', views.getReviewsAllTimeYear),
     path('get-reviews/all-time-month/<int:id>/', views.getReviewsAllTimeMonth),
     path('get-reviews/past-twelve-months/<int:id>/', views.getReviewsPastTwelveMonths),

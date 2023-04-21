@@ -20,3 +20,28 @@
 .neg-bar:hover{
     filter: brightness(130%);
 }
+
+/* Sentiment Bar Colours */
+#sentiment-bar-01, #sentiment-bar-02, #sentiment-bar-03, #sentiment-bar-04  {
+    fill: #6c3;
+}
+
+#sentiment-bar-05, #sentiment-bar-06, #sentiment-bar-07 {
+    fill: #80a45c;
+}
+
+#sentiment-bar-08, #sentiment-bar-09, #sentiment-bar-1 {
+    fill: #99b67d;
+}
+
+#sentiment-bar--01, #sentiment-bar--02, #sentiment-bar--03, #sentiment-bar--04  {
+    fill: #f4ff50;
+}
+
+#sentiment-bar--05, #sentiment-bar--06, #sentiment-bar--07 {
+    fill: #f89c3c;
+}
+
+#sentiment-bar--08, #sentiment-bar--09, #sentiment-bar--1 {
+    fill: #f03424;
+}

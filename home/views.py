@@ -154,13 +154,6 @@ def GameDetail(request, pk):
 
     time_check_0 = time.time()
 
-    #reviews 
-    total_reviews = len(Review.objects.filter(app_id=game))
-    positive_reviews = len(Review.objects.filter(app_id=game, voted_up=True))
-    negative_reviews = len(Review.objects.filter(app_id=game, voted_up=False))
-
-    time_check_0_5 = time.time()
-
     sentiment_score = GameStat.objects.get(app_id=game).current_sentiment_score
 
     time_check_1 = time.time() 
@@ -187,25 +180,16 @@ def GameDetail(request, pk):
 
     time_check_4 = time.time() 
 
-    reviews_percentage = round((game_stats.current_review_score * 100), 1)
-
-    print(reviews_percentage)
-
     context = {
         'game': game, 
         'game_stats': game_stats, 
         'player_count': player_count, 
-        'descriptors': descriptors, 
-        'total_reviews': total_reviews,
-        "positive_reviews": positive_reviews,
-        "negative_reviews": negative_reviews,
+        'descriptors': descriptors,
         'sentiment_score': sentiment_score, 
-        "reviews": reviews,
-        "reviews_percentage": reviews_percentage
+        "reviews": reviews
         }
     
     print("Check 0: ", time_check_0-start)
-    print("Check 0.5: ", time_check_0_5-start)
     print("Check 1: ", time_check_1-start)
     print("Check 2: ", time_check_2-start)
     print("Check 3: ", time_check_3-start)
