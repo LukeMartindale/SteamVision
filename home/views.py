@@ -159,6 +159,8 @@ def GameDetail(request, pk):
     positive_reviews = len(Review.objects.filter(app_id=game, voted_up=True))
     negative_reviews = len(Review.objects.filter(app_id=game, voted_up=False))
 
+    time_check_0_5 = time.time()
+
     sentiment_score = GameStat.objects.get(app_id=game).current_sentiment_score
 
     time_check_1 = time.time() 
@@ -203,6 +205,7 @@ def GameDetail(request, pk):
         }
     
     print("Check 0: ", time_check_0-start)
+    print("Check 0.5: ", time_check_0_5-start)
     print("Check 1: ", time_check_1-start)
     print("Check 2: ", time_check_2-start)
     print("Check 3: ", time_check_3-start)
