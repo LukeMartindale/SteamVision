@@ -25,6 +25,10 @@ $(function(){
         $("#reviews-section").removeClass("hide-section")
         $("#review-selector-button").addClass("content-selected")
 
+        redrawReviewsGraphs()
+        redrawSentimentgraph()
+        redrawEmotionGraph()
+
     })
 
     $("#recent-reviews-selector-button").click(function(){
@@ -69,6 +73,8 @@ $(function(){
 
         $("#players-section").removeClass("hide-section")
         $("#players-selector-button").addClass("content-selected")
+
+        redrawPlayerGraph()
 
     })
 
@@ -189,7 +195,6 @@ function CompareButton(){
     
 }
 
-
 // Set specific colours of parts of the page
 $(function(){
 
@@ -296,3 +301,162 @@ $(function(){
 
 
 })
+
+function redrawReviewsGraphs(){
+    console.log("reviews redraw")
+    // Reviews redraw
+    let option = $("#reviews-select").children("option:selected").val()
+
+    if(option == "review-all-time"){
+
+        review_all_time_year(game_id)
+        active_review_vis = "all_time_year"
+
+    } else if (option == "review-past-12-months"){
+
+        reviews_past_twelve_months(game_id)
+        active_review_vis = "past_twelve_months"
+
+    } else if (option == "review-past-6-months"){
+
+        reviews_past_six_months(game_id)
+        active_review_vis = "past_six_months"
+        
+    } else if (option == "review-past-1-month"){
+
+        reviews_past_one_month(game_id)
+        active_review_vis = "past_one_month"
+        
+    } else if (option == "review-past-2-weeks"){
+
+        reviews_past_two_weeks(game_id)
+        active_review_vis = "past_two_weeks"
+        
+    } else if (option == "review-past-1-week"){
+
+        reviews_past_one_week(game_id)
+        active_review_vis = "past_one_week"
+        
+    } 
+
+}
+
+function redrawSentimentgraph() {
+    console.log("sentiment redraw")
+    // Sentiment Redraw
+    let option = $("#sentiment-select").children("option:selected").val()
+
+    if(option == "sentiment-all-time"){
+
+        sentiment_all_time(game_id)
+        active_sentiment_vis = "all_time"
+
+    } else if (option == "sentiment-past-12-months"){
+
+        sentiment_past_twelve_months(game_id)
+        active_sentiment_vis = "past_twelve_months"
+
+    } else if (option == "sentiment-past-6-months"){
+
+        sentiment_past_six_months(game_id)
+        active_sentiment_vis = "past_six_months"
+        
+    } else if (option == "sentiment-past-1-month"){
+
+        sentiment_past_one_month(game_id)
+        active_sentiment_vis = "past_one_month"
+        
+    } else if (option == "sentiment-past-2-weeks"){
+
+        sentiment_past_two_weeks(game_id)
+        active_sentiment_vis = "past_two_weeks"
+        
+    } else if (option == "sentiment-past-1-week"){
+
+        sentiment_past_one_week(game_id)
+        active_sentiment_vis = "past_one_week"
+        
+    } 
+
+}
+
+function redrawEmotionGraph(){
+    console.log("emotion redraw")
+    // Emotion Redraw
+    let option = $("#emotion-select").children("option:selected").val()
+
+    if(option == "emotion-all-time"){
+
+        emotion_all_time(game_id)
+        active_emotion_vis = "all_time"
+
+    } else if (option == "emotion-past-12-months"){
+
+        emotion_past_twelve_months(game_id)
+        active_emotion_vis = "past_twelve_months"
+
+    } else if (option == "emotion-past-6-months"){
+
+        emotion_past_six_months(game_id)
+        active_emotion_vis = "past_six_months"
+        
+    } else if (option == "emotion-past-1-month"){
+
+        emotion_past_one_month(game_id)
+        active_emotion_vis = "past_one_month"
+        
+    } else if (option == "emotion-past-2-weeks"){
+
+        emotion_past_two_weeks(game_id)
+        active_emotion_vis = "past_two_weeks"
+        
+    } else if (option == "emotion-past-1-week"){
+
+        emotion_past_one_week(game_id)
+        active_emotion_vis = "past_one_week"
+        
+    } 
+}
+
+function redrawPlayerGraph() {
+    console.log("player redraw")
+    // Player Redraw
+    let option = $("#player-select").children("option:selected").val()
+
+    if(option == "player-all-time"){
+
+        player_count_all_time(game_id)
+        active_player_vis = "all_time"
+
+    } else if (option == "player-past-1-month"){
+
+        player_count_past_one_month(game_id)
+        active_player_vis = "past_one_month"
+
+    } else if (option == "player-past-2-weeks"){
+
+        player_count_past_two_weeks(game_id)
+        active_player_vis = "past_two_weeks"
+        
+    } else if (option == "player-past-1-week"){
+
+        player_count_past_one_week(game_id)
+        active_player_vis = "past_one_week"
+        
+    } else if (option == "player-past-72-hours"){
+
+        player_count_past_72_hours(game_id)
+        active_player_vis = "past_72_hours"
+        
+    } else if (option == "player-past-48-hours"){
+
+        player_count_past_48_hours(game_id)
+        active_player_vis = "past_48_hours"
+        
+    } else if (option == "player-past-24-hours"){
+
+        player_count_past_24_hours(game_id)
+        active_player_vis = "past_24_hours"
+        
+    } 
+}
