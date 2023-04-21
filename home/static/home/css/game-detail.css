@@ -285,6 +285,10 @@
     font-size: 28px;
 }
 
+.emotion-icon:hover {
+    filter: brightness(130%);
+}
+
 .emotion-happy {
     color: #6c3;
 }
@@ -303,6 +307,23 @@
 
 .emotion-fear {
     color: #CC8899;
+}
+
+/* small emotion icon */
+.emotion-icon-small-wrapper {
+    min-width: 26px;
+    min-height: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.emotion-small-icon {
+    font-size: 22px;
+}
+
+.emotion-small-icon:hover {
+    filter: brightness(130%);
 }
 
 .descriptors-label-wrapper {
@@ -521,6 +542,33 @@
 .high-positive-sentiment-widget {
     border: 2px solid #99b67d;
     background-color: rgba(153, 182, 125, 0.2);
+}
+
+/* emotion widgets */
+
+.sad-emotion-widget {
+    border: 2px solid #006ee6;
+    background-color: rgba(0, 110, 230, 0.2);
+}
+
+.fear-emotion-widget {
+    border: 2px solid #CC8899;
+    background-color: rgba(204, 136, 153, 0.2);
+}
+
+.angry-emotion-widget {
+    border: 2px solid #ff683b;
+    background-color: rgba(255, 104, 59, 0.2);
+}
+
+.happy-emotion-widget {
+    border: 2px solid #6c3;
+    background-color: rgba(102, 204, 51, 0.2);
+}
+
+.surprise-emotion-widget {
+    border: 2px solid #FFFF00;
+    background-color: rgba(255, 255, 0, 0.2);
 }
 
 .visualisation-legend-widget-minor-section {
@@ -1070,13 +1118,13 @@ select option {
     
     .visualisation-container-header-detail-widget-left {
         width: 100%;
-        height: 60%;
+        height: 50%;
         font-size: 13px;
     }
     
     .visualisation-container-header-detail-widget-right {
         width: 100%;
-        height: 40%;
+        height: 50%;
         font-size: 13px;
     }
 
@@ -1114,6 +1162,10 @@ select option {
 
     .visualisation-legend-bar-main-section {
         padding-left: 0px;
+    }
+
+    #vis-prom-emotion-label {
+        font-size: 11px;
     }
 
 }

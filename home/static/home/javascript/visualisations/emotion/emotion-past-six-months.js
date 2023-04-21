@@ -27,6 +27,8 @@ function emotion_past_six_months(id){
     let emotion = EmotionSection(raw_data, ["#006ee6","#CC8899","#ff683b","#6c3","#FFFF00"])
     let reviews_data = emotion.section_data
 
+    ProminentEmotionPlacer(emotion.section_data)
+
     if(emotion.status){
 
         $('#emotion-container-content').empty()
