@@ -268,7 +268,7 @@ def calc_sentiment_score(app):
     neu_total = 0
 
     # Calculate each total for type of sentiment
-    for sentiment in stats.sentiment:
+    for sentiment in stats.sentiment_all_time:
         if sentiment["label"] in pos_labels:
             pos_total += sentiment["value"]
         if sentiment["label"] in neg_labels:
@@ -310,7 +310,7 @@ def calc_sentiment_score_all():
         neu_total = 0
 
         # Calculate each total for type of sentiment
-        for sentiment in stats.sentiment:
+        for sentiment in stats.sentiment_all_time:
             if sentiment["label"] in pos_labels:
                 pos_total += sentiment["value"]
             if sentiment["label"] in neg_labels:
