@@ -190,28 +190,36 @@
                     {% endfor %}
 
                     <div class="page-selector">
-                        {% if games.has_previous %}
-                            {% if pass_search %}
-                                <a href="?search_text={{ search_text }}&genres={{ genres }}&tags={{ tags }}&categories={{ categories }}&page={{ games.previous_page_number }}">Previous</a>
+                        <!-- PREVIOUS -->
+                        <div class="previous-selector-wrapper">
+                            {% if games.has_previous %}
+                                {% if pass_search %}
+                                    <a class="avaliable" href="?search_text={{ search_text }}&genres={{ genres }}&tags={{ tags }}&categories={{ categories }}&page={{ games.previous_page_number }}">Previous</a>
+                                {% else %}
+                                    <a class="avaliable" href="?page={{ games.previous_page_number }}">Previous</a>
+                                {% endif %}
                             {% else %}
-                                <a href="?page={{ games.previous_page_number }}">Previous</a>
+                                <span class="not-avaliable">Previous</span>
                             {% endif %}
-                        {% endif %}
-
-                        <span class="current">
+                        </div>
+                        <!-- PAGE NUMBERS -->
+                        <div class="page-number-selector-wrapper">
                             {% if games %}
-                                Page {{ games.number }} of {{ games.paginator.num_pages }}
+                                {{ games.number }} of {{ games.paginator.num_pages }}
                             {% endif %}
-                        </span>
-
-                        {% if games.has_next %}
-                            {% if pass_search %}
-                                <a href="?search_text={{ search_text }}&genres={{ genres }}&tags={{ tags }}&categories={{ categories }}&page={{ games.next_page_number }}">Next</a>
+                        </div>
+                        <!-- NEXT -->
+                        <div class="next-selector-wrapper">
+                            {% if games.has_next %}
+                                {% if pass_search %}
+                                    <a class="avaliable" href="?search_text={{ search_text }}&genres={{ genres }}&tags={{ tags }}&categories={{ categories }}&page={{ games.next_page_number }}">Next</a>
+                                {% else %}
+                                    <a class="avaliable" href="?page={{ games.next_page_number }}">Next</a>
+                                {% endif %}
                             {% else %}
-                                <a href="?page={{ games.next_page_number }}">Next</a>
+                                <span class="not-avaliable">Next</span>
                             {% endif %}
-                        {% endif %}
-
+                        </div>
                     </div>
 
                 </div>

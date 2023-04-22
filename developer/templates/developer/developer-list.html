@@ -66,31 +66,35 @@
 
         <div class="pageinator-controls-wrapper">
 
-            {% if developers.has_previous %}
-                {% if pass_search %}
-                    <a href="?search_text={{ text_search }}&page={{ developers.previous_page_number }}">Previous</a>
+            <div class="previous-selector-wrapper">
+                {% if developers.has_previous %}
+                    {% if pass_search %}
+                        <a class="avaliable" href="?search_text={{ text_search }}&page={{ developers.previous_page_number }}">Previous</a>
+                    {% else %}
+                        <a class="avaliable" href="?page={{ developers.previous_page_number }}">Previous</a>
+                    {% endif %}
                 {% else %}
-                    <a href="?page={{ developers.previous_page_number }}">Previous</a>
+                    <span class="not-avaliable">Previous</span>
                 {% endif %}
-            {% else %}
-                <p>Previous</p>
-            {% endif %}
+            </div>
 
-            <span class="current">
+            <div class="page-number-selector-wrapper">
                 {% if developers %}
                     Page {{ developers.number }} of {{ developers.paginator.num_pages }}
                 {% endif %}
-            </span>
+            </div>
 
-            {% if developers.has_next %}
-                {% if pass_search %}
-                    <a href="?search_text={{ text_search }}&page={{ developers.next_page_number }}">Next</a>
+            <div class="next-selector-wrapper">
+                {% if developers.has_next %}
+                    {% if pass_search %}
+                        <a class="avaliable" href="?search_text={{ text_search }}&page={{ developers.next_page_number }}">Next</a>
+                    {% else %}
+                        <a class="avaliable" href="?page={{ developers.next_page_number }}">Next</a>
+                    {% endif %}
                 {% else %}
-                    <a href="?page={{ developers.next_page_number }}">Next</a>
+                    <span class="not-avaliable">Next</span>
                 {% endif %}
-            {% endif %}
-
-
+            </div>
 
         </div>
 

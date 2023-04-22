@@ -198,28 +198,36 @@
             {% endfor %}
 
             <div class="page-selector">
-
-                {% if reviews.has_previous %}
-                    {% if pass_search %}
-                        <a href="?search_text={{ search_text }}&review_score={{ review_score }}&sentiment_range={{ sentiment_range }}&prominent_emotion={{ prominent_emotion }}&page={{ reviews.previous_page_number }}">Previous</a>
+                <!-- PREVIOUS -->
+                <div class="previous-selector-wrapper">
+                    {% if reviews.has_previous %}
+                        {% if pass_search %}
+                            <a href="?search_text={{ search_text }}&review_score={{ review_score }}&sentiment_range={{ sentiment_range }}&prominent_emotion={{ prominent_emotion }}&page={{ reviews.previous_page_number }}">Previous</a>
+                        {% else %}
+                            <a href="?page={{ reviews.previous_page_number }}">Previous</a>
+                        {% endif %}
                     {% else %}
-                        <a href="?page={{ reviews.previous_page_number }}">Previous</a>
+                        <span class="not-avaliable">Previous</span>
                     {% endif %}
-                {% endif %}
-
-                <span class="current">
+                </div>
+                <!-- PAGE NUMBERS -->
+                <div class="page-number-selector-wrapper">
                     {% if reviews %}
                         Page {{ reviews.number }} of {{ reviews.paginator.num_pages }}
                     {% endif %}
-                </span>
-
-                {% if reviews.has_next %}
-                    {% if pass_search %}
-                        <a href="?search_text={{ search_text }}&review_score={{ review_score }}&sentiment_range={{ sentiment_range }}&prominent_emotion={{ prominent_emotion }}&page={{ reviews.next_page_number }}">Next</a>
+                </div>
+                <!-- NEXT -->
+                <div class="next-selector-wrapper">
+                    {% if reviews.has_next %}
+                        {% if pass_search %}
+                            <a href="?search_text={{ search_text }}&review_score={{ review_score }}&sentiment_range={{ sentiment_range }}&prominent_emotion={{ prominent_emotion }}&page={{ reviews.next_page_number }}">Next</a>
+                        {% else %}
+                            <a href="?page={{ reviews.next_page_number }}">Next</a>
+                        {% endif %}
                     {% else %}
-                        <a href="?page={{ reviews.next_page_number }}">Next</a>
+                        <span class="not-avaliable">Next</span>
                     {% endif %}
-                {% endif %}
+                </div>
 
             </div>
 
