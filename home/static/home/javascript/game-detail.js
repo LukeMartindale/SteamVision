@@ -1,5 +1,6 @@
 // SET Variables
 let follow_status = "unknown"
+let follow_timeout
 
 // GENERAL PAGE FUNCTIONALITY
 $(function(){
@@ -121,19 +122,15 @@ $(function(){
         $('#follow-game-button').addClass("alternate-detail-button")
     } else if (response.code == 2) {
         follow_status = "not following"
+    } else if (response.code == 0) {
+        follow_status = "not logged in"
     }
-
-    console.log(follow_status)
 
 })
 
 function FollowButton(){
 
-    console.log("Follow Button")
-    console.log(follow_status)
-
     if (follow_status == "not following") {
-        console.log("TEST 1")
         let api_url = `/api/user/followgame/${game_id}/`
 
         let response = function(){
@@ -150,15 +147,25 @@ function FollowButton(){
             return data
         }();
 
-        console.log("1")
-
         follow_status = "following"
 
         $('#follow-game-button').text("Unfollow")
         $('#follow-game-button').addClass("alternate-detail-button")
 
+        let widget = $(".detail-message-section")
+
+        widget.empty()
+        widget.append('<b style="margin-top: 7.5px; color: royalblue;">Successfully followed game</b>').hide().fadeIn()
+
+        clearTimeout(follow_timeout)
+
+        follow_timeout = setTimeout(function(){
+            widget.empty()
+        }, 2500)
+
+        console.log("Not Logged In")
+
     } else if (follow_status == "following") {
-        console.log("TEST 2")
         let api_url = `/api/user/unfollowgame/${game_id}/`
 
         let response = function(){
@@ -175,12 +182,39 @@ function FollowButton(){
             return data
         }();
 
-        console.log("2")
-
         follow_status = "not following"
         
         $('#follow-game-button').text("Follow")
         $('#follow-game-button').removeClass("alternate-detail-button")
+
+        let widget = $(".detail-message-section")
+
+        widget.empty()
+        widget.append('<b style="margin-top: 7.5px; color: royalblue;">Game has been unfollowed</b>').hide().fadeIn()
+
+        clearTimeout(follow_timeout)
+
+        follow_timeout = setTimeout(function(){
+            widget.empty()
+        }, 2500)
+
+        console.log("Not Logged In")
+
+    } else if (follow_status == "not logged in"){
+
+        let widget = $(".detail-message-section")
+
+        widget.empty()
+        widget.append('<b style="margin-top: 7.5px; color: crimson;">You must be logged in to use this feature</b>').hide().fadeIn()
+
+        clearTimeout(follow_timeout)
+
+        follow_timeout = setTimeout(function(){
+            widget.empty()
+        }, 2500)
+
+        console.log("Not Logged In")
+
     }
 
 }

@@ -159,8 +159,6 @@ def GameDetail(request, pk):
             if dev == devs.name:
                 ordered_developers.append(devs)
 
-    print(ordered_developers)
-
     reviews_format = ["[list]", "[/list]", "[i]", "[/i]", "[b]", "[/b]", "[h1]", "[/h1]", "[code]", "[/code]", "[/url]", "[spoiler]", "[/spoiler]"]
     reg = "\[url=[^\]]*]"
 

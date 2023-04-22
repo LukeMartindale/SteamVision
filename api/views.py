@@ -434,91 +434,104 @@ def getReviewPercentageCurrent(request):
 @api_view(['GET'])
 def userFollowGame(request, id):
 
-    # Check that user is logged in
-
-    # Check that game exists
-    if Game.objects.filter(app_id=id).exists():
-        # Get user profile
-        profile = Profile.objects.get(user=request.user)
-
-        # Create dictionary object
-        followed_entry = dict()
-        # check if followed game is empty or not
-        if profile.followed_games == {}:
-            followed_list = []
-        else:
-            followed_list = profile.followed_games
-        # Check if game already being followed
-        if not any (d.get('app_id', 'default') == id for d in followed_list):
-            # Set app_id in followed_entry
-            followed_entry["app_id"] = id
-            # Get current date/time and set in followed_entry
-            followed_entry["date_and_time"] = timezone.now().strftime("%Y-%m-%d %H:%M:%S")
-            # Figure out followed rank should be
-            followed_entry["rank"] = len(followed_list) + 1
-            # add game to followed games list
-            followed_list.append(followed_entry)
-            # set profile followed game to file_list
-            profile.followed_games = followed_list
-            # Save profile
-            profile.save()
-            return Response({"message": "Game successfully followed"}, status=status.HTTP_200_OK)
-        else:
-            return Response({"message": "User is already following this game"}, status=status.HTTP_200_OK)
+    # check if user is logged in
+    if(request.user.is_anonymous):
+        # User is not logged in
+        return Response({"follow_status": "not applicable", "code": "0"})
     else:
-        return Response({"message": "This game does not exist"}, status=status.HTTP_404_NOT_FOUND)
+        # Check that game exists
+        if Game.objects.filter(app_id=id).exists():
+            # Get user profile
+            profile = Profile.objects.get(user=request.user)
+
+            # Create dictionary object
+            followed_entry = dict()
+            # check if followed game is empty or not
+            if profile.followed_games == {}:
+                followed_list = []
+            else:
+                followed_list = profile.followed_games
+            # Check if game already being followed
+            if not any (d.get('app_id', 'default') == id for d in followed_list):
+                # Set app_id in followed_entry
+                followed_entry["app_id"] = id
+                # Get current date/time and set in followed_entry
+                followed_entry["date_and_time"] = timezone.now().strftime("%Y-%m-%d %H:%M:%S")
+                # Figure out followed rank should be
+                followed_entry["rank"] = len(followed_list) + 1
+                # add game to followed games list
+                followed_list.append(followed_entry)
+                # set profile followed game to file_list
+                profile.followed_games = followed_list
+                # Save profile
+                profile.save()
+                return Response({"message": "Game successfully followed"})
+            else:
+                return Response({"message": "User is already following this game"})
+        else:
+            return Response({"message": "This game does not exist"})
 
 @api_view(['GET'])
 def userUnfollowGame(request, id):
 
-    # Check that user is logged in
-
-    # Get user profile
-    profile = Profile.objects.get(user=request.user)
-    # Check that game is being followed
-    if any (d.get('app_id', 'default') == id for d in profile.followed_games):
-        # get rank of removed game
-        removed_rank = next((x for x in profile.followed_games if (x["app_id"]) == id), None)
-        if removed_rank: removed_rank = removed_rank["rank"]
-        # remove game from followed list
-        new_list = [i for i in profile.followed_games if not (i["app_id"] == id)]
-        # update game ranks
-        for item in new_list:
-            if item["rank"] > removed_rank: item["rank"]-=1
-        # set profile followed games to new list
-        profile.followed_games = new_list
-        # save profile
-        profile.save()
-        return Response({"message": "Game successfully unfollowed"})
+    # check if user is logged in
+    if(request.user.is_anonymous):
+        # User is not logged in
+        return Response({"message": "Not Logged In"})
     else:
-        return Response({"message": "This game is not being followed"})
+        # Get user profile
+        profile = Profile.objects.get(user=request.user)
+        # Check that game is being followed
+        if any (d.get('app_id', 'default') == id for d in profile.followed_games):
+            # get rank of removed game
+            removed_rank = next((x for x in profile.followed_games if (x["app_id"]) == id), None)
+            if removed_rank: removed_rank = removed_rank["rank"]
+            # remove game from followed list
+            new_list = [i for i in profile.followed_games if not (i["app_id"] == id)]
+            # update game ranks
+            for item in new_list:
+                if item["rank"] > removed_rank: item["rank"]-=1
+            # set profile followed games to new list
+            profile.followed_games = new_list
+            # save profile
+            profile.save()
+            return Response({"message": "Game successfully unfollowed"})
+        else:
+            return Response({"message": "This game is not being followed"})
 
 @api_view(['GET'])
 def userGetFollowedGames(request):
-    # Check if user is logged in
-    # Get user profile
-    profile = Profile.objects.get(user__username=request.user)
-    game_ids = [i["app_id"] for i in profile.followed_games]
-    # Get game objects
-    followed_games = Game.objects.filter(app_id__in=game_ids)
-    # serialize followed games
-    serializer = GameSerializer(followed_games, many=True)
-    # Return followed games list
-    return Response({"message": "Followed games list retrieved", "games": serializer.data})
+    # check if user is logged in
+    if(request.user.is_anonymous):
+        # User is not logged in
+        return Response({"message": "user is not logged in", "games": []})
+    else:
+        # Get user profile
+        profile = Profile.objects.get(user__username=request.user)
+        game_ids = [i["app_id"] for i in profile.followed_games]
+        # Get game objects
+        followed_games = Game.objects.filter(app_id__in=game_ids)
+        # serialize followed games
+        serializer = GameSerializer(followed_games, many=True)
+        # Return followed games list
+        return Response({"message": "Followed games list retrieved", "games": serializer.data})
 
 @api_view(['GET'])
 def userCheckFollowingGame(request, id):
 
     # check if user is logged in
-
-    profile = Profile.objects.get(user=request.user)
-    # check if user is following game
-    if any (d.get('app_id', 'default') == id for d in profile.followed_games):
-        # user is following game
-        return Response({"follow_status": "following", "code": "1"})
+    if(request.user.is_anonymous):
+        # User is not logged in
+        return Response({"follow_status": "not applicable", "code": "0"})
     else:
-        # user is not following game
-        return Response({"follow_status": "not following", "code": "2"})
+        profile = Profile.objects.get(user=request.user)
+        # check if user is following game
+        if any (d.get('app_id', 'default') == id for d in profile.followed_games):
+            # user is following game
+            return Response({"follow_status": "following", "code": "1"})
+        else:
+            # user is not following game
+            return Response({"follow_status": "not following", "code": "2"})
     
 @api_view(['GET'])
 def gameDetailReviewsStats(request, id):
