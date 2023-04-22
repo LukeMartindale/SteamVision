@@ -118,15 +118,14 @@
                 <div class="supported-system-section">
                     <!-- WINDOWS -->
                     {% if game.windows_support %}
-                        <div class="detail-system-wrapper">
+                        <div class="detail-system-wrapper" title="Windows Support">
                             <i class="bi bi-windows detail-system-icon"></i>
                             <div class="detail-system-text">Windows</div>
-                            <div class="absolute-anchor"></div>
                         </div>
                     {% endif %}
                     <!-- MAC -->
                     {% if game.mac_support %}
-                        <div class="detail-system-wrapper">
+                        <div class="detail-system-wrapper" title="Mac Support">
                             <i class="bi bi-apple detail-system-icon"></i>
                             <div class="detail-system-text">Mac</div>
                         </div>
@@ -134,7 +133,7 @@
                     <!-- LINUX -->
                     {% if game.linux_support %}
 
-                        <div class="detail-system-wrapper">
+                        <div class="detail-system-wrapper" title="Linux Support">
                             <i class="bi bi-laptop detail-system-icon"></i>
                             <div class="detail-system-text">Linux</div>
                         </div>
