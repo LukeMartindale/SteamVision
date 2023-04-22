@@ -46,7 +46,7 @@ def getAllGames(request):
 # Get a single game stat object by its app_id / pk of the game
 @api_view(['GET'])
 def getGameStats(request, id):
-    game_stats = GameStat.objects.filter(app_id__app_id__contains=id)
+    game_stats = GameStat.objects.filter(app_id__app_id=id)
     serializer = GameStatSerializer(game_stats, many=True)
 
     return Response(serializer.data)
@@ -65,19 +65,19 @@ def getGameSearch(request, search):
 # Get the all time year reviews data form game stat object by its app_id / pk of the game
 @api_view(['GET'])
 def getReviewsAllTimeYear(request, id):
-    stat = GameStat.objects.get(app_id__app_id__contains=id)
+    stat = GameStat.objects.get(app_id__app_id=id)
     
     return Response(stat.reviews_all_time_year)
 
 @api_view(['GET'])
 def getReviewsAllTimeMonth(request, id):
-    stat = GameStat.objects.get(app_id__app_id__contains=id)
+    stat = GameStat.objects.get(app_id__app_id=id)
 
     return Response(stat.reviews_all_time_month)
 
 @api_view(['GET'])
 def getReviewsPastTwelveMonths(request, id):
-    stats = GameStat.objects.get(app_id__app_id__contains=id)
+    stats = GameStat.objects.get(app_id__app_id=id)
 
     time = timezone.now()
     end_index = 0
@@ -97,7 +97,7 @@ def getReviewsPastTwelveMonths(request, id):
 
 @api_view(['GET'])
 def getReviewsPastSixMonths(request, id):
-    stats = GameStat.objects.get(app_id__app_id__contains=id)
+    stats = GameStat.objects.get(app_id__app_id=id)
 
     time = timezone.now()
     end_index = 0
@@ -117,13 +117,13 @@ def getReviewsPastSixMonths(request, id):
 
 @api_view(['GET'])
 def getReviewsPastOneMonth(request, id):
-    stat = GameStat.objects.get(app_id__app_id__contains=id)
+    stat = GameStat.objects.get(app_id__app_id=id)
     
     return Response(reversed(stat.reviews_past_one_month))
 
 @api_view(['GET'])
 def getReviewsPastTwoWeeks(request, id):
-    stat = GameStat.objects.get(app_id__app_id__contains=id)
+    stat = GameStat.objects.get(app_id__app_id=id)
     reviews_percentages = []
 
     # Get all dates from the last 30 days
@@ -134,7 +134,7 @@ def getReviewsPastTwoWeeks(request, id):
 
 @api_view(['GET'])
 def getReviewsPastOneWeek(request, id):
-    stat = GameStat.objects.get(app_id__app_id__contains=id)
+    stat = GameStat.objects.get(app_id__app_id=id)
     reviews_percentages = []
 
     # Get all dates from the last 30 days
@@ -145,19 +145,19 @@ def getReviewsPastOneWeek(request, id):
 
 @api_view(['GET'])
 def getSentimentAllTime(request, id):
-    stat = GameStat.objects.get(app_id__app_id__contains=id)
+    stat = GameStat.objects.get(app_id__app_id=id)
 
     return Response(stat.sentiment_all_time)
 
 @api_view(['GET'])
 def getSentimentAllTimeMonth(request, id):
-    stat = GameStat.objects.get(app_id__app_id__contains=id)
+    stat = GameStat.objects.get(app_id__app_id=id)
 
     return Response(stat.sentiment_all_time_month)
 
 @api_view(['GET'])
 def getSentimentPastTwelveMonths(request, id):
-    stats = GameStat.objects.get(app_id__app_id__contains=id)
+    stats = GameStat.objects.get(app_id__app_id=id)
 
     time = timezone.now()
     end_index = 0
@@ -179,7 +179,7 @@ def getSentimentPastTwelveMonths(request, id):
 
 @api_view(['GET'])
 def getSentimentPastSixMonths(request, id):
-    stats = GameStat.objects.get(app_id__app_id__contains=id)
+    stats = GameStat.objects.get(app_id__app_id=id)
 
     time = timezone.now()
     end_index = 0
@@ -201,37 +201,37 @@ def getSentimentPastSixMonths(request, id):
 
 @api_view(['GET'])
 def getSentimentPastOneMonth(request, id):
-    stats = GameStat.objects.get(app_id__app_id__contains=id)
+    stats = GameStat.objects.get(app_id__app_id=id)
 
     return Response(stats.sentiment_past_one_month)
 
 @api_view(['GET'])
 def getSentimentPastTwoWeeks(request, id):
-    stats = GameStat.objects.get(app_id__app_id__contains=id)
+    stats = GameStat.objects.get(app_id__app_id=id)
 
     return Response(stats.sentiment_past_two_weeks)
 
 @api_view(['GET'])
 def getSentimentPastOneWeek(request, id):
-    stats = GameStat.objects.get(app_id__app_id__contains=id)
+    stats = GameStat.objects.get(app_id__app_id=id)
 
     return Response(stats.sentiment_past_one_week)
 
 @api_view(['GET'])
 def getEmotionAllTime(request, id):
-    stat = GameStat.objects.get(app_id__app_id__contains=id)
+    stat = GameStat.objects.get(app_id__app_id=id)
 
     return Response(stat.emotion_all_time)
 
 @api_view(['GET'])
 def getEmotionAllTimeMonth(request, id):
-    stat = GameStat.objects.get(app_id__app_id__contains=id)
+    stat = GameStat.objects.get(app_id__app_id=id)
 
     return Response(stat.emotion_all_time_month)
 
 @api_view(['GET'])
 def getEmotionPastTwelveMonths(request, id):
-    stats = GameStat.objects.get(app_id__app_id__contains=id)
+    stats = GameStat.objects.get(app_id__app_id=id)
 
     time = timezone.now()
     end_index = 0
@@ -256,7 +256,7 @@ def getEmotionPastTwelveMonths(request, id):
 
 @api_view(['GET'])
 def getEmotionPastSixMonths(request, id):
-    stats = GameStat.objects.get(app_id__app_id__contains=id)
+    stats = GameStat.objects.get(app_id__app_id=id)
 
     time = timezone.now()
     end_index = 0
@@ -281,19 +281,19 @@ def getEmotionPastSixMonths(request, id):
 
 @api_view(['GET'])
 def getEmotionPastOneMonth(request, id):
-    stats = GameStat.objects.get(app_id__app_id__contains=id)
+    stats = GameStat.objects.get(app_id__app_id=id)
 
     return Response(stats.emotion_past_one_month)
 
 @api_view(['GET'])
 def getEmotionPastTwoWeeks(request, id):
-    stats = GameStat.objects.get(app_id__app_id__contains=id)
+    stats = GameStat.objects.get(app_id__app_id=id)
 
     return Response(stats.emotion_past_two_weeks)
 
 @api_view(['GET'])
 def getEmotionPastOneWeek(request, id):
-    stats = GameStat.objects.get(app_id__app_id__contains=id)
+    stats = GameStat.objects.get(app_id__app_id=id)
 
     return Response(stats.emotion_past_one_week)
 
