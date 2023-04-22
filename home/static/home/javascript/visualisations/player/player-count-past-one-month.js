@@ -213,7 +213,7 @@ function player_count_past_one_month(id){
         .datum(player_data)
         .attr("fill", "none")
         .attr("stroke", "steelblue")
-        .attr("stroke-width", 1)
+        .attr("stroke-width", 1.5)
         .attr("d", d3.line()
             .x(function(data) {return x(data.timestamp)})
             .y(function(data) {return y(data.player_count)})
