@@ -41,10 +41,46 @@
                         <header class="detail-about-title-text">About</header>
                     </div>
                     <div class="detail-about-content-wrapper">
-                        <div class="detail-about-content-left">
-                            <div class="detail-about-content-left-section">
-                                <b>Price:</b>
+                        <!-- RELEASE DATE -->
+                        <div class="detail-about-content-row">
+                            <div class="detail-about-content-left">
+                                <b>Release Date:</b>
                             </div>
+                            <div class="detail-about-content-right">
+                                {{ game.release_date }}
+                            </div>
+                        </div>
+                        <!-- DEVELOPER -->
+                        <div class="detail-about-content-row">
+                            <div class="detail-about-content-left">
+                                <b>Developer:</b>
+                            </div>
+                            <div class="detail-about-content-right">
+                                {% for developer in developers %}
+                                    {% if forloop.last %}
+                                        <a class="detail-about-links detail-about-text-right" href="/developer/{{ developer.pk }}/">{{ developer.name }}</a>
+                                    {% else %}
+                                        <a class="detail-about-links detail-about-text-right" href="/developer/{{ developer.pk }}/">{{ developer.name }},</a>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <!-- PUBLISHER -->
+                        <div class="detail-about-content-row">
+                            <div class="detail-about-content-left">
+                                <b>Publisher:</b>
+                            </div>
+                            <div class="detail-about-content-right">
+                                {% for publisher in game.publisher %}
+                                    {% if forloop.last %}
+                                        {{ publisher }}
+                                    {% else %}
+                                        {{ publisher }},
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <!-- <div class="detail-about-content-left">
                             <div class="detail-about-content-left-section">
                                 <b>Release Date:</b>
                             </div>
@@ -56,9 +92,6 @@
                             </div>
                         </div>
                         <div class="detail-about-content-right">
-                            <div class="detail-about-content-right-section">
-                                Placeholder
-                            </div>
                             <div class="detail-about-content-right-section">
                                 {{ game.release_date }}
                             </div>
@@ -72,7 +105,7 @@
                                     {{ publisher }}
                                 {% endfor %}
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 

@@ -87,33 +87,48 @@
 .detail-about-content-wrapper {
     margin-top: 10px;
     display: flex;
+    flex-direction: column;
+}
+
+.detail-about-content-row {
+    width: 100%;
+    display: flex;
     flex-direction: row;
+    font-size: 19px;
+    margin-top: 7.5px;
+    margin-bottom: 7.5px;
 }
 
 .detail-about-content-left {
     width: 50%;
     display: flex;
-    flex-direction: column;
+    justify-content: right;
+    align-items: top;
+    padding-right: 7.5px;
+    text-align: right;
 }
 
 .detail-about-content-right {
     width: 50%;
     display: flex;
-    flex-direction: column;
-}
-
-.detail-about-content-left-section {
-    font-size: 19px;
-    text-align: right;
-    padding-right: 5px;
-    margin-top: 5px;
-}
-
-.detail-about-content-right-section {
-    font-size: 19px;
+    justify-content: left;
+    align-items: start;
+    padding-left: 7.5px;
     text-align: left;
-    padding-left: 5px;
-    margin-top: 5px;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+
+.detail-about-links {
+    width: 100%;
+    color: #bec5cb ;
+    text-align: left;
+    text-decoration: none;
+}
+
+.detail-about-links:hover {
+    text-decoration: underline;
 }
 
 .detail-section-bottom {
@@ -1096,6 +1111,29 @@ select option {
         margin-bottom: 10px;
     }
 
+    .detail-about-content-row {
+        flex-direction: column;
+    }
+
+    .detail-about-content-left {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        padding: 0px;
+    }
+
+    .detail-about-content-right {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 0px;
+    }
+
+    .detail-about-links {
+        text-align: center;
+    }
+
 }
 
 @media only screen and (max-width: 900px) {
@@ -1193,6 +1231,23 @@ select option {
         padding-right: 10px;
         padding-top: 5px;
         padding-bottom: 5px;
+    }
+
+    .detail-about-content-row {
+        flex-direction: column;
+    }
+
+    .detail-about-content-left {
+        width: 100%;
+        padding: 0px;
+        justify-content: center;
+    }
+
+    .detail-about-content-right {
+        width: 100%;
+        padding: 0px;
+        align-items: center;
+        justify-content: center;
     }
     
 }

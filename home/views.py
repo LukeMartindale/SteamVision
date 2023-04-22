@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from . models import Game, GameStat, Descriptor, Review, PlayerCount
+from . models import Game, GameStat, Descriptor, Review, PlayerCount, Developer
 from django.views.generic import (
     ListView,
     DetailView,
@@ -145,18 +145,21 @@ def GameList(request):
 
 def GameDetail(request, pk):
 
-    start = time.time() 
-
     game = Game.objects.get(app_id=pk)
     game_stats = GameStat.objects.get(app_id__app_id=pk)
+    developers = Developer.objects.filter(name__in=game.developer)
     descriptors = Descriptor.objects.all().order_by('name').values()
     player_count = PlayerCount.objects.filter(app_id=game).last()
-
-    time_check_0 = time.time()
-
     sentiment_score = GameStat.objects.get(app_id=game).current_sentiment_score
 
-    time_check_1 = time.time() 
+    #Order developers into the correct order 
+    ordered_developers = []
+    for dev in game.developer:
+        for devs in developers:
+            if dev == devs.name:
+                ordered_developers.append(devs)
+
+    print(ordered_developers)
 
     reviews_format = ["[list]", "[/list]", "[i]", "[/i]", "[b]", "[/b]", "[h1]", "[/h1]", "[code]", "[/code]", "[/url]", "[spoiler]", "[/spoiler]"]
     reg = "\[url=[^\]]*]"
@@ -165,35 +168,24 @@ def GameDetail(request, pk):
 
     reviews = reviews[0:10]
 
-    time_check_2 = time.time() 
-
     # Formated reviews by removing unecceseray content
     for review in reviews:
         for format in reviews_format:
             review.review_text = review.review_text.replace(format, '')
 
-    time_check_3 = time.time() 
-
     for review in reviews:
         review.review_text = re.sub(reg, '', review.review_text)
-
-    time_check_4 = time.time() 
 
     context = {
         'game': game, 
         'game_stats': game_stats, 
+        'developers': ordered_developers,
         'player_count': player_count, 
         'descriptors': descriptors,
         'sentiment_score': sentiment_score, 
         "reviews": reviews
         }
     
-    print("Check 0: ", time_check_0-start)
-    print("Check 1: ", time_check_1-start)
-    print("Check 2: ", time_check_2-start)
-    print("Check 3: ", time_check_3-start)
-    print("Check 4: ", time_check_4-start)
-
     return render(request, 'home/game-detail.html', context)
 
 def GameReviews(request, pk):
