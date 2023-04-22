@@ -213,7 +213,7 @@ function player_count_all_time(id){
         .datum(player_data)
         .attr("fill", "none")
         .attr("stroke", "steelblue")
-        .attr("stroke-width", 2)
+        .attr("stroke-width", 1)
         .attr("d", d3.line()
             .x(function(data) {return x(data.timestamp)})
             .y(function(data) {return y(data.player_count)})
