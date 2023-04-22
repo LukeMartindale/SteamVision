@@ -547,6 +547,22 @@ def gameDetailReviewsStats(request, id):
     return Response({"current_review_score": game_stats.current_review_score, "total_reviews": total_reviews, "positive_reviews": positive_reviews, "negative_reviews": negative_reviews})
 
 @api_view(['GET'])
+def getVisualisationWidgetReviewData(request, id):
+    return Response({"message": "Review Visualisation Widgets Data"})
+
+@api_view(['GET'])
+def getVisualisationWidgetSentiementData(request, id):
+    return Response({"message": "Sentiment Visualisation Widgets Data"})
+
+@api_view(['GET'])
+def getVisualisationWidgetEmotionData(request, id):
+    return Response({"message": "Emotion Visualisation Widgets Data"})
+
+@api_view(['GET'])
+def getVisualisationWidgetPlayerData(request, id):
+    return Response({"message": "Player Visualisation Widgets Data"})
+
+@api_view(['GET'])
 def test(request):
 
     print(request.session)
