@@ -46,9 +46,6 @@ function player_count_all_time(id){
     let svgWidth = $('#player-graph').width() - margins.left - margins.right
     let svgHeight = 440 - margins.top - margins.bottom
 
-    console.log(svgWidth)
-
-
     let chartContainer = d3
         .select('#player-graph')
         .attr('width', svgWidth + margins.left + margins.right)
@@ -66,8 +63,6 @@ function player_count_all_time(id){
     let chart = chartContainer
         .append("g")
         .attr("transform", `translate(${margins.left},${margins.top})`);
-
-
 
     if($(window).width() <= 800 && $(window).width() > 400){
         //X-AXIS TICKS

@@ -21,7 +21,7 @@ $(function(){
 
         console.log(compare_game_data)
 
-        player_count_past_24_hours_compare(compare_game_ids)
+        player_count_all_time_compare(compare_game_ids)
         playerLegendHandler("player")
 
     }
