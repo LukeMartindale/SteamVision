@@ -46,9 +46,10 @@ urlpatterns = [
     path('user/unfollowgame/<int:id>/', views.userUnfollowGame),
     path('user/getfollowedgames/', views.userGetFollowedGames),
     path('user/checkfollowgame/<int:id>/', views.userCheckFollowingGame),
-    path("visualisation/review-widgets/<int:id>/", views.getVisualisationWidgetReviewData),
-    path("visualisation/sentiment-widgets/<int:id>/", views.getVisualisationWidgetSentiementData),
-    path("visualisation/emotion-widgets/<int:id>/", views.getVisualisationWidgetEmotionData),
-    path("visualisation/player-widgets/<int:id>/", views.getVisualisationWidgetPlayerData),
+    path('visualisation/review-widgets/<int:id>/', views.getVisualisationWidgetReviewData),
+    path('visualisation/sentiment-widgets/<int:id>/', views.getVisualisationWidgetSentiementData),
+    path('visualisation/emotion-widgets/<int:id>/', views.getVisualisationWidgetEmotionData),
+    path('visualisation/player-widgets/<int:id>/', views.getVisualisationWidgetPlayerData),
+    path('compare/oldest-date-player-count/<int:id>/', views.getOldestDateForGamePlayerData),
     path('test/', views.test)
 ]

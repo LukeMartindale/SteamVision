@@ -74,3 +74,61 @@ function getGame(ids){
     return game_data
 
 }
+
+function getPlayerCountOldestDates(ids){
+
+    let temp_data
+    let oldest_dates = []
+
+    console.log(compare_game_ids)
+
+    ids.forEach(function(value, index){
+
+        let api_url = `/api/compare/oldest-date-player-count/${value}/`
+
+        temp_data = function(){
+            let data = null;
+            $.ajax({
+                async: false,
+                type: 'GET',
+                dataType: 'json',
+                url: api_url,
+                success: function(result){
+                    data = result
+                }
+            });
+            return data
+        }();
+
+        oldest_dates.push(temp_data)
+
+    })
+
+    return oldest_dates
+}
+
+function comparePlayerCountOldestDates(){
+
+    console.log("comparepPlayerCountOldestDates")
+
+    let oldest_dates = getPlayerCountOldestDates(compare_game_ids)
+    let oldest_date = new Date()
+    let oldest_id
+
+    console.log(oldest_dates)
+
+    oldest_dates.forEach(function(value, index){
+        oldest_dates[index].oldest_date = new Date(value.oldest_date)
+        console.log()
+        if (oldest_dates[index].oldest_date < oldest_date){
+            oldest_date = oldest_dates[index].oldest_date
+            oldest_id = oldest_dates[index].app_id
+        }
+    })
+
+    console.log(oldest_date)
+    console.log(oldest_id)
+
+    return oldest_id
+
+}

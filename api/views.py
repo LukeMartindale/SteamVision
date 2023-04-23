@@ -566,6 +566,13 @@ def getVisualisationWidgetEmotionData(request, id):
 @api_view(['GET'])
 def getVisualisationWidgetPlayerData(request, id):
     return Response({"message": "Player Visualisation Widgets Data"})
+    
+@api_view(['GET'])
+def getOldestDateForGamePlayerData(request, id):
+    oldest_date = PlayerCount.objects.filter(app_id__app_id=id).earliest('timestamp')
+    serializer = PlayerCountSerializer(oldest_date)
+
+    return Response({"app_id": serializer.data["app_id"], "oldest_date": serializer.data['timestamp']})
 
 @api_view(['GET'])
 def test(request):

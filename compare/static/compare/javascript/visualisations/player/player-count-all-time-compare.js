@@ -12,7 +12,10 @@ function player_count_all_time_compare(ids){
 
         let highest_count = 0
         let highest_set = []
+        let earliest_id = comparePlayerCountOldestDates()
+        let earliest_set = []
 
+        // find which data set has the earliest data to use for x scale values
         // find which data set has the highest player count to use for y scale values
         if(player_data.length > 1){
             player_data.forEach(function(data, index){
@@ -22,10 +25,18 @@ function player_count_all_time_compare(ids){
                         highest_set = data
                     }
                 })
+                if(data[0].app_id == earliest_id){
+                    earliest_set = data
+                }
             })
         } else {
             highest_set = player_data[0]
+            earliest_set = player_data[0]
         }
+
+        console.log(earliest_id)
+        console.log(earliest_set)
+        console.log(highest_set)
     
         $("#player-graph").empty()
     
@@ -52,7 +63,7 @@ function player_count_all_time_compare(ids){
     
     
         let x = d3.scaleTime()
-            .domain(d3.extent(highest_set, function(data) {return data.timestamp; }))
+            .domain(d3.extent(earliest_set, function(data) {return data.timestamp; }))
             .range([0, svgWidth])
     
         let y = d3.scaleLinear()
