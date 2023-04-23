@@ -233,17 +233,19 @@ function player_count_past_24_hours_compare(ids) {
         }
 
         player_data.forEach(function(value, index){
+            console.log(compare_players_colours[index])
             // ADD CHART LINE
             chart
                 .append("path")
                 .datum(value)
                 .attr("fill", "none")
-                .attr("stroke", "steelblue")
+                .attr("stroke", compare_players_colours[index])
                 .attr("stroke-width", 4)
                 .attr("d", d3.line()
                     .x(function(data) {return x(data.timestamp)})
                     .y(function(data) {return y(data.player_count)})
                 )
-            })
+        })
+            
     }
 }

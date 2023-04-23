@@ -27,6 +27,20 @@ $(function(){
 
 })
 
+// Vis info button functionality
+$(function(){
+
+    // Visualisation info widget
+    $(".visualisation-legend-bar-info-cirlce").on({
+        mouseenter: function() {
+            $(this).parents().siblings(".absolute-anchor").find(".vis-info-box-wrapper").removeClass("hide-section")
+        },
+        mouseleave: function() {
+            $(this).parents().siblings(".absolute-anchor").find(".vis-info-box-wrapper").addClass("hide-section")
+        }
+    })
+})
+
 function getGame(ids){
 
     let api_url = "/api/get-games/"

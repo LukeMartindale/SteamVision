@@ -2,7 +2,7 @@
 let active_review_vis = "all_time_year"
 let active_sentiment_vis = "all_time"
 let active_emotion_vis = "all_time"
-let active_player_vis = "past_24_hours"
+let active_player_vis = "all_time"
 
 function drawGraphs(){
     // Draw Players Graph
@@ -15,57 +15,91 @@ function playerGraphsHandler(active_vis){
 
     if(active_vis == "all_time"){
         console.log("all time")
+        player_count_all_time_compare(compare_game_ids)
+        playerLegendHandler("player")
     } else if(active_vis == "past_24_hours") {
         console.log("past 24 hours")
         player_count_past_24_hours_compare(compare_game_ids)
+        playerLegendHandler("player")
     }
 
 }
 
-// // PLAYER VISUALISATION SELECT OPTIONS
-// $(function(){
+function playerLegendHandler(graph) {
 
-//     $('#player-select').on('change', function (e) {
+    console.log("TEST")
 
-//         let option = $(this).children("option:selected").val()
+    let legend_bar
 
-//         if(option == "player-all-time"){
+    // Figure out which graph legend needs updating
+    if(graph == "player"){
+        legend_bar = $("#player-vis-legend-bar")
+    }
 
-//             player_count_all_time(game_id)
-//             active_player_vis = "all_time"
+    console.log(compare_game_data)
 
-//         } else if (option == "player-past-1-month"){
+    legend_bar.empty()
 
-//             player_count_past_one_month(game_id)
-//             active_player_vis = "past_one_month"
+    compare_game_data.forEach(function(value, index){
+        legend_bar
+            .append(`<div class="visualisation-legend-widget-wrapper" id="legend-widget-wrapper-${index}" style="border: 2px solid ${compare_players_colours[index]}; background-color: ${compare_players_colours[index] + "4d"};"></div>`)
 
-//         } else if (option == "player-past-2-weeks"){
+        legend_bar
+            .find(`#legend-widget-wrapper-${index}`)
+            .append(`<div class="visualisation-legend-widget-minor-section" id="legend-widget-minor-${index}"></div>`)
+            .append(`<div class="visualisation-legend-widget-major-section" id="legend-widget-major-${index}"></div>`)
 
-//             player_count_past_two_weeks(game_id)
-//             active_player_vis = "past_two_weeks"
+        legend_bar
+            .find(`#legend-widget-minor-${index}`)
+            .append(`<div class="visualisation-legend-widget-colour-circle" style="background-color: ${compare_players_colours[index]}"></div>`)
+
+        legend_bar
+            .find(`#legend-widget-major-${index}`)
+            .append(value.name)
+
+    })
+}
+
+// PLAYER VISUALISATION SELECT OPTIONS
+$(function(){
+
+    $('#player-select').on('change', function (e) {
+
+        let option = $(this).children("option:selected").val()
+
+        if(option == "player-all-time"){
+
+            player_count_all_time_compare(compare_game_ids)
+            playerLegendHandler("player")
+            active_player_vis = "all_time"
+
+        } else if (option == "player-past-1-month"){
+
+            active_player_vis = "past_one_month"
+
+        } else if (option == "player-past-2-weeks"){
+
+            active_player_vis = "past_two_weeks"
             
-//         } else if (option == "player-past-1-week"){
-
-//             player_count_past_one_week(game_id)
-//             active_player_vis = "past_one_week"
+        } else if (option == "player-past-1-week"){
+            active_player_vis = "past_one_week"
             
-//         } else if (option == "player-past-72-hours"){
+        } else if (option == "player-past-72-hours"){
 
-//             player_count_past_72_hours(game_id)
-//             active_player_vis = "past_72_hours"
+            active_player_vis = "past_72_hours"
             
-//         } else if (option == "player-past-48-hours"){
+        } else if (option == "player-past-48-hours"){
 
-//             player_count_past_48_hours(game_id)
-//             active_player_vis = "past_48_hours"
+            active_player_vis = "past_48_hours"
             
-//         } else if (option == "player-past-24-hours"){
+        } else if (option == "player-past-24-hours"){
 
-//             player_count_past_24_hours(game_id)
-//             active_player_vis = "past_24_hours"
+            player_count_past_24_hours_compare(compare_game_ids)
+            playerLegendHandler("player")
+            active_player_vis = "past_24_hours"
             
-//         } 
+        } 
 
-//     })
+    })
     
-// })
+})
