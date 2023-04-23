@@ -68,7 +68,7 @@ function player_count_all_time_compare(ids){
     
         let chart = chartContainer
             .append("g")
-            .attr("transform", `translate(${margins.left},${margins.top})`);
+            .attr("transform", `translate(${margins.left},${margins.top})`)
     
         if($(window).width() <= 800 && $(window).width() > 400){
             //X-AXIS TICKS
@@ -302,10 +302,11 @@ function player_count_all_time_compare(ids){
                         .attr("y", y(highest_count/1.2))
                         .attr("display", "block")
                         .attr("white-space", "nowrap")
+                        .attr("z-index", 1500)
                         .html("")
                         .append('tspan')
                             .attr("white-space", "inherit")
-                            .text("Player Count:" + player_data[index][ci].player_count)
+                            .text(compare_game_data[index].name + ": " + player_data[index][ci].player_count)
                             .attr("fill", compare_players_colours[index])
                             .attr("dx", 0)
                             .attr("dy", 18);
@@ -313,7 +314,7 @@ function player_count_all_time_compare(ids){
                     focusText
                     .append('tspan')
                         .attr("white-space", "inherit")
-                        .text("Player Count:" + player_data[index][ci].player_count)
+                        .text(compare_game_data[index].name + ": " + player_data[index][ci].player_count)
                         .attr("fill", compare_players_colours[index])
                         .attr("dx", -104)
                         .attr("dy", 18);
