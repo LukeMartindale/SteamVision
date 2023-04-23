@@ -296,13 +296,18 @@ function player_count_all_time_compare(ids){
 
             focus_all.forEach(function(value, index){
                 let ci = is[index]
+                let width_scale = 15
                 if(index == 0){
+                    if(x(player_data[index][ci].timestamp)+15 > $("#player-graph").width()/2){
+                        width_scale = -150
+                    } else {
+                        width_scale = 15
+                    }
                     focusText
-                        .attr("x", x(player_data[index][ci].timestamp)+15)
+                        .attr("x", x(player_data[index][ci].timestamp)+width_scale)
                         .attr("y", y(highest_count/1.2))
                         .attr("display", "block")
                         .attr("white-space", "nowrap")
-                        .attr("z-index", 1500)
                         .html("")
                         .append('tspan')
                             .attr("white-space", "inherit")
