@@ -293,10 +293,35 @@ function player_count_all_time_compare(ids){
             // focus
             //     .attr("cx", x(selectedData.timestamp))
             //     .attr("cy", y(selectedData.player_count))
-            focusText
-                .html("Player Count:" + selectedData.player_count)
-                .attr("x", x(selectedData.timestamp)+15)
-                .attr("y", y(highest_count/1.2))
+
+            focus_all.forEach(function(value, index){
+                let ci = is[index]
+                if(index == 0){
+                    focusText
+                        .attr("x", x(player_data[index][ci].timestamp)+15)
+                        .attr("y", y(highest_count/1.2))
+                        .attr("display", "block")
+                        .attr("white-space", "nowrap")
+                        .html("")
+                        .append('tspan')
+                            .attr("white-space", "inherit")
+                            .text("Player Count:" + player_data[index][ci].player_count)
+                            .attr("fill", compare_players_colours[index])
+                            .attr("dx", 0)
+                            .attr("dy", 18);
+                } else {
+                    focusText
+                    .append('tspan')
+                        .attr("white-space", "inherit")
+                        .text("Player Count:" + player_data[index][ci].player_count)
+                        .attr("fill", compare_players_colours[index])
+                        .attr("dx", -104)
+                        .attr("dy", 18);
+                }
+            })
+            player_data.forEach(function(value, index){
+
+            })
         }
 
         function mouseout(){
