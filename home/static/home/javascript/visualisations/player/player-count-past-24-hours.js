@@ -167,11 +167,6 @@ function player_count_past_24_hours(id){
         temp_data[index].timestamp = new Date(data.timestamp)
     })
 
-    // player_data = temp_data
-
-    // console.log(temp_data)
-    // console.log(player_data)
-
     $("#player-graph").empty()
 
     let margins = {top: 0, bottom: 0, left: 0, right: 0}
@@ -310,7 +305,7 @@ function player_count_past_24_hours(id){
         chartContainer
             .append('text')
             .attr('y', -12.5)
-            .attr('x', -($("#sentiment-container-content").height()/1.75))
+            .attr('x', -($("#player-count-container-content").height()/1.95))
             .attr("transform", "rotate(-90)")
             .attr('fill', '#bec5cb')
             .attr('font-size', 15)
@@ -320,7 +315,7 @@ function player_count_past_24_hours(id){
         chartContainer
             .append('text')
             .attr('y', 0)
-            .attr('x', -($("#sentiment-container-content").height()/1.75))
+            .attr('x', -($("#player-count-container-content").height()/1.95))
             .attr("transform", "rotate(-90)")
             .attr('fill', '#bec5cb')
             .attr('font-size', 20)
