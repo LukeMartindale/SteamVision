@@ -258,17 +258,14 @@ function player_count_all_time_compare(ids){
             .on('mouseout', mouseout)
 
         function mouseover() {
-            console.log("mouseover")
             focus_all.forEach(function(value, index){
                 value.style("opacity", 1)
             })
-            // focus.style("opacity", 1)
             focusText.style("opacity", 1)
         }
 
         function mousemove(event){
             let x0 = x.invert(d3.pointer(event, this)[0]);
-            // console.log(d3.pointer(event, this))
             let is = []
             player_data.forEach(function(value, index){
                 is.push(bisect(player_data[index], x0, 0))
@@ -290,16 +287,12 @@ function player_count_all_time_compare(ids){
                         return y(player_data[index][ci].player_count) 
                     })
             })
-            // focus
-            //     .attr("cx", x(selectedData.timestamp))
-            //     .attr("cy", y(selectedData.player_count))
-
             focus_all.forEach(function(value, index){
                 let ci = is[index]
                 let width_scale = 15
                 if(index == 0){
                     if(x(player_data[index][ci].timestamp)+15 > $("#player-graph").width()/2){
-                        width_scale = -150
+                        width_scale = -115
                     } else {
                         width_scale = 15
                     }
@@ -325,17 +318,12 @@ function player_count_all_time_compare(ids){
                         .attr("dy", 18);
                 }
             })
-            player_data.forEach(function(value, index){
-
-            })
         }
 
         function mouseout(){
-            console.log("mouseout")
             focus_all.forEach(function(value, index){
                 value.style("opacity", 0)
             })
-            // focus.style("opacity", 0)
             focusText.style("opacity", 0)
         }
 
