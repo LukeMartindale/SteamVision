@@ -27,16 +27,12 @@ function playerGraphsHandler(active_vis){
 
 function playerLegendHandler(graph) {
 
-    console.log("TEST")
-
     let legend_bar
 
     // Figure out which graph legend needs updating
     if(graph == "player"){
         legend_bar = $("#player-vis-legend-bar")
     }
-
-    console.log(compare_game_data)
 
     legend_bar.empty()
 

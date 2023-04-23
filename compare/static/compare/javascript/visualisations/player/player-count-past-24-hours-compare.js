@@ -1,35 +1,3 @@
-function get_data_player_count_past_24_hours_compare(ids) {
-
-    let api_url = "/api/get-player-count/past-24-hours/"
-    let temp_data = []
-    let player_data = []
-
-    ids.forEach(function(value, index){
-
-        api_url = `/api/get-player-count/past-24-hours/${value}/`
-
-        temp_data = function(){
-            let data = null;
-            $.ajax({
-                async: false,
-                type: 'GET',
-                dataType: 'json',
-                url: api_url,
-                success: function(result){
-                    data = result
-                }
-            });
-            return data
-        }();
-
-        player_data.push(temp_data)
-
-    })
-
-    return player_data
-
-}
-
 function player_count_past_24_hours_compare(ids) {
 
     let player_data = get_data_player_count_past_24_hours_compare(ids)
@@ -191,7 +159,7 @@ function player_count_past_24_hours_compare(ids) {
             chartContainer
                 .append('text')
                 .attr('y', -12.5)
-                .attr('x', -($("#sentiment-container-content").height()/1.75))
+                .attr('x', -($("#player-count-container-content").height()/1.95))
                 .attr("transform", "rotate(-90)")
                 .attr('fill', '#bec5cb')
                 .attr('font-size', 15)
@@ -201,7 +169,7 @@ function player_count_past_24_hours_compare(ids) {
             chartContainer
                 .append('text')
                 .attr('y', 0)
-                .attr('x', -($("#sentiment-container-content").height()/1.75))
+                .attr('x', -($("#player-count-container-content").height()/1.95))
                 .attr("transform", "rotate(-90)")
                 .attr('fill', '#bec5cb')
                 .attr('font-size', 20)

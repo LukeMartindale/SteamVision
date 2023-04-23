@@ -118,6 +118,11 @@
     overflow: visible;
 }
 
+.players-container-content {
+    max-height: 800px;
+    height: 550px;
+}
+
 .visualisation-svg {
     width: 100%;
     height: 100%;
