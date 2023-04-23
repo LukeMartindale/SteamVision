@@ -23,6 +23,11 @@ from django.utils import timezone
 import datetime
 import calendar
 
+# Base route for eash of use
+@api_view(['GET'])
+def base(request):
+    return Response({"message": "Base Route"})
+
 # Get a single game by its app_id / pk
 @api_view(['GET'])
 def getGame(request, id):
