@@ -225,13 +225,20 @@ function player_count_all_time_compare(ids){
         // HOVER TOOLTIP
         let bisect = d3.bisector(function(data) {return data.timestamp }).left;
 
-        let focus = chart
-            .append('g')
-            .append('circle')
-                .style("fill", "none")
-                .attr("stroke", "black")
-                .attr('r', 8.5)
-                .style("opacity", 0)
+        let focus_all = []
+
+        player_data.forEach(function(value, index){
+            let focus = chart.append('g').append('circle').style("fill", "none").attr("stroke", "black").attr('r', 8.5).style("opacity", 0)
+            focus_all.push(focus)
+        })
+
+        // let focus = chart
+        //     .append('g')
+        //     .append('circle')
+        //         .style("fill", "none")
+        //         .attr("stroke", "black")
+        //         .attr('r', 8.5)
+        //         .style("opacity", 0)
 
         let focusText = chart
             .append('g')
@@ -252,34 +259,54 @@ function player_count_all_time_compare(ids){
 
         function mouseover() {
             console.log("mouseover")
-            focus.style("opacity", 1)
+            focus_all.forEach(function(value, index){
+                value.style("opacity", 1)
+            })
+            // focus.style("opacity", 1)
             focusText.style("opacity", 1)
         }
 
         function mousemove(event){
             let x0 = x.invert(d3.pointer(event, this)[0]);
-            console.log(d3.pointer(event, this))
-            let i = bisect(player_data[0], x0, 1);
-            console.log("x0: ", x0)
-            console.log("i: ", i)
-            selectedData = player_data[1][i]
-            console.log(selectedData)
-            focus
-                .attr("cx", x(selectedData.timestamp))
-                .attr("cy", y(selectedData.player_count))
+            // console.log(d3.pointer(event, this))
+            let is = []
+            player_data.forEach(function(value, index){
+                is.push(bisect(player_data[index], x0, 0))
+            })
+            let i = bisect(player_data[0], x0, 0);
+            selectedData = player_data[0][i]
+            focus_all.forEach(function(value, index){
+                value
+                    .attr("cx", function(value) { 
+                        let ci = is[index]
+                        if(player_data[index].length < player_data[0].length){
+                            return x(player_data[index][ci].timestamp) 
+                        } else {
+                            return x(player_data[index][ci].timestamp)
+                        }
+                    })
+                    .attr("cy", function(value) { 
+                        let ci = is[index]
+                        return y(player_data[index][ci].player_count) 
+                    })
+            })
+            // focus
+            //     .attr("cx", x(selectedData.timestamp))
+            //     .attr("cy", y(selectedData.player_count))
             focusText
-                .html("x:" + selectedData.timestamp + "  -  "  + "y:" + selectedData.player_count)
+                .html("Player Count:" + selectedData.player_count)
                 .attr("x", x(selectedData.timestamp)+15)
-                .attr("y", y(selectedData.player_count))
+                .attr("y", y(highest_count/1.2))
         }
 
         function mouseout(){
             console.log("mouseout")
-            focus.style("opacity", 0)
+            focus_all.forEach(function(value, index){
+                value.style("opacity", 0)
+            })
+            // focus.style("opacity", 0)
             focusText.style("opacity", 0)
         }
-
-        console.log(bisect)
 
     }
 
