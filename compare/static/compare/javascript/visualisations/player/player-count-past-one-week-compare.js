@@ -1,9 +1,9 @@
-function player_count_past_24_hours_compare(ids) {
+function player_count_past_one_week_compare(ids){
 
-    let player_data = get_data_player_count_past_24_hours_compare(ids)
+    let player_data = get_data_player_count_past_one_week_compare(ids)
 
-    if(player_data.length > 0){
-        // update all data to correct time format
+    if(player_data.length > 0) {
+
         player_data.forEach(function(data, index){
             data.forEach(function(value, data_index){
                 player_data[index][data_index].timestamp = new Date(value.timestamp)
@@ -12,7 +12,10 @@ function player_count_past_24_hours_compare(ids) {
 
         let highest_count = 0
         let highest_set = []
+        let earliest_id = comparePlayerCountOldestDates()
+        let earliest_set = []
 
+        // find which data set has the earliest data to use for x scale values
         // find which data set has the highest player count to use for y scale values
         if(player_data.length > 1){
             player_data.forEach(function(data, index){
@@ -22,46 +25,51 @@ function player_count_past_24_hours_compare(ids) {
                         highest_set = data
                     }
                 })
+                if(data[0].app_id == earliest_id){
+                    earliest_set = data
+                }
             })
         } else {
             highest_set = player_data[0]
+            earliest_set = player_data[0]
         }
-
+    
         $("#player-graph").empty()
-
+    
         let margins = {top: 0, bottom: 0, left: 0, right: 0}
-
+    
         // MARGINS
         if ($(window).width() <= 475) {
-
+    
             margins = {top: 15, bottom: 5, left: 25, right: 0}
-
+    
         } else {
-
+    
             margins = {top: 15, bottom: 5, left: 50, right: 0}
-
+    
         }
-
+    
         let svgWidth = $('#player-graph').width() - margins.left - margins.right
         let svgHeight = 440 - margins.top - margins.bottom
-
+    
         let chartContainer = d3
             .select('#player-graph')
             .attr('width', svgWidth + margins.left + margins.right)
             .attr('height', svgHeight + margins.top + margins.bottom);
-        
+    
+    
         let x = d3.scaleTime()
-            .domain(d3.extent(highest_set, function(data) {return data.timestamp; }))
+            .domain(d3.extent(earliest_set, function(data) {return data.timestamp; }))
             .range([0, svgWidth])
-
+    
         let y = d3.scaleLinear()
             .domain([0, d3.max(highest_set, function(data) {return data.player_count})])
             .range([svgHeight, 0]);
-
+    
         let chart = chartContainer
             .append("g")
-            .attr("transform", `translate(${margins.left},${margins.top})`);
-
+            .attr("transform", `translate(${margins.left},${margins.top})`)
+    
         if($(window).width() <= 800 && $(window).width() > 400){
             //X-AXIS TICKS
             chart
@@ -76,7 +84,7 @@ function player_count_past_24_hours_compare(ids) {
                 .attr("dx", "-.8em")
                 .attr("dy", ".15em")
                 .attr("transform", "rotate(-90)");
-
+    
         } else if ($(window).width() <= 400) {
             //X-AXIS TICKS
             chart
@@ -101,9 +109,9 @@ function player_count_past_24_hours_compare(ids) {
                 .attr('font-size', 15)
                 .attr('font-weight', 'bold');
         }
-
-
-
+    
+    
+    
         // X-AXIS LABELS
         if($(window).width() <= 800 && $(window).width() > 400){
             // X AXIS LABELS 
@@ -133,9 +141,9 @@ function player_count_past_24_hours_compare(ids) {
                 .attr('font-weight', 'bold')
                 .text("Time");
         }
-
-
-
+    
+    
+    
         // Y AXIS TICKS
         if ($(window).width() <= 400) {
             //Y-AXIS TICKS
@@ -144,7 +152,7 @@ function player_count_past_24_hours_compare(ids) {
                 .call(d3.axisLeft(y).tickSizeInner(-svgWidth).tickValues(y.ticks().filter(Number.isInteger)).tickFormat(d3.format('d')))
                 .attr('color', '#bec5cb')
                 .attr('font-size', 12);
-
+    
         } else {
             //Y-AXIS TICKS
             chart
@@ -153,7 +161,7 @@ function player_count_past_24_hours_compare(ids) {
                 .attr('color', '#bec5cb')
                 .attr('font-size', 15);
         }
-
+    
         // Y AXIS LABELS
         if ($(window).width() <= 475) {
             chartContainer
@@ -176,7 +184,7 @@ function player_count_past_24_hours_compare(ids) {
                 .attr('font-weight', 'bold')
                 .text("Number of Players");
         }
-
+    
         // GRAPH TITLE
         if ($(window).width() <= 475) {
             // GRAPH TITLE
@@ -187,7 +195,7 @@ function player_count_past_24_hours_compare(ids) {
                 .attr('fill', '#bec5cb')
                 .attr('font-size', 14)
                 .attr('font-weight', 'bold')
-                .text("Past 24 Hours");
+                .text("All Time");
         } else {
             // GRAPH TITLE
             chartContainer
@@ -197,18 +205,17 @@ function player_count_past_24_hours_compare(ids) {
                 .attr('fill', '#bec5cb')
                 .attr('font-size', 16)
                 .attr('font-weight', 'bold')
-                .text("Past 24 Hours");
+                .text("All Time");
         }
-
+    
         player_data.forEach(function(value, index){
-            console.log(compare_players_colours[index])
             // ADD CHART LINE
             chart
                 .append("path")
                 .datum(value)
                 .attr("fill", "none")
                 .attr("stroke", compare_players_colours[index])
-                .attr("stroke-width", 4)
+                .attr("stroke-width", 1.5)
                 .attr("d", d3.line()
                     .x(function(data) {return x(data.timestamp)})
                     .y(function(data) {return y(data.player_count)})
@@ -319,6 +326,7 @@ function player_count_past_24_hours_compare(ids) {
             })
             focusText.style("opacity", 0)
         }
-            
+
     }
+
 }

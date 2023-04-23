@@ -17,6 +17,21 @@ function playerGraphsHandler(active_vis){
         console.log("all time")
         player_count_all_time_compare(compare_game_ids)
         playerLegendHandler("player")
+    } else if (active_vis == "past_one_month"){
+        player_count_past_one_month_compare(compare_game_ids)
+        playerLegendHandler("player")
+    } else if (active_vis == "past_two_weeks") {
+        player_count_past_two_weeks_compare(compare_game_ids)
+        playerLegendHandler("player")
+    } else if (active_vis == "past_one_week") {
+        player_count_past_one_week_compare(compare_game_ids)
+        playerLegendHandler("player")
+    } else if(active_vis == "past_72_hours") {
+        player_count_past_72_hours_compare(compare_game_ids)
+        playerLegendHandler("player")
+    } else if(active_vis == "past_48_hours") {
+        player_count_past_48_hours_compare(compare_game_ids)
+        playerLegendHandler("player")
     } else if(active_vis == "past_24_hours") {
         console.log("past 24 hours")
         player_count_past_24_hours_compare(compare_game_ids)
@@ -71,21 +86,32 @@ $(function(){
 
         } else if (option == "player-past-1-month"){
 
+            player_count_past_one_month_compare(compare_game_ids)
+            playerLegendHandler("player")
             active_player_vis = "past_one_month"
 
         } else if (option == "player-past-2-weeks"){
 
+            player_count_past_two_weeks_compare(compare_game_ids)
+            playerLegendHandler("player")
             active_player_vis = "past_two_weeks"
             
         } else if (option == "player-past-1-week"){
+
+            player_count_past_one_week_compare(compare_game_ids)
+            playerLegendHandler("player")
             active_player_vis = "past_one_week"
             
         } else if (option == "player-past-72-hours"){
 
+            player_count_past_72_hours_compare(compare_game_ids)
+            playerLegendHandler("player")
             active_player_vis = "past_72_hours"
             
         } else if (option == "player-past-48-hours"){
 
+            player_count_past_48_hours_compare(compare_game_ids)
+            playerLegendHandler("player")
             active_player_vis = "past_48_hours"
             
         } else if (option == "player-past-24-hours"){
