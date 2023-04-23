@@ -33,10 +33,6 @@ function player_count_all_time_compare(ids){
             highest_set = player_data[0]
             earliest_set = player_data[0]
         }
-
-        console.log(earliest_id)
-        console.log(earliest_set)
-        console.log(highest_set)
     
         $("#player-graph").empty()
     
@@ -213,7 +209,6 @@ function player_count_all_time_compare(ids){
         }
     
         player_data.forEach(function(value, index){
-            console.log(compare_players_colours[index])
             // ADD CHART LINE
             chart
                 .append("path")
@@ -226,6 +221,66 @@ function player_count_all_time_compare(ids){
                     .y(function(data) {return y(data.player_count)})
                 )
         })
+
+        // HOVER TOOLTIP
+        let bisect = d3.bisector(function(data) {return data.timestamp }).left;
+
+        let focus = chart
+            .append('g')
+            .append('circle')
+                .style("fill", "none")
+                .attr("stroke", "black")
+                .attr('r', 8.5)
+                .style("opacity", 0)
+
+        let focusText = chart
+            .append('g')
+            .append('text')
+                .style("opacity", 0)
+                .attr("text-anchor", "left")
+                .attr("alignment-baseline", "middle")
+
+        chart
+            .append('rect')
+            .style("fill", "none")
+            .style("pointer-events", "all")
+            .attr('width', svgWidth)
+            .attr('height', svgHeight)
+            .on('mouseover', mouseover)
+            .on('mousemove', mousemove)
+            .on('mouseout', mouseout)
+
+        function mouseover() {
+            console.log("mouseover")
+            focus.style("opacity", 1)
+            focusText.style("opacity", 1)
+        }
+
+        function mousemove(event){
+            let x0 = x.invert(d3.pointer(event, this)[0]);
+            console.log(d3.pointer(event, this))
+            let i = bisect(player_data[0], x0, 1);
+            console.log("x0: ", x0)
+            console.log("i: ", i)
+            selectedData = player_data[1][i]
+            console.log(selectedData)
+            focus
+                .attr("cx", x(selectedData.timestamp))
+                .attr("cy", y(selectedData.player_count))
+            focusText
+                .html("x:" + selectedData.timestamp + "  -  "  + "y:" + selectedData.player_count)
+                .attr("x", x(selectedData.timestamp)+15)
+                .attr("y", y(selectedData.player_count))
+        }
+
+        function mouseout(){
+            console.log("mouseout")
+            focus.style("opacity", 0)
+            focusText.style("opacity", 0)
+        }
+
+        console.log(bisect)
+
     }
 
 }
