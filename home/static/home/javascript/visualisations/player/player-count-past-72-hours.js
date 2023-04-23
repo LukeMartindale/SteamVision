@@ -166,7 +166,7 @@ function player_count_past_72_hours(id){
         chartContainer
             .append('text')
             .attr('y', -12.5)
-            .attr('x', -($("#sentiment-container-content").height()/1.75))
+            .attr('x', -($("#player-count-container-content").height()/1.95))
             .attr("transform", "rotate(-90)")
             .attr('fill', '#bec5cb')
             .attr('font-size', 15)
@@ -176,7 +176,7 @@ function player_count_past_72_hours(id){
         chartContainer
             .append('text')
             .attr('y', 0)
-            .attr('x', -($("#sentiment-container-content").height()/1.75))
+            .attr('x', -($("#player-count-container-content").height()/1.95))
             .attr("transform", "rotate(-90)")
             .attr('fill', '#bec5cb')
             .attr('font-size', 20)
