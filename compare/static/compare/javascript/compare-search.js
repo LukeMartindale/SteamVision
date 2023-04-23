@@ -7,14 +7,23 @@ $(function(){
         $(".search-bar-wrapper").css("box-shadow", "0px 0px 5px white")
 
         if($("#search-input").val()){
-            $(".search-display-wrapper").toggleClass("hide")
+            $(".search-display-wrapper").removeClass("hide")
         }
     })
 
+    // document.addEventListener('click', event => {
+    //     if(!event.target.classList.contains("search-display-wrapper") || !event.target.classList.contains("search-item-wrapper") || !event.target.classList.contains("search-item-image-wrapper")){
+    //         console.log("not")
+    //         $(".search-display-wrapper").addClass("hide")
+    //     }
+    // })
+
     $("#search-input").focusout(function(){
 
-        $(".search-bar-wrapper").css("box-shadow", "0px 0px 0px white")
-        // $(".search-display-wrapper").addClass("hide")
+        setTimeout(() => {
+            $(".search-bar-wrapper").css("box-shadow", "0px 0px 0px white")
+            $(".search-display-wrapper").addClass("hide")
+        }, 250);
 
     })
 
