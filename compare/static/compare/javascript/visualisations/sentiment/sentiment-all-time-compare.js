@@ -3,6 +3,7 @@ function sentiment_all_time_compare(ids){
     let reviews_data = get_data_sentiment_all_time_compare(ids)
 
     $('#sentiment-graph').empty()
+    $('#sentiment-container-content').find(".tooltip").remove()
 
     let margins = {top: 0, bottom: 0, left: 0, right: 0}
 
@@ -227,22 +228,16 @@ function sentiment_all_time_compare(ids){
         .style("padding", "10px")
 
     let mouseover = function(event, data) {
-        console.log(this.__data__)
-        let subgroupName = d3.select(this.parentNode).datum().key;
-        console.log(subgroupName)
-        let subgroupValue = data[subgroupName];
         tooltip
             .html("Game: " + this.__data__.key + "<br>" + "Value: " + this.__data__.value)
             .style("opacity", 1)
     }
 
     let mousemove = function(event, data) {
-        console.log(event.x)
-        console.log(event.y)
         tooltip
             .style("transform", "translateY(-55%)")
             .style("left", (event.x) + "px")
-            .style("top", (event.y)-100 + "px")
+            .style("top", (event.y) -100 + "px")
     }
 
     let mouseleave = function(event, data) {
