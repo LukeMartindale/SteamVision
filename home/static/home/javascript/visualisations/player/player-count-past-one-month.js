@@ -28,6 +28,16 @@ function player_count_past_one_month(id){
         player_data[index].timestamp = new Date(data.timestamp)
     })
 
+    let highest_count = 0
+
+    if(player_data.length > 1){
+        player_data.forEach(function(value, index){
+            if(value.player_count > highest_count){
+                highest_count = value.player_count
+            }
+        })
+    }
+
     $("#player-graph").empty()
 
     let margins = {top: 0, bottom: 0, left: 0, right: 0}
@@ -219,14 +229,82 @@ function player_count_past_one_month(id){
             .y(function(data) {return y(data.player_count)})
         )
 
-    // // ADD RED CIRCLES
-    // chart.selectAll("myCircles")
-    //     .data(player_data)
-    //     .join("circle")
-    //       .attr("fill", "red")
-    //       .attr("stroke", "none")
-    //       .attr("cx", d => x(d.timestamp))
-    //       .attr("cy", d => y(d.player_count))
-    //       .attr("r", 3)
+    // HOVER TOOLTIP
+    let bisect = d3.bisector(function(data) {return data.timestamp }).left;
+
+    let focus = chart
+        .append('g')
+        .append('circle')
+            .style("fill", "none")
+            .attr("stroke", "black")
+            .attr('r', 8.5)
+            .style("opacity", 0)
+
+    let focusText = chart
+        .append('g')
+        .append('text')
+            .style("opacity", 0)
+            .attr("text-anchor", "left")
+            .attr("alignment-baseline", "middle")
+
+    chart
+        .append('rect')
+        .style("fill", "none")
+        .style("pointer-events", "all")
+        .attr('width', svgWidth)
+        .attr('height', svgHeight)
+        .on('mouseover', mouseover)
+        .on('mousemove', mousemove)
+        .on('mouseout', mouseout)
+
+    function mouseover() {
+        focus.style("opacity", 1)
+        focusText.style("opacity", 1)
+    }
+
+    function mousemove(event){
+        let x0 = x.invert(d3.pointer(event, this)[0]);
+        let i = bisect(player_data, x0, 0);
+        selectedData = player_data[i]
+        focus
+            .attr("cx", function(value) { 
+                if(player_data.length < player_data.length){
+                    return x(player_data[i].timestamp) 
+                } else {
+                    return x(player_data[i].timestamp)
+                }
+            })
+            .attr("cy", function(value) { 
+                return y(player_data[i].player_count) 
+            })
+
+        let width_scale = 15
+        let time = new Date(player_data[i].timestamp)
+        time = time.getFullYear() + "/" + time.getMonth() + "/" + time.getDate();
+
+        if(x(player_data[i].timestamp)+15 > $("#player-graph").width()/2){
+            width_scale = -175
+        } else {
+            width_scale = 15
+        }
+
+        focusText
+            .attr("x", x(player_data[i].timestamp)+width_scale)
+            .attr("y", y(highest_count/1.2))
+            .attr("display", "block")
+            .attr("white-space", "nowrap")
+            .attr("text-anchor", "start")
+            .html("")
+            .append('tspan')
+                .attr("white-space", "inherit")
+                .text("Players: " + player_data[i].player_count + " (" + time + ")")
+                .attr("fill", "royalblue")
+                .style("text-shadow", "rgb(0, 0, 0) -1px -1px 0px, rgb(0, 0, 0) 1px -1px 0px, rgb(0, 0, 0) -1px 1px 0px, rgb(0, 0, 0) 1px 1px 0px");
+    }
+
+    function mouseout(){
+        focus.style("opacity", 0)
+        focusText.style("opacity", 0)
+    }
 
 }

@@ -20,141 +20,6 @@ function get_data_player_count_past_24_hours(id){
 
 }
 
-let temp_data = [
-    {
-        "id": 9193,
-        "player_count": 3,
-        "timestamp": "2023-03-14T13:02:32.928615Z",
-        "app_id": 542050
-    },
-    {
-        "id": 9217,
-        "player_count": 1,
-        "timestamp": "2023-03-14T14:02:38.236588Z",
-        "app_id": 542050
-    },
-    {
-        "id": 9241,
-        "player_count": 0,
-        "timestamp": "2023-03-14T15:02:58.923479Z",
-        "app_id": 542050
-    },
-    {
-        "id": 9265,
-        "player_count": 2,
-        "timestamp": "2023-03-14T16:02:41.235735Z",
-        "app_id": 542050
-    },
-    {
-        "id": 9289,
-        "player_count": 0,
-        "timestamp": "2023-03-14T17:03:21.406404Z",
-        "app_id": 542050
-    },
-    {
-        "id": 9313,
-        "player_count": 3,
-        "timestamp": "2023-03-14T18:02:40.055425Z",
-        "app_id": 542050
-    },
-    {
-        "id": 9337,
-        "player_count": 2,
-        "timestamp": "2023-03-14T19:03:24.312965Z",
-        "app_id": 542050
-    },
-    {
-        "id": 9361,
-        "player_count": 3,
-        "timestamp": "2023-03-14T20:03:14.448389Z",
-        "app_id": 542050
-    },
-    {
-        "id": 9385,
-        "player_count": 2,
-        "timestamp": "2023-03-14T21:03:14.599040Z",
-        "app_id": 542050
-    },
-    {
-        "id": 9409,
-        "player_count": 2,
-        "timestamp": "2023-03-14T22:03:05.828535Z",
-        "app_id": 542050
-    },
-    {
-        "id": 9433,
-        "player_count": 2,
-        "timestamp": "2023-03-14T23:02:48.136706Z",
-        "app_id": 542050
-    },
-    {
-        "id": 9457,
-        "player_count": 2,
-        "timestamp": "2023-03-15T01:04:09.490972Z",
-        "app_id": 542050
-    },
-    {
-        "id": 9481,
-        "player_count": 0,
-        "timestamp": "2023-03-15T04:04:05.083872Z",
-        "app_id": 542050
-    },
-    {
-        "id": 9505,
-        "player_count": 1,
-        "timestamp": "2023-03-15T05:02:55.733516Z",
-        "app_id": 542050
-    },
-    {
-        "id": 9529,
-        "player_count": 2,
-        "timestamp": "2023-03-15T06:04:15.875585Z",
-        "app_id": 542050
-    },
-    {
-        "id": 9553,
-        "player_count": 0,
-        "timestamp": "2023-03-15T07:04:06.199747Z",
-        "app_id": 542050
-    },
-    {
-        "id": 9577,
-        "player_count": 1,
-        "timestamp": "2023-03-15T08:02:50.065325Z",
-        "app_id": 542050
-    },
-    {
-        "id": 9601,
-        "player_count": 1,
-        "timestamp": "2023-03-15T09:03:46.216606Z",
-        "app_id": 542050
-    },
-    {
-        "id": 9625,
-        "player_count": 1,
-        "timestamp": "2023-03-15T10:03:06.072924Z",
-        "app_id": 542050
-    },
-    {
-        "id": 9649,
-        "player_count": 1,
-        "timestamp": "2023-03-15T11:03:27.001082Z",
-        "app_id": 542050
-    },
-    {
-        "id": 9673,
-        "player_count": 1,
-        "timestamp": "2023-03-15T12:03:09.621421Z",
-        "app_id": 542050
-    },
-    {
-        "id": 9697,
-        "player_count": 1,
-        "timestamp": "2023-03-15T13:03:26.771644Z",
-        "app_id": 542050
-    }
-]
-
 function player_count_past_24_hours(id){
 
     let player_data = get_data_player_count_past_24_hours(id)
@@ -163,9 +28,15 @@ function player_count_past_24_hours(id){
         player_data[index].timestamp = new Date(data.timestamp)
     })
 
-    temp_data.forEach(function(data, index){
-        temp_data[index].timestamp = new Date(data.timestamp)
-    })
+    let highest_count = 0
+
+    if(player_data.length > 1){
+        player_data.forEach(function(value, index){
+            if(value.player_count > highest_count){
+                highest_count = value.player_count
+            }
+        })
+    }
 
     $("#player-graph").empty()
 
@@ -358,14 +229,95 @@ function player_count_past_24_hours(id){
             .y(function(data) {return y(data.player_count)})
         )
 
-    // // ADD RED CIRCLES
-    // chart.selectAll("myCircles")
-    //     .data(player_data)
-    //     .join("circle")
-    //       .attr("fill", "red")
-    //       .attr("stroke", "none")
-    //       .attr("cx", d => x(d.timestamp))
-    //       .attr("cy", d => y(d.player_count))
-    //       .attr("r", 3)
+
+    // ADD CHART LINE
+    chart
+        .append("path")
+        .datum(player_data)
+        .attr("fill", "none")
+        .attr("stroke", "steelblue")
+        .attr("stroke-width", 3)
+        .attr("d", d3.line()
+            .x(function(data) {return x(data.timestamp)})
+            .y(function(data) {return y(data.player_count)})
+        )
+
+    // HOVER TOOLTIP
+    let bisect = d3.bisector(function(data) {return data.timestamp }).left;
+
+    let focus = chart
+        .append('g')
+        .append('circle')
+            .style("fill", "none")
+            .attr("stroke", "black")
+            .attr('r', 8.5)
+            .style("opacity", 0)
+
+    let focusText = chart
+        .append('g')
+        .append('text')
+            .style("opacity", 0)
+            .attr("text-anchor", "left")
+            .attr("alignment-baseline", "middle")
+
+    chart
+        .append('rect')
+        .style("fill", "none")
+        .style("pointer-events", "all")
+        .attr('width', svgWidth)
+        .attr('height', svgHeight)
+        .on('mouseover', mouseover)
+        .on('mousemove', mousemove)
+        .on('mouseout', mouseout)
+
+    function mouseover() {
+        focus.style("opacity", 1)
+        focusText.style("opacity", 1)
+    }
+
+    function mousemove(event){
+        let x0 = x.invert(d3.pointer(event, this)[0]);
+        let i = bisect(player_data, x0, 0);
+        selectedData = player_data[i]
+        focus
+            .attr("cx", function(value) { 
+                if(player_data.length < player_data.length){
+                    return x(player_data[i].timestamp) 
+                } else {
+                    return x(player_data[i].timestamp)
+                }
+            })
+            .attr("cy", function(value) { 
+                return y(player_data[i].player_count) 
+            })
+
+        let width_scale = 15
+        let time = new Date(player_data[i].timestamp)
+        time = time.getFullYear() + "/" + time.getMonth() + "/" + time.getDate() + " - " + time.getHours();
+
+        if(x(player_data[i].timestamp)+15 > $("#player-graph").width()/2){
+            width_scale = -175
+        } else {
+            width_scale = 15
+        }
+
+        focusText
+            .attr("x", x(player_data[i].timestamp)+width_scale)
+            .attr("y", y(highest_count/1.2))
+            .attr("display", "block")
+            .attr("white-space", "nowrap")
+            .attr("text-anchor", "start")
+            .html("")
+            .append('tspan')
+                .attr("white-space", "inherit")
+                .text("Players: " + player_data[i].player_count + " (" + time + ")")
+                .attr("fill", "royalblue")
+                .style("text-shadow", "rgb(0, 0, 0) -1px -1px 0px, rgb(0, 0, 0) 1px -1px 0px, rgb(0, 0, 0) -1px 1px 0px, rgb(0, 0, 0) 1px 1px 0px");
+    }
+
+    function mouseout(){
+        focus.style("opacity", 0)
+        focusText.style("opacity", 0)
+    }
 
 }
