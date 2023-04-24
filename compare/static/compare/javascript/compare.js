@@ -2,6 +2,7 @@ let compare_game_ids = []
 let searched_game_data = []
 let compare_game_data = []
 
+// ON LOAD AUTO LOAD PRE SELECTED GAMES
 $(function(){
 
     let params = new URLSearchParams(document.location.search);
@@ -41,6 +42,93 @@ $(function(){
     })
 })
 
+
+//COMPARISON TAB SECTIONS FUNCTIONALITY
+$(function(){
+
+    // REVIEWS TAB
+    $("#review-selector-button").click(function(){
+
+        let ids = ["sentiment-block", "emotion-block", "player-block"]
+        let button_ids = ["sentiment-selector-button", "emotion-selector-button", "player-selector-button"]
+
+        ids.forEach(function(id, index){
+            $("#" + id).addClass("hide-section")
+        })
+
+        button_ids.forEach(function(id, index){
+            $("#" + id).removeClass("content-selected")
+        })
+
+        $("#review-block").removeClass("hide-section")
+        $("#review-selector-button").addClass("content-selected")
+
+
+    })
+    // SENTIMENT TAB
+    $("#sentiment-selector-button").click(function(){
+
+        let ids = ["review-block", "emotion-block", "player-block"]
+        let button_ids = ["review-selector-button", "emotion-selector-button", "player-selector-button"]
+
+        ids.forEach(function(id, index){
+            $("#" + id).addClass("hide-section")
+        })
+
+        button_ids.forEach(function(id, index){
+            $("#" + id).removeClass("content-selected")
+        })
+
+        $("#sentiment-block").removeClass("hide-section")
+        $("#sentiment-selector-button").addClass("content-selected")
+
+        sentimentGraphsHandler(active_sentiment_vis)
+
+    })
+    // EMOTION TAB
+    $("#emotion-selector-button").click(function(){
+        
+
+        let ids = ["review-block", "sentiment-block", "player-block"]
+        let button_ids = ["review-selector-button", "sentiment-selector-button", "player-selector-button"]
+
+        ids.forEach(function(id, index){
+            $("#" + id).addClass("hide-section")
+        })
+
+        button_ids.forEach(function(id, index){
+            $("#" + id).removeClass("content-selected")
+        })
+
+        $("#emotion-block").removeClass("hide-section")
+        $("#emotion-selector-button").addClass("content-selected")
+
+    })
+    // PLAYER TAB
+    $("#player-selector-button").click(function(){
+
+        let ids = ["review-block", "sentiment-block", "emotion-block"]
+        let button_ids = ["review-selector-button", "sentiment-selector-button", "emotion-selector-button"]
+
+        ids.forEach(function(id, index){
+            $("#" + id).addClass("hide-section")
+        })
+
+        button_ids.forEach(function(id, index){
+            $("#" + id).removeClass("content-selected")
+        })
+
+        $("#player-block").removeClass("hide-section")
+        $("#player-selector-button").addClass("content-selected")
+
+        playerGraphsHandler(active_player_vis)
+
+    })
+
+})
+
+
+//GET DATA FOR SELECTED GAMES
 function getGame(ids){
 
     let api_url = "/api/get-games/"
@@ -74,6 +162,7 @@ function getGame(ids){
 
 }
 
+//GET THE OLDEST PLAYER RECORD FOR EACH SELECTED GAME
 function getPlayerCountOldestDates(ids){
 
     let temp_data
@@ -104,6 +193,7 @@ function getPlayerCountOldestDates(ids){
     return oldest_dates
 }
 
+//COMPARE OLDEST PLAYER RECORD TO DETERMINE WHICH ONE IS OLDER
 function comparePlayerCountOldestDates(){
 
     let oldest_dates = getPlayerCountOldestDates(compare_game_ids)
