@@ -208,4 +208,27 @@ function sentiment_all_time_compare(ids){
 
     }
 
+    // Y AXIS LABELS
+    if ($(window).width() <= 475) {
+        chartContainer
+            .append('text')
+            .attr('y', -12.5)
+            .attr('x', -($("#sentiment-container-content").height()/1.75))
+            .attr("transform", "rotate(-90)")
+            .attr('fill', '#bec5cb')
+            .attr('font-size', 15)
+            .attr('font-weight', 'bold')
+            .text("Number of Reviews");
+    } else {
+        chartContainer
+            .append('text')
+            .attr('y', 0)
+            .attr('x', -($("#sentiment-container-content").height()/1.75))
+            .attr("transform", "rotate(-90)")
+            .attr('fill', '#bec5cb')
+            .attr('font-size', 20)
+            .attr('font-weight', 'bold')
+            .text("Number of Reviews");
+    }
+
 }
