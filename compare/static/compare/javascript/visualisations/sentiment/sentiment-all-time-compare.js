@@ -34,6 +34,18 @@ function sentiment_all_time_compare(ids){
     let groups = reviews_data.map(data => data.label)
     let subgroups = Object.keys(reviews_data[0])
     subgroups.shift()
+
+    // GET MAX VALUE FOR Y AXIS SCALING
+    let max_value = 0
+    subgroups.forEach(function(value, index){
+        reviews_data.forEach(function(data, data_index){
+            if(data[value] > max_value){
+                max_value = data[value]
+            }
+        })
+    })
+
+    console.log("Max Value: ", max_value)
     
     // X, Y AND Xsub SETUP
     let x = d3.scaleBand()
@@ -41,7 +53,7 @@ function sentiment_all_time_compare(ids){
         .range([0, svgWidth])
         .padding(0.1)
     let y = d3.scaleLinear()
-        .domain([0, 1200])
+        .domain([0, (max_value + max_value*0.1)])
         .range([svgHeight, 0]);
     let xsub = d3.scaleBand()
         .domain(subgroups)
@@ -70,12 +82,11 @@ function sentiment_all_time_compare(ids){
             .attr('font-weight', 'bold')
             .text("All Time");
     }
-
     
     //COLOURS
     let colour = d3.scaleOrdinal()
         .domain(subgroups)
-        .range(['#e41a1c','#377eb8','#4daf4a'])
+        .range(compare_sentiment_colours)
 
     //BARS
     chart
@@ -165,11 +176,11 @@ function sentiment_all_time_compare(ids){
 
     // Y AXIS TICKS
     if ($(window).width() <= 400) {
-        if(1200 < 10) {
+        if(max_value < 10) {
         //Y-AXIS TICKS
         chart
             .append('g')
-            .call(d3.axisLeft(y).tickSizeInner(-svgWidth).ticks(1200+1))
+            .call(d3.axisLeft(y).tickSizeInner(-svgWidth).ticks(max_value+1))
             .attr('color', '#bec5cb')
             .attr('font-size', 12);
         } else {
@@ -180,11 +191,11 @@ function sentiment_all_time_compare(ids){
             .attr('font-size', 12);
         }
     } else {
-        if(1200 < 10) {
+        if(max_value < 10) {
         //Y-AXIS TICKS
         chart
             .append('g')
-            .call(d3.axisLeft(y).tickSizeInner(-svgWidth).ticks(1200+1))
+            .call(d3.axisLeft(y).tickSizeInner(-svgWidth).ticks(max_value+1))
             .attr('color', '#bec5cb')
             .attr('font-size', 15)
         } else {

@@ -1,27 +1,3 @@
-let sentiment_group = [
-    '-1',
-    '-0.9',
-    '-0.8',
-    '-0.7',
-    '-0.6',
-    '-0.5',
-    '-0.4',
-    '-0.3',
-    '-0.2',
-    '-0.1',
-    '0',
-    '0.1',
-    '0.2',
-    '0.3',
-    '0.4',
-    '0.5',
-    '0.6',
-    '0.7',
-    '0.8',
-    '0.9',
-    '1',
-]
-
 let sentiment_format_base = [
     {label: '-1'},
     {label: '-0.9'},
@@ -44,6 +20,15 @@ let sentiment_format_base = [
     {label: '0.8'},
     {label: '0.9'},
     {label: '1'},
+]
+
+let compare_sentiment_colours = [
+    "#4169e1",
+    "#66cc33",
+    "#f4ff50",
+    "#f89c3c",
+    "#f03424",
+    "#9300ff",
 ]
 
 let compare_players_colours = [
