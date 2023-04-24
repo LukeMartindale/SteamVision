@@ -19,7 +19,9 @@ function player_count_all_time_compare(ids){
         // find which data set has the highest player count to use for y scale values
         if(player_data.length > 1){
             player_data.forEach(function(data, index){
+                console.log(data)
                 data.forEach(function(value, data_index){
+                    console.log(value)
                     if(value.player_count > highest_count){
                         highest_count = value.player_count
                         highest_set = data
@@ -30,6 +32,11 @@ function player_count_all_time_compare(ids){
                 }
             })
         } else {
+            player_data[0].forEach(function(value, index){
+                if(value.player_count > highest_count){
+                    highest_count = value.player_count
+                }
+            })
             highest_set = player_data[0]
             earliest_set = player_data[0]
         }

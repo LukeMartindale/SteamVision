@@ -30,6 +30,11 @@ function player_count_past_two_weeks_compare(ids){
                 }
             })
         } else {
+            player_data[0].forEach(function(value, index){
+                if(value.player_count > highest_count){
+                    highest_count = value.player_count
+                }
+            })
             highest_set = player_data[0]
             earliest_set = player_data[0]
         }
