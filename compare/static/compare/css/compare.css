@@ -450,7 +450,7 @@
 
 .tooltip {
     position: absolute;
-    z-index: 1070;
+    z-index: 500;
     display: block;
     margin: 0;
     font-weight: 400;

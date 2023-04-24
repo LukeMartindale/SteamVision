@@ -230,6 +230,7 @@ function sentiment_all_time_compare(ids){
     let mouseover = function(event, data) {
         tooltip
             .html("Game: " + this.__data__.key + "<br>" + "Value: " + this.__data__.value)
+            .style("display", "block")
             .style("opacity", 1)
     }
 
@@ -237,11 +238,12 @@ function sentiment_all_time_compare(ids){
         tooltip
             .style("transform", "translateY(-55%)")
             .style("left", (event.x) + "px")
-            .style("top", (event.y) -100 + "px")
+            .style("top", (event.y) - 30 + "px")
     }
 
     let mouseleave = function(event, data) {
         tooltip
+            .style("display", "none")
             .style("opacity", 0)
     }
     
