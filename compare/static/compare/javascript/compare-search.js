@@ -11,13 +11,6 @@ $(function(){
         }
     })
 
-    // document.addEventListener('click', event => {
-    //     if(!event.target.classList.contains("search-display-wrapper") || !event.target.classList.contains("search-item-wrapper") || !event.target.classList.contains("search-item-image-wrapper")){
-    //         console.log("not")
-    //         $(".search-display-wrapper").addClass("hide")
-    //     }
-    // })
-
     $("#search-input").focusout(function(){
 
         setTimeout(() => {

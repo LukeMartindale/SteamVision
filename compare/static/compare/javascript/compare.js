@@ -19,10 +19,10 @@ $(function(){
             selectedItemDisplayAppend(value[0])
         })
 
-        player_count_all_time_compare(compare_game_ids)
         sentiment_all_time_compare(compare_game_ids)
-        playerLegendHandler("player")
-
+        LegendHandler("sentiment")
+        player_count_all_time_compare(compare_game_ids)
+        LegendHandler("player")
     }
 
 })

@@ -44,8 +44,6 @@ function sentiment_all_time_compare(ids){
             }
         })
     })
-
-    console.log("Max Value: ", max_value)
     
     // X, Y AND Xsub SETUP
     let x = d3.scaleBand()
@@ -87,21 +85,6 @@ function sentiment_all_time_compare(ids){
     let colour = d3.scaleOrdinal()
         .domain(subgroups)
         .range(compare_sentiment_colours)
-
-    //BARS
-    chart
-        .selectAll("g")
-        .data(reviews_data)
-        .join("g")
-            .attr("transform", data => `translate(${x(data.label)}, 0)` )
-        .selectAll("rect")
-        .data(function(data) {return subgroups.map(function(key) { return {key: key, value: data[key]}; }); })
-        .join("rect")
-            .attr("x", data => xsub(data.key))
-            .attr("y", data => y(data.value))
-            .attr("width", xsub.bandwidth())
-            .attr("height", data => svgHeight - y(data.value))
-            .attr("fill", data => colour(data.key))
 
     if($(window).width() <= 800 && $(window).width() > 400){
         //X-AXIS TICKS
@@ -230,5 +213,63 @@ function sentiment_all_time_compare(ids){
             .attr('font-weight', 'bold')
             .text("Number of Reviews");
     }
+
+
+    // CREATE TOOLTIP
+    let tooltip = d3.select('#sentiment-container-content')
+        .append("div")
+        .style("opacity", 0)
+        .attr("class", "tooltip")
+        .style("background-color", "white")
+        .style("border", "solid")
+        .style("border-wdith", "1px")
+        .style("border-radius", "5px")
+        .style("padding", "10px")
+
+    let mouseover = function(event, data) {
+        console.log(this.__data__)
+        let subgroupName = d3.select(this.parentNode).datum().key;
+        console.log(subgroupName)
+        let subgroupValue = data[subgroupName];
+        tooltip
+            .html("Game: " + this.__data__.key + "<br>" + "Value: " + this.__data__.value)
+            .style("opacity", 1)
+    }
+
+    let mousemove = function(event, data) {
+        console.log(event.x)
+        console.log(event.y)
+        tooltip
+            .style("transform", "translateY(-55%)")
+            .style("left", (event.x) + "px")
+            .style("top", (event.y)-100 + "px")
+    }
+
+    let mouseleave = function(event, data) {
+        tooltip
+            .style("opacity", 0)
+    }
+    
+    let gChart = chart
+        .append('g')
+
+    //BARS
+    gChart
+        .selectAll("g")
+        .data(reviews_data)
+        .join("g")
+            .attr("transform", data => `translate(${x(data.label)}, 0)` )
+        .selectAll("rect")
+        .data(function(data) {return subgroups.map(function(key) { return {key: key, value: data[key]}; }); })
+        .join("rect")
+            .classed('bar', true)
+            .attr("x", data => xsub(data.key))
+            .attr("y", data => y(data.value))
+            .attr("width", xsub.bandwidth())
+            .attr("height", data => svgHeight - y(data.value))
+            .attr("fill", data => colour(data.key))
+        .on('mouseover', mouseover)
+        .on('mousemove', mousemove)
+        .on('mouseout', mouseleave)
 
 }

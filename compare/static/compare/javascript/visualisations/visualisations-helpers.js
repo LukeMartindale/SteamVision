@@ -1,43 +1,27 @@
-let sentiment_format_base = [
-    {label: '-1'},
-    {label: '-0.9'},
-    {label: '-0.8'},
-    {label: '-0.7'},
-    {label: '-0.6'},
-    {label: '-0.5'},
-    {label: '-0.4'},
-    {label: '-0.3'},
-    {label: '-0.2'},
-    {label: '-0.1'},
-    {label: '0'},
-    {label: '0.1'},
-    {label: '0.2'},
-    {label: '0.3'},
-    {label: '0.4'},
-    {label: '0.5'},
-    {label: '0.6'},
-    {label: '0.7'},
-    {label: '0.8'},
-    {label: '0.9'},
-    {label: '1'},
-]
-
 let compare_sentiment_colours = [
-    "#4169e1",
-    "#66cc33",
-    "#f4ff50",
-    "#f89c3c",
-    "#f03424",
-    "#9300ff",
+    "#4169e1", //blue
+    "#66cc33", //green
+    "#f4ff50", //yellow
+    "#f89c3c", //orange
+    "#f03424", //red
+    "#9300ff", //purple
+    "#FF00FF", //pink
+    "#6F4E37", //brown
+    "#000000", //black
+    "#FAF9F6", //white
 ]
 
 let compare_players_colours = [
-    "#4169e1",
-    "#66cc33",
-    "#f4ff50",
-    "#f89c3c",
-    "#f03424",
-    "#9300ff",
+    "#4169e1", //blue
+    "#66cc33", //green
+    "#f4ff50", //yellow
+    "#f89c3c", //orange
+    "#f03424", //red
+    "#9300ff", //purple
+    "#FF00FF", //pink
+    "#6F4E37", //brown
+    "#000000", //black
+    "#FAF9F6", //white
 ]
 
 let compare_alternate_colours = [
