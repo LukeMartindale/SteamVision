@@ -2,6 +2,8 @@ let compare_game_ids = []
 let searched_game_data = []
 let compare_game_data = []
 
+let active_tab = "review"
+
 // ON LOAD AUTO LOAD PRE SELECTED GAMES
 $(function(){
 
@@ -20,10 +22,6 @@ $(function(){
             selectedItemDisplayAppend(value[0])
         })
 
-        sentiment_all_time_compare(compare_game_ids)
-        LegendHandler("sentiment")
-        player_count_all_time_compare(compare_game_ids)
-        LegendHandler("player")
     }
 
 })
@@ -41,7 +39,6 @@ $(function(){
         }
     })
 })
-
 
 //COMPARISON TAB SECTIONS FUNCTIONALITY
 $(function(){
@@ -63,6 +60,8 @@ $(function(){
         $("#review-block").removeClass("hide-section")
         $("#review-selector-button").addClass("content-selected")
 
+        active_tab = "review"
+
 
     })
     // SENTIMENT TAB
@@ -81,6 +80,8 @@ $(function(){
 
         $("#sentiment-block").removeClass("hide-section")
         $("#sentiment-selector-button").addClass("content-selected")
+
+        active_tab = "sentiment"
 
         sentimentGraphsHandler(active_sentiment_vis)
 
@@ -103,6 +104,8 @@ $(function(){
         $("#emotion-block").removeClass("hide-section")
         $("#emotion-selector-button").addClass("content-selected")
 
+        active_tab = "emotion"
+
     })
     // PLAYER TAB
     $("#player-selector-button").click(function(){
@@ -120,6 +123,8 @@ $(function(){
 
         $("#player-block").removeClass("hide-section")
         $("#player-selector-button").addClass("content-selected")
+
+        active_tab = "player"
 
         playerGraphsHandler(active_player_vis)
 

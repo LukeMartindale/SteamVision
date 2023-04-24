@@ -7,8 +7,15 @@ $(function(){
         clearTimeout(resizeTimer)
         resizeTimer = setTimeout(function(){
 
-            sentiemnt_compare_resize_handler(active_sentiment_vis)
-            player_compare_resize_handler(active_player_vis)
+            if(active_tab == "review") {
+                console.log("Not yet Implemented")
+            } else if (active_tab == "sentiment") {
+                sentiemnt_compare_resize_handler(active_sentiment_vis)
+            } else if (active_tab == "emotion") {
+                console.log("Not yet Implemented")
+            } else if (active_tab == "player") {
+                player_compare_resize_handler(active_player_vis)
+            }
 
         }, 100)
 

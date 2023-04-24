@@ -5,10 +5,19 @@ let active_emotion_vis = "all_time"
 let active_player_vis = "all_time"
 
 function drawGraphs(){
-    // Draw Sentiment Graph
-    sentimentGraphsHandler(active_sentiment_vis)
-    // Draw Players Graph
-    playerGraphsHandler(active_player_vis)
+
+    if(active_tab == "review") {
+        console.log("Not yet Implemented")
+    } else if (active_tab == "sentiment") {
+        // Draw Sentiment Graph
+        sentimentGraphsHandler(active_sentiment_vis)
+    } else if (active_tab == "emotion") {
+        console.log("Not yet Implemented")
+    } else if (active_tab == "player") {
+        // Draw Players Graph
+        playerGraphsHandler(active_player_vis)
+    }
+
 }
 
 function sentimentGraphsHandler(active_vis){
