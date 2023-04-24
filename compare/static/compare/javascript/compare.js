@@ -20,6 +20,7 @@ $(function(){
         })
 
         player_count_all_time_compare(compare_game_ids)
+        sentiment_all_time_compare(compare_game_ids)
         playerLegendHandler("player")
 
     }

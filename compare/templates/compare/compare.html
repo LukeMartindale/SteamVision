@@ -38,38 +38,35 @@
         </div>
 
         <!-- DISPLAY SECTION FOR GAMES SELECTED TO BE DISPLAYED -->
-        <div class="selected-games-wrapper">
+        <div class="selected-games-wrapper"></div>
 
-        </div>
+        <!-- VISUALISATIONS SECTION -->
 
-        <!-- PLAYER GRAPH SECTION -->
+        <!-- SENTIMENT VIS SECTION -->
         <div class="section-block-wrapper">
-
+            
             <div class="detail-title-wrapper">
                 <header class="detail-title-text">
-                    Player Count
+                    Reviews Sentiment
                 </header>
             </div>
 
             <div class="visualisation-container">
                 <div class="visualisation-container-header">
                     <div class="visualisation-container-options-wrapper">
-                        <select class="visualisation-select" id="player-select">
-                            <option class="visualisation-select-option" value="player-all-time">All Time</option>
-                            <option class="visualisation-select-option" value="player-past-1-month">Past Month</option>
-                            <option class="visualisation-select-option" value="player-past-2-weeks">Past 2 Weeks</option>
-                            <option class="visualisation-select-option" value="player-past-1-week">Past 7 Days</option>
-                            <option class="visualisation-select-option" value="player-past-72-hours">Past 72 Hours</option>
-                            <option class="visualisation-select-option" value="player-past-48-hours">Past 48 Hours</option>
-                            <option class="visualisation-select-option" value="player-past-24-hours">Past 24 Hours</option>
+                        <select class="visualisation-select" id="sentiment-select">
+                            <option class="visualisation-select-option" value="sentiment-all-time">All Time</option>
+                            <option class="visualisation-select-option" value="sentiment-past-12-months">Past 12 Months</option>
+                            <option class="visualisation-select-option" value="sentiment-past-6-months">Past 6 Months</option>
+                            <option class="visualisation-select-option" value="sentiment-past-1-month">Past Month</option>
+                            <option class="visualisation-select-option" value="sentiment-past-2-weeks">Past 2 Weeks</option>
+                            <option class="visualisation-select-option" value="sentiment-past-1-week">Past 7 Days</option>
                         </select>
                     </div>
                 </div>
-                <!-- Player Legend bar -->
+                <!-- SENTIMENT GRAPH LEGEND SECTION -->
                 <div class="visualisation-legend-bar">
-                    <div class="visualisation-legend-bar-main-section" id="player-vis-legend-bar">
-                        <!-- Player Label -->
-                    </div>
+                    <div class="visualisation-legend-bar-main-section"></div>
                     <!-- Extra information -->
                     <div class="visualisation-legend-bar-small-section">
                         <div class="visualisation-legend-bar-small-circle-wrapper">
@@ -79,29 +76,93 @@
                             <div class="vis-info-box-wrapper hide-section">
                                 <div class="vis-info-box">
                                     <p class="vis-info-text" style="font-size: 13px;">
-                                        The following graph shows number of players the game had at specific times
+                                        The following graph shows the sentiment across the reviews for this game.
                                         <br>
+                                        <br>A score less than 0 is negative 
                                         <br>
-                                        The higher the line, the more players there where during this time.
+                                        <br>A score of 0 is netural
                                         <br>
-                                        <br>
-                                        The lines are colour coded to show each game you have selected for comparison. These colours are shown in the legend left of this information widget.
+                                        <br>A score greater than 0 is positive
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="visualisation-container-content players-container-content" id="player-count-container-content">
-                    <svg class="visualisation-svg" id="player-graph"></svg>
+                <div class="visualisation-container-content" id="sentiment-container-content">
+                    <svg class="visualisation-svg" id="sentiment-graph"></svg>
                 </div>
             </div>
+        </div>
+
+        <!-- PLAYER GRAPH SECTION -->
+        <div class="section-block-wrapper">
+
+            <div class="game-player-wrapper">
+                <div class="detail-title-wrapper">
+                    <header class="detail-title-text">
+                        Player Count
+                    </header>
+                </div>
+    
+                <div class="visualisation-container">
+                    <div class="visualisation-container-header">
+                        <div class="visualisation-container-options-wrapper">
+                            <select class="visualisation-select" id="player-select">
+                                <option class="visualisation-select-option" value="player-all-time">All Time</option>
+                                <option class="visualisation-select-option" value="player-past-1-month">Past Month</option>
+                                <option class="visualisation-select-option" value="player-past-2-weeks">Past 2 Weeks</option>
+                                <option class="visualisation-select-option" value="player-past-1-week">Past 7 Days</option>
+                                <option class="visualisation-select-option" value="player-past-72-hours">Past 72 Hours</option>
+                                <option class="visualisation-select-option" value="player-past-48-hours">Past 48 Hours</option>
+                                <option class="visualisation-select-option" value="player-past-24-hours">Past 24 Hours</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Player Legend bar -->
+                    <div class="visualisation-legend-bar">
+                        <div class="visualisation-legend-bar-main-section" id="player-vis-legend-bar">
+                            <!-- Player Label -->
+                        </div>
+                        <!-- Extra information -->
+                        <div class="visualisation-legend-bar-small-section">
+                            <div class="visualisation-legend-bar-small-circle-wrapper">
+                                <i class="bi bi-info-circle-fill visualisation-legend-bar-info-cirlce"></i>
+                            </div>
+                            <div class="absolute-anchor">
+                                <div class="vis-info-box-wrapper hide-section">
+                                    <div class="vis-info-box">
+                                        <p class="vis-info-text" style="font-size: 13px;">
+                                            The following graph shows number of players the game had at specific times
+                                            <br>
+                                            <br>
+                                            The higher the line, the more players there where during this time.
+                                            <br>
+                                            <br>
+                                            The lines are colour coded to show each game you have selected for comparison. These colours are shown in the legend left of this information widget.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="visualisation-container-content players-container-content" id="player-count-container-content">
+                        <svg class="visualisation-svg" id="player-graph"></svg>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
 
     </div>
 
     <!-- VIS HELPER -->
     <script src="{% static 'compare/javascript/visualisations/visualisations-helpers.js' %}"></script>
+
+    <!-- SENTIMENT VISUALISATIONS -->
+    <script src="{% static 'compare/javascript/visualisations/sentiment/sentiment-data-getters.js' %}"></script>
+    <script src="{% static 'compare/javascript/visualisations/sentiment/sentiment-all-time-compare.js' %}"></script>
 
     <!-- PLAYER COUNT VISUALISATIONS -->
     <script src="{% static 'compare/javascript/visualisations/player/player-count-data-getters.js' %}"></script>
