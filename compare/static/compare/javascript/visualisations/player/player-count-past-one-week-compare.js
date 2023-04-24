@@ -291,7 +291,7 @@ function player_count_past_one_week_compare(ids){
                 let ci = is[index]
                 let width_scale = 15
                 let time = new Date(player_data[index][ci].timestamp)
-                time = time.getUTCFullYear() + "/" + time.getUTCMonth() + "/" + time.getUTCDate() + " - " + time.getHours();
+                time = time.getFullYear() + "/" + time.getMonth() + "/" + time.getDate() + " - " + time.getHours();
                 if(index == 0){
                     if(x(player_data[index][ci].timestamp)+15 > $("#player-graph").width()/2){
                         width_scale = -175
