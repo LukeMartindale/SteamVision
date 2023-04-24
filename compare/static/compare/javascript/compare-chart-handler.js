@@ -29,7 +29,7 @@ function sentimentGraphsHandler(active_vis){
         sentiment_past_two_weeks_compare(compare_game_ids)
         LegendHandler("sentiment")
     } else if (active_vis == "past_one_week") {
-
+        sentiment_past_one_week_compare(compare_game_ids)
         LegendHandler("sentiment")
     }
 
@@ -137,7 +137,7 @@ $(function(){
             
         } else if (option == "sentiment-past-1-week"){
 
-            // sentiment_past_one_week(game_id)
+            sentiment_past_one_week_compare(compare_game_ids)
             active_sentiment_vis = "past_one_week"
             
         } 

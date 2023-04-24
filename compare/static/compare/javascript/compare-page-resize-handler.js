@@ -30,7 +30,7 @@ function sentiemnt_compare_resize_handler(active_vis) {
     } else if (active_vis == "past_two_weeks"){
         sentiment_past_two_weeks_compare(compare_game_ids)
     } else if (active_vis == "past_one_week"){
-
+        sentiment_past_one_week_compare(compare_game_ids)
     }
 }
 
