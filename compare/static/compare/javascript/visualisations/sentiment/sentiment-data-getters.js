@@ -49,8 +49,11 @@ function get_data_sentiment_all_time_compare(ids){
 
     })
 
-    return formatted_data
-    
+    if(ids.length > 0){
+        return formatted_data
+    } else {
+        return []
+    }
 }
 
 function get_data_sentiment_past_twelve_months_compare(ids) {
@@ -104,7 +107,12 @@ function get_data_sentiment_past_twelve_months_compare(ids) {
 
     })
 
-    return formatted_data
+    if(ids.length > 0){
+        return formatted_data
+    } else {
+        return []
+    }
+
 }
 
 function get_data_sentiment_past_six_months_compare(ids) {
@@ -158,7 +166,12 @@ function get_data_sentiment_past_six_months_compare(ids) {
 
     })
 
-    return formatted_data
+    if(ids.length > 0){
+        return formatted_data
+    } else {
+        return []
+    }
+
 }
 
 function get_data_sentiment_past_one_month_compare(ids) {
@@ -212,7 +225,12 @@ function get_data_sentiment_past_one_month_compare(ids) {
 
     })
 
-    return formatted_data
+    if(ids.length > 0){
+        return formatted_data
+    } else {
+        return []
+    }
+
 }
 
 function get_data_sentiment_past_two_weeks_compare(ids) {
@@ -266,7 +284,12 @@ function get_data_sentiment_past_two_weeks_compare(ids) {
 
     })
 
-    return formatted_data
+    if(ids.length > 0){
+        return formatted_data
+    } else {
+        return []
+    }
+
 }
 
 function get_data_sentiment_past_one_week_compare(ids) {
@@ -320,5 +343,10 @@ function get_data_sentiment_past_one_week_compare(ids) {
 
     })
 
-    return formatted_data
+    if(ids.length > 0){
+        return formatted_data
+    } else {
+        return []
+    }
+    
 }

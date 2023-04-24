@@ -335,6 +335,8 @@ function player_count_past_72_hours_compare(ids){
             focusText.style("opacity", 0)
         }
 
+    } else {
+        $("#player-graph").empty()
     }
 
 }

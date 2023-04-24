@@ -335,6 +335,8 @@ function player_count_past_two_weeks_compare(ids){
             focusText.style("opacity", 0)
         }
 
+    } else {
+        $("#player-graph").empty()
     }
 
 }
