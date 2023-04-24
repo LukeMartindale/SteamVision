@@ -290,9 +290,11 @@ function player_count_past_72_hours_compare(ids){
             focus_all.forEach(function(value, index){
                 let ci = is[index]
                 let width_scale = 15
+                let time = new Date(player_data[index][ci].timestamp)
+                time = time.getUTCFullYear() + "/" + time.getUTCMonth() + "/" + time.getUTCDate() + " - " + time.getHours();
                 if(index == 0){
                     if(x(player_data[index][ci].timestamp)+15 > $("#player-graph").width()/2){
-                        width_scale = -115
+                        width_scale = -175
                     } else {
                         width_scale = 15
                     }
@@ -301,21 +303,27 @@ function player_count_past_72_hours_compare(ids){
                         .attr("y", y(highest_count/1.2))
                         .attr("display", "block")
                         .attr("white-space", "nowrap")
+                        .attr("text-anchor", "start")
                         .html("")
                         .append('tspan')
                             .attr("white-space", "inherit")
-                            .text(compare_game_data[index].name + ": " + player_data[index][ci].player_count)
+                            .text(compare_game_data[index].name + ": " + player_data[index][ci].player_count + " (" + time + ")")
                             .attr("fill", compare_players_colours[index])
-                            .attr("dx", 0)
-                            .attr("dy", 18);
+                            .style("text-shadow", "rgb(0, 0, 0) -1px -1px 0px, rgb(0, 0, 0) 1px -1px 0px, rgb(0, 0, 0) -1px 1px 0px, rgb(0, 0, 0) 1px 1px 0px");
                 } else {
+                    if(x(player_data[index][ci].timestamp)+15 > $("#player-graph").width()/2){
+                        width_scale = -175
+                    } else {
+                        width_scale = 15
+                    }
                     focusText
                     .append('tspan')
                         .attr("white-space", "inherit")
-                        .text(compare_game_data[index].name + ": " + player_data[index][ci].player_count)
+                        .text(compare_game_data[index].name + ": " + player_data[index][ci].player_count + " (" + time + ")")
                         .attr("fill", compare_players_colours[index])
-                        .attr("dx", -104)
-                        .attr("dy", 18);
+                        .attr("x", x(player_data[index][ci].timestamp)+width_scale)
+                        .attr("dy", "1.2em")
+                        .style("text-shadow", "rgb(0, 0, 0) -1px -1px 0px, rgb(0, 0, 0) 1px -1px 0px, rgb(0, 0, 0) -1px 1px 0px, rgb(0, 0, 0) 1px 1px 0px");
                 }
             })
         }
