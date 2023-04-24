@@ -2,8 +2,6 @@ function sentiment_all_time_compare(ids){
 
     let reviews_data = get_data_sentiment_all_time_compare(ids)
 
-    console.log(reviews_data)
-
     if(reviews_data.length > 0) {
 
         $('#sentiment-graph').empty()

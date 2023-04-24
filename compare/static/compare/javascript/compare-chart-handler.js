@@ -37,10 +37,7 @@ function sentimentGraphsHandler(active_vis){
 
 function playerGraphsHandler(active_vis){
 
-    console.log(compare_game_ids)
-
     if(active_vis == "all_time"){
-        console.log("all time")
         player_count_all_time_compare(compare_game_ids)
         LegendHandler("player")
     } else if (active_vis == "past_one_month"){
@@ -59,7 +56,6 @@ function playerGraphsHandler(active_vis){
         player_count_past_48_hours_compare(compare_game_ids)
         LegendHandler("player")
     } else if(active_vis == "past_24_hours") {
-        console.log("past 24 hours")
         player_count_past_24_hours_compare(compare_game_ids)
         LegendHandler("player")
     }

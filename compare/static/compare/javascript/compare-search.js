@@ -113,11 +113,9 @@ function searchItemClickEvent(){
         }
         // Add selcted game data to selected_game_data
         let selected_data
-        console.log("Search Game Data: ", searched_game_data)
         for (let i = 0; i < searched_game_data.length; i++){
             if(searched_game_data[i]["app_id"] == id){
                 selected_data = searched_game_data[i]
-                console.log(i)
                 break
             }
         }
@@ -165,9 +163,6 @@ function deleteItemClickEvent(){
 
         $(`#selected-game-${id}`).remove()
 
-        console.log("Before: ", compare_game_data)
-        console.log("Before: ", compare_game_ids)
-
         // remove game data from selected game data
         let filtered_games = compare_game_data.filter(function(value, index){
             return value.app_id !=  id
@@ -183,10 +178,6 @@ function deleteItemClickEvent(){
 
         drawGraphs()
 
-        console.log("After: ", compare_game_data)
-        console.log("ids: ", compare_game_ids)
-
-        console.log(id)
     })
 
 }
