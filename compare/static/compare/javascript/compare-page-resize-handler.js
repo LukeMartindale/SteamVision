@@ -20,17 +20,15 @@ $(function(){
 function sentiemnt_compare_resize_handler(active_vis) {
     if (active_vis == "all_time"){
         sentiment_all_time_compare(compare_game_ids)
+    } else if (active_vis == "past_twelve_month"){
+        sentiment_past_twelve_months_compare(compare_game_ids)
+    } else if (active_vis == "past_six_month"){
+
     } else if (active_vis == "past_one_month"){
 
     } else if (active_vis == "past_two_weeks"){
 
     } else if (active_vis == "past_one_week"){
-
-    } else if (active_vis == "past_72_hours"){
-
-    } else if (active_vis == "past_48_hours"){
-
-    } else if (active_vis == "past_24_hours"){
 
     }
 }
