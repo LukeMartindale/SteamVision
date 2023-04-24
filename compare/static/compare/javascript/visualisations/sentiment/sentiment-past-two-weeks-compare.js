@@ -69,7 +69,7 @@ function sentiment_past_two_weeks_compare(ids){
             .attr('fill', '#bec5cb')
             .attr('font-size', 14)
             .attr('font-weight', 'bold')
-            .text("All Time");
+            .text("Past Two Weeks");
     } else {
         // GRAPH TITLE
         chartContainer
@@ -79,7 +79,7 @@ function sentiment_past_two_weeks_compare(ids){
             .attr('fill', '#bec5cb')
             .attr('font-size', 16)
             .attr('font-weight', 'bold')
-            .text("All Time");
+            .text("Past Two Weeks");
     }
     
     //COLOURS
