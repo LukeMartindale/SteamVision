@@ -13,9 +13,6 @@ function drawGraphs(){
 
 function sentimentGraphsHandler(active_vis){
 
-    console.log(compare_game_ids)
-    console.log("Sentiment", active_vis)
-
     if (active_vis == "all_time"){
         sentiment_all_time_compare(compare_game_ids)
         LegendHandler("sentiment")
@@ -23,7 +20,7 @@ function sentimentGraphsHandler(active_vis){
         sentiment_past_twelve_months_compare(compare_game_ids)
         LegendHandler("sentiment")
     } else if (active_vis == "past_six_months") {
-
+        sentiment_past_six_months_compare(compare_game_ids)
         LegendHandler("sentiment")
     } else if (active_vis == "past_one_month"){
 
@@ -125,7 +122,7 @@ $(function(){
 
         } else if (option == "sentiment-past-6-months"){
 
-            // sentiment_past_six_months(game_id)
+            sentiment_past_six_months_compare(compare_game_ids)
             active_sentiment_vis = "past_six_months"
             
         } else if (option == "sentiment-past-1-month"){

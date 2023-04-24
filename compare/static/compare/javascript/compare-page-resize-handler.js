@@ -18,12 +18,13 @@ $(function(){
 })
 
 function sentiemnt_compare_resize_handler(active_vis) {
+    console.log("SENTIMENT RESIZE", active_vis)
     if (active_vis == "all_time"){
         sentiment_all_time_compare(compare_game_ids)
-    } else if (active_vis == "past_twelve_month"){
+    } else if (active_vis == "past_twelve_months"){
         sentiment_past_twelve_months_compare(compare_game_ids)
-    } else if (active_vis == "past_six_month"){
-
+    } else if (active_vis == "past_six_months"){
+        sentiment_past_six_months_compare(compare_game_ids)
     } else if (active_vis == "past_one_month"){
 
     } else if (active_vis == "past_two_weeks"){
