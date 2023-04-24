@@ -195,7 +195,7 @@ function player_count_past_48_hours_compare(ids){
                 .attr('fill', '#bec5cb')
                 .attr('font-size', 14)
                 .attr('font-weight', 'bold')
-                .text("All Time");
+                .text("Past 48 Hours");
         } else {
             // GRAPH TITLE
             chartContainer
@@ -205,7 +205,7 @@ function player_count_past_48_hours_compare(ids){
                 .attr('fill', '#bec5cb')
                 .attr('font-size', 16)
                 .attr('font-weight', 'bold')
-                .text("All Time");
+                .text("Past 48 Hours");
         }
     
         player_data.forEach(function(value, index){
