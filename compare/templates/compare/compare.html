@@ -83,7 +83,7 @@
                 <!-- GRAPH LEGEND SECTION -->
                 <div class="visualisation-legend-bar">
                     <!-- REVIEW GRAPH LEGEND -->
-                    <div class="visualisation-legend-bar-main-section"></div>
+                    <div class="visualisation-legend-bar-main-section" id="review-vis-legend-bar"></div>
 
                     <!-- Extra information -->
                     <div class="visualisation-legend-bar-small-section">
@@ -225,6 +225,10 @@
 
     <!-- VIS HELPER -->
     <script src="{% static 'compare/javascript/visualisations/visualisations-helpers.js' %}"></script>
+
+    <!-- REVIEWS VISUALISATIONS -->
+    <script src="{% static 'compare/javascript/visualisations/reviews/reviews-data-getters.js' %}"></script>
+    <script src="{% static 'compare/javascript/visualisations/reviews/reviews-all-time-years-compare.js' %}"></script>
 
     <!-- SENTIMENT VISUALISATIONS -->
     <script src="{% static 'compare/javascript/visualisations/sentiment/sentiment-data-getters.js' %}"></script>

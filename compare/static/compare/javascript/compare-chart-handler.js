@@ -7,7 +7,7 @@ let active_player_vis = "all_time"
 function drawGraphs(){
 
     if(active_tab == "review") {
-        console.log("Not yet Implemented")
+        reviewsGraphsHandler(active_review_vis)
     } else if (active_tab == "sentiment") {
         // Draw Sentiment Graph
         sentimentGraphsHandler(active_sentiment_vis)
@@ -16,6 +16,25 @@ function drawGraphs(){
     } else if (active_tab == "player") {
         // Draw Players Graph
         playerGraphsHandler(active_player_vis)
+    }
+
+}
+
+function reviewsGraphsHandler(active_vis){
+
+    if (active_vis == "all_time_year"){
+        reviews_all_time_year_compare(compare_game_ids)
+        LegendHandler("review")
+    } else if (active_vis == "past_twelve_months") {
+        LegendHandler("review")
+    } else if (active_vis == "past_six_months") {
+        LegendHandler("review")
+    } else if (active_vis == "past_one_month"){
+        LegendHandler("review")
+    } else if (active_vis == "past_two_weeks") {
+        LegendHandler("review")
+    } else if (active_vis == "past_one_week") {
+        LegendHandler("review")
     }
 
 }

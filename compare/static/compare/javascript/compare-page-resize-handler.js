@@ -8,7 +8,7 @@ $(function(){
         resizeTimer = setTimeout(function(){
 
             if(active_tab == "review") {
-                console.log("Not yet Implemented")
+                review_compare_resize_handler(active_review_vis)
             } else if (active_tab == "sentiment") {
                 sentiemnt_compare_resize_handler(active_sentiment_vis)
             } else if (active_tab == "emotion") {
@@ -22,6 +22,23 @@ $(function(){
     })
 
 })
+
+function review_compare_resize_handler(active_vis) {
+    if (active_vis == "all_time_year"){
+        reviews_all_time_year_compare(compare_game_ids)
+    } else if (active_vis == "past_twelve_months"){
+
+    } else if (active_vis == "past_six_months"){
+
+    } else if (active_vis == "past_one_month"){
+
+    } else if (active_vis == "past_two_weeks"){
+
+    } else if (active_vis == "past_one_week"){
+
+    }
+}
+
 
 function sentiemnt_compare_resize_handler(active_vis) {
     if (active_vis == "all_time"){

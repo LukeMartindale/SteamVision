@@ -22,6 +22,8 @@ $(function(){
             selectedItemDisplayAppend(value[0])
         })
 
+        reviewsGraphsHandler(active_review_vis)
+
     }
 
 })
