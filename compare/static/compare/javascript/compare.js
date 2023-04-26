@@ -64,6 +64,8 @@ $(function(){
 
         active_tab = "review"
 
+        reviewsGraphsHandler(active_review_vis)
+
 
     })
     // SENTIMENT TAB
