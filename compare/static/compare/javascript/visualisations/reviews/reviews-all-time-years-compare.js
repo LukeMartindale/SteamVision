@@ -81,7 +81,7 @@ function reviews_all_time_year_compare(ids) {
         //COLOURS
         let colour = d3.scaleOrdinal()
             .domain(subgroups)
-            .range(compare_sentiment_colours)
+            .range(compare_review_colours)
 
 
         if($(window).width() <= 800 && $(window).width() > 400){
@@ -202,14 +202,32 @@ function reviews_all_time_year_compare(ids) {
             .append('g')
 
         console.log(reviews_data)
-        // console.log(subgroups.map(function(key) { return {key: key, value: data[key]}}))
 
+        // NEGATIVE BARS
         gChart
             .selectAll("g")
             .data(reviews_data)
             .join("g")
                 .attr("transform", data => `translate(${x(data.label)}, 0)` )
-            .selectAll("rect")
+            .selectAll('.neg-bar')
+            .data(function(data) { return subgroups.map(function(key) { return {key: key, value: data[key]}; }); })
+            .enter()
+            .append('rect')
+                .classed('neg-bar', true)
+                .attr('width', xsub.bandwidth())
+                .attr('height', svgHeight - y(100))
+                .attr('x', data => xsub(data.key))
+                .attr('y', y(100))
+                .property('value', data => data.value.number_of_reviews)
+
+
+        // BARS
+        gChart
+            .selectAll("g")
+            .data(reviews_data)
+            .join("g")
+                .attr("transform", data => `translate(${x(data.label)}, 0)` )
+            .selectAll("bar")
             .data(function(data) { return subgroups.map(function(key) { return {key: key, value: data[key]}; }); })
             .join("rect")
                 .classed('bar', true)
@@ -219,24 +237,7 @@ function reviews_all_time_year_compare(ids) {
                 .attr("height", data => svgHeight - y(data.value.percentage))
                 .attr("fill", data => colour(data.key))
 
-        // //NEGATIVE BARS
-        // chart
-        //     .selectAll('.neg-bar')
-        //     .data(reviews_data, data => data.label)
-        //     .enter()
-        //     .append('rect')
-        //         .classed('neg-bar', true)
-        //         .attr('width', x.bandwidth())
-        //         .attr('height', svgHeight - y(100))
-        //         .attr('x', data => x(data.label))
-        //         .attr('y', y(100))
-        //         .attr('id', data => data.label + "-")
-        //         .property('value', data => Math.round(data.number_of_reviews * (((100 - data.percentage) / 100))))
-        //         .append('title')
-        //         .text((data) => `Percentage negative reviews: ${(100 - data.percentage).toFixed(1)}%\nNumber of negative reviews: ${Math.round(data.number_of_reviews * (((100 - data.percentage) / 100)))}\nDate: ${data.label}`);
-        
-
-
+        no_reviews_neutral_bar()
 
     } else {
         $('#reviews-graph').empty()

@@ -447,6 +447,19 @@
     z-index: 1500;
 }
 
+.bar:hover {
+    filter: brightness(130%);
+}
+
+.neg-bar {
+    fill: crimson;
+    z-index: 900;
+}
+
+.neg-bar:hover {
+    filter: brightness(130%);
+}
+
 .tooltip {
     position: absolute;
     z-index: 500;

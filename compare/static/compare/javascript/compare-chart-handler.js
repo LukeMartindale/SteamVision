@@ -93,23 +93,27 @@ function playerGraphsHandler(active_vis){
 function LegendHandler(graph) {
 
     let legend_bar
+    let legend_colours
 
     // Figure out which graph legend needs updating
     if (graph == "review"){
         legend_bar = $("#review-vis-legend-bar")
+        legend_colours = compare_review_colours
     } else if (graph == "sentiment") {
         legend_bar = $("#sentiment-vis-legend-bar")
+        legend_colours = compare_sentiment_colours
     } else if (graph == "emotion") {
         legend_bar = $("#emotion-vis-legend-bar")
     } else if (graph == "player") {
         legend_bar = $("#player-vis-legend-bar")
+        legend_colours = compare_players_colours
     }
 
     legend_bar.empty()
 
     compare_game_data.forEach(function(value, index){
         legend_bar
-            .append(`<div class="visualisation-legend-widget-wrapper" id="legend-widget-wrapper-${index}" style="border: 2px solid ${compare_players_colours[index]}; background-color: ${compare_players_colours[index] + "4d"};"></div>`)
+            .append(`<div class="visualisation-legend-widget-wrapper" id="legend-widget-wrapper-${index}" style="border: 2px solid ${legend_colours[index]}; background-color: ${legend_colours[index] + "4d"};"></div>`)
 
         legend_bar
             .find(`#legend-widget-wrapper-${index}`)
@@ -118,7 +122,7 @@ function LegendHandler(graph) {
 
         legend_bar
             .find(`#legend-widget-minor-${index}`)
-            .append(`<div class="visualisation-legend-widget-colour-circle" style="background-color: ${compare_players_colours[index]}"></div>`)
+            .append(`<div class="visualisation-legend-widget-colour-circle" style="background-color: ${legend_colours[index]}"></div>`)
 
         legend_bar
             .find(`#legend-widget-major-${index}`)
