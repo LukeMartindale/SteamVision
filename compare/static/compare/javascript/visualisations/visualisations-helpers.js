@@ -1,3 +1,7 @@
+let reviews_data_store
+let sentiment_data_store
+let players_data_store
+
 let compare_review_colours = [
     "#4169e1", //blue
     "#66cc33", //green

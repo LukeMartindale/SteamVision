@@ -197,6 +197,74 @@ function reviews_all_time_year_compare(ids) {
                 .text("Reviews Percentage");
         }
 
+        // CREATE TOOLTIP
+        let tooltip = d3.select('#reviews-container-content')
+            .append("div")
+            .style("opacity", 0)
+            .attr("class", "tooltip")
+            .style("background-color", "white")
+            .style("border", "solid")
+            .style("border-wdith", "1px")
+            .style("border-radius", "5px")
+            .style("padding", "10px")
+
+        // CREATE NEGATIVE TOOLTIP
+        let tooltip_negative = d3.select('#reviews-container-content')
+            .append("div")
+            .style("opacity", 0)
+            .attr("class", "tooltip")
+            .style("background-color", "white")
+            .style("border", "solid")
+            .style("border-wdith", "1px")
+            .style("border-radius", "5px")
+            .style("padding", "10px")
+    
+        let mouseover = function(event, data) {
+            tooltip
+                .html("Negative Reviews" + "<br>" + "Game: " + this.__data__.key + "<br>" + "Number of Reviews: " + this.__data__.value.number_of_reviews)
+                .style("display", "block")
+                .style("opacity", 1)
+        }
+
+        let mouseover_negative = function(event, data) {
+            let html
+            if(this.__data__.value.number_of_reviews > 0){
+                html = "Positive Reviews" + "<br>" + "Game: " + this.__data__.key + "<br>" + "Number of Reviews: " + Math.round(this.__data__.value.number_of_reviews * (((100 - this.__data__.value.percentage) / 100)))
+            } else {
+                html = "No Reviews" + "<br>" + "Game: " + this.__data__.key
+            }
+            tooltip_negative
+                .html(html)
+                .style("display", "block")
+                .style("opacity", 1)
+        }
+    
+        let mousemove = function(event, data) {
+            tooltip
+                .style("transform", "translateY(-55%)")
+                .style("left", (event.x) + "px")
+                .style("top", (event.y) - 55 + "px")
+        }
+
+        let mousemove_negative = function(event, data) {
+            tooltip_negative
+                .style("transform", "translateY(-55%)")
+                .style("left", (event.x) + "px")
+                .style("top", (event.y) - 55 + "px")
+        }
+    
+        let mouseleave = function(event, data) {
+            tooltip
+                .style("display", "none")
+                .style("opacity", 0)
+        }
+
+        let mouseleave_negative = function(event, data) {
+            tooltip_negative
+                .style("display", "none")
+                .style("opacity", 0)
+        }
+
                 
         let gChart = chart
             .append('g')
@@ -219,7 +287,9 @@ function reviews_all_time_year_compare(ids) {
                 .attr('x', data => xsub(data.key))
                 .attr('y', y(100))
                 .property('value', data => data.value.number_of_reviews)
-
+            .on('mouseover', mouseover_negative)
+            .on('mousemove', mousemove_negative)
+            .on('mouseout', mouseleave_negative)
 
         // BARS
         gChart
@@ -236,6 +306,9 @@ function reviews_all_time_year_compare(ids) {
                 .attr("width", xsub.bandwidth())
                 .attr("height", data => svgHeight - y(data.value.percentage))
                 .attr("fill", data => colour(data.key))
+            .on('mouseover', mouseover)
+            .on('mousemove', mousemove)
+            .on('mouseout', mouseleave)
 
         no_reviews_neutral_bar()
 
