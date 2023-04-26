@@ -2,8 +2,6 @@ function reviews_all_time_year_compare(ids) {
 
     let reviews_data = get_data_reviews_all_time_compare(ids)
 
-    console.log(reviews_data)
-
     if(reviews_data.length > 0) {
     
         $('#reviews-graph').empty()
@@ -38,9 +36,6 @@ function reviews_all_time_year_compare(ids) {
         let groups = reviews_data.map(data => data.label)
         let subgroups = Object.keys(reviews_data[0])
         subgroups.shift()
-
-        console.log(groups)
-        console.log(subgroups)
 
         // X, Y AND Xsub SETUP
         let x = d3.scaleBand()
@@ -268,8 +263,6 @@ function reviews_all_time_year_compare(ids) {
                 
         let gChart = chart
             .append('g')
-
-        console.log(reviews_data)
 
         // NEGATIVE BARS
         gChart
