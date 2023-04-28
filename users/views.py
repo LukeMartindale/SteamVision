@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from .forms import UserRegisterForm, UserUpdateForm
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from .decorators import unauthrosied_user
 
@@ -90,3 +91,26 @@ def profileEditPage(request):
     context = {'form': form}
 
     return render(request, 'users/profile-edit.html', context)
+
+# Profile update password Page
+@login_required
+def profileEditPasswordPage(request):
+    form = PasswordChangeForm(user=request.user)
+
+    if request.method == 'POST':
+        form = PasswordChangeForm(user=request.user, data=request.POST)
+        
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            messages.info(request, 'Account password successfully updated')
+
+
+        else:
+            print(request.POST)
+            print(request.POST['old_password'])
+            print(request.POST['new_password1'])
+            print(request.POST['new_password2'])
+
+    context = {'form': form}
+    return render(request, 'users/profile-edit-password.html', context)

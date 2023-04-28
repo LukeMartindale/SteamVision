@@ -74,6 +74,11 @@ $(function() {
         window.location.href = '/users/profile/edit/'
     })
 
+    // Go to page to update password
+    $("#edit-password-button").click(function(){
+        window.location.href = '/users/profile/edit-password/'
+    })
+
     // Go to game page on followed game click
     $(".game-widget-wrapper").click(function(event){
         window.location.href = `/games/${this.id.split("-")[2]}`
