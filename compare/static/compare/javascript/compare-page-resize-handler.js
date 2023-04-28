@@ -27,15 +27,15 @@ function review_compare_resize_handler(active_vis) {
     if (active_vis == "all_time_year"){
         reviews_all_time_year_compare(compare_game_ids)
     } else if (active_vis == "past_twelve_months"){
-
+        reviews_past_twelve_months_compare(compare_game_ids)
     } else if (active_vis == "past_six_months"){
-
+        reviews_past_six_months_compare(compare_game_ids)
     } else if (active_vis == "past_one_month"){
-
+        reviews_past_one_month_compare(compare_game_ids)
     } else if (active_vis == "past_two_weeks"){
-
+        reviews_past_two_weeks_compare(compare_game_ids)
     } else if (active_vis == "past_one_week"){
-
+        reviews_past_one_week_compare(compare_game_ids)
     }
 }
 

@@ -26,14 +26,19 @@ function reviewsGraphsHandler(active_vis){
         reviews_all_time_year_compare(compare_game_ids)
         LegendHandler("review")
     } else if (active_vis == "past_twelve_months") {
+        reviews_past_twelve_months_compare(compare_game_ids)
         LegendHandler("review")
     } else if (active_vis == "past_six_months") {
+        reviews_past_six_months_compare(compare_game_ids)
         LegendHandler("review")
     } else if (active_vis == "past_one_month"){
+        reviews_past_one_month_compare(compare_game_ids)
         LegendHandler("review")
     } else if (active_vis == "past_two_weeks") {
+        reviews_past_two_weeks_compare(compare_game_ids)
         LegendHandler("review")
     } else if (active_vis == "past_one_week") {
+        reviews_past_one_week_compare(compare_game_ids)
         LegendHandler("review")
     }
 
@@ -130,6 +135,48 @@ function LegendHandler(graph) {
 
     })
 }
+
+// REVIEW VISUALISATION SELECT OPTIONS
+$(function(){
+
+    $('#reviews-select').on('change', function (e) {
+        
+        let option = $("#reviews-select").children("option:selected").val()
+
+        if(option == "review-all-time"){
+
+            reviews_all_time_year_compare(compare_game_ids)
+            active_review_vis = "all_time_year"
+
+        } else if (option == "review-past-12-months"){
+
+            reviews_past_twelve_months_compare(compare_game_ids)
+            active_review_vis = "past_twelve_months"
+
+        } else if (option == "review-past-6-months"){
+
+            reviews_past_six_months_compare(compare_game_ids)
+            active_review_vis = "past_six_months"
+            
+        } else if (option == "review-past-1-month"){
+
+            reviews_past_one_month_compare(compare_game_ids)
+            active_review_vis = "past_one_month"
+        
+        } else if (option == "review-past-2-weeks"){
+
+            reviews_past_two_weeks_compare(compare_game_ids)
+            active_review_vis = "past_two_weeks"
+
+        } else if (option == "review-past-1-week"){
+
+            reviews_past_one_week_compare(compare_game_ids)
+            active_review_vis = "past_one_week"
+
+        }
+        
+    })
+})
 
 // SENTIMENT VISUALISATION SELECT OPTIONS
 $(function(){

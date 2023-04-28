@@ -126,6 +126,11 @@
     overflow: visible;
 }
 
+.reviews-container-content {
+    max-height: 800px;
+    height: 550px;
+}
+
 .players-container-content {
     max-height: 800px;
     height: 550px;
