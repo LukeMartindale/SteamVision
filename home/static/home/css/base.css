@@ -277,6 +277,20 @@ body {
     overflow: hidden;
 }
 
+.title-inner-wrapper {
+    height: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.title-inner-wrapper:hover {
+    background-color: rgba(217, 217, 217, 0.3);
+}
+
 @media only screen and (max-width: 800px){
 
     .sidebar-mini {

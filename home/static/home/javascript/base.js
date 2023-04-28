@@ -50,6 +50,11 @@ $(function(){
         }
     })
 
+    // Title button click fucntionality
+    $(".title-inner-wrapper").click(function(){
+        window.location.href = "/"
+    })
+
 
 })
 

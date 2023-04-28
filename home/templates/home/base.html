@@ -39,7 +39,9 @@
             </div>
     
             <div class="title-wrapper">
-                <header class="title">Steam Vision</header>
+                <div class="title-inner-wrapper">
+                    <header class="title">Steam Vision</header>
+                </div>
             </div>
     
             <div class="user-widget-wrapper">
@@ -84,7 +86,7 @@
             </div>
 
             <div class="sidebar-mini-option-wrapper">
-                <a class="sidebar-mini-option-highlight" href="{% url 'compare' %}">
+                <a class="sidebar-mini-option-highlight" id="compare-mini-icon" href="{% url 'compare' %}">
                     <i class="bi bi-arrow-left-right sidebar-mini-option-icon"></i>
                 </a>
             </div>
@@ -147,7 +149,7 @@
             </div>
 
             <div class="sidebar-option-wrapper">
-                <a class="sidebar-option-highlight" href="{% url 'compare' %}" tabindex="-1">
+                <a class="sidebar-option-highlight" id="compare-icon" href="{% url 'compare' %}" tabindex="-1">
                     <div class="sidebar-img-wrapper">
                         <i class="bi bi-arrow-left-right sidebar-mini-option-icon"></i>
                     </div>

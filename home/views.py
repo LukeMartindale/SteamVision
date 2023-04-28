@@ -18,7 +18,7 @@ from .views_helper import (
 # Create your views here.
 
 def home(request):
-    return render(request, 'home/base.html', {"tests": Game.objects.all()})
+    return render(request, 'home/home.html')
 
 def GameList(request):
 
