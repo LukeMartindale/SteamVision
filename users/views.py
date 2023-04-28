@@ -75,15 +75,18 @@ def profilePage(request):
 #Profile edit Page
 @login_required
 def profileEditPage(request):
+    form = UserUpdateForm()
 
     if request.method == 'POST':
         form = UserUpdateForm(request.POST, instance=request.user)
+
         if form.is_valid():
             form.save()
+            messages.info(request, 'Account info successfully updated')
             print("TEST")
 
     user = User.objects.get(username=request.user)
 
-    context = {'user': user}
+    context = {'form': form}
 
-    return render(request, 'users/profile-edit.html')
+    return render(request, 'users/profile-edit.html', context)

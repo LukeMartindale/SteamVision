@@ -12,15 +12,14 @@
 }
 
 .edit-box {
-    max-width: 960px;
-    width: 960px;
+    width: 350px;
     border-radius: 12px;
     background-color: #272C30;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
     padding-top: 15px;
     padding-bottom: 15px;
     margin-top: 30px;
@@ -44,22 +43,24 @@
 }
 
 .user-info-bar {
-    padding-left: 25px;
-    padding-right: 25px;
     margin-bottom: 15px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 
 .user-info-bar-label {
     width: 156px;
     font-size: 25px;
+    text-align: center;
 }
 
 .user-info-button-wrapper {
+    margin-top: 10px;
     display: flex;
-    justify-content: end;
+    justify-content: center;
     align-items: center;
 }
 
@@ -103,8 +104,13 @@
 }
 
 .profile-input {
+    width: 280px;
     height: 40px;
-    font-size: 25px;
+    font-size: 16px;
     border-radius: 6px;
     padding-left: 10px;
+}
+
+.message-box {
+    text-align: center;
 }

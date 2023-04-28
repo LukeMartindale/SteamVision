@@ -22,16 +22,27 @@
                     {% csrf_token %}
                     <div class="user-info-bar">
                         <div class="user-info-bar-label">
-                            <b>Username:</b> 
+                            <b>Username</b> 
                         </div>
                         <input class="profile-input" type="text" name="username" id="username-input" placeholder="Username" value={{user.username}} required>
                     </div>
 
                     <div class="user-info-bar">
                         <div class="user-info-bar-label">
-                            <b>Email:</b> 
+                            <b>Email</b> 
                         </div>
                         <input class="profile-input" type="email" name="email" id="email-input" placeholder="Email" value={{user.email}} required>
+                    </div>
+
+                    <div class="message-box">
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <span class="errorlist">{{ error }}</span>
+                            {% endfor %}
+                        {% endfor %}
                     </div>
 
                     <div class="user-info-button-wrapper">
