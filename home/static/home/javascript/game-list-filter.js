@@ -96,6 +96,11 @@ $(function(){
         let action_input = `/games/?genres=${$("#genres-input").val()}&tags=${$("#tags-input").val()}&categories=${$("#categories-input").val()}`
         $("#filter-form").attr('action', action_input)
     })
+
+    // CLEAR filters dropdown button
+    $("#bottom-button-clear").click(function(){
+        window.location.href = "/games/"
+    })
 })
 
 $(function(){
