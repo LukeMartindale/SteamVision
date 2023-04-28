@@ -78,7 +78,7 @@
                                 <div class="dropdown-menu-item-wrapper hide-none">
                                     {% for descriptor in descriptors %}
                                         {% if descriptor.type == 'Genres' %}
-                                            <div class="dropdown-menu-item" id="genre-{{ descriptor.name }}">
+                                            <div class="dropdown-menu-item" id="genre_{{ descriptor.name }}">
                                                 {{ descriptor.name }}
                                             </div>
                                         {% endif %}
@@ -103,7 +103,7 @@
                                 <div class="dropdown-menu-item-wrapper hide-none">
                                     {% for descriptor in descriptors %}
                                         {% if descriptor.type == 'Tags' %}
-                                            <div class="dropdown-menu-item" id="tag-{{ descriptor.name }}">
+                                            <div class="dropdown-menu-item" id="tag_{{ descriptor.name }}">
                                                 {{ descriptor.name }}
                                             </div>
                                         {% endif %}
@@ -127,7 +127,7 @@
                                 <div class="dropdown-menu-item-wrapper hide-none">
                                     {% for descriptor in descriptors %}
                                         {% if descriptor.type == 'Categories' %}
-                                            <div class="dropdown-menu-item" id="category-{{ descriptor.name }}">
+                                            <div class="dropdown-menu-item" id="category_{{ descriptor.name }}">
                                                 {{ descriptor.name }}
                                             </div>
                                         {% endif %}

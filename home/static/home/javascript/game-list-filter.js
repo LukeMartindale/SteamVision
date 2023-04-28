@@ -63,10 +63,14 @@ $(function(){
 
         let selected = $(this).closest(".dropdown-wrapper").children("input").val()
 
+        console.log(selected)
+
         if($(this).hasClass("dropdown-menu-item-selected")){
             //If item  selected, unselect and remove value from input
             let values = selected.split(",")
-            values.splice($.inArray($(this).attr('id').split("-")[1], values), 1)
+            values.splice($.inArray($(this).attr('id').split("_")[1], values), 1)
+
+            console.log(values)
 
             selected = values
 
@@ -76,13 +80,13 @@ $(function(){
         } else {
             //If item not selected, select and add value to input
             if($(this).closest(".dropdown-wrapper").children("input").val()){
-                selected = selected + ',' + $(this).attr('id').split("-")[1]
+                selected = selected + ',' + $(this).attr('id').split("_")[1]
             } else {
-                selected = $(this).attr('id').split("-")[1]
+                selected = $(this).attr('id').split("_")[1]
             }
 
             //remove element from display
-            $(this).closest('.dropdown-wrapper').children(".dropdown-button").children(".dropdown-button-display").append('<div class="dropdown-button-display-widget" id="' + $(this).attr('id') + '">' + $(this).attr('id').split("-")[1] + '</div>')
+            $(this).closest('.dropdown-wrapper').children(".dropdown-button").children(".dropdown-button-display").append('<div class="dropdown-button-display-widget" id="' + $(this).attr('id') + '">' + $(this).attr('id').split("_")[1] + '</div>')
 
         }
 
@@ -109,8 +113,8 @@ $(function(){
 
         if(!genresParams[0] == ""){
             genresParams.forEach(function(value, index, array){
-                $("[id='genre-" + value +"']").addClass("dropdown-menu-item-selected")
-                $("#genres-dropdown-wrapper").find(".dropdown-button-display").append('<div class="dropdown-button-display-widget" id="genre-' + value + '">' + value + '</div>')
+                $("[id='genre_" + value +"']").addClass("dropdown-menu-item-selected")
+                $("#genres-dropdown-wrapper").find(".dropdown-button-display").append('<div class="dropdown-button-display-widget" id="genre_' + value + '">' + value + '</div>')
             })
         }
 
@@ -125,8 +129,8 @@ $(function(){
 
         if(!tagsParams[0] == ""){
             tagsParams.forEach(function(value, index, array){
-                $("[id='tag-" + value +"']").addClass("dropdown-menu-item-selected")
-                $("#tags-dropdown-wrapper").find(".dropdown-button-display").append('<div class="dropdown-button-display-widget" id="tag-' + value + '">' + value + '</div>')
+                $("[id='tag_" + value +"']").addClass("dropdown-menu-item-selected")
+                $("#tags-dropdown-wrapper").find(".dropdown-button-display").append('<div class="dropdown-button-display-widget" id="tag_' + value + '">' + value + '</div>')
             })
         }
 
@@ -141,8 +145,8 @@ $(function(){
 
         if(!categoriesParams[0] == ""){
             categoriesParams.forEach(function(value, index, array){
-                $("[id='category-" + value +"']").addClass("dropdown-menu-item-selected")
-                $("#categories-dropdown-wrapper").find(".dropdown-button-display").append('<div class="dropdown-button-display-widget" id="category-' + value + '">' + value + '</div>')
+                $("[id='category_" + value +"']").addClass("dropdown-menu-item-selected")
+                $("#categories-dropdown-wrapper").find(".dropdown-button-display").append('<div class="dropdown-button-display-widget" id="category_' + value + '">' + value + '</div>')
             })
         }
 
