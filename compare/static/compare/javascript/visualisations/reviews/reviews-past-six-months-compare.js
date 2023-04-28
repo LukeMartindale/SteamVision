@@ -216,7 +216,7 @@ function reviews_past_six_months_compare(ids) {
     
         let mouseover = function(event, data) {
             tooltip
-                .html("Negative Reviews" + "<br>" + "Game: " + this.__data__.key + "<br>" + "Number of Reviews: " + this.__data__.value.number_of_reviews)
+                .html("Positive Reviews" + "<br>" + "Game: " + this.__data__.key + "<br>" + "Percentage Positive Reviews: " + (this.__data__.value.percentage).toFixed(1) + "%" + "<br>" + "Number of Reviews: " + Math.round(this.__data__.value.number_of_reviews * (this.__data__.value.percentage / 100)))
                 .style("display", "block")
                 .style("opacity", 1)
         }
@@ -224,7 +224,7 @@ function reviews_past_six_months_compare(ids) {
         let mouseover_negative = function(event, data) {
             let html
             if(this.__data__.value.number_of_reviews > 0){
-                html = "Positive Reviews" + "<br>" + "Game: " + this.__data__.key + "<br>" + "Number of Reviews: " + Math.round(this.__data__.value.number_of_reviews * (((100 - this.__data__.value.percentage) / 100)))
+                html = "Negative Reviews" + "<br>" + "Game: " + this.__data__.key + "<br>" + "Percentage Negative Reviews: " + (100 - this.__data__.value.percentage).toFixed(1) + "%" + "<br>" + "Number of Reviews: " + Math.round(this.__data__.value.number_of_reviews * (((100 - this.__data__.value.percentage) / 100)))
             } else {
                 html = "No Reviews" + "<br>" + "Game: " + this.__data__.key
             }
@@ -235,17 +235,25 @@ function reviews_past_six_months_compare(ids) {
         }
     
         let mousemove = function(event, data) {
+            let x_co = 0
+            if(event.x > ($(window).width()/2)){
+                x_co = 150
+            }
             tooltip
                 .style("transform", "translateY(-55%)")
-                .style("left", (event.x) + "px")
-                .style("top", (event.y) - 55 + "px")
+                .style("left", (event.x) - x_co + "px")
+                .style("top", (event.y) - 65 + "px")
         }
 
         let mousemove_negative = function(event, data) {
+            let x_co = 0
+            if(event.x > ($(window).width()/2)){
+                x_co = 150
+            }
             tooltip_negative
                 .style("transform", "translateY(-55%)")
-                .style("left", (event.x) + "px")
-                .style("top", (event.y) - 55 + "px")
+                .style("left", (event.x) - x_co + "px")
+                .style("top", (event.y) - 65 + "px")
         }
     
         let mouseleave = function(event, data) {
