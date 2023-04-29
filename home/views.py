@@ -12,7 +12,8 @@ import time
 
 from .views_helper import (
     reviews_score_search_filter_value,
-    sentiment_score_search_filter_value
+    sentiment_score_search_filter_value,
+    emotion_prominent_search_filter_value
 )
 
 # Create your views here.
@@ -188,6 +189,7 @@ def GameDetail(request, pk):
 
 def GameReviews(request, pk):
 
+    # Get game data and set pass through variables 
     game = Game.objects.get(app_id=pk)
     pass_search = False
     search_text = ""
@@ -202,40 +204,39 @@ def GameReviews(request, pk):
 
         reviews_filter = reviews_score_search_filter_value(request.POST["review-score-select"])
         sentiment_filter = sentiment_score_search_filter_value(request.POST["sentiment-range-select"])
+        emotion_filter = emotion_prominent_search_filter_value(request.POST["prominent-emotion-select"])
 
+        # GET reviews 
         reviews = Review.objects.filter(
             app_id=game, 
-            review_text__contains=request.POST["reviews-search-text"],
+            review_text__icontains=request.POST["reviews-search-text"],
             voted_up__in=reviews_filter,
             sentiment_polarity__lte=sentiment_filter["top-range"], 
-            sentiment_polarity__gte=sentiment_filter["bottom-range"]
+            sentiment_polarity__gte=sentiment_filter["bottom-range"],
+            emotion_prominent__icontains=emotion_filter,
         ).order_by('time_created')
-
-        # temp_reviews = []
-        # for review in reviews:
-        #     if request.POST["prominent-emotion-select"] in review.emotion_prominent:
-        #         temp_reviews.append(review)
-
-        # reviews = temp_reviews
         
+        # SET pass through variables
         pass_search = True
         search_text = request.POST["reviews-search-text"]
         review_score = request.POST["review-score-select"]
         sentiment_range = request.POST["sentiment-range-select"]
         prominent_emotion = request.POST["prominent-emotion-select"]
 
-    elif request.GET.get('search_text', False) or request.GET.get('review_score', False) or request.GET.get('sentiment_range', False) or request.GET.get('prominent_range', False):
+    elif request.GET.get('search_text', False) or request.GET.get('review_score', False) or request.GET.get('sentiment_range', False) or request.GET.get('prominent_emotion', False):
 
         reviews_filter = reviews_score_search_filter_value(request.GET.get('review_score', False))
         sentiment_filter = sentiment_score_search_filter_value(request.GET.get('sentiment_range', False))
-        
+        emotion_filter = emotion_prominent_search_filter_value(request.GET.get('prominent_emotion', False))
+
         # GET reviews
         reviews = Review.objects.filter(
             app_id=game, 
             review_text__contains=request.GET.get('search_text', False),
             voted_up__in=reviews_filter,
             sentiment_polarity__lte=sentiment_filter["top-range"], 
-            sentiment_polarity__gte=sentiment_filter["bottom-range"]
+            sentiment_polarity__gte=sentiment_filter["bottom-range"],
+            emotion_prominent__icontains=emotion_filter,
         ).order_by('time_created')
 
         # SET pass through variables
@@ -243,7 +244,7 @@ def GameReviews(request, pk):
         search_text = request.GET.get('search_text', False)
         review_score = request.GET.get('review_score', False)
         sentiment_range = request.GET.get('sentiment_range', False)
-        prominent_emotion = request.GET.get('prominent_range', False)
+        prominent_emotion = request.GET.get('prominent_emotion', False)
 
     else:
         reviews = Review.objects.filter(app_id=game).order_by('-time_created')

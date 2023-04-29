@@ -44,3 +44,12 @@ $(function(){
 
 })
 
+// Clear page button
+$(function(){
+
+    $(".clear-button").click(function(){
+        window.location.href = `/games/${game_id}/reviews/`
+    })
+
+})
+

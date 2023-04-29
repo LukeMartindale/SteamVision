@@ -3,6 +3,10 @@
 
 {% block content %}
 
+    <script>
+        const game_id = '{{game.app_id}}'
+    </script>
+
     <!-- MY CSS -->
     <link rel="stylesheet" href="{% static 'home/css/game-reviews.css' %}">
 
@@ -48,24 +52,114 @@
                                 <select class="review-select" name="sentiment-range-select" id="sentiment-range-select">
                                     {% if sentiment_range == "sentiment-neutral" %}
                                         <option class="sentiment-select-option" value="all-sentiment">All</option>
-                                        <option class="sentiment-select-option" value="sentiment-neutral" selected>Neutral</option>
                                         <option class="sentiment-select-option" value="sentiment-positive">Positive</option>
                                         <option class="sentiment-select-option" value="sentiment-negative">Negative</option>
+                                        <option class="sentiment-select-option" value="sentiment-neutral" selected>Neutral</option>
+                                        <option class="sentiment-select-option" value="positive-high">Highly Positive</option>
+                                        <option class="sentiment-select-option" value="positive-mid">Moderate Positive</option>
+                                        <option class="sentiment-select-option" value="positive-low">Light Positive</option>
+                                        <option class="sentiment-select-option" value="negative-high">Highly Negative</option>
+                                        <option class="sentiment-select-option" value="negative-mid">Moderate Negative</option>
+                                        <option class="sentiment-select-option" value="negative-low">Light Negative</option>
                                     {% elif sentiment_range == "sentiment-positive" %}
                                         <option class="sentiment-select-option" value="all-sentiment">All</option>
-                                        <option class="sentiment-select-option" value="sentiment-neutral">Neutral</option>
                                         <option class="sentiment-select-option" value="sentiment-positive" selected>Positive</option>
                                         <option class="sentiment-select-option" value="sentiment-negative">Negative</option>
+                                        <option class="sentiment-select-option" value="sentiment-neutral">Neutral</option>
+                                        <option class="sentiment-select-option" value="positive-high">Highly Positive</option>
+                                        <option class="sentiment-select-option" value="positive-mid">Moderate Positive</option>
+                                        <option class="sentiment-select-option" value="positive-low">Light Positive</option>
+                                        <option class="sentiment-select-option" value="negative-high">Highly Negative</option>
+                                        <option class="sentiment-select-option" value="negative-mid">Moderate Negative</option>
+                                        <option class="sentiment-select-option" value="negative-low">Light Negative</option>
                                     {% elif sentiment_range == "sentiment-negative" %}
                                         <option class="sentiment-select-option" value="all-sentiment">All</option>
-                                        <option class="sentiment-select-option" value="sentiment-neutral">Neutral</option>
                                         <option class="sentiment-select-option" value="sentiment-positive">Positive</option>
                                         <option class="sentiment-select-option" value="sentiment-negative" selected>Negative</option>
-                                    {% else %}
-                                        <option class="sentiment-select-option" value="all-sentiment">All</option>
                                         <option class="sentiment-select-option" value="sentiment-neutral">Neutral</option>
+                                        <option class="sentiment-select-option" value="positive-high">Highly Positive</option>
+                                        <option class="sentiment-select-option" value="positive-mid">Moderate Positive</option>
+                                        <option class="sentiment-select-option" value="positive-low">Light Positive</option>
+                                        <option class="sentiment-select-option" value="negative-high">Highly Negative</option>
+                                        <option class="sentiment-select-option" value="negative-mid">Moderate Negative</option>
+                                        <option class="sentiment-select-option" value="negative-low">Light Negative</option>
+                                    {% elif sentiment_range == "positive-high" %}
+                                        <option class="sentiment-select-option" value="all-sentiment">All</option>
                                         <option class="sentiment-select-option" value="sentiment-positive">Positive</option>
                                         <option class="sentiment-select-option" value="sentiment-negative">Negative</option>
+                                        <option class="sentiment-select-option" value="sentiment-neutral">Neutral</option>
+                                        <option class="sentiment-select-option" value="positive-high" selected>Highly Positive</option>
+                                        <option class="sentiment-select-option" value="positive-mid">Moderate Positive</option>
+                                        <option class="sentiment-select-option" value="positive-low">Light Positive</option>
+                                        <option class="sentiment-select-option" value="negative-high">Highly Negative</option>
+                                        <option class="sentiment-select-option" value="negative-mid">Moderate Negative</option>
+                                        <option class="sentiment-select-option" value="negative-low">Light Negative</option>
+                                    {% elif sentiment_range == "positive-mid" %}
+                                        <option class="sentiment-select-option" value="all-sentiment">All</option>
+                                        <option class="sentiment-select-option" value="sentiment-positive">Positive</option>
+                                        <option class="sentiment-select-option" value="sentiment-negative">Negative</option>
+                                        <option class="sentiment-select-option" value="sentiment-neutral">Neutral</option>
+                                        <option class="sentiment-select-option" value="positive-high">Highly Positive</option>
+                                        <option class="sentiment-select-option" value="positive-mid" selected>Moderate Positive</option>
+                                        <option class="sentiment-select-option" value="positive-low">Light Positive</option>
+                                        <option class="sentiment-select-option" value="negative-high">Highly Negative</option>
+                                        <option class="sentiment-select-option" value="negative-mid">Moderate Negative</option>
+                                        <option class="sentiment-select-option" value="negative-low">Light Negative</option>
+                                    {% elif sentiment_range == "positive-low" %}
+                                        <option class="sentiment-select-option" value="all-sentiment">All</option>
+                                        <option class="sentiment-select-option" value="sentiment-positive">Positive</option>
+                                        <option class="sentiment-select-option" value="sentiment-negative">Negative</option>
+                                        <option class="sentiment-select-option" value="sentiment-neutral">Neutral</option>
+                                        <option class="sentiment-select-option" value="positive-high">Highly Positive</option>
+                                        <option class="sentiment-select-option" value="positive-mid">Moderate Positive</option>
+                                        <option class="sentiment-select-option" value="positive-low" selected>Light Positive</option>
+                                        <option class="sentiment-select-option" value="negative-high">Highly Negative</option>
+                                        <option class="sentiment-select-option" value="negative-mid">Moderate Negative</option>
+                                        <option class="sentiment-select-option" value="negative-low">Light Negative</option>
+                                    {% elif sentiment_range == "negative-high" %}
+                                        <option class="sentiment-select-option" value="all-sentiment">All</option>
+                                        <option class="sentiment-select-option" value="sentiment-positive">Positive</option>
+                                        <option class="sentiment-select-option" value="sentiment-negative">Negative</option>
+                                        <option class="sentiment-select-option" value="sentiment-neutral">Neutral</option>
+                                        <option class="sentiment-select-option" value="positive-high">Highly Positive</option>
+                                        <option class="sentiment-select-option" value="positive-mid">Moderate Positive</option>
+                                        <option class="sentiment-select-option" value="positive-low">Light Positive</option>
+                                        <option class="sentiment-select-option" value="negative-high" selected>Highly Negative</option>
+                                        <option class="sentiment-select-option" value="negative-mid">Moderate Negative</option>
+                                        <option class="sentiment-select-option" value="negative-low">Light Negative</option>
+                                    {% elif sentiment_range == "negative-mid" %}
+                                        <option class="sentiment-select-option" value="all-sentiment">All</option>
+                                        <option class="sentiment-select-option" value="sentiment-positive">Positive</option>
+                                        <option class="sentiment-select-option" value="sentiment-negative">Negative</option>
+                                        <option class="sentiment-select-option" value="sentiment-neutral">Neutral</option>
+                                        <option class="sentiment-select-option" value="positive-high">Highly Positive</option>
+                                        <option class="sentiment-select-option" value="positive-mid">Moderate Positive</option>
+                                        <option class="sentiment-select-option" value="positive-low">Light Positive</option>
+                                        <option class="sentiment-select-option" value="negative-high">Highly Negative</option>
+                                        <option class="sentiment-select-option" value="negative-mid" selected>Moderate Negative</option>
+                                        <option class="sentiment-select-option" value="negative-low">Light Negative</option>
+                                    {% elif sentiment_range == "negative-low" %}
+                                        <option class="sentiment-select-option" value="all-sentiment">All</option>
+                                        <option class="sentiment-select-option" value="sentiment-positive">Positive</option>
+                                        <option class="sentiment-select-option" value="sentiment-negative">Negative</option>
+                                        <option class="sentiment-select-option" value="sentiment-neutral">Neutral</option>
+                                        <option class="sentiment-select-option" value="positive-high">Highly Positive</option>
+                                        <option class="sentiment-select-option" value="positive-mid">Moderate Positive</option>
+                                        <option class="sentiment-select-option" value="positive-low">Light Positive</option>
+                                        <option class="sentiment-select-option" value="negative-high">Highly Negative</option>
+                                        <option class="sentiment-select-option" value="negative-mid">Moderate Negative</option>
+                                        <option class="sentiment-select-option" value="negative-low" selected>Light Negative</option>
+                                    {% else %}
+                                        <option class="sentiment-select-option" value="all-sentiment" selected>All</option>
+                                        <option class="sentiment-select-option" value="sentiment-positive">Positive</option>
+                                        <option class="sentiment-select-option" value="sentiment-negative">Negative</option>
+                                        <option class="sentiment-select-option" value="sentiment-neutral">Neutral</option>
+                                        <option class="sentiment-select-option" value="positive-high">Highly Positive</option>
+                                        <option class="sentiment-select-option" value="positive-mid">Moderate Positive</option>
+                                        <option class="sentiment-select-option" value="positive-low">Light Positive</option>
+                                        <option class="sentiment-select-option" value="negative-high">Highly Negative</option>
+                                        <option class="sentiment-select-option" value="negative-mid">Moderate Negative</option>
+                                        <option class="sentiment-select-option" value="negative-low">Light Negative</option>
                                     {% endif %}
                                 </select>
                             </div>
@@ -73,12 +167,49 @@
                             <div class="filter-block-bottom-section-row-sub-group">
                                 <label for="prominent-emotion-select" class="filter-label">Prominent Emotion:</label>
                                 <select class="review-select" name="prominent-emotion-select" id="review-score-select">
-                                    <option class="review-select-option" value="all-emotions">All</option>
-                                    <option class="review-select-option" value="emotion-happy">Happy</option>
-                                    <option class="review-select-option" value="emotion-angry">Angry</option>
-                                    <option class="review-select-option" value="emotion-surprise">Surprise</option>
-                                    <option class="review-select-option" value="emotion-sad">Sad</option>
-                                    <option class="review-select-option" value="emotion-fear">Fear</option>
+                                    {% if prominent_emotion == "emotion-happy" %}
+                                        <option class="review-select-option" value="all-emotions">All</option>
+                                        <option class="review-select-option" value="emotion-happy" selected>Happy</option>
+                                        <option class="review-select-option" value="emotion-angry">Angry</option>
+                                        <option class="review-select-option" value="emotion-surprise">Surprise</option>
+                                        <option class="review-select-option" value="emotion-sad">Sad</option>
+                                        <option class="review-select-option" value="emotion-fear">Fear</option>
+                                    {% elif prominent_emotion == "emotion-angry" %}
+                                        <option class="review-select-option" value="all-emotions">All</option>
+                                        <option class="review-select-option" value="emotion-happy">Happy</option>
+                                        <option class="review-select-option" value="emotion-angry" selected>Angry</option>
+                                        <option class="review-select-option" value="emotion-surprise">Surprise</option>
+                                        <option class="review-select-option" value="emotion-sad">Sad</option>
+                                        <option class="review-select-option" value="emotion-fear">Fear</option>
+                                    {% elif prominent_emotion == "emotion-surprise" %}
+                                        <option class="review-select-option" value="all-emotions">All</option>
+                                        <option class="review-select-option" value="emotion-happy">Happy</option>
+                                        <option class="review-select-option" value="emotion-angry">Angry</option>
+                                        <option class="review-select-option" value="emotion-surprise" selected>Surprise</option>
+                                        <option class="review-select-option" value="emotion-sad">Sad</option>
+                                        <option class="review-select-option" value="emotion-fear">Fear</option>
+                                    {% elif prominent_emotion == "emotion-sad" %}
+                                        <option class="review-select-option" value="all-emotions">All</option>
+                                        <option class="review-select-option" value="emotion-happy">Happy</option>
+                                        <option class="review-select-option" value="emotion-angry">Angry</option>
+                                        <option class="review-select-option" value="emotion-surprise">Surprise</option>
+                                        <option class="review-select-option" value="emotion-sad" selected>Sad</option>
+                                        <option class="review-select-option" value="emotion-fear">Fear</option>
+                                    {% elif prominent_emotion == "emotion-fear" %}
+                                        <option class="review-select-option" value="all-emotions">All</option>
+                                        <option class="review-select-option" value="emotion-happy">Happy</option>
+                                        <option class="review-select-option" value="emotion-angry">Angry</option>
+                                        <option class="review-select-option" value="emotion-surprise">Surprise</option>
+                                        <option class="review-select-option" value="emotion-sad">Sad</option>
+                                        <option class="review-select-option" value="emotion-fear" selected>Fear</option>
+                                    {% else %}
+                                        <option class="review-select-option" value="all-emotions">All</option>
+                                        <option class="review-select-option" value="emotion-happy">Happy</option>
+                                        <option class="review-select-option" value="emotion-angry">Angry</option>
+                                        <option class="review-select-option" value="emotion-surprise">Surprise</option>
+                                        <option class="review-select-option" value="emotion-sad">Sad</option>
+                                        <option class="review-select-option" value="emotion-fear">Fear</option>
+                                    {% endif %}
                                 </select>
                             </div>
                         </div>
@@ -86,7 +217,7 @@
                     </div>
 
                     <div class="search-button-section">
-                        <button class="clear-button" type="submit">Clear</button>
+                        <button class="clear-button" type="button">Clear</button>
                         <button class="search-button" type="submit">Search</button>
                     </div>
 

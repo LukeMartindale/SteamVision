@@ -16,14 +16,56 @@ def sentiment_score_search_filter_value(sentiment_score):
 
     sentiment_filter = {"top-range": 1, "bottom-range": -1}
 
-    # set correct search params
     if sentiment_score == "all-sentiment":
+        # ALL
         sentiment_filter = {"top-range": 1, "bottom-range": -1}
-    elif sentiment_score == "sentiment-neutral":
-        sentiment_filter = {"top-range": 0, "bottom-range": 0}
     elif sentiment_score == "sentiment-positive":
-        sentiment_filter = {"top-range": 1, "bottom-range": 0.00000000000000000000000001}
+        # POS
+        sentiment_filter = {"top-range": 1, "bottom-range": 0.05000000000000001}
     elif sentiment_score == "sentiment-negative":
-        sentiment_filter = {"top-range": -0.00000000000000000000000001, "bottom-range": -1}
+        # NEG
+        sentiment_filter = {"top-range": -0.05000000000000001, "bottom-range": -1}
+    elif sentiment_score == "sentiment-neutral":
+        # NEU
+        sentiment_filter = {"top-range": 0.04999999999999999, "bottom-range": -0.05000000000000000}
+    elif sentiment_score == "positive-high":
+        # POS HIGH
+        sentiment_filter = {"top-range": 1, "bottom-range": 0.75000000000000000}
+    elif sentiment_score == "positive-mid":
+        # POS MID
+        sentiment_filter = {"top-range": 0.74999999999999999, "bottom-range": 0.45000000000000000}
+    elif sentiment_score == "positive-low":
+        # POS LOW
+        sentiment_filter = {"top-range": 0.44999999999999999, "bottom-range": 0.05000000000000000}
+    elif sentiment_score == "negative-high":
+        # NEG HIGH
+        sentiment_filter = {"top-range": -0.75000000000000001, "bottom-range": -1}
+    elif sentiment_score == "negative-mid":
+        # NEG MID
+        sentiment_filter = {"top-range": -0.45000000000000001, "bottom-range": -0.74999999999999999}
+    elif sentiment_score == "negative-low":
+        # NEG LOW
+        sentiment_filter = {"top-range": -0.05000000000000001, "bottom-range": -0.44999999999999999}
 
     return sentiment_filter
+
+def emotion_prominent_search_filter_value(prominent_emotion):
+
+    emotions = ""
+
+    if prominent_emotion == "all-emotions":
+        emotions = ""
+    elif prominent_emotion == "emotion-happy":
+        emotions = "happy"
+    elif prominent_emotion == "emotion-angry":
+        emotions = "angry"
+    elif prominent_emotion == "emotion-surprise":
+        emotions = "surprise"
+    elif prominent_emotion == "emotion-sad":
+        emotions = "sad"
+    elif prominent_emotion == "emotion-fear":
+        emotions = "angry"
+
+    print(prominent_emotion)
+
+    return emotions
