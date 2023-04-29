@@ -541,8 +541,6 @@ $(function(){
         return data
     }();
 
-    console.log(response)
-
     // All Time
     $("#sentiment-drawer-all-time").text(`${(response.all_time).toFixed(3)}`)
     // Twelve Months
@@ -555,5 +553,192 @@ $(function(){
     $("#sentiment-drawer-two-weeks").text(`${(response.two_weeks).toFixed(3)}`)
     // One Week
     $("#sentiment-drawer-one-week").text(`${(response.one_week).toFixed(3)}`)
+
+})
+
+// EMOTION DRAWER WIDGETS
+$(function(){
+
+    let api_url = `/api/visualisation/emotion-widgets/${game_id}/`
+
+    let response = function(){
+        let data = null;
+        $.ajax({
+            async: false,
+            type: 'GET',
+            dataType: 'json',
+            url: api_url,
+            success: function(result){
+                data = result
+            }
+        });
+        return data
+    }();
+
+    console.log(response)
+
+    // All Time
+    let all_time_widget = $("#emotion-drawer-all-time")
+    response.all_time.forEach(function(value, index){
+
+        if(value == "Happy"){
+            // Happy
+            all_time_widget.append('<div class="emotion-icon-wrapper" id="top-emotion-icon-happy"></div>')
+            all_time_widget.find("#top-emotion-icon-happy").append('<i class="bi bi-emoji-smile-fill emotion-icon emotion-happy" title="Happy"></i>')
+        } else if (value == "Angry") {
+            // Angry
+            all_time_widget.append('<div class="emotion-icon-wrapper" id="top-emotion-icon-angry"></div>')
+            all_time_widget.find("#top-emotion-icon-angry").append('<i class="bi bi-emoji-angry-fill emotion-icon emotion-angry" title="Angry"></i>')
+        } else if (value == "Surprise") {
+            // laughing
+            all_time_widget.append('<div class="emotion-icon-wrapper" id="top-emotion-icon-surprise"></div>')
+            all_time_widget.find("#top-emotion-icon-surprise").append('<i class="bi bi-emoji-laughing-fill emotion-icon emotion-surprise" title="Surprise"></i>')
+        } else if (value == "Sad") {
+            // unhappy
+            all_time_widget.append('<div class="emotion-icon-wrapper" id="top-emotion-icon-sad"></div>')
+            all_time_widget.find("#top-emotion-icon-sad").append('<i class="bi bi-emoji-frown-fill emotion-icon emotion-sad" title="Sad"></i>')
+        } else if (value == "Fear") {
+            // dizzy
+            all_time_widget.append('<div class="emotion-icon-wrapper" id="top-emotion-icon-fear"></div>')
+            all_time_widget.find("#top-emotion-icon-fear").append('<i class="bi bi-emoji-dizzy-fill emotion-icon emotion-fear" title="Fear"></i>')
+        }
+
+    })
+
+    // Twelve Months
+    let twelve_months_widget = $("#emotion-drawer-twelve-months")
+    response.all_time.forEach(function(value, index){
+
+        if(value == "Happy"){
+            // Happy
+            twelve_months_widget.append('<div class="emotion-icon-wrapper" id="top-emotion-icon-happy"></div>')
+            twelve_months_widget.find("#top-emotion-icon-happy").append('<i class="bi bi-emoji-smile-fill emotion-icon emotion-happy" title="Happy"></i>')
+        } else if (value == "Angry") {
+            // Angry
+            twelve_months_widget.append('<div class="emotion-icon-wrapper" id="top-emotion-icon-angry"></div>')
+            twelve_months_widget.find("#top-emotion-icon-angry").append('<i class="bi bi-emoji-angry-fill emotion-icon emotion-angry" title="Angry"></i>')
+        } else if (value == "Surprise") {
+            // laughing
+            twelve_months_widget.append('<div class="emotion-icon-wrapper" id="top-emotion-icon-surprise"></div>')
+            twelve_months_widget.find("#top-emotion-icon-surprise").append('<i class="bi bi-emoji-laughing-fill emotion-icon emotion-surprise" title="Surprise"></i>')
+        } else if (value == "Sad") {
+            // unhappy
+            twelve_months_widget.append('<div class="emotion-icon-wrapper" id="top-emotion-icon-sad"></div>')
+            twelve_months_widget.find("#top-emotion-icon-sad").append('<i class="bi bi-emoji-frown-fill emotion-icon emotion-sad" title="Sad"></i>')
+        } else if (value == "Fear") {
+            // dizzy
+            twelve_months_widget.append('<div class="emotion-icon-wrapper" id="top-emotion-icon-fear"></div>')
+            twelve_months_widget.find("#top-emotion-icon-fear").append('<i class="bi bi-emoji-dizzy-fill emotion-icon emotion-fear" title="Fear"></i>')
+        }
+
+    })
+    // Six Months
+    let six_months_widget = $("#emotion-drawer-six-months")
+    response.all_time.forEach(function(value, index){
+
+        if(value == "Happy"){
+            // Happy
+            six_months_widget.append('<div class="emotion-icon-wrapper" id="top-emotion-icon-happy"></div>')
+            six_months_widget.find("#top-emotion-icon-happy").append('<i class="bi bi-emoji-smile-fill emotion-icon emotion-happy" title="Happy"></i>')
+        } else if (value == "Angry") {
+            // Angry
+            six_months_widget.append('<div class="emotion-icon-wrapper" id="top-emotion-icon-angry"></div>')
+            six_months_widget.find("#top-emotion-icon-angry").append('<i class="bi bi-emoji-angry-fill emotion-icon emotion-angry" title="Angry"></i>')
+        } else if (value == "Surprise") {
+            // laughing
+            six_months_widget.append('<div class="emotion-icon-wrapper" id="top-emotion-icon-surprise"></div>')
+            six_months_widget.find("#top-emotion-icon-surprise").append('<i class="bi bi-emoji-laughing-fill emotion-icon emotion-surprise" title="Surprise"></i>')
+        } else if (value == "Sad") {
+            // unhappy
+            six_months_widget.append('<div class="emotion-icon-wrapper" id="top-emotion-icon-sad"></div>')
+            six_months_widget.find("#top-emotion-icon-sad").append('<i class="bi bi-emoji-frown-fill emotion-icon emotion-sad" title="Sad"></i>')
+        } else if (value == "Fear") {
+            // dizzy
+            six_months_widget.append('<div class="emotion-icon-wrapper" id="top-emotion-icon-fear"></div>')
+            six_months_widget.find("#top-emotion-icon-fear").append('<i class="bi bi-emoji-dizzy-fill emotion-icon emotion-fear" title="Fear"></i>')
+        }
+
+    })
+    // One Month
+    let one_month_widget = $("#emotion-drawer-one-month")
+    response.all_time.forEach(function(value, index){
+
+        if(value == "Happy"){
+            // Happy
+            one_month_widget.append('<div class="emotion-icon-wrapper" id="top-emotion-icon-happy"></div>')
+            one_month_widget.find("#top-emotion-icon-happy").append('<i class="bi bi-emoji-smile-fill emotion-icon emotion-happy" title="Happy"></i>')
+        } else if (value == "Angry") {
+            // Angry
+            one_month_widget.append('<div class="emotion-icon-wrapper" id="top-emotion-icon-angry"></div>')
+            one_month_widget.find("#top-emotion-icon-angry").append('<i class="bi bi-emoji-angry-fill emotion-icon emotion-angry" title="Angry"></i>')
+        } else if (value == "Surprise") {
+            // laughing
+            one_month_widget.append('<div class="emotion-icon-wrapper" id="top-emotion-icon-surprise"></div>')
+            one_month_widget.find("#top-emotion-icon-surprise").append('<i class="bi bi-emoji-laughing-fill emotion-icon emotion-surprise" title="Surprise"></i>')
+        } else if (value == "Sad") {
+            // unhappy
+            one_month_widget.append('<div class="emotion-icon-wrapper" id="top-emotion-icon-sad"></div>')
+            one_month_widget.find("#top-emotion-icon-sad").append('<i class="bi bi-emoji-frown-fill emotion-icon emotion-sad" title="Sad"></i>')
+        } else if (value == "Fear") {
+            // dizzy
+            one_month_widget.append('<div class="emotion-icon-wrapper" id="top-emotion-icon-fear"></div>')
+            one_month_widget.find("#top-emotion-icon-fear").append('<i class="bi bi-emoji-dizzy-fill emotion-icon emotion-fear" title="Fear"></i>')
+        }
+
+    })
+    // Two Weeks
+    let two_weeks_widget = $("#emotion-drawer-two-weeks")
+    response.all_time.forEach(function(value, index){
+
+        if(value == "Happy"){
+            // Happy
+            two_weeks_widget.append('<div class="emotion-icon-wrapper" id="top-emotion-icon-happy"></div>')
+            two_weeks_widget.find("#top-emotion-icon-happy").append('<i class="bi bi-emoji-smile-fill emotion-icon emotion-happy" title="Happy"></i>')
+        } else if (value == "Angry") {
+            // Angry
+            two_weeks_widget.append('<div class="emotion-icon-wrapper" id="top-emotion-icon-angry"></div>')
+            two_weeks_widget.find("#top-emotion-icon-angry").append('<i class="bi bi-emoji-angry-fill emotion-icon emotion-angry" title="Angry"></i>')
+        } else if (value == "Surprise") {
+            // laughing
+            two_weeks_widget.append('<div class="emotion-icon-wrapper" id="top-emotion-icon-surprise"></div>')
+            two_weeks_widget.find("#top-emotion-icon-surprise").append('<i class="bi bi-emoji-laughing-fill emotion-icon emotion-surprise" title="Surprise"></i>')
+        } else if (value == "Sad") {
+            // unhappy
+            two_weeks_widget.append('<div class="emotion-icon-wrapper" id="top-emotion-icon-sad"></div>')
+            two_weeks_widget.find("#top-emotion-icon-sad").append('<i class="bi bi-emoji-frown-fill emotion-icon emotion-sad" title="Sad"></i>')
+        } else if (value == "Fear") {
+            // dizzy
+            two_weeks_widget.append('<div class="emotion-icon-wrapper" id="top-emotion-icon-fear"></div>')
+            two_weeks_widget.find("#top-emotion-icon-fear").append('<i class="bi bi-emoji-dizzy-fill emotion-icon emotion-fear" title="Fear"></i>')
+        }
+
+    })
+    // One Week
+    let one_week_widget = $("#emotion-drawer-one-week")
+    response.all_time.forEach(function(value, index){
+
+        if(value == "Happy"){
+            // Happy
+            one_week_widget.append('<div class="emotion-icon-wrapper" id="top-emotion-icon-happy"></div>')
+            one_week_widget.find("#top-emotion-icon-happy").append('<i class="bi bi-emoji-smile-fill emotion-icon emotion-happy" title="Happy"></i>')
+        } else if (value == "Angry") {
+            // Angry
+            one_week_widget.append('<div class="emotion-icon-wrapper" id="top-emotion-icon-angry"></div>')
+            one_week_widget.find("#top-emotion-icon-angry").append('<i class="bi bi-emoji-angry-fill emotion-icon emotion-angry" title="Angry"></i>')
+        } else if (value == "Surprise") {
+            // laughing
+            one_week_widget.append('<div class="emotion-icon-wrapper" id="top-emotion-icon-surprise"></div>')
+            one_week_widget.find("#top-emotion-icon-surprise").append('<i class="bi bi-emoji-laughing-fill emotion-icon emotion-surprise" title="Surprise"></i>')
+        } else if (value == "Sad") {
+            // unhappy
+            one_week_widget.append('<div class="emotion-icon-wrapper" id="top-emotion-icon-sad"></div>')
+            one_week_widget.find("#top-emotion-icon-sad").append('<i class="bi bi-emoji-frown-fill emotion-icon emotion-sad" title="Sad"></i>')
+        } else if (value == "Fear") {
+            // dizzy
+            one_week_widget.append('<div class="emotion-icon-wrapper" id="top-emotion-icon-fear"></div>')
+            one_week_widget.find("#top-emotion-icon-fear").append('<i class="bi bi-emoji-dizzy-fill emotion-icon emotion-fear" title="Fear"></i>')
+        }
+
+    })
 
 })
