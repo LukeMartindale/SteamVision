@@ -583,15 +583,15 @@ def getVisualisationWidgetReviewData(request, id):
     else:
         thrity_days = 0.0
     # 2 weeks
-    two_weeks_total = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(days=30), timezone.now()]).count()
-    two_weeks_pos = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(days=30), timezone.now()], voted_up=True).count()
+    two_weeks_total = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(days=14), timezone.now()]).count()
+    two_weeks_pos = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(days=14), timezone.now()], voted_up=True).count()
     if two_weeks_total:
         two_weeks = round(two_weeks_pos / two_weeks_total * 100, 1)
     else:
         two_weeks = 0.0
     # 1 week
-    one_week_total = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(days=30), timezone.now()]).count()
-    one_week_pos = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(days=30), timezone.now()], voted_up=True).count()
+    one_week_total = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(days=7), timezone.now()]).count()
+    one_week_pos = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(days=7), timezone.now()], voted_up=True).count()
     if one_week_total:
         one_week = round(one_week_pos / one_week_total * 100, 1)
     else:
