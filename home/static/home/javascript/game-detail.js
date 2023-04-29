@@ -503,4 +503,23 @@ $(function(){
 
     console.log(response)
 
+    // All time
+    $("#reviews-drawer-all-time-positive").text(`${(response.all_time).toFixed(1)}%`)
+    $("#reviews-drawer-all-time-negative").text(`${(response.all_time_neg).toFixed(1)}%`)
+    // Past twelve months
+    $("#reviews-drawer-twelve-months-positive").text(`${(response.twelve_months).toFixed(1)}%`)
+    $("#reviews-drawer-twelve-months-negative").text(`${(response.twelve_months_neg).toFixed(1)}%`)
+    // Past six months
+    $("#reviews-drawer-six-months-positive").text(`${(response.six_months).toFixed(1)}%`)
+    $("#reviews-drawer-six-months-negative").text(`${(response.six_months_neg).toFixed(1)}%`)
+    // Past one month
+    $("#reviews-drawer-past-month-positive").text(`${(response.thirty_days).toFixed(1)}%`)
+    $("#reviews-drawer-past-month-negative").text(`${(response.thirty_days_neg).toFixed(1)}%`)
+    // past two weeks
+    $("#reviews-drawer-two-weeks-positive").text(`${(response.two_weeks).toFixed(1)}%`)
+    $("#reviews-drawer-two-weeks-negative").text(`${(response.two_weeks_neg).toFixed(1)}%`)
+    // Past one week
+    $("#reviews-drawer-one-week-positive").text(`${(response.one_week).toFixed(1)}%`)
+    $("#reviews-drawer-one-week-negative").text(`${(response.one_week_neg).toFixed(1)}%`)
+
 })
