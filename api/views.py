@@ -652,7 +652,7 @@ def getVisualisationWidgetSentiementData(request, id):
     else:
         one_week = 0
 
-    return Response({"all_time": all_time, "twelve_months": twelve_months, "six_months": six_months, "thrity_days": thirty_days, "two_weeks": two_weeks, "one_week": one_week})
+    return Response({"all_time": all_time, "twelve_months": twelve_months, "six_months": six_months, "thirty_days": thirty_days, "two_weeks": two_weeks, "one_week": one_week})
 
 @api_view(['GET'])
 def getVisualisationWidgetEmotionData(request, id):
