@@ -656,7 +656,119 @@ def getVisualisationWidgetSentiementData(request, id):
 
 @api_view(['GET'])
 def getVisualisationWidgetEmotionData(request, id):
-    return Response({"message": "Emotion Visualisation Widgets Data"})
+    game = Game.objects.get(app_id=id)
+    game_stats = GameStat.objects.get(app_id=game)
+
+    # All time
+    past_all_time = game_stats.emotion_all_time
+
+    emotion_total = 0
+    for emotion, score in past_all_time.items():
+        emotion_total += score
+
+    all_time = []
+    if emotion_total > 0:
+        for emotion, score in past_all_time.items():
+            if (past_all_time[emotion] / emotion_total >= 0.15):
+                all_time.append(emotion)
+
+    # Twelve Months
+    time = timezone.now()
+    end_index = 0
+
+    for index, stat in enumerate(game_stats.emotion_all_time_month):
+        if(stat["year"] == time.year and stat["month"] == calendar.month_name[time.month]):
+            end_index = index+1
+            break
+
+    start_index = end_index - 12
+    past_twelve_months = []
+
+    for stat in reversed(game_stats.emotion_all_time_month[start_index:end_index]):
+        past_twelve_months.append(stat)
+
+    emotions = {"Happy": 0, "Angry": 0, "Surprise": 0, "Sad": 0, "Fear": 0}
+    for past in past_twelve_months:
+        for emotion, score in emotions.items():
+            emotions[emotion] += past["emotion"][emotion]
+
+    emotion_total = 0
+    for emotion, score in emotions.items():
+        emotion_total += score
+
+    twelve_months = []
+    if emotion_total > 0:
+        for emotion, score in emotions.items():
+            if (emotions[emotion] / emotion_total >= 0.15):
+                twelve_months.append(emotion)
+
+    # Six Months
+    time = timezone.now()
+    end_index = 0
+
+    for index, stat in enumerate(game_stats.emotion_all_time_month):
+        if(stat["year"] == time.year and stat["month"] == calendar.month_name[time.month]):
+            end_index = index+1
+            break
+
+    start_index = end_index - 6
+    past_six_months = []
+
+    for stat in reversed(game_stats.emotion_all_time_month[start_index:end_index]):
+        past_six_months.append(stat)
+
+    emotions = {"Happy": 0, "Angry": 0, "Surprise": 0, "Sad": 0, "Fear": 0}
+    for past in past_six_months:
+        for emotion, score in emotions.items():
+            emotions[emotion] += past["emotion"][emotion]
+
+    emotion_total = 0
+    for emotion, score in emotions.items():
+        emotion_total += score
+
+    six_months = []
+    if emotion_total > 0:
+        for emotion, score in emotions.items():
+            if (emotions[emotion] / emotion_total >= 0.15):
+                six_months.append(emotion)
+
+    # One Month
+    past_one_month = game_stats.emotion_past_one_month
+
+    emotion_total = 0
+    for emotion, score in past_one_month.items():
+        emotion_total += score
+
+    one_month = []
+    for emotion, score in past_one_month.items():
+        if (past_one_month[emotion] / emotion_total >= 0.15):
+            one_month.append(emotion)
+    # Two Weeks
+    past_two_weeks = game_stats.emotion_past_two_weeks
+
+    emotion_total = 0
+    for emotion, score in past_two_weeks.items():
+        emotion_total += score
+
+    two_weeks = []
+    for emotion, score in past_two_weeks.items():
+        if (past_two_weeks[emotion] / emotion_total >= 0.15):
+            two_weeks.append(emotion)
+    # One Week
+    past_one_week = game_stats.emotion_past_one_week
+
+    emotion_total = 0
+    for emotion, score in past_one_week.items():
+        emotion_total += score
+
+    one_week = []
+    if emotion_total > 0:
+        for emotion, score in past_one_week.items():
+            if (past_one_week[emotion] / emotion_total >= 0.15):
+                one_week.append(emotion)
+
+    return Response({"all_time": all_time, "twelve_months": twelve_months, "six_months": six_months, "one_month": one_month, "two_weeks": two_weeks, "one_week": one_week})
+
 
 @api_view(['GET'])
 def getVisualisationWidgetPlayerData(request, id):
