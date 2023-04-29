@@ -558,7 +558,6 @@ def getVisualisationWidgetReviewData(request, id):
 
     game = Game.objects.get(app_id=id)
     game_stats = GameStat.objects.get(app_id=game)
-    game_stats_serialized = GameStatSerializer(game_stats)
 
     # all time peak
     all_time_peak = game_stats.highest_player_count
@@ -574,16 +573,16 @@ def getVisualisationWidgetReviewData(request, id):
     seven_days = {"peak": seven_day_peak["player_count__max"], "average": seven_day_average["player_count__avg"]}
     # 72 hours peak & Average
     seventy_two_peak = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() - timezone.timedelta(hours=73), timezone.now()]).aggregate(Max('player_count'))
-    seventy_two_average = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() + timezone.timedelta(hours=73), timezone.now()]).aggregate(Avg('player_count'))
+    seventy_two_average = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() - timezone.timedelta(hours=73), timezone.now()]).aggregate(Avg('player_count'))
     print(seventy_two_average)
     seventy_two_hours = {"peak": seventy_two_peak["player_count__max"], "average": seventy_two_average["player_count__avg"]}
     # 48 hours peak & Average
     forty_eight_peak = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() - timezone.timedelta(hours=49), timezone.now()]).aggregate(Max('player_count'))
-    forty_eight_average = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() + timezone.timedelta(hours=49), timezone.now()]).aggregate(Avg('player_count'))
+    forty_eight_average = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() - timezone.timedelta(hours=49), timezone.now()]).aggregate(Avg('player_count'))
     forty_eight_hours = {"peak": forty_eight_peak["player_count__max"], "average": forty_eight_average["player_count__avg"]}
     # 24 hours peak
     twenty_four_peak = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() - timezone.timedelta(hours=25), timezone.now()]).aggregate(Max('player_count'))
-    twenty_four_average = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() + timezone.timedelta(hours=25), timezone.now()]).aggregate(Avg('player_count'))
+    twenty_four_average = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() - timezone.timedelta(hours=25), timezone.now()]).aggregate(Avg('player_count'))
     twenty_four_hours = {"peak": twenty_four_peak["player_count__max"], "average": twenty_four_average["player_count__avg"]}
     # most active times (past 30 days)
     print(all_time)
