@@ -605,7 +605,7 @@ def getVisualisationWidgetSentiementData(request, id):
     game_stats = GameStat.objects.get(app_id=game)
 
     # All time
-    all_time = game_stats.highest_sentiment_score
+    all_time = game_stats.current_review_score
     # # 12 months
     twelve_months_neu = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(weeks=52), timezone.now()], sentiment_polarity__gte=-0.05000000000000000, sentiment_polarity__lte=0.04999999999999999).count()
     twelve_months_pos = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(weeks=52), timezone.now()], sentiment_polarity__gte=0.05000000000000001, sentiment_polarity__lte=1).count()
