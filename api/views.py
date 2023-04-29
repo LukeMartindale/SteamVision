@@ -576,12 +576,12 @@ def getVisualisationWidgetReviewData(request, id):
     else:
         six_months = 0.0
     # 30 days
-    thrity_days_total = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(days=30), timezone.now()]).count()
-    thrity_days_pos = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(days=30), timezone.now()], voted_up=True).count()
-    if thrity_days_total:
-        thrity_days = round(thrity_days_pos / thrity_days_total * 100, 1)
+    thirty_days_total = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(days=30), timezone.now()]).count()
+    thirty_days_pos = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(days=30), timezone.now()], voted_up=True).count()
+    if thirty_days_total:
+        thirty_days = round(thirty_days_pos / thirty_days_total * 100, 1)
     else:
-        thrity_days = 0.0
+        thirty_days = 0.0
     # 2 weeks
     two_weeks_total = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(days=14), timezone.now()]).count()
     two_weeks_pos = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(days=14), timezone.now()], voted_up=True).count()
@@ -597,7 +597,7 @@ def getVisualisationWidgetReviewData(request, id):
     else:
         one_week = 0.0
 
-    return Response({"all_time": all_time, "twelve_months": twelve_months, "six_months": six_months, "thrity_days": thrity_days, "two_weeks": two_weeks, "one_week": one_week})
+    return Response({"all_time": all_time, "twelve_months": twelve_months, "six_months": six_months, "thirty_days": thirty_days, "two_weeks": two_weeks, "one_week": one_week})
 
 @api_view(['GET'])
 def getVisualisationWidgetSentiementData(request, id):
@@ -780,9 +780,9 @@ def getVisualisationWidgetPlayerData(request, id):
     all_time_average = PlayerCount.objects.filter(app_id__app_id=id).aggregate(Avg('player_count'))
     all_time = {"peak": all_time_peak, "average": all_time_average["player_count__avg"]}
     # 30 day peak & Average
-    thrity_day_peak = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() + timezone.timedelta(days=-30) , timezone.now()]).aggregate(Max('player_count'))
+    thirty_day_peak = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() + timezone.timedelta(days=-30) , timezone.now()]).aggregate(Max('player_count'))
     thirty_day_average = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() + timezone.timedelta(days=-30) , timezone.now()]).aggregate(Avg('player_count'))
-    thirty_days = {"peak": thrity_day_peak["player_count__max"], "average": thirty_day_average["player_count__avg"]}
+    thirty_days = {"peak": thirty_day_peak["player_count__max"], "average": thirty_day_average["player_count__avg"]}
     # 7 day peak & Average
     seven_day_peak = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() + timezone.timedelta(days=-7), timezone.now()]).aggregate(Max('player_count'))
     seven_day_average = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() + timezone.timedelta(days=-7), timezone.now()]).aggregate(Avg('player_count'))

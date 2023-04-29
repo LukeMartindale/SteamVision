@@ -213,15 +213,11 @@ function FollowButton(){
             widget.empty()
         }, 2500)
 
-        console.log("Not Logged In")
-
     }
 
 }
 
 function CompareButton(){
-
-    console.log("Compare Button")
 
     let url = `/compare/?games=${game_id}`
 
@@ -236,8 +232,6 @@ $(function(){
     let widget = $("#top-widget-current-review-score")
 
     let percentage = reviews_percentage
-
-    console.log(percentage)
 
     if (percentage >= 0.70){
         widget.css("color", "#80a45c")
@@ -280,8 +274,6 @@ $(function(){
     let emotions_base = ["Happy", "Angry", "Surprise", "Sad", "Fear"]
     let total_emotion = 0
     let prominent = []
-
-    console.log(emotion_data)
 
     emotions_base.forEach(function(value, index){
         total_emotion += emotion_data[value]
@@ -331,13 +323,9 @@ $(function(){
     }
 
 
-    console.log(prominent)
-
-
 })
 
 function redrawReviewsGraphs(){
-    console.log("reviews redraw")
     // Reviews redraw
     let option = $("#reviews-select").children("option:selected").val()
 
@@ -376,7 +364,6 @@ function redrawReviewsGraphs(){
 }
 
 function redrawSentimentgraph() {
-    console.log("sentiment redraw")
     // Sentiment Redraw
     let option = $("#sentiment-select").children("option:selected").val()
 
@@ -415,7 +402,6 @@ function redrawSentimentgraph() {
 }
 
 function redrawEmotionGraph(){
-    console.log("emotion redraw")
     // Emotion Redraw
     let option = $("#emotion-select").children("option:selected").val()
 
@@ -453,7 +439,6 @@ function redrawEmotionGraph(){
 }
 
 function redrawPlayerGraph() {
-    console.log("player redraw")
     // Player Redraw
     let option = $("#player-select").children("option:selected").val()
 
@@ -494,3 +479,28 @@ function redrawPlayerGraph() {
         
     } 
 }
+
+// DRAWER WIDGETS STUFF
+
+// REVIEW DRAWER WIDGETS
+$(function(){
+
+    let api_url = `/api/visualisation/review-widgets/${game_id}/`
+
+    let response = function(){
+        let data = null;
+        $.ajax({
+            async: false,
+            type: 'GET',
+            dataType: 'json',
+            url: api_url,
+            success: function(result){
+                data = result
+            }
+        });
+        return data
+    }();
+
+    console.log(response)
+
+})

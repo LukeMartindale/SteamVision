@@ -243,10 +243,8 @@ function sentiment_update_current_value(data, range){
 }
 
 function player_update_current_value(data) {
-    console.log(data)
     let max = data.reduce(function(prev, current) {
         return (prev.player_count > current.player_count) ? prev : current
     })
-    console.log(max)
     $("#peak-players-info").text(max.player_count)
 }

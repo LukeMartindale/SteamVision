@@ -22,7 +22,6 @@ function EmotionSection(data, colour){
 
 function ProminentEmotionPlacer(emotion_data){
 
-    console.log(emotion_data)
     let emotions_base = ["Happy", "Angry", "Surprise", "Sad", "Fear"]
     let total_emotion = 0
     let prominent = []
@@ -73,14 +72,9 @@ function ProminentEmotionPlacer(emotion_data){
 
         })
 
-        console.log("Prominent Emotions Added")
-
     } else {
         console.log("Not Yet Implemented")
         // Put a message that states no promient emotions found
     }
-
-
-    console.log(prominent)
 
 }
