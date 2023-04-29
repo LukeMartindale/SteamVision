@@ -778,8 +778,8 @@ $(function(){
     $("#player-drawer-seventy-two-hour-peak").text(`${(response.seventy_two_hours.peak).toFixed(0)}`)
     $("#player-drawer-seventy-two-hour-average").text(`${(response.seventy_two_hours.average).toFixed(0)}`)
     // 48 Hours
-    $("#player-drawer-forty-eight-hour-peak").text(`${(response.forty_eight_hours.peak).toFixed(0)}`)
-    $("#player-drawer-forty-eight-hour-average").text(`${(response.forty_eight_hours.average).toFixed(0)}`)
+    $("#player-drawer-fourty-eight-hour-peak").text(`${(response.forty_eight_hours.peak).toFixed(0)}`)
+    $("#player-drawer-fourty-eight-hour-average").text(`${(response.forty_eight_hours.average).toFixed(0)}`)
     // 24 Hours
     $("#player-drawer-twenty-four-hour-peak").text(`${(response.twenty_four_hours.peak).toFixed(0)}`)
     $("#player-drawer-twenty-four-hour-average").text(`${(response.twenty_four_hours.average).toFixed(0)}`)
