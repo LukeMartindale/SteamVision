@@ -612,7 +612,7 @@ def getVisualisationWidgetSentiementData(request, id):
     twelve_months_neg = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(weeks=52), timezone.now()], sentiment_polarity__gte=-1, sentiment_polarity__lte=-0.05000000000000001).count()
     twelve_months_sub = twelve_months_pos + twelve_months_neg + twelve_months_neu
     if twelve_months_sub > 0:
-        twelve_months = round((twelve_months_pos - twelve_months_neg) / twelve_months_sub, 2)
+        twelve_months = round((twelve_months_pos - twelve_months_neg) / twelve_months_sub, 3)
     else:
         twelve_months = 0
     # 6 months
@@ -621,7 +621,7 @@ def getVisualisationWidgetSentiementData(request, id):
     six_months_neg = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(weeks=26), timezone.now()], sentiment_polarity__gte=-1, sentiment_polarity__lte=-0.05000000000000001).count()
     six_months_sub = six_months_pos + six_months_neg + six_months_neu
     if six_months_sub > 0:
-        six_months = round((six_months_pos - six_months_neg) / six_months_sub, 2)
+        six_months = round((six_months_pos - six_months_neg) / six_months_sub, 3)
     else:
         six_months = 0
     # 30 days
@@ -630,7 +630,7 @@ def getVisualisationWidgetSentiementData(request, id):
     thrity_days_neg = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(days=30), timezone.now()], sentiment_polarity__gte=-1, sentiment_polarity__lte=-0.05000000000000001).count()
     thrity_days_sub = thrity_days_pos + thrity_days_neg + thrity_days_neu
     if thrity_days_sub > 0:
-        thrity_days = round((thrity_days_pos - thrity_days_neg) / thrity_days_sub, 2)
+        thrity_days = round((thrity_days_pos - thrity_days_neg) / thrity_days_sub, 3)
     else:
         thrity_days = 0
     # 2 weeks
@@ -639,7 +639,7 @@ def getVisualisationWidgetSentiementData(request, id):
     two_weeks_neg = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(days=14), timezone.now()], sentiment_polarity__gte=-1, sentiment_polarity__lte=-0.05000000000000001).count()
     two_weeks_sub = two_weeks_pos + two_weeks_neg + two_weeks_neu
     if two_weeks_sub > 0:
-        two_weeks = round((two_weeks_pos - two_weeks_neg) / two_weeks_sub, 2)
+        two_weeks = round((two_weeks_pos - two_weeks_neg) / two_weeks_sub, 3)
     else:
         two_weeks = 0
     # 1 week
@@ -648,7 +648,7 @@ def getVisualisationWidgetSentiementData(request, id):
     one_week_neg = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(days=7), timezone.now()], sentiment_polarity__gte=-1, sentiment_polarity__lte=-0.05000000000000001).count()
     one_week_sub = one_week_pos + one_week_neg + one_week_neu
     if one_week_sub > 0:
-        one_week = round((one_week_pos - one_week_neg) / one_week_sub, 2)
+        one_week = round((one_week_pos - one_week_neg) / one_week_sub, 3)
     else:
         one_week = 0
 

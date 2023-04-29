@@ -203,37 +203,42 @@ function reviews_update_current_total(data){
 
 }
 
-function sentiment_update_current_value(data){
+function sentiment_update_current_value(data, range){
 
-    let sentiment_score = 0
-    let num_of_reviews = 0
-    let pos_counter = 0
-    let neg_counter = 0
+    
+    let api_url = `/api/visualisation/sentiment-widgets/${game_id}/`
 
-    pos_labels = ["0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9", "1"]
-    neg_labels = ["-0.1", "-0.2", "-0.3", "-0.4", "-0.5", "-0.6", "-0.7", "-0.8", "-0.9", "-1"]
+    let reviews = function(){
+        let data = null;
+        $.ajax({
+            async: false,
+            type: 'GET',
+            dataType: 'json',
+            url: api_url,
+            success: function(result){
+                data = result
+            }
+        });
+        return data
+    }();
 
-    data.forEach(function(item){
+    let current
 
-        num_of_reviews += item.value
-
-        if(pos_labels.includes(item.label)){
-            pos_counter += item.value
-        } else if (neg_labels.includes(item.label)){
-            neg_counter += item.value
-        }
-
-    })
-
-    let sub_total = pos_counter - neg_counter
-
-    if (num_of_reviews > 0){
-        sentiment_score = (sub_total / num_of_reviews).toFixed(3)
-    } else {
-        sentiment_score = 0.000
+    if(range == "all-time"){
+        current = reviews.all_time
+    } else if (range == "twelve-months"){
+        current = reviews.twelve_months
+    } else if (range == "six-months") {
+        current = reviews.six_months
+    } else if (range == "one-month") {
+        current = reviews.one_month
+    } else if (range == "two-weeks") {
+        current = reviews.two_weeks
+    } else if (range == "one-week") {
+        current = reviews.one_week
     }
 
-    $("#sentiment-value-info").text(sentiment_score)
+    $("#sentiment-value-info").text(current)
 
 }
 

@@ -233,6 +233,6 @@ function sentiment_all_time(id) {
         .append('title')
         .text((data) => `Sentiment Value: ${data.label}\nNumber of Reviews: ${data.value}`);
 
-    sentiment_update_current_value(reviews_data)
+    sentiment_update_current_value(reviews_data , "all-time")
 
 }
