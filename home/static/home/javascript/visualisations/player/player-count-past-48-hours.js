@@ -24,6 +24,8 @@ function player_count_past_48_hours(id){
 
     let player_data = get_data_player_count_past_48_hours(id)
 
+    player_update_current_value(player_data)
+
     player_data.forEach(function(data, index){
         player_data[index].timestamp = new Date(data.timestamp)
     })
