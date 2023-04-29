@@ -555,7 +555,21 @@ def gameDetailReviewsStats(request, id):
 
 @api_view(['GET'])
 def getVisualisationWidgetReviewData(request, id):
+    return Response({"message": "Reviews Visualisation Widgets Data"})
 
+@api_view(['GET'])
+def getVisualisationWidgetSentiementData(request, id):
+    game = Game.objects.get(app_id=id)
+    game_stats = GameStat.objects.get(app_id=game)
+
+    return Response({"message": "Sentiment Visualisation Widgets Data"})
+
+@api_view(['GET'])
+def getVisualisationWidgetEmotionData(request, id):
+    return Response({"message": "Emotion Visualisation Widgets Data"})
+
+@api_view(['GET'])
+def getVisualisationWidgetPlayerData(request, id):
     game = Game.objects.get(app_id=id)
     game_stats = GameStat.objects.get(app_id=game)
 
@@ -574,7 +588,6 @@ def getVisualisationWidgetReviewData(request, id):
     # 72 hours peak & Average
     seventy_two_peak = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() - timezone.timedelta(hours=73), timezone.now()]).aggregate(Max('player_count'))
     seventy_two_average = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() - timezone.timedelta(hours=73), timezone.now()]).aggregate(Avg('player_count'))
-    print(seventy_two_average)
     seventy_two_hours = {"peak": seventy_two_peak["player_count__max"], "average": seventy_two_average["player_count__avg"]}
     # 48 hours peak & Average
     forty_eight_peak = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() - timezone.timedelta(hours=49), timezone.now()]).aggregate(Max('player_count'))
@@ -584,26 +597,8 @@ def getVisualisationWidgetReviewData(request, id):
     twenty_four_peak = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() - timezone.timedelta(hours=25), timezone.now()]).aggregate(Max('player_count'))
     twenty_four_average = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() - timezone.timedelta(hours=25), timezone.now()]).aggregate(Avg('player_count'))
     twenty_four_hours = {"peak": twenty_four_peak["player_count__max"], "average": twenty_four_average["player_count__avg"]}
-    # most active times (past 30 days)
-    print(all_time)
-    print(thirty_days)
-    print(seven_days)
-    print(seventy_two_hours)
-    print(forty_eight_hours)
-    print(twenty_four_hours)
+
     return Response({"all_time": all_time, "thirty_days": thirty_days, "seven_days": seven_days, "seventy_two_hours": seventy_two_hours, "forty_eight_hours": forty_eight_hours, "twenty_four_hours": twenty_four_hours})
-
-@api_view(['GET'])
-def getVisualisationWidgetSentiementData(request, id):
-    return Response({"message": "Sentiment Visualisation Widgets Data"})
-
-@api_view(['GET'])
-def getVisualisationWidgetEmotionData(request, id):
-    return Response({"message": "Emotion Visualisation Widgets Data"})
-
-@api_view(['GET'])
-def getVisualisationWidgetPlayerData(request, id):
-    return Response({"message": "Player Visualisation Widgets Data"})
     
 @api_view(['GET'])
 def getOldestDateForGamePlayerData(request, id):
