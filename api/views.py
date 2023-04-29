@@ -563,27 +563,28 @@ def getVisualisationWidgetReviewData(request, id):
     # all time peak
     all_time_peak = game_stats.highest_player_count
     all_time_average = PlayerCount.objects.filter(app_id__app_id=id).aggregate(Avg('player_count'))
-    all_time = {"peak": all_time_peak, "average": round(all_time_average["player_count__avg"])}
+    all_time = {"peak": all_time_peak, "average": all_time_average["player_count__avg"]}
     # 30 day peak & Average
     thrity_day_peak = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() + timezone.timedelta(days=-30) , timezone.now()]).aggregate(Max('player_count'))
     thirty_day_average = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() + timezone.timedelta(days=-30) , timezone.now()]).aggregate(Avg('player_count'))
-    thirty_days = {"peak": thrity_day_peak["player_count__max"], "average": round(thirty_day_average["player_count__avg"])}
+    thirty_days = {"peak": thrity_day_peak["player_count__max"], "average": thirty_day_average["player_count__avg"]}
     # 7 day peak & Average
     seven_day_peak = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() + timezone.timedelta(days=-7), timezone.now()]).aggregate(Max('player_count'))
     seven_day_average = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() + timezone.timedelta(days=-7), timezone.now()]).aggregate(Avg('player_count'))
-    seven_days = {"peak": seven_day_peak["player_count__max"], "average": round(seven_day_average["player_count__avg"])}
+    seven_days = {"peak": seven_day_peak["player_count__max"], "average": seven_day_average["player_count__avg"]}
     # 72 hours peak & Average
     seventy_two_peak = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() - timezone.timedelta(hours=73), timezone.now()]).aggregate(Max('player_count'))
     seventy_two_average = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() + timezone.timedelta(hours=73), timezone.now()]).aggregate(Avg('player_count'))
-    seventy_two_hours = {"peak": seventy_two_peak["player_count__max"], "average": round(seventy_two_average["player_count__avg"])}
+    print(seventy_two_average)
+    seventy_two_hours = {"peak": seventy_two_peak["player_count__max"], "average": seventy_two_average["player_count__avg"]}
     # 48 hours peak & Average
     forty_eight_peak = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() - timezone.timedelta(hours=49), timezone.now()]).aggregate(Max('player_count'))
     forty_eight_average = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() + timezone.timedelta(hours=49), timezone.now()]).aggregate(Avg('player_count'))
-    forty_eight_hours = {"peak": forty_eight_peak["player_count__max"], "average": round(forty_eight_average["player_count__avg"])}
+    forty_eight_hours = {"peak": forty_eight_peak["player_count__max"], "average": forty_eight_average["player_count__avg"]}
     # 24 hours peak
-    twenty_four_peak = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() - timezone.timedelta(hours=49), timezone.now()]).aggregate(Max('player_count'))
-    twenty_four_average = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() + timezone.timedelta(hours=49), timezone.now()]).aggregate(Avg('player_count'))
-    twenty_four_hours = {"peak": twenty_four_peak["player_count__max"], "average": round(twenty_four_average["player_count__avg"])}
+    twenty_four_peak = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() - timezone.timedelta(hours=25), timezone.now()]).aggregate(Max('player_count'))
+    twenty_four_average = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() + timezone.timedelta(hours=25), timezone.now()]).aggregate(Avg('player_count'))
+    twenty_four_hours = {"peak": twenty_four_peak["player_count__max"], "average": twenty_four_average["player_count__avg"]}
     # most active times (past 30 days)
     print(all_time)
     print(thirty_days)
