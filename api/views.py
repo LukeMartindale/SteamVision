@@ -555,12 +555,71 @@ def gameDetailReviewsStats(request, id):
 
 @api_view(['GET'])
 def getVisualisationWidgetReviewData(request, id):
-    return Response({"message": "Reviews Visualisation Widgets Data"})
+
+    game = Game.objects.get(app_id=id)
+    game_stats = GameStat.objects.get(app_id=game)
+
+    # All time
+    all_time = game_stats.current_review_score
+    # 12 months
+    twelve_months_total = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(weeks=52), timezone.now()]).count()
+    twelve_months_pos = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(weeks=52), timezone.now()], voted_up=True).count()
+    if twelve_months_total:
+        twelve_months = round(twelve_months_pos / twelve_months_total * 100, 1)
+    else:
+        twelve_months = 0.0
+    # 6 months
+    six_months_total = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(weeks=26), timezone.now()]).count()
+    six_months_pos = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(weeks=26), timezone.now()], voted_up=True).count()
+    if six_months_total:
+        six_months = round(six_months_pos / six_months_total * 100, 1)
+    else:
+        six_months = 0.0
+    # 30 days
+    thrity_days_total = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(days=30), timezone.now()]).count()
+    thrity_days_pos = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(days=30), timezone.now()], voted_up=True).count()
+    if thrity_days_total:
+        thrity_days = round(thrity_days_pos / thrity_days_total * 100, 1)
+    else:
+        thrity_days = 0.0
+    # 2 weeks
+    two_weeks_total = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(days=30), timezone.now()]).count()
+    two_weeks_pos = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(days=30), timezone.now()], voted_up=True).count()
+    if two_weeks_total:
+        two_weeks = round(two_weeks_pos / two_weeks_total * 100, 1)
+    else:
+        two_weeks = 0.0
+    # 1 week
+    one_week_total = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(days=30), timezone.now()]).count()
+    one_week_pos = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(days=30), timezone.now()], voted_up=True).count()
+    if one_week_total:
+        one_week = round(one_week_pos / one_week_total * 100, 1)
+    else:
+        one_week = 0.0
+
+    print(all_time)
+    print(twelve_months)
+    print(six_months)
+    print(thrity_days)
+    print(two_weeks)
+    print(one_week)
+
+    return Response({"all_time": all_time, "twelve_months": twelve_months, "six_months": six_months, "thrity_days": thrity_days, "two_weeks": two_weeks, "one_week": one_week})
 
 @api_view(['GET'])
 def getVisualisationWidgetSentiementData(request, id):
     game = Game.objects.get(app_id=id)
     game_stats = GameStat.objects.get(app_id=game)
+
+    #     # All time
+    # all_time = {"peak", game_stats.highest_sentiment_score}
+    # # 12 months
+    # twelve_months_pos = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(weeks=52), timezone.now()], sentiment_polarity__gte=0.05000000000000001, sentiment_polarity__lte="")
+    # print(twelve_months_peak)
+    # # 6 months
+    # # 30 days
+    # # 2 weeks
+    # # 1 week
 
     return Response({"message": "Sentiment Visualisation Widgets Data"})
 
