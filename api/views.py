@@ -560,7 +560,7 @@ def getVisualisationWidgetReviewData(request, id):
     game_stats = GameStat.objects.get(app_id=game)
 
     # All time
-    all_time = round(game_stats.current_review_score, 1)
+    all_time = round(game_stats.current_review_score * 100, 1)
     # 12 months
     twelve_months_total = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(weeks=52), timezone.now()]).count()
     twelve_months_pos = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(weeks=52), timezone.now()], voted_up=True).count()
@@ -596,13 +596,6 @@ def getVisualisationWidgetReviewData(request, id):
         one_week = round(one_week_pos / one_week_total * 100, 1)
     else:
         one_week = 0.0
-
-    print(all_time)
-    print(twelve_months)
-    print(six_months)
-    print(thrity_days)
-    print(two_weeks)
-    print(one_week)
 
     return Response({"all_time": all_time, "twelve_months": twelve_months, "six_months": six_months, "thrity_days": thrity_days, "two_weeks": two_weeks, "one_week": one_week})
 
