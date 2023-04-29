@@ -625,14 +625,14 @@ def getVisualisationWidgetSentiementData(request, id):
     else:
         six_months = 0
     # 30 days
-    thrity_days_neu = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(days=30), timezone.now()], sentiment_polarity__gte=-0.05000000000000000, sentiment_polarity__lte=0.04999999999999999).count()
-    thrity_days_pos = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(days=30), timezone.now()], sentiment_polarity__gte=0.05000000000000001, sentiment_polarity__lte=1).count()
-    thrity_days_neg = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(days=30), timezone.now()], sentiment_polarity__gte=-1, sentiment_polarity__lte=-0.05000000000000001).count()
-    thrity_days_sub = thrity_days_pos + thrity_days_neg + thrity_days_neu
-    if thrity_days_sub > 0:
-        thrity_days = round((thrity_days_pos - thrity_days_neg) / thrity_days_sub, 3)
+    thirty_days_neu = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(days=30), timezone.now()], sentiment_polarity__gte=-0.05000000000000000, sentiment_polarity__lte=0.04999999999999999).count()
+    thirty_days_pos = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(days=30), timezone.now()], sentiment_polarity__gte=0.05000000000000001, sentiment_polarity__lte=1).count()
+    thirty_days_neg = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(days=30), timezone.now()], sentiment_polarity__gte=-1, sentiment_polarity__lte=-0.05000000000000001).count()
+    thirty_days_sub = thirty_days_pos + thirty_days_neg + thirty_days_neu
+    if thirty_days_sub > 0:
+        thirty_days = round((thirty_days_pos - thirty_days_neg) / thirty_days_neu, 3)
     else:
-        thrity_days = 0
+        thirty_days = 0
     # 2 weeks
     two_weeks_neu = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(days=14), timezone.now()], sentiment_polarity__gte=-0.05000000000000000, sentiment_polarity__lte=0.04999999999999999).count()
     two_weeks_pos = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(days=14), timezone.now()], sentiment_polarity__gte=0.05000000000000001, sentiment_polarity__lte=1).count()
@@ -652,7 +652,7 @@ def getVisualisationWidgetSentiementData(request, id):
     else:
         one_week = 0
 
-    return Response({"all_time": all_time, "twelve_months": twelve_months, "six_months": six_months, "thrity_days": thrity_days, "two_weeks": two_weeks, "one_week": one_week})
+    return Response({"all_time": all_time, "twelve_months": twelve_months, "six_months": six_months, "thrity_days": thirty_days, "two_weeks": two_weeks, "one_week": one_week})
 
 @api_view(['GET'])
 def getVisualisationWidgetEmotionData(request, id):

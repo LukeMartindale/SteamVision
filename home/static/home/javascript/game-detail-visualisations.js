@@ -231,7 +231,7 @@ function sentiment_update_current_value(data, range){
     } else if (range == "six-months") {
         current = reviews.six_months
     } else if (range == "one-month") {
-        current = reviews.one_month
+        current = reviews.thirty_days
     } else if (range == "two-weeks") {
         current = reviews.two_weeks
     } else if (range == "one-week") {
