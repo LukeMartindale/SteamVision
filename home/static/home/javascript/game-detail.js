@@ -501,8 +501,6 @@ $(function(){
         return data
     }();
 
-    console.log(response)
-
     // All time
     $("#reviews-drawer-all-time-positive").text(`${(response.all_time).toFixed(1)}%`)
     $("#reviews-drawer-all-time-negative").text(`${(response.all_time_neg).toFixed(1)}%`)
@@ -521,5 +519,41 @@ $(function(){
     // Past one week
     $("#reviews-drawer-one-week-positive").text(`${(response.one_week).toFixed(1)}%`)
     $("#reviews-drawer-one-week-negative").text(`${(response.one_week_neg).toFixed(1)}%`)
+
+})
+
+// SENTIMENT DRAWER WIDGETS
+$(function(){
+
+    let api_url = `/api/visualisation/sentiment-widgets/${game_id}/`
+
+    let response = function(){
+        let data = null;
+        $.ajax({
+            async: false,
+            type: 'GET',
+            dataType: 'json',
+            url: api_url,
+            success: function(result){
+                data = result
+            }
+        });
+        return data
+    }();
+
+    console.log(response)
+
+    // All Time
+    $("#sentiment-drawer-all-time").text(`${(response.all_time).toFixed(3)}`)
+    // Twelve Months
+    $("#sentiment-drawer-twelve-months").text(`${(response.twelve_months).toFixed(3)}`)
+    // Six Months
+    $("#sentiment-drawer-six-months").text(`${(response.six_months).toFixed(3)}`)
+    // One Month
+    $("#sentiment-drawer-one-month").text(`${(response.thirty_days).toFixed(3)}`)
+    // Two Weeks
+    $("#sentiment-drawer-two-weeks").text(`${(response.two_weeks).toFixed(3)}`)
+    // One Week
+    $("#sentiment-drawer-one-week").text(`${(response.one_week).toFixed(3)}`)
 
 })
