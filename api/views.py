@@ -630,7 +630,7 @@ def getVisualisationWidgetSentiementData(request, id):
     thirty_days_neg = Review.objects.filter(app_id__app_id=id, time_created__range=[timezone.now() - timezone.timedelta(days=30), timezone.now()], sentiment_polarity__gte=-1, sentiment_polarity__lte=-0.05000000000000001).count()
     thirty_days_sub = thirty_days_pos + thirty_days_neg + thirty_days_neu
     if thirty_days_sub > 0:
-        thirty_days = round((thirty_days_pos - thirty_days_neg) / thirty_days_neu, 3)
+        thirty_days = round((thirty_days_pos - thirty_days_neg) / thirty_days_sub, 3)
     else:
         thirty_days = 0
     # 2 weeks
