@@ -575,8 +575,6 @@ $(function(){
         return data
     }();
 
-    console.log(response)
-
     // All Time
     let all_time_widget = $("#emotion-drawer-all-time")
     response.all_time.forEach(function(value, index){
@@ -740,5 +738,50 @@ $(function(){
         }
 
     })
+
+})
+
+// PLAYER DRAWER WIDGETS
+$(function(){
+
+    let api_url = `/api/visualisation/player-widgets/${game_id}/`
+
+    let response = function(){
+        let data = null;
+        $.ajax({
+            async: false,
+            type: 'GET',
+            dataType: 'json',
+            url: api_url,
+            success: function(result){
+                data = result
+            }
+        });
+        return data
+    }();
+
+    console.log(response)
+
+    // All Time
+    $("#player-drawer-all-time-peak").text(`${(response.all_time.peak).toFixed(0)}`)
+    $("#player-drawer-all-time-average").text(`${(response.all_time.average).toFixed(0)}`)
+    // One Month
+    $("#player-drawer-one-month-peak").text(`${(response.thirty_days.peak).toFixed(0)}`)
+    $("#player-drawer-one-month-average").text(`${(response.thirty_days.average).toFixed(0)}`)
+    // Two Weeks
+    $("#player-drawer-two-weeks-peak").text(`${(response.fourteen_days.peak).toFixed(0)}`)
+    $("#player-drawer-two-weeks-average").text(`${(response.fourteen_days.average).toFixed(0)}`)
+    // One Week
+    $("#player-drawer-one-week-peak").text(`${(response.seven_days.peak).toFixed(0)}`)
+    $("#player-drawer-one-week-average").text(`${(response.seven_days.average).toFixed(0)}`)
+    // 72 Hours
+    $("#player-drawer-seventy-two-hour-peak").text(`${(response.seventy_two_hours.peak).toFixed(0)}`)
+    $("#player-drawer-seventy-two-hour-average").text(`${(response.seventy_two_hours.average).toFixed(0)}`)
+    // 48 Hours
+    $("#player-drawer-forty-eight-hour-peak").text(`${(response.forty_eight_hours.peak).toFixed(0)}`)
+    $("#player-drawer-forty-eight-hour-average").text(`${(response.forty_eight_hours.average).toFixed(0)}`)
+    // 24 Hours
+    $("#player-drawer-twenty-four-hour-peak").text(`${(response.twenty_four_hours.peak).toFixed(0)}`)
+    $("#player-drawer-twenty-four-hour-average").text(`${(response.twenty_four_hours.average).toFixed(0)}`)
 
 })

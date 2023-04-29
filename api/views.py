@@ -797,6 +797,10 @@ def getVisualisationWidgetPlayerData(request, id):
     thirty_day_peak = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() + timezone.timedelta(days=-30) , timezone.now()]).aggregate(Max('player_count'))
     thirty_day_average = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() + timezone.timedelta(days=-30) , timezone.now()]).aggregate(Avg('player_count'))
     thirty_days = {"peak": thirty_day_peak["player_count__max"], "average": thirty_day_average["player_count__avg"]}
+    # 14 day peak & Average
+    fourteen_day_peak = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() + timezone.timedelta(days=-14), timezone.now()]).aggregate(Max('player_count'))
+    fourteen_day_average = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() + timezone.timedelta(days=-14), timezone.now()]).aggregate(Avg('player_count'))
+    fourteen_days = {"peak": fourteen_day_peak["player_count__max"], "average": fourteen_day_average["player_count__avg"]}
     # 7 day peak & Average
     seven_day_peak = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() + timezone.timedelta(days=-7), timezone.now()]).aggregate(Max('player_count'))
     seven_day_average = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() + timezone.timedelta(days=-7), timezone.now()]).aggregate(Avg('player_count'))
@@ -814,7 +818,7 @@ def getVisualisationWidgetPlayerData(request, id):
     twenty_four_average = PlayerCount.objects.filter(app_id__app_id=id, timestamp__range=[timezone.now() - timezone.timedelta(hours=25), timezone.now()]).aggregate(Avg('player_count'))
     twenty_four_hours = {"peak": twenty_four_peak["player_count__max"], "average": twenty_four_average["player_count__avg"]}
 
-    return Response({"all_time": all_time, "thirty_days": thirty_days, "seven_days": seven_days, "seventy_two_hours": seventy_two_hours, "forty_eight_hours": forty_eight_hours, "twenty_four_hours": twenty_four_hours})
+    return Response({"all_time": all_time, "thirty_days": thirty_days, "fourteen_days": fourteen_days, "seven_days": seven_days, "seventy_two_hours": seventy_two_hours, "forty_eight_hours": forty_eight_hours, "twenty_four_hours": twenty_four_hours})
     
 @api_view(['GET'])
 def getOldestDateForGamePlayerData(request, id):
