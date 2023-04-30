@@ -26,7 +26,7 @@
 }
 
 .chart-select-wrapper {
-    width: 50%;
+    width: 30%;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -432,8 +432,9 @@
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: end;
     align-items: center;
+    margin-bottom: 20px;
 }
 
 .page-selector {
@@ -473,15 +474,15 @@
 }
 
 @media only screen and (max-width: 750px){
-    .chart-filter-form {
+    /* .chart-filter-form {
         flex-direction: column;
         justify-content: center;
         align-items: center ;
-    }
+    } */
 
-    .chart-select-wrapper {
+    /* .chart-select-wrapper {
         width: 90%;
-    }
+    } */
 }
 
 @media only screen and (max-width: 700px){

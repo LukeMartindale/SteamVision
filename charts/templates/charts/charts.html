@@ -12,37 +12,26 @@
 
     <div class="block-wrapper">
 
-        <div class="filter-block">
-
-            <form action="" method="post" class="chart-filter-form" id="chart-form">
-                {% csrf_token %}
-
-                <div class="chart-select-wrapper">
-                    <select class="chart-select" id="subject-select" name="subject">
-                        {% if games_subject == "player_count" %}
-                            <option class="chart-select-option" value="player-count" selected>Player Count</option>
-                            <option class="chart-select-option" value="reviews">Reviews</option>
-                        {% elif games_subject == "reviews" %}
-                            <option class="chart-select-option" value="player-count">Player Count</option>
-                            <option class="chart-select-option" value="reviews" selected>Reviews</option>
-                        {% endif %}
-                    </select>
-                </div>
-    
-                <div class="chart-select-wrapper">
-                    <select class="chart-select" id="type-select" name="type">
-                        <option class="chart-select-option" value="current">Current</option>
-                        <option class="chart-select-option" value="all-time">All Time</option>
-                    </select>
-                </div>
-
-            </form>
-
-        </div>
-
         <div class="content-block">
 
             <div class="game-list-wrapper">
+
+                <form action="" method="post" class="chart-filter-form" id="chart-form">
+                    {% csrf_token %}
+    
+                    <div class="chart-select-wrapper">
+                        <select class="chart-select" id="subject-select" name="subject">
+                            {% if games_subject == "player_count" %}
+                                <option class="chart-select-option" value="player-count" selected>Player Count</option>
+                                <option class="chart-select-option" value="reviews">Reviews</option>
+                            {% elif games_subject == "reviews" %}
+                                <option class="chart-select-option" value="player-count">Player Count</option>
+                                <option class="chart-select-option" value="reviews" selected>Reviews</option>
+                            {% endif %}
+                        </select>
+                    </div>
+        
+                </form>
 
                 {% for game in games %}
 
