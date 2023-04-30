@@ -33,6 +33,7 @@ function sentiment_past_one_week(id){
     })
 
     $('#sentiment-graph').empty()
+    $("#sentiment-container-content").find(".tooltip").remove()
 
     let margins = {top: 0, bottom: 0, left: 0, right: 0}
 
@@ -232,6 +233,53 @@ function sentiment_past_one_week(id){
         .attr('id', data => (("sentiment-bar-" + data.label).replace(".", '')))
         .append('title')
         .text((data) => `Sentiment Value: ${data.label}\nNumber of Reviews: ${data.value}`);
+
+
+    // CREATE TOOLTIP
+    let tooltip = d3.select('#sentiment-container-content')
+        .append("div")
+        .style("opacity", 0)
+        .attr("class", "tooltip")
+        .style("background-color", "white")
+        .style("border", "solid")
+        .style("border-wdith", "1px")
+        .style("border-radius", "5px")
+        .style("padding", "10px")
+
+    let mouseover = function(event, data) {
+        mouseleave()
+        console.log(event.target)
+        console.log(event.target.__data__)
+        if (event.target.classList.contains("bar")){
+            tooltip
+                .html("Sentiment Score: " + event.target.__data__.label + "<br>" + "Number of Reviews: " + event.target.__data__.value)
+                .style("display", "block")
+                .style("opacity", 1)
+        }
+    }
+
+    let mousemove = function(event, data) {
+        let x_co = -50
+        if(event.x > ($(window).width()/2)){
+            x_co = 250
+        }
+        let y_co = $(".detail-block-wrapper").height() + $("#reviews-game-section").height() - $(".game-content-selector").height()
+        tooltip
+            .style("transform", "translateY(-55%)")
+            .style("left", (event.x) - x_co + "px")
+            .style("top", (event.y) + y_co + "px")
+    }
+
+    let mouseleave = function(event, data) {
+        tooltip
+            .style("display", "none")
+            .style("opacity", 0)
+    }
+
+    chart
+        .on("mouseover", mouseover)
+        .on("mousemove", mousemove)
+        .on("mouseleave", mouseleave)
 
     sentiment_update_current_value(reviews_data, "one-week")
 
