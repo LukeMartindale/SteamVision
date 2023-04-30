@@ -2,5 +2,109 @@
 {% load static %}
 
 {% block content %}
-    <div>TEST</div>
+
+    <!-- MY CSS -->
+    <link rel="stylesheet" href="{% static  'home/css/home.css' %}">
+
+    <div class="block-wrapper">
+
+        <div class="content-block">
+            <div class="content-block-title-wrapper">
+                <header class="content-block-title-text">
+                    Welcome
+                </header>
+            </div>
+            <div class="content-block-content-wrapper">
+                <p class="content-block-content-text">
+                    Welcome to Steam Vision where we try to make the decision of what games you play and purchase on Steam easier.
+                    We collect data from Steam on a daily basis, process it, and then make it avaliable for you to view.
+                    You can view the Reviews and player count as well as looking at the sentiment and prominent emotions are for the games you like or are interested in.
+                </p>
+                <p class="content-block-content-text">
+                    We collect data from Steam every day starting from 12AM over the next few hours, store, and process the data we collect fro you to view.
+                    Reviews are collected and processed every night, whilst player count is collected hourly.
+                </p>
+                <a class="link-text" href="/games/">Get started looking at games now</a>
+            </div>
+        </div>
+
+        <div class="content-block-widgets-wrapper">
+            <div class="content-block-widgets">
+                <div class="content-block-title-wrapper">
+                    <i class="bi bi-blockquote-right widgets-icon"></i>
+                    <header class="content-block-title-text">
+                        Reviews
+                    </header>
+                </div>
+                <p class="content-block-widgets-text">
+                    Check out what the reviews for the game say over different time periods to gain a better knowledge of how the game may have changed overtime.
+                </p>
+            </div>
+            <div class="content-block-widgets">
+                <div class="content-block-title-wrapper">
+                    <i class="bi bi-chat-dots widgets-icon"></i>
+                    <header class="content-block-title-text">
+                        Sentiment
+                    </header>
+                </div>
+                <p class="content-block-widgets-text">
+                    On Steam reviews are rated on a simple voted up, voted down basis. Check out the sentiment for a game and its reviews to see just how positive or negative its reviews really are. 
+                </p>
+            </div>
+            <div class="content-block-widgets">
+                <div class="content-block-title-wrapper">
+                    <i class="bi bi-emoji-angry widgets-icon"></i>
+                    <header class="content-block-title-text">
+                        Emotion
+                    </header>
+                </div>
+                <p class="content-block-widgets-text">
+                    See what the common emotion prevelant in a games reviews are to help you see what the current mindset of the current playerbase is. 
+                </p>
+            </div>
+            <div class="content-block-widgets">
+                <div class="content-block-title-wrapper">
+                    <i class="bi bi-controller widgets-icon"></i>
+                    <header class="content-block-title-text">
+                        Players
+                    </header>
+                </div>
+                <p class="content-block-widgets-text">
+                    See the number of players who are activly playing this game right now, and see how it compares with the number of players who have played previously to help you determine if this game has a healthy playerbase you would like to be apart off.
+                </p>
+            </div>
+        </div>
+
+        <div class="content-block">
+            <div class="content-block-title-wrapper">
+                <header class="content-block-title-text">
+                    Compare
+                </header>
+            </div>
+            <div class="content-block-content-wrapper">
+                <p class="content-block-content-text">
+                    Compare a selection of games from out database to see how they stack up against each other. You can compare their Reviews, Sentiment and player counts with just a few simple clicks.
+
+                    By looking at home differetn stack up and compare to each other you can make better informed decisions about what games you choose to play.
+                </p>
+                <a class="link-text" href="compare">Get started comparing games now</a>
+            </div>
+        </div>
+
+        <div class="content-block">
+            <div class="content-block-title-wrapper">
+                <header class="content-block-title-text">
+                    Sign Up
+                </header>
+            </div>
+            <div class="content-block-content-wrapper">
+                <p class="content-block-content-text">
+                    Created an account and login to follow your favourite games allowing you to more easily find them and check their current status in the future.
+                </p>
+                <a class="link-text" href="/users/register/">Sign up now!</a>
+            </div>
+        </div>
+
+    </div>
+
 {% endblock %}
