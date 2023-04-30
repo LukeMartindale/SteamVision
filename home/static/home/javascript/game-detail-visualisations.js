@@ -185,6 +185,7 @@ function no_reviews_neutral_bar(){
             let title = $(this).children("title").html()
             title = reg.exec(title)
             $(this).children("title").html("Info: No Reviews\nDate:" + title[1])
+            $(this).addClass("neutral-bar")
         }
 
     })

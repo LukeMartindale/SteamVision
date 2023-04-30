@@ -25,6 +25,7 @@ function review_all_time_year(id){
     let reviews_data = get_data_reviews_all_time_year(id)
 
     $('#reviews-graph').empty()
+    $("#reviews-container-content").find(".tooltip").remove()
 
     let margins = {top: 0, bottom: 0, left: 0, right: 0}
 
@@ -222,7 +223,66 @@ function review_all_time_year(id){
             .attr('y', data => y(data.percentage))
             .attr('id', data => data.label + "+")
             .append('title')
-            .text((data) => `Percentage positive reviews: ${data.percentage}%\nNumber of positive reviews: ${Math.round(data.number_of_reviews * (data.percentage / 100))}\nDate: ${data.label}`);
+            .text((data) => `Percentage positive reviews: ${data.percentage}%\nNumber of positive reviews: ${Math.round(data.number_of_reviews * (data.percentage / 100))}\nDate: ${data.label}`)
+
+    // CREATE TOOLTIP
+    let tooltip = d3.select('#reviews-container-content')
+        .append("div")
+        .style("opacity", 0)
+        .attr("class", "tooltip")
+        .style("background-color", "white")
+        .style("border", "solid")
+        .style("border-wdith", "1px")
+        .style("border-radius", "5px")
+        .style("padding", "10px")
+
+    let mouseover = function(event, data) {
+        mouseleave()
+        if(event.target.classList.contains("neutral-bar")){
+            tooltip
+                .html("No Reviews")
+                .style("display", "block")
+                .style("opacity", 1)
+        } else if (event.target.classList.contains("bar")){
+            tooltip
+                .html("Positive Reviews" + "<br>" + "Percentage Positive Reviews: " + (event.target.__data__.percentage).toFixed(1) + "%" + "<br>" + "Number of Reviews: " + Math.round(event.target.__data__.number_of_reviews * (event.target.__data__.percentage / 100)))
+                .style("display", "block")
+                .style("opacity", 1)
+        } else if (event.target.classList.contains("neg-bar")) {
+            if(event.target.__data__.number_of_reviews > 0){
+                neg_percentage = (100 - event.target.__data__.percentage).toFixed(1)
+                neg_reviews = Math.round(event.target.__data__.number_of_reviews * (neg_percentage / 100))
+            }
+            tooltip
+                .html("Negative Reviews" + "<br>" + "Percentage Negative Reviews: " + neg_percentage + "%" + "<br>" + "Number of Reviews: " + neg_reviews)
+                .style("display", "block")
+                .style("opacity", 1)
+        }
+    }
+
+    let mousemove = function(event, data) {
+        let x_co = -50
+        if(event.x > ($(window).width()/2)){
+            x_co = 250
+        }
+        let y_co = $(".detail-block-wrapper").height()/1.5
+        tooltip
+            .style("transform", "translateY(-55%)")
+            .style("left", (event.x) - x_co + "px")
+            .style("top", (event.y) + y_co + "px")
+    }
+
+    let mouseleave = function(event, data) {
+        tooltip
+            .style("display", "none")
+            .style("opacity", 0)
+    }
+
+
+    chart
+        .on("mouseover", mouseover)
+        .on("mousemove", mousemove)
+        .on("mouseleave", mouseleave)
 
     reviews_update_current_total(reviews_data)
     no_reviews_neutral_bar()
