@@ -25,6 +25,7 @@ function reviews_past_one_week(id){
     let reviews_data = get_data_reviews_past_one_week(id)
 
     $('#reviews-graph').empty()
+    $("#reviews-container-content").find(".tooltip").remove()
 
     let margins = {top: 0, bottom: 0, left: 0, right: 0}
 
