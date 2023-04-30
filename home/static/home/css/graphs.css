@@ -74,3 +74,11 @@
     opacity: 0;
     color: black;
 }
+
+.no-data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 21px;
+    text-align: center;
+}
