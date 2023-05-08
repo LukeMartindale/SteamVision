@@ -591,13 +591,13 @@
 }
 
 .medium-positive-sentiment-widget {
-    border: 2px solid #80a45c;
-    background-color: rgba(128, 164, 92, 0.2);
+    border: 2px solid #cc3366;
+    background-color: rgba(204, 51, 102, 0.2);
 }
 
 .high-positive-sentiment-widget {
-    border: 2px solid #99b67d;
-    background-color: rgba(153, 182, 125, 0.2);
+    border: 2px solid #9933cc;
+    background-color: rgba(153, 51, 204, 0.2);
 }
 
 /* emotion widgets */
@@ -1121,7 +1121,7 @@ select option {
 }
 
 .alternate-detail-button {
-    background-color: gray;
+    background-color: #478f24;
 }
 
 .detail-message-section {

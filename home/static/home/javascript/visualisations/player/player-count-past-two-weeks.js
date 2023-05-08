@@ -282,7 +282,7 @@ function player_count_past_two_weeks(id){
 
         let width_scale = 15
         let time = new Date(player_data[i].timestamp)
-        time = time.getFullYear() + "/" + time.getMonth() + "/" + time.getDate();
+        time = time.getDate() + "/" + time.getMonth() + "/" + time.getFullYear();
 
         if(x(player_data[i].timestamp)+15 > $("#player-graph").width()/2){
             width_scale = -175

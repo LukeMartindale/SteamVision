@@ -230,7 +230,7 @@ body {
     margin-left: 10px;
     text-decoration: none;
     color: #bec5cb;
-    font-size: 32px;
+    font-size: 28px;
     display: flex;
     justify-content: start;
     align-items: center;
@@ -238,6 +238,7 @@ body {
 
 .sidebar-text {
     margin: 0;
+    white-space: nowrap;
 }
 
 .display-draw {
