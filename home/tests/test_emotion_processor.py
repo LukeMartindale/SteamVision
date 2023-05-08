@@ -12,7 +12,6 @@ class TestSentimentProcessor(TestCase):
 
     def test_emotion_processor_happy_score_check(self):
         emotions = reviews_emotions(self.text)
-        print(emotions)
         self.assertEqual(emotions["scores"]["Happy"], 0.5)
 
     def test_emotion_processor_angry_score_check(self):
