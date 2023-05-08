@@ -282,7 +282,11 @@ function player_count_past_48_hours(id){
 
         let width_scale = 15
         let time = new Date(player_data[i].timestamp)
-        time = time.getFullYear() + "/" + time.getMonth() + "/" + time.getDate() + " - " + time.getHours();
+        let minutes = time.getMinutes()
+        if (minutes < 10) {
+            minutes = "0" + minutes.toString()
+        }
+        time = time.getDate() + "/" + time.getMonth() + "/" + time.getFullYear() + " - " + time.getHours() + ":" + minutes;
 
         if(x(player_data[i].timestamp)+15 > $("#player-graph").width()/2){
             width_scale = -175
