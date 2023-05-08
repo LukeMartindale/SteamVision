@@ -296,8 +296,7 @@ function player_count_past_one_month_compare(ids){
                 let ci = is[index]
                 let width_scale = 15
                 let time = new Date(player_data[index][ci].timestamp)
-                time = time.getFullYear() + "/" + time.getMonth() + "/" + time.getDate();
-                if(index == 0){
+                time = time.getDate() + "/" + time.getMonth() + "/" + time.getFullYear();                if(index == 0){
                     if(x(player_data[index][ci].timestamp)+15 > $("#player-graph").width()/2){
                         width_scale = -175
                     } else {
