@@ -233,7 +233,7 @@ function player_count_all_time(id){
         .append('g')
         .append('circle')
             .style("fill", "none")
-            .attr("stroke", "black")
+            .attr("stroke", "#bec5cb")
             .attr('r', 8.5)
             .style("opacity", 0)
 

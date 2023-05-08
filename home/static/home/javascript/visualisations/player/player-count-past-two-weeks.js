@@ -238,7 +238,7 @@ function player_count_past_two_weeks(id){
         .append('g')
         .append('circle')
             .style("fill", "none")
-            .attr("stroke", "black")
+            .attr("stroke", "#bec5cb")
             .attr('r', 8.5)
             .style("opacity", 0)
 

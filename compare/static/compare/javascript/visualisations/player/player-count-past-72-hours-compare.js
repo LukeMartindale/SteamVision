@@ -233,7 +233,7 @@ function player_count_past_72_hours_compare(ids){
         let focus_all = []
 
         player_data.forEach(function(value, index){
-            let focus = chart.append('g').append('circle').style("fill", "none").attr("stroke", "black").attr('r', 8.5).style("opacity", 0)
+            let focus = chart.append('g').append('circle').style("fill", "none").attr("stroke", "#bec5cb").attr('r', 8.5).style("opacity", 0)
             focus_all.push(focus)
         })
 
