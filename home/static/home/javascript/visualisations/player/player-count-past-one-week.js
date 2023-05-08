@@ -282,7 +282,7 @@ function player_count_past_one_week(id){
 
         let width_scale = 15
         let time = new Date(player_data[i].timestamp)
-        time = time.getDate() + "/" + time.getMonth() + "/" + time.getFullYear() + " - " + time.getHours() + ":" + time.getMinutes();
+        time = time.getDate() + "/" + time.getMonth() + "/" + time.getFullYear() + " - " + time.getHours() + ":" + time.getTime();
 
         if(x(player_data[i].timestamp)+15 > $("#player-graph").width()/2){
             width_scale = -175
