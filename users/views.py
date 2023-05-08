@@ -28,8 +28,12 @@ def registerPage(request):
             profile = Profile()
             profile.user = user
             profile.save()
+            return redirect('login')
+        else:
+            context = {'form': form, 'username': request.POST['username'], 'email': request.POST['email']}
+            return render(request, 'users/register.html', context)
 
-    context = {'form': form}
+    context = {'form': form, 'username': None, 'email': None}
     return render(request, 'users/register.html', context)
 
 #Login Page and Functionality

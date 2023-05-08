@@ -14,9 +14,17 @@
             <form method="POST" class="register-form">
                 {% csrf_token %}
 
-                <input type="text" name="username" id="username-input" required placeholder="Username">
+                {% if username %}
+                    <input type="text" name="username" id="username-input" required placeholder="Username" value="{{ username }}">
+                {% else %}
+                    <input type="text" name="username" id="username-input" required placeholder="Username">
+                {% endif %}
 
-                <input type="email" name="email" id="email-input" required placeholder="Email">
+                {% if email %}
+                    <input type="email" name="email" id="email-input" required placeholder="Email" value="{{ email }}">
+                {% else %}
+                    <input type="email" name="email" id="email-input" required placeholder="Email">
+                {% endif %}
 
                 <input type="password" name="password1" id="password-input" autocomplete="new-password" required placeholder="Password">
 
