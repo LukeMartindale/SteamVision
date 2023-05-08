@@ -79,6 +79,8 @@ class TestSentimentgetters(APITestCase):
             sentiment_all_time=self.test_data,
             sentiment_all_time_month=temp_data,
             sentiment_past_one_month=self.test_data,
+            sentiment_past_two_weeks=self.test_data,
+            sentiment_past_one_week=self.test_data
         )
         game_stat.save()
 
@@ -111,4 +113,40 @@ class TestSentimentgetters(APITestCase):
 
     def test_sentiment_get_data_past_twelve_months_status_code(self):
         response = self.client.get("/api/get-sentiment/past-twelve-months/10/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_sentiment_get_data_past_six_months(self):
+        response = self.client.get("/api/get-sentiment/past-six-months/10/")
+        content = response.content.decode('utf-8')
+        self.assertEqual(content, self.assert_data)
+
+    def test_sentiment_get_data_past_six_months_status_code(self):
+        response = self.client.get("/api/get-sentiment/past-six-months/10/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_sentiment_get_data_past_one_month(self):
+        response = self.client.get("/api/get-sentiment/past-one-month/10/")
+        content = response.content.decode('utf-8')
+        self.assertEqual(content, self.assert_data)
+
+    def test_sentiment_get_data_past_one_month_status_code(self):
+        response = self.client.get("/api/get-sentiment/past-one-month/10/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_sentiment_get_data_past_two_weeks(self):
+        response = self.client.get("/api/get-sentiment/past-two-weeks/10/")
+        content = response.content.decode('utf-8')
+        self.assertEqual(content, self.assert_data)
+
+    def test_sentiment_get_data_past_one_month_status_code(self):
+        response = self.client.get("/api/get-sentiment/past-two-weeks/10/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_sentiment_get_data_past_one_week(self):
+        response = self.client.get("/api/get-sentiment/past-one-week/10/")
+        content = response.content.decode('utf-8')
+        self.assertEqual(content, self.assert_data)
+
+    def test_sentiment_get_data_past_one_week_status_code(self):
+        response = self.client.get("/api/get-sentiment/past-one-week/10/")
         self.assertEqual(response.status_code, 200)
