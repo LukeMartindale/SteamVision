@@ -1,11 +1,6 @@
 # SteamVision
 Steam Vision is a web application which displays data collected from Steam. The application has functionality for collecting data from steam which can be setup to run or a regualr basis.
 
-## Deployed App
-**Link to deployed application:** https://steam-vision.herokuapp.com/
-
-The deploy app uses Heroku and has the Heroku scheduler setup to run the data collection automatcially
-
 ## Installing and Running
 - Pull the application repository
 - Install all requirements in dependecies
